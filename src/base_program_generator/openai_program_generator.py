@@ -11,20 +11,18 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
     https://platform.openai.com/docs/api-reference?lang=python.
     
     """
-    OPENAI_CLIENT = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-
+    OPENAI_CLIENT = OpenAI(api_key=os.environ.get("CS3213_OPENAI_API_KEY"))
 
     # Prompt constants
     # Adapted from https://community.openai.com/t/convert-few-shot-example-to-api-code/325614/2
-    SYSTEM_PROMPT = "You are a random generator of functions. " + \
+    SYSTEM_PROMPT = "You are a function generator that creates totally random functions in the given language. Be totally random! " + \
         "You will be given a language from the ###Language: section " + \
         "and constraints from the ###Constraints: section. " + \
-        "Generate a simple function in the language while adhering to the constraints. " + \
-        "The output is 1 single string, using \\n for newlines and \\t for tabs. " + \
+        "Randomly generate a varied function in the language while adhering to the constraints. " + \
+        "The output is a single-line string representing the function. Use '\\n' for newlines and '\\t' for tabs. Output is one continuous line. " + \
         "Here are some examples:\n\n"
     
-    
-    
+    # Few-shot learning for Python
     SAMPLE_PYTHON_PROGRAMS = "###Language: py\n" + \
         "###Constraints: None\n" + \
         "###Output: def add_numbers(a, b):\\n\\treturn a + b\n" + \
@@ -33,17 +31,32 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         "###Constraints: Have 1 while loop\n" + \
         "###Output: def factorial(n):\\n\\tresult = 1\\n\\twhile n > 1:\\n\\t\\tresult *= n\\n\\t\\tn -= 1\\n\\treturn result\n" + \
         "---\n" + \
-        "###Language: py\n" + \
+        "###Language: c\n" + \
         "###Constraints: Have 1 for loop\n" + \
-        "###Output: def sum_of_numbers(n):\\n\\tsum_result = 0\\n\\tfor i in range(1, n+1):\\n\\t\\tsum_result += i\\n\\treturn sum_result\n" + \
+        "###Output: #include <stdio.h>\\n\\nint sum_of_squares(int n) {\\n\\tint sum = 0;\\n\\tfor (int i = 1; i <= n; i++) {\\n\\t\\tsum += i * i;\\n\\t}\\n\\treturn sum;\\n}\n" + \
         "---\n" + \
-        "###Language: py\n" + \
-        "###Constraints: Use an import statement\n" + \
-        "###Output: import math\\n\\ndef calculate_square_root(n):\\n\\treturn math.sqrt(n)"
+        "###Language: c\n" + \
+        "###Constraints: Use 2 include statements\n" + \
+        "###Output: #include <stdio.h>\\n#include <math.h>\\n\\nfloat calculate_square_root(float num) {\\n\\treturn sqrt(num);\\n}"
+    
+    
 
-
-    # TODO: Update if confirm Python programs work
-    SAMPLE_C_PROGRAMS = ""
+    # Few-shot learning for C
+    SAMPLE_C_PROGRAMS = "###Language: c\n" + \
+        "###Constraints: None\n" + \
+        "###Output: #include <stdio.h>\\n\\nint sum_of_numbers(int n) {\\n\\tint sum = 0;\\n\\tfor (int i = 1; i <= n; i++) {\\n\\t\\tsum += i;\\n\\t}\\n\\treturn sum;\\n}\n" + \
+        "---\n" + \
+        "###Language: c\n" + \
+        "###Constraints: Have 1 while loop\n" + \
+        "###Output: #include <stdio.h>\\n\\nint count_digits(int n) {\\n\\tint count = 0;\\n\\twhile (n != 0) {\\n\\t\\tn /= 10;\\n\\t\\tcount++;\\n\\t}\\n\\treturn count;\\n}\n" + \
+        "---\n" + \
+        "###Language: c\n" + \
+        "###Constraints: Have 1 for loop\n" + \
+        "###Output: #include <stdio.h>\\n\\nint sum_of_squares(int n) {\\n\\tint sum = 0;\\n\\tfor (int i = 1; i <= n; i++) {\\n\\t\\tsum += i * i;\\n\\t}\\n\\treturn sum;\\n}\n" + \
+        "---\n" + \
+        "###Language: c\n" + \
+        "###Constraints: Use 2 include statements\n" + \
+        "###Output: #include <stdio.h>\\n#include <math.h>\\n\\nfloat calculate_square_root(float num) {\\n\\treturn sqrt(num);\\n}"
 
      
     def __init__(self):
@@ -69,14 +82,16 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         response = self.OPENAI_CLIENT.chat.completions.create(
             model="gpt-3.5-turbo-0125",
             messages=[
-                {"role": "system", "content": self.SYSTEM_PROMPT + (self.SAMPLE_PYTHON_PROGRAMS if (language == 'py') else self.SAMPLE_C_PROGRAMS)},
+                {"role": "system", "content": self.SYSTEM_PROMPT + (self.SAMPLE_PYTHON_PROGRAMS if (language == 'py') else self.SAMPLE_PYTHON_PROGRAMS)},
                 {"role": "user", "content": user_prompt }
             ],
-            temperature=1.0 # We want more randomness in generating these base programs
+            temperature=2.0 # We want more randomness in generating these base programs
         )
 
         # Extract output from API
         program_string = response.choices[0].message.content
+
+        # program_string = self.SYSTEM_PROMPT + (self.SAMPLE_PYTHON_PROGRAMS if (language == 'py') else self.SAMPLE_C_PROGRAMS)
 
         return program_string
 
@@ -97,8 +112,9 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
 
     def test_string(self):
-        return self.__generate_user_prompt("py", "Have 1 while loop")
+        #return self.__generate_user_prompt("py", "Have 1 while loop")
         #return self.SYSTEM_PROMPT + self.SAMPLE_PYTHON_PROGRAMS
+        return self.SYSTEM_PROMPT + self.SAMPLE_C_PROGRAMS
 
 
 
