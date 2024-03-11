@@ -16,7 +16,7 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
     # Prompt constants
     # Adapted from https://community.openai.com/t/convert-few-shot-example-to-api-code/325614/2
-    SYSTEM_PROMPT = "You are a generator of random functions. " + \
+    SYSTEM_PROMPT = "You are a random generator of functions. " + \
         "You will be given a language from the ###Language: section " + \
         "and constraints from the ###Constraints: section. " + \
         "Generate a simple function in the language while adhering to the constraints. " + \
@@ -25,19 +25,19 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
     
     
     
-    SAMPLE_PYTHON_PROGRAMS = "###Language: Py\n" + \
+    SAMPLE_PYTHON_PROGRAMS = "###Language: py\n" + \
         "###Constraints: None\n" + \
         "###Output: def add_numbers(a, b):\\n\\treturn a + b\n" + \
         "---\n" + \
-        "###Language: Py\n" + \
+        "###Language: py\n" + \
         "###Constraints: Have 1 while loop\n" + \
         "###Output: def factorial(n):\\n\\tresult = 1\\n\\twhile n > 1:\\n\\t\\tresult *= n\\n\\t\\tn -= 1\\n\\treturn result\n" + \
         "---\n" + \
-        "###Language: Py\n" + \
+        "###Language: py\n" + \
         "###Constraints: Have 1 for loop\n" + \
         "###Output: def sum_of_numbers(n):\\n\\tsum_result = 0\\n\\tfor i in range(1, n+1):\\n\\t\\tsum_result += i\\n\\treturn sum_result\n" + \
         "---\n" + \
-        "###Language: Py\n" + \
+        "###Language: py\n" + \
         "###Constraints: Use an import statement\n" + \
         "###Output: import math\\n\\ndef calculate_square_root(n):\\n\\treturn math.sqrt(n)"
 
@@ -69,32 +69,36 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         response = self.OPENAI_CLIENT.chat.completions.create(
             model="gpt-3.5-turbo-0125",
             messages=[
-                {"role": "system", "content": self.SYSTEM_PROMPT},
+                {"role": "system", "content": self.SYSTEM_PROMPT + (self.SAMPLE_PYTHON_PROGRAMS if (language == 'py') else self.SAMPLE_C_PROGRAMS)},
                 {"role": "user", "content": user_prompt }
-            ]
+            ],
+            temperature=1.0 # We want more randomness in generating these base programs
         )
 
-        return response
+        # Extract output from API
+        program_string = response.choices[0].message.content
 
-
-
+        return program_string
 
 
     def __generate_user_prompt(self, language, constraints):
         """
-
         Prompt engineers a user prompt to be passed into the OpenAI model
 
         Parameters:
             language: A string indicating the language in which the base program is written in.
             constraints: A string indicating some constraints and guidelines to generate the base program with.
+        
         """
 
-        return "Hello"
+        return f"###Language: { language }\n" + \
+            f"###Constraints: { constraints }"
+        
 
 
     def test_string(self):
-        return self.SYSTEM_PROMPT + self.SAMPLE_PYTHON_PROGRAMS
+        return self.__generate_user_prompt("py", "Have 1 while loop")
+        #return self.SYSTEM_PROMPT + self.SAMPLE_PYTHON_PROGRAMS
 
 
 
