@@ -19,4 +19,3 @@ class MetamorphicProgramModifier(object):
         pass
     
     ## Insert other methods of MetamorphicProgramModifier here
-
