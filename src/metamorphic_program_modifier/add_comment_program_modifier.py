@@ -7,7 +7,7 @@ class AddCommentProgramModifier(MetamorphicProgramModifier):
     adding comments to a program should not affect its semantics.
 
     """
-
+    DEFAULT_COMMENT = "This is the default comment added by the AddCommentProgramModifier."
 
     def __init__(self):
         """
@@ -31,7 +31,7 @@ class AddCommentProgramModifier(MetamorphicProgramModifier):
         Returns:
             str: The modified program with comments
         """
-        if language not in ["Python", "Java", "C"]:
+        if language not in ["py", "c"]:
             raise ValueError("Unsupported programming language: {}".format(language))
-        modified_program = self.add_comment(original_program, "This is a comment added by the AddCommentProgramModifier.")
+        modified_program = self.add_comment(original_program, self.DEFAULT_COMMENT)
         return modified_program
