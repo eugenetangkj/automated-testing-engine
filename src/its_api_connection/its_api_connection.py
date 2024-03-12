@@ -26,3 +26,9 @@ class ItsApiConnection(object):
         params = {"language": language, "source_code": source_code}
         response = requests.post(parser_url, json=params)
         return response.json()
+
+    def call_parser_endpoint_other(self, request_body):
+        """Returns the response of the call to the parser endpoint of the ITS API"""
+        parser_url = self.BASE_API_URL + "parser"
+        response = requests.post(parser_url, json=request_body)
+        return response.json()
