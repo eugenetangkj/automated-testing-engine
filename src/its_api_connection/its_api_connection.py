@@ -1,3 +1,4 @@
+import requests
 
 class ItsApiConnection(object):
     """
@@ -10,8 +11,7 @@ class ItsApiConnection(object):
     """
 
     BASE_API_URL = "https://its.comp.nus.edu.sg/cs3213/"
-    
-    
+
     def __init__(self):
         """
         Initialisation method for an ItsApiConnection instance
@@ -19,3 +19,12 @@ class ItsApiConnection(object):
         pass
     
     ## Insert other methods of ItsApiConnection here
+
+    def call_parser_endpoint(self, language, source_code):
+        """Returns the response of the call to the parser endpoint of the ITS API"""
+        parser_url = self.BASE_API_URL + "parser"
+        print(parser_url)
+        params = {"language": language, "source_code": source_code}
+        response = requests.post(parser_url, json=params)
+        print(response.json())
+        return response.json()
