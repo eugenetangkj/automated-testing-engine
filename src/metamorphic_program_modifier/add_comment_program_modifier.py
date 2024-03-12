@@ -16,3 +16,22 @@ class AddCommentProgramModifier(MetamorphicProgramModifier):
         pass
     
     ## Insert other methods of AddCommentProgramModifier here
+    def add_comment(self, original_program, comment):
+        modified_program = original_program + "\n# " + comment
+        return modified_program
+    
+    def modify_program(self, language, original_program):
+        """
+        Modifies the base program by adding comments to it.
+        
+        Args:
+            language (str): The programming language of the program.
+            original_program (str): The original program.
+            
+        Returns:
+            str: The modified program with comments
+        """
+        if language not in ["Python", "Java", "C"]:
+            raise ValueError("Unsupported programming language: {}".format(language))
+        modified_program = self.add_comment(original_program, "This is a comment added by the AddCommentProgramModifier.")
+        return modified_program
