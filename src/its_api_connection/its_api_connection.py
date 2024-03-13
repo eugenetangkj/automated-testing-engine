@@ -17,7 +17,7 @@ class ItsApiConnection(object):
         Initialisation method for an ItsApiConnection instance
         """
         pass
-    
+
     ## Insert other methods of ItsApiConnection here
 
     def __make_api_call(self, url, params):
@@ -25,14 +25,17 @@ class ItsApiConnection(object):
 
     def __package_params(self, params, endpoint):
         """
-        Takes in an array of parameters and packages these parameters according to the specified ITS API endpoint.
-        The errorlocalizer, feedback_fix, feedback_error and repair services take in the same parameters.
+        Takes in an array of parameters and packages these parameters according to the specified
+        ITS API endpoint.
+        The errorlocalizer, feedback_fix, feedback_error and repair services take in the same
+        parameters.
         """
         if endpoint == "parser":
             return {"language": params[0], "source_code": params[1]}
-        elif endpoint in ["errorlocalizer", "feedback_fix", "feedback_error", "repair"]:
-            result = {"language": params[0], "reference_solution": params[1], "student_solution": params[2], "function": params[3], "inputs": params[4], "arg": params[5]}
-            return result
+        if endpoint in ["errorlocalizer", "feedback_fix", "feedback_error", "repair"]:
+            return {"language": params[0], "reference_solution": params[1],
+                    "student_solution": params[2], "function": params[3], "inputs": params[4],
+                    "arg": params[5]}
 
     def call_parser_endpoint(self, language, source_code):
         """
@@ -44,7 +47,8 @@ class ItsApiConnection(object):
         response = self.__make_api_call(parser_url, params)
         return response.json()
 
-    def call_feedback_fix_endpoint(self, language, reference_solution, student_solution, function, inputs, arg):
+    def call_feedback_fix_endpoint(self, language, reference_solution, student_solution, function,
+                                   inputs, arg):
         """
         Returns the response of the call to the feedback fix endpoint of the ITS API
         """
