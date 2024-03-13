@@ -20,15 +20,16 @@ class ItsApiConnection(object):
     
     ## Insert other methods of ItsApiConnection here
 
+    def __make_api_call(self, url, params):
+        return requests.post(url, json=params)
+
+    def __package_params(self, language, source_code):
+        return {"language": language, "source_code": source_code}
+
     def call_parser_endpoint(self, language, source_code):
         """Returns the response of the call to the parser endpoint of the ITS API"""
         parser_url = self.BASE_API_URL + "parser"
-        params = {"language": language, "source_code": source_code}
-        response = requests.post(parser_url, json=params)
+        params = self.__package_params(language, source_code)
+        response = self.__make_api_call(parser_url, params)
         return response.json()
 
-    def call_parser_endpoint_other(self, request_body):
-        """Returns the response of the call to the parser endpoint of the ITS API"""
-        parser_url = self.BASE_API_URL + "parser"
-        response = requests.post(parser_url, json=request_body)
-        return response.json()
