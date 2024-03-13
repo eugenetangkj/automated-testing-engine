@@ -2,8 +2,9 @@ from .base_program_generator import BaseProgramGenerator
 from dotenv import load_dotenv
 from openai import OpenAI
 import os
-import timeout_decorator
 import httpx
+import json
+import random
 
 load_dotenv() # Loads environment variables for OpenAI API key
 
@@ -101,7 +102,8 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
     def test_string(self):
         #return self.__generate_user_prompt("py", "Have 1 while loop")
         #return self.SYSTEM_PROMPT + self.SAMPLE_PYTHON_PROGRAMS
-        return self.SYSTEM_PROMPT + self.SAMPLE_PY_PROGRAMS
+        # return self.SYSTEM_PROMPT + self.SAMPLE_PY_PROGRAMS
+        return self.__get_random_program_from_file()
     
 
     def __process_newlines_and_tabs(self, raw_program_string):
@@ -124,6 +126,13 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
             return processed_program_string
 
 
+    def __get_random_program_from_file(self):
+        with open("src\\base_program_generator\\random_py_programs.json", 'r') as file:
+            data = json.load(file)
+            if (data):
+                return random.choice(data)
+            else:
+                return 'No program!'
 
 
 
