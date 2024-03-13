@@ -2,6 +2,8 @@ from .base_program_generator import BaseProgramGenerator
 from dotenv import load_dotenv
 from openai import OpenAI
 import os
+import timeout_decorator
+import httpx
 
 load_dotenv() # Loads environment variables for OpenAI API key
 
@@ -11,45 +13,26 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
     https://platform.openai.com/docs/api-reference?lang=python.
     
     """
-    OPENAI_CLIENT = OpenAI(api_key=os.environ.get("CS3213_OPENAI_API_KEY"))
+    OPENAI_CLIENT = OpenAI(api_key=os.environ.get("CS3213_OPENAI_API_KEY"), timeout=httpx.Timeout(20.0))
 
     # Prompt constants
     # Adapted from https://community.openai.com/t/convert-few-shot-example-to-api-code/325614/2
-    SYSTEM_PROMPT = "You are a function generator that creates totally random functions in the given language. Be totally random! " + \
-        "You will be given a language from the ###Language: section " + \
-        "and constraints from the ###Constraints: section. " + \
-        "Randomly generate a varied function in the language while adhering to the constraints. " + \
-        "The output is 1 single string, using \\n for newlines and \\t for tabs. " + \
-        "Here are some examples:\n\n"
+    SYSTEM_PROMPT = "Create a totally random function given a language and constraints. " + \
+        "Just return the function in a single line without the prefix ###Function, using \\n for newlines and \\t for tabs. " + \
+        "Examples:\n"
     
     # Few-shot learning for Python
     SAMPLE_PY_PROGRAMS = "###Language: py\n" + \
         "###Constraints: None\n" + \
-        "###Output: def add_numbers(a, b):\\n\\treturn a + b\n" + \
+        "###Function: def add_numbers(a, b):\\n\\treturn a + b\n" + \
         "---\n" + \
         "###Language: py\n" + \
         "###Constraints: Have 1 while loop\n" + \
-        "###Output: def factorial(n):\\n\\tresult = 1\\n\\twhile n > 1:\\n\\t\\tresult *= n\\n\\t\\tn -= 1\\n\\treturn result\n" + \
-        "---\n" + \
-        "###Language: py\n" + \
-        "###Constraints: Have 1 for loop\n" + \
-        "###Output: def sum_of_numbers(n):\\n\\tsum_result = 0\\n\\tfor i in range(1, n+1):\\n\\t\\tsum_result += i\\n\\treturn sum_result\n" + \
-        "---\n" + \
-        "###Language: py\n" + \
-        "###Constraints: Use an import statement\n" + \
-        "###Output: import math\\n\\ndef calculate_square_root(n):\\n\\treturn math.sqrt(n)"
-    
+        "###Function: def factorial(n):\\n\\tresult = 1\\n\\twhile n > 1:\\n\\t\\tresult *= n\\n\\t\\tn -= 1\\n\\treturn result"
 
+    
     # Few-shot learning for C
     SAMPLE_C_PROGRAMS = "###Language: c\n" + \
-        "###Constraints: None\n" + \
-        "###Output: #include <stdio.h>\\n\\nint sum_of_numbers(int n) {\\n\\tint sum = 0;\\n\\tfor (int i = 1; i <= n; i++) {\\n\\t\\tsum += i;\\n\\t}\\n\\treturn sum;\\n}\n" + \
-        "---\n" + \
-        "###Language: c\n" + \
-        "###Constraints: Have 1 while loop\n" + \
-        "###Output: #include <stdio.h>\\n\\nint count_digits(int n) {\\n\\tint count = 0;\\n\\twhile (n != 0) {\\n\\t\\tn /= 10;\\n\\t\\tcount++;\\n\\t}\\n\\treturn count;\\n}\n" + \
-        "---\n" + \
-        "###Language: c\n" + \
         "###Constraints: Have 1 for loop\n" + \
         "###Output: #include <stdio.h>\\n\\nint sum_of_squares(int n) {\\n\\tint sum = 0;\\n\\tfor (int i = 1; i <= n; i++) {\\n\\t\\tsum += i * i;\\n\\t}\\n\\treturn sum;\\n}\n" + \
         "---\n" + \
@@ -77,22 +60,28 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         """
 
         # Calls the chat completion API to generate the base program
-        user_prompt = self.__generate_user_prompt(language, constraints)
-        response = self.OPENAI_CLIENT.chat.completions.create(
-            model="gpt-3.5-turbo-0125",
-            messages=[
-                {"role": "system", "content": self.SYSTEM_PROMPT + (self.SAMPLE_PY_PROGRAMS if (language == 'py') else self.SAMPLE_C_PROGRAMS)},
-                {"role": "user", "content": user_prompt }
-            ],
-            temperature=2.0 # We want more randomness in generating these base programs
-        )
+        try:
+            user_prompt = self.__generate_user_prompt(language, constraints)
+            response = self.OPENAI_CLIENT.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": self.SYSTEM_PROMPT + (self.SAMPLE_PY_PROGRAMS if (language == 'py') else self.SAMPLE_C_PROGRAMS)},
+                    {"role": "user", "content": user_prompt }
+                ],
+                temperature=1.5, # We want more randomness in generating these base programs
+            )
 
-        # Extract output from API
-        program_string = response.choices[0].message.content
-        output = self.__process_newlines_and_tabs(program_string)
+            # Extract output from API
+            program_string = response.choices[0].message.content
+            output = self.__process_newlines_and_tabs(program_string)
 
 
-        return output
+            return output
+        
+        except httpx.TimeoutException:
+            return "Timeout!"
+
+
 
     def __generate_user_prompt(self, language, constraints):
         """
@@ -118,12 +107,21 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
     def __process_newlines_and_tabs(self, raw_program_string):
         """
         Transforms newlines and tabs into \\n and \\t respectively, as required for the ITS API input.
+        Also removes filler content that is sometimes returned by OpenAI's API
 
         Note that OpenAi's output returns 4 whitespace characters in lieu of tabs.
         
         """
-        processed_program_string = raw_program_string.replace('\n', '\\n').replace('    ', '\\t')
-        return processed_program_string
+
+        if (raw_program_string.startswith("```py\n") and raw_program_string.endswith("\n```")):
+            processed_program_string = raw_program_string[6:-4].replace('\n', '\\n').replace('    ', '\\t')
+            return processed_program_string
+        elif (raw_program_string.startswith("```c\n") and raw_program_string.endswith("\n```")):
+            processed_program_string = raw_program_string[5:-4].replace('\n', '\\n').replace('    ', '\\t')
+            return processed_program_string
+        else:
+            processed_program_string = raw_program_string.replace('\n', '\\n').replace('    ', '\\t')
+            return processed_program_string
 
 
 
