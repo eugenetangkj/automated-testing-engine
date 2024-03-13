@@ -154,20 +154,3 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
                 return random.choice(data)
             else:
                 return 'No program!'
-
-
-    def test_string(self):
-        #return self.__generate_user_prompt("py", "Have 1 while loop")
-        #return self.SYSTEM_PROMPT + self.SAMPLE_PYTHON_PROGRAMS
-        # return self.SYSTEM_PROMPT + self.SAMPLE_PY_PROGRAMS
-        return self.__get_random_program_from_file("c")
-    
-
-
-
-
-
-
-
-
-
