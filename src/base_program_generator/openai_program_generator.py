@@ -14,7 +14,11 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
     https://platform.openai.com/docs/api-reference?lang=python.
     
     """
+
+    # OpenAI client instance
+    # Adapted from https://community.openai.com/t/setting-request-timeout-in-openai-v1-2-2/492772
     OPENAI_CLIENT = OpenAI(api_key=os.environ.get("CS3213_OPENAI_API_KEY"), timeout=httpx.Timeout(20.0))
+
 
     # Prompt constants
     # Adapted from https://community.openai.com/t/convert-few-shot-example-to-api-code/325614/2
@@ -40,8 +44,16 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         "###Language: c\n" + \
         "###Constraints: Use 2 include statements\n" + \
         "###Output: #include <stdio.h>\\n#include <math.h>\\n\\nfloat calculate_square_root(float num) {\\n\\treturn sqrt(num);\\n}"
+    
 
-     
+    # File path of pre-generated random C programs
+    PATH_PREGENERATED_C_PROGRAMS = "src\\base_program_generator\\random_c_programs.json"
+
+    # File path of pre-generated random Python programs
+    PATH_PREGENERATED_PY_PROGRAMS = "src\\base_program_generator\\random_py_programs.json"
+
+
+ 
     def __init__(self):
         """
         Initialisation method for a OpenAiProgramGenerator instance
@@ -76,11 +88,12 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
             program_string = response.choices[0].message.content
             output = self.__process_newlines_and_tabs(program_string)
 
-
             return output
         
         except httpx.TimeoutException:
-            return "Timeout!"
+            # OpenAI API takes too long to create a test case. We just fetch one randomly from the pre-generated list.
+            # However, for now, this means that we cannot take into consideration the constraints.
+            return self.__get_random_program_from_file(language)
 
 
 
@@ -98,14 +111,6 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
             f"###Constraints: { constraints }"
         
 
-
-    def test_string(self):
-        #return self.__generate_user_prompt("py", "Have 1 while loop")
-        #return self.SYSTEM_PROMPT + self.SAMPLE_PYTHON_PROGRAMS
-        # return self.SYSTEM_PROMPT + self.SAMPLE_PY_PROGRAMS
-        return self.__get_random_program_from_file()
-    
-
     def __process_newlines_and_tabs(self, raw_program_string):
         """
         Transforms newlines and tabs into \\n and \\t respectively, as required for the ITS API input.
@@ -115,24 +120,48 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         
         """
 
+        # Python programs
         if (raw_program_string.startswith("```py\n") and raw_program_string.endswith("\n```")):
             processed_program_string = raw_program_string[6:-4].replace('\n', '\\n').replace('    ', '\\t')
             return processed_program_string
+        
+        # C programs
         elif (raw_program_string.startswith("```c\n") and raw_program_string.endswith("\n```")):
             processed_program_string = raw_program_string[5:-4].replace('\n', '\\n').replace('    ', '\\t')
             return processed_program_string
         else:
+            # Input is as intended
             processed_program_string = raw_program_string.replace('\n', '\\n').replace('    ', '\\t')
             return processed_program_string
 
 
-    def __get_random_program_from_file(self):
-        with open("src\\base_program_generator\\random_py_programs.json", 'r') as file:
+    def __get_random_program_from_file(self, language):
+        """
+        Retrieves a random program string from a file of pre-generated programs
+
+        Parameters:
+        language: Language of program to retrieve, either c or python
+
+        """
+
+        # Retrieve correct file path
+        file_path = self.PATH_PREGENERATED_C_PROGRAMS if (language == 'c') else self.PATH_PREGENERATED_PY_PROGRAMS
+
+        # Fetch program from file
+        with open(file_path, 'r') as file:
             data = json.load(file)
             if (data):
                 return random.choice(data)
             else:
                 return 'No program!'
+
+
+    def test_string(self):
+        #return self.__generate_user_prompt("py", "Have 1 while loop")
+        #return self.SYSTEM_PROMPT + self.SAMPLE_PYTHON_PROGRAMS
+        # return self.SYSTEM_PROMPT + self.SAMPLE_PY_PROGRAMS
+        return self.__get_random_program_from_file("c")
+    
 
 
 

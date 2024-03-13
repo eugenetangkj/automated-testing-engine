@@ -29,11 +29,9 @@ class TestEngine(object):
     
     ## Insert other methods of TestEngine here
     def test_add_comment_relation(self):
-        # print("Generate base programs and modify them to test the add comment metamorphic relation")
-        # print(self.openai_base_program_generator.generate_test_case("c", "Have 1 for loop"))
-        print(self.openai_base_program_generator.test_string())
+        print("Generate base programs and modify them to test the add comment metamorphic relation")
         
-    
+
 
 if __name__ == "__main__":
     # Main driver method that creates an instance of TestEngine
@@ -41,4 +39,3 @@ if __name__ == "__main__":
     test_engine = TestEngine()
 
     test_engine.test_add_comment_relation()
-
