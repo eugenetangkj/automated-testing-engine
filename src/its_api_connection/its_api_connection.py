@@ -32,6 +32,10 @@ class ItsApiConnection(object):
         """
         if endpoint == "parser":
             return {"language": params[0], "source_code": params[1]}
+
+        if endpoint == "interpreter":
+            return {"language": params[0], "program_model": params[1],
+                    "function": params[2], "inputs": params[3], "args": params[4]}
             
         if endpoint in ["errorlocalizer", "feedback_fix", "feedback_error", "repair"]:
             return {"language": params[0], "reference_solution": params[1],
@@ -48,6 +52,16 @@ class ItsApiConnection(object):
         response = self.__make_api_call(parser_url, params)
         return response.json()
 
+    def call_interpreter_endpoint(self, language, program_model, function, inputs, args):
+        """
+        Returns the response of the call to the interpreter endpoint of the ITS API
+        """
+        interpreter_url = self.BASE_API_URL + "interpreter"
+        param_arr = [language, program_model, function, inputs, args]
+        params = self.__package_params(param_arr, "interpreter")
+        response = self.__make_api_call(interpreter_url, params)
+        return response.json()
+
     def call_feedback_fix_endpoint(self, language, reference_solution, student_solution, function,
                                    inputs, arg):
         """
@@ -58,3 +72,5 @@ class ItsApiConnection(object):
         params = self.__package_params(param_arr, "feedback_fix")
         response = self.__make_api_call(feedback_fix_url, params)
         return response.json()
+
+c = ItsApiConnection()
