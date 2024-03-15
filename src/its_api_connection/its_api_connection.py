@@ -72,5 +72,3 @@ class ItsApiConnection(object):
         params = self.__package_params(param_arr, "feedback_fix")
         response = self.__make_api_call(feedback_fix_url, params)
         return response.json()
-
-c = ItsApiConnection()
