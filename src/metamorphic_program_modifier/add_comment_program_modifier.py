@@ -17,12 +17,14 @@ class AddCommentProgramModifier(MetamorphicProgramModifier):
     
     ## Insert other methods of AddCommentProgramModifier here
     def add_comment(self, original_program, comment):
-        modified_program = original_program + "\n# " + comment
+        lines = original_program.split('\n') # Split the program into lines
+        commented_lines = [f"{line.rstrip()} {comment}" for line in lines] # add a comment to each line
+        modified_program = '\n'.join(commented_lines)
         return modified_program
     
     def modify_program(self, language, original_program):
         """
-        Modifies the base program by adding comments to it.
+        Modifies the base program by adding a comment to the end of each line.
         
         Args:
             language (str): The programming language of the program.
