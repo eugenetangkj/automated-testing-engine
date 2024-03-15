@@ -13,9 +13,17 @@ class TestIncrementProgramModifier(MetamorphicProgramModifier):
         """
         pass
     
-    def test_increment(self, original_program, comment):
-      modified_program = str(original_program).replace(" += ", " = i + ")
-      return modified_program
+    def test_increment(self, original_program):
+        lines = original_program.split('\n')
+        modified_lines = []
+        for line in lines:  # find all instances in program
+            if '+=' in line:
+                var_name = line.split('+=')[0]
+                increment_val = line.split('+=')[1].strip() # remove additional spaces
+                modified_lines.append(f"{var_name} = {var_name} + {increment_val}")
+            else:
+                modified_lines.append(line)
+        return '\n'.join(modified_lines)
     
     def modify_program(self, language, original_program):
         """
