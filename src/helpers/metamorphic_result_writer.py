@@ -1,7 +1,7 @@
 '''
     Responsible for writing of test case results to a file
 '''
-from metamorphic_relation_enum import MetamorphicRelationEnum
+from .metamorphic_relation_enum import MetamorphicRelationEnum
 
 class MetamorphicResultWriter():
     """

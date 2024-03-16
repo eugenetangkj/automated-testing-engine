@@ -33,7 +33,7 @@ class TestEngine():
         Tests the addition assignment relation
         """
         print("Testing addition assignment relation...")
-        AdditionAssignmentRelationTester(3).test_relation() # Generates 5 test cases for now
+        AdditionAssignmentRelationTester(5).test_relation() # Generates 5 test cases for now
         print("Testing addition assignment relation completed.\n")
 
 
