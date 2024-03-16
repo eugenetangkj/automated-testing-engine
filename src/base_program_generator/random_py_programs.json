@@ -1,20 +1,10 @@
 [
-    "def list_sum(lst):\n\tsum = 0\n\tfor num in lst:\n\t\tsum += num\n\treturn sum",
-    "def sum_elements(arr):\n\ttotal = 0\n\tfor num in arr:\n\t\ttotal += num\n\treturn total",
-    "def iterate_list(lst):\n\tfor i in lst:\n\t\tprint(i)",
-    "def multiply_elements(lst):\n\tresult = 1\n\tfor elem in lst:\n\t\tresult *= elem\n\treturn result",
     "def countdown(n):\n\twhile n >= 0:\n\t\tprint(n)\n\t\tn -= 1",
     "def reverse_string(s):\n\tresult = ''\n\twhile s:\n\t\tresult += s[-1]\n\t\ts = s[:-1]\n\treturn result",
     "def find_maximum(lst):\n\tmax_value = float('-inf')\n\twhile lst:\n\t\tvalue = lst.pop()\n\t\tif value > max_value:\n\t\t\tmax_value = value\n\treturn max_value",
-    "def power(base, exponent):\n\tresult = 1\n\twhile exponent > 0:\n\t\tresult *= base\n\t\texponent -= 1\n\treturn result",
     "def sum_of_digits(n):\n\ttotal = 0\n\twhile n > 0:\n\t\ttotal += n % 10\n\t\tn //= 10\n\treturn total",
-    "def binary_search(arr, target):\n\tleft, right = 0, len(arr) - 1\n\twhile left <= right:\n\t\tmid = (left + right) // 2\n\t\tif arr[mid] == target:\n\t\t\treturn mid\n\t\telif arr[mid] < target:\n\t\t\tleft = mid + 1\n\t\telse:\n\t\t\tright = mid - 1\n\treturn -1",
     "def fibonacci(n):\n\ta, b = 0, 1\n\twhile n > 0:\n\t\tprint(a)\n\t\ta, b = b, a + b\n\t\tn -= 1",
-    "def linear_search(arr, target):\n\tindex = 0\n\twhile index < len(arr):\n\t\tif arr[index] == target:\n\t\t\treturn index\n\t\tindex += 1\n\treturn -1",
     "def is_prime(n):\n\tif n <= 1:\n\t\treturn False\n\ti = 2\n\twhile i * i <= n:\n\t\tif n % i == 0:\n\t\t\treturn False\n\t\ti += 1\n\treturn True",
-    "def sum_of_even_numbers(lst):\n\ttotal = 0\n\tindex = 0\n\twhile index < len(lst):\n\t\tif lst[index] % 2 == 0:\n\t\t\ttotal += lst[index]\n\t\tindex += 1\n\treturn total",
-    "def remove_duplicates(lst):\n\tindex = 0\n\twhile index < len(lst):\n\t\tif lst.count(lst[index]) > 1:\n\t\t\tlst.remove(lst[index])\n\t\telse:\n\t\t\tindex += 1\n\treturn lst",    
-    "def find_second_largest(lst):\n\tmax_value = float('-inf')\n\tsecond_max = float('-inf')\n\tindex = 0\n\twhile index < len(lst):\n\t\tif lst[index] > max_value:\n\t\t\tsecond_max = max_value\n\t\t\tmax_value = lst[index]\n\t\telif lst[index] > second_max and lst[index] != max_value:\n\t\t\tsecond_max = lst[index]\n\t\tindex += 1\n\treturn second_max",
-    "def reverse_digits(n):\n\treversed_num = 0\n\twhile n != 0:\n\t\tdigit = n % 10\n\t\treversed_num = reversed_num * 10 + digit\n\t\tn //= 10\n\treturn reversed_num",
-    "def find_median(lst):\n\tsorted_lst = sorted(lst)\n\tlength = len(sorted_lst)\n\tif length % 2 == 0:\n\t\treturn (sorted_lst[length // 2 - 1] + sorted_lst[length // 2]) / 2\n\telse:\n\t\treturn sorted_lst[length // 2]"
+    "def reverse_digits(n):\n\treversed_num = 0\n\twhile n != 0:\n\t\tdigit = n % 10\n\t\treversed_num = reversed_num * 10 + digit\n\t\tn //= 10\n\treturn reversed_num"
+
 ]

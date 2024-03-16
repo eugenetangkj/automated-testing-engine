@@ -1,27 +1,70 @@
 Base Program:
-int factorial(int n) {
-	int result = 1;
-	while (n > 1) {
-		result *= n;
-		n--;
+void totally_random_function(int num) {
+	if(num == 0) {
+		printf("No argument supplied");
+	} else {
+		printf("Number %d used as argument", num);
 	}
-	return result;
 }
 
 Modified Program:
-int factorial(int n) {
+void totally_random_function(int num) {
 //Default comment
-	int result = 1;
+	if(num == 0) {
 //Default comment
-	while (n > 1) {
+		printf("No argument supplied");
 //Default comment
-		result *= n;
+	} else {
 //Default comment
-		n--;
+		printf("Number %d used as argument", num);
 //Default comment
 	}
 //Default comment
-	return result;
+}
+//Default comment
+
+Error Localizer API Output:
+{
+    "errorLocations": {}
+}
+
+Feedback Fix API Output:
+[]
+
+Feedback Error API Output:
+[]
+
+Repair API Output:
+[]
+
+Status:
+PASS
+
+
+########
+
+
+Base Program:
+int judged_by_zero(int n) {
+	if (n == 0) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
+
+Modified Program:
+int judged_by_zero(int n) {
+//Default comment
+	if (n == 0) {
+//Default comment
+		return 1;
+//Default comment
+	} else {
+//Default comment
+		return 0;
+//Default comment
+	}
 //Default comment
 }
 //Default comment

@@ -28,6 +28,7 @@ if __name__ == "__main__":
     test_engine = TestEngine()
 
     
-    logging.debug("Testing add comment relation...")
+    print("Testing add comment relation...")
     AddCommentRelationTester(1).test_relation()
+    print("Testing add comment relation completed.")
 

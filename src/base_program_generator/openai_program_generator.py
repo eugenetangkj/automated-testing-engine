@@ -23,13 +23,14 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
     # Prompt constants
     # Adapted from https://community.openai.com/t/convert-few-shot-example-to-api-code/325614/2
     SYSTEM_PROMPT = "Create a totally random function given a language and constraints. " + \
+        "The function takes either 0 or 1 argument, which must be a number." + \
         "Just return the function in a single line without the prefix ###Function" + \
         "Examples:\n"
     
     # Few-shot learning for Python
     SAMPLE_PY_PROGRAMS = "###Language: py\n" + \
         "###Constraints: None\n" + \
-        "###Function: def add_numbers(a, b):\n\treturn a + b\n" + \
+        "###Function: def countdown(n):\n\twhile n >= 0:\n\t\tprint(n)\n\t\tn -= 1" + \
         "---\n" + \
         "###Language: py\n" + \
         "###Constraints: Have 1 while loop\n" + \

@@ -6,6 +6,7 @@ from ..helpers.type_of_metamorphic_relation import TypeOfMetamorphicRelation
 from ..helpers.metamorphic_relation_enum import MetamorphicRelationEnum
 from ..helpers.metamorphic_result_writer import MetamorphicResultWriter
 from ..api_output_comparator import ApiOutputComparator
+from ..base_program_generator import OpenAiProgramGenerator
 import json
 
 class AddCommentRelationTester(MetamorphicRelationTester):
@@ -30,6 +31,7 @@ class AddCommentRelationTester(MetamorphicRelationTester):
         self.add_comment_program_modifier = AddCommentProgramModifier()
         self.its_api_connection = ItsApiConnection()
         self.inter_representation_processer = InterRepresentationProcesser()
+        self.openai_base_program_generator = OpenAiProgramGenerator()
         self.api_output_comparator = ApiOutputComparator()
         self.metamorphic_result_writer = MetamorphicResultWriter()
         
@@ -59,8 +61,8 @@ class AddCommentRelationTester(MetamorphicRelationTester):
         for i in range(number_of_test_cases):
 
             # Step 1a: Generate a random base program
-            # base_program_string = self.openai_base_program_generator.generate_test_case('py', '')
-            base_program_string = "int factorial(int n) {\n\tint result = 1;\n\twhile (n > 1) {\n\t\tresult *= n;\n\t\tn--;\n\t}\n\treturn result;\n}"
+            base_program_string = self.openai_base_program_generator.generate_test_case('c', '')
+            # base_program_string = "int factorial(int n) {\n\tint result = 1;\n\twhile (n > 1) {\n\t\tresult *= n;\n\t\tn--;\n\t}\n\treturn result;\n}"
        
     
             # Step 2a: Modify the base program
@@ -136,6 +138,8 @@ class AddCommentRelationTester(MetamorphicRelationTester):
                 json.dumps(output_repair, indent=4),
                 status
             )
+
+            print("Test case " + str(i) + " done.")
 
 
     def test_relation_py(self, number_of_test_cases):
