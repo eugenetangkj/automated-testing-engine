@@ -73,7 +73,7 @@ class AddCommentRelationTester(MetamorphicRelationTester):
             
             except:
                 # Step 1a: Randomly pick a c program
-                with open('././datafiles/random_py_programs.json', 'r') as file:
+                with open('././datafiles/random_c_programs.json', 'r') as file:
                     data = json.load(file)
                     base_program_string = random.choice(data)
                 self.__process_relation_c(base_program_string)
@@ -100,7 +100,7 @@ class AddCommentRelationTester(MetamorphicRelationTester):
                 base_program_data_type = base_program["data_type"]
                 self.__process_relation_py(base_program_string, base_program_data_type)
                 
-                print("Test case " + str(i) + " done.")
+                print("Test case " + str(i + self.number_of_test_cases - number_of_test_cases) + " done.")
             
             except:
                 # Step 1b: Randomly pick from a safe pool of Python programs
