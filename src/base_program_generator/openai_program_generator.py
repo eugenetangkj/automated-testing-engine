@@ -54,14 +54,7 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         "###Function: #include <stdio.h>\n#include <math.h>\n\nfloat calculate_square_root(float num) {\n\treturn sqrt(num);\n}"
     
 
-    # File path of pre-generated random C programs
-    PATH_PREGENERATED_C_PROGRAMS = "src\\base_program_generator\\random_c_programs.json"
 
-    # File path of pre-generated random Python programs
-    PATH_PREGENERATED_PY_PROGRAMS = "src\\base_program_generator\\random_py_programs.json"
-
-
- 
     def __init__(self):
         """
         Initialisation method for a OpenAiProgramGenerator instance
@@ -182,14 +175,30 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         language: Language of program to retrieve, either c or python
 
         """
+        if (language == 'c'):
+            with open('././datafiles/random_py_programs.json', 'r') as file:
+                    data = json.load(file)
+                    base_program_string = random.choice(data)
+            
+            return {
+                    "program": base_program_string,
+                    "data_type": ""
+            }
 
-        # Retrieve correct file path
-        file_path = self.PATH_PREGENERATED_C_PROGRAMS if (language == 'c') else self.PATH_PREGENERATED_PY_PROGRAMS
+        else:
+            with open('././datafiles/random_py_programs.json') as file:
+                    random_py_programs = json.load(file)
+                
+            random_index = random.randrange(len(random_py_programs))
 
-        # Fetch program from file
-        with open(file_path, 'r') as file:
-            data = json.load(file)
-            if (data):
-                return random.choice(data)
-            else:
-                return 'No program!'
+            with open('././datafiles/random_py_datatypes.json') as file:
+                random_data_types = json.load(file)
+
+            base_program_string = random_py_programs[random_index]
+            base_program_data_type = random_data_types[random_index]
+
+            return {
+                "program": base_program_string,
+                "data_type": base_program_data_type
+            }
+

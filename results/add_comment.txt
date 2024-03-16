@@ -1,4 +1,53 @@
 Base Program:
+char say_hello(int n) { 
+	if (n == 0) {
+		return 'H';
+	}
+	else {
+		return 'e';
+	}
+}
+
+Modified Program:
+char say_hello(int n) {
+//Default comment
+	if (n == 0) {
+//Default comment
+		return 'H';
+//Default comment
+	}
+//Default comment
+	else {
+//Default comment
+		return 'e';
+//Default comment
+	}
+//Default comment
+}
+//Default comment
+
+Error Localizer API Output:
+{
+    "errorLocations": {}
+}
+
+Feedback Fix API Output:
+[]
+
+Feedback Error API Output:
+[]
+
+Repair API Output:
+[]
+
+Status:
+PASS
+
+
+########
+
+
+Base Program:
 def countdown(n):
 	while n >= 0:
 		print(n)
@@ -36,13 +85,108 @@ PASS
 
 
 Base Program:
-def perform_math_operation(x):
-	return x * 10 if x % 2 == 0 else x / 2
+int some_function(int num) {
+	return num * num + 5;
+}
 
 Modified Program:
-def perform_math_operation(x):
+int some_function(int num) {
+//Default comment
+	return num * num + 5;
+//Default comment
+}
+//Default comment
+
+Error Localizer API Output:
+{
+    "errorLocations": {}
+}
+
+Feedback Fix API Output:
+[]
+
+Feedback Error API Output:
+[]
+
+Repair API Output:
+[]
+
+Status:
+PASS
+
+
+########
+
+
+Base Program:
+int random_function(int n) {
+	int result = 0;
+	for (int i = 0; i < n; i++) {
+		result += i * (i + 1);
+	}
+	return result;
+}
+
+Modified Program:
+int random_function(int n) {
+//Default comment
+	int result = 0;
+//Default comment
+	for (int i = 0; i < n; i++) {
+//Default comment
+		result += i * (i + 1);
+//Default comment
+	}
+//Default comment
+	return result;
+//Default comment
+}
+//Default comment
+
+Error Localizer API Output:
+{
+    "errorLocations": {}
+}
+
+Feedback Fix API Output:
+[]
+
+Feedback Error API Output:
+[]
+
+Repair API Output:
+[]
+
+Status:
+PASS
+
+
+########
+
+
+Base Program:
+def reverse_digits(n):
+	reversed_num = 0
+	while n != 0:
+		digit = n % 10
+		reversed_num = reversed_num * 10 + digit
+		n //= 10
+	return reversed_num
+
+Modified Program:
+def reverse_digits(n):
 #Default Comment
-	return x * 10 if x % 2 == 0 else x / 2
+	reversed_num = 0
+#Default Comment
+	while n != 0:
+#Default Comment
+		digit = n % 10
+#Default Comment
+		reversed_num = reversed_num * 10 + digit
+#Default Comment
+		n //= 10
+#Default Comment
+	return reversed_num
 #Default Comment
 
 Error Localizer API Output:

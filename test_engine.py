@@ -29,6 +29,6 @@ if __name__ == "__main__":
 
     
     print("Testing add comment relation...")
-    AddCommentRelationTester(2).test_relation()
-    print("Testing add comment relation completed.")
+    AddCommentRelationTester(3).test_relation() # Generates 3 test cases for now
+    print("Testing add comment relation completed.\n")
 
