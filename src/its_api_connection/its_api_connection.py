@@ -35,8 +35,12 @@ class ItsApiConnection(object):
             return {"language": params[0], "program_model": params[1],
                     "function": params[2], "inputs": params[3], "args": params[4]}
 
-        if endpoint == "structural_alignment":
+        if endpoint == "alignment_structural":
             return {"reference_solution": params[0], "student_solution": params[1]}
+
+        if endpoint == "alignment_variable":
+            return {"reference_solution": params [0], "student_solution": params[1],
+                    "structural_alignment": params[2]}
 
         if endpoint in ["errorlocalizer", "feedback_fix", "feedback_error", "repair"]:
             return {"language": params[0], "reference_solution": params[1],
@@ -67,10 +71,20 @@ class ItsApiConnection(object):
         """
         Returns the response of the call to the structural alignment service endpoint of the ITS API
         """
-        alighnment_structural_url = self.BASE_API_URL + "alignment_structural"
+        alignment_structural_url = self.BASE_API_URL + "alignment_structural"
         param_arr = [reference_solution, student_solution]
-        params = self.__package_params(param_arr, "alignment structural")
-        response = self.__make_api_call(alighnment_structural_url, params)
+        params = self.__package_params(param_arr, "alignment_structural")
+        response = self.__make_api_call(alignment_structural_url, params)
+        return response.json()
+
+    def call_alignment_variable_endpoint(self, reference_solution, student_solution, structural_alignment):
+        """
+        Returns the response of the call to the variable assignment service enpoint of the ITS API
+        """
+        alignment_variable_url = self.BASE_API_URL + "alignment_variable"
+        param_arr = [reference_solution, student_solution, structural_alignment]
+        params =  self.__package_params(param_arr, "alignment_variable")
+        response = self.__make_api_call(alignment_variable_url, params)
         return response.json()
 
     def call_feedback_fix_endpoint(self, language, reference_solution, student_solution, function,
