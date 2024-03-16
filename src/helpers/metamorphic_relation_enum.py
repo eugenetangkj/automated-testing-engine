@@ -1,4 +1,6 @@
-
+'''
+    Enum representing which metamorphic relation it is
+'''
 from enum import Enum
 
 class MetamorphicRelationEnum(Enum):
@@ -9,5 +11,3 @@ class MetamorphicRelationEnum(Enum):
     """
     ADD_COMMENT = "add_comment"
     ADDITION_ASSIGNMENT = "addition_assignment"
-    
-

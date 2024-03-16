@@ -1,5 +1,8 @@
+'''
+    This class is responsible for connecting to the ITS API
+'''
+
 import requests
-import json
 
 class ItsApiConnection(object):
     """
@@ -17,10 +20,9 @@ class ItsApiConnection(object):
         """
         Initialisation method for an ItsApiConnection instance
         """
-        pass
 
     def __make_api_call(self, url, params):
-        return requests.post(url, json=params)
+        return requests.post(url, json=params, timeout=30)
 
     def __package_params(self, params, endpoint):
         """
@@ -78,7 +80,8 @@ class ItsApiConnection(object):
         response = self.__make_api_call(alignment_structural_url, params)
         return response.json()
 
-    def call_alignment_variable_endpoint(self, reference_solution, student_solution, structural_alignment):
+    def call_alignment_variable_endpoint(self, reference_solution, student_solution,
+                                         structural_alignment):
         """
         Returns the response of the call to the variable assignment service endpoint of the ITS API
         """
@@ -96,18 +99,14 @@ class ItsApiConnection(object):
         errorlocalizer_url = self.BASE_API_URL + "errorlocalizer"
         param_arr = [language, reference_solution, student_solution, function, inputs, args]
         params = self.__package_params(param_arr, "errorlocalizer")
-
-        with open("output1.json", "w") as file:
-            # Convert the dictionary to a JSON string and write it to the file
-            json.dump(params, file)
-
         response = self.__make_api_call(errorlocalizer_url, params)
         return response.json()
 
     def call_feedback_fix_endpoint(self, language, reference_solution, student_solution, function,
                                    inputs, args):
         """
-        Returns the response of the call to the feedback fix endpoint of the feedback service in the ITS API
+        Returns the response of the call to the feedback fix endpoint of the
+        feedback service in the ITS API
         """
         feedback_fix_url = self.BASE_API_URL + "feedback_fix"
         param_arr = [language, reference_solution, student_solution, function, inputs, args]
@@ -119,7 +118,8 @@ class ItsApiConnection(object):
     def call_feedback_error_endpoint(self, language, reference_solution, student_solution, function,
                                      inputs, args):
         """
-        Returns the response of the call to the feedback error endpoint of the feedback service in the ITS API
+        Returns the response of the call to the feedback error endpoint of the feedback service
+        in the ITS API
         """
         feedback_error_url = self.BASE_API_URL + "feedback_error"
         param_arr = [language, reference_solution, student_solution, function, inputs, args]

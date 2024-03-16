@@ -1,10 +1,14 @@
-from abc import ABC, abstractmethod
+"""
+    Abstract class for base program generator
+"""
+from abc import abstractmethod
 
 class BaseProgramGenerator(object):
     """
-    This is an abstract class from which concrete program generator classes would extend from. Subclasses that extend
-    this class are responsible for generating a list of random programs (either in C or Python). These random programs
-    generated are the base programs, as later on, they will be modified upon to test the metamorphic relations.
+    This is an abstract class from which concrete program generator classes would extend from.
+    Subclasses that extend this class are responsible for generating random programs (c or py).
+    These random programs generated are the base programs which will be modified to
+    test the metamorphic relations.
     
     """
 
@@ -12,8 +16,8 @@ class BaseProgramGenerator(object):
         """
         Initialisation method for a BaseProgramGenerator instance
         """
-        pass
-    
+
+
     @abstractmethod
     def generate_test_case(self, language, constraints):
         """
@@ -23,9 +27,7 @@ class BaseProgramGenerator(object):
 
         Parameters:
             language: A string indicating the language in which the base program is written in.
-            constraints: A string indicating some constraints and guidelines to generate the base program with.
+            constraints: A string indicating some constraints and guidelines to generate the base
+                         program with.
 
         """
-        pass
-
-

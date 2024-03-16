@@ -1,3 +1,6 @@
+"""
+    Generate random c programs using csmith
+"""
 import os
 import subprocess
 from .base_program_generator import BaseProgramGenerator
@@ -13,18 +16,17 @@ class CsmithProgramGenerator(BaseProgramGenerator):
         """
         Initialisation method for a CsmithProgramGenerator instance
         """
-        pass
 
-    def generate_test_case(self, language="C", constraints=None):
+    def generate_test_case(self, language="c", constraints=None):
         """
-        Generate a random C program using Csmith
+        Generate a random c program using Csmith
         """
-        if language != "C":
-            raise ValueError("Csmith only supports C programs")
+        if language != "c":
+            raise ValueError("Csmith only supports c programs")
 
         # Run csmith binary
         cwd = os.path.dirname(os.path.realpath(__file__)) + "/csmith"
-        result = subprocess.run(["./csmith"], capture_output=True, cwd=cwd, text=True)
+        result = subprocess.run(["./csmith"], capture_output=True, cwd=cwd, text=True, check=False)
 
         if result.returncode != 0:
             raise ValueError("Csmith failed to generate a program")
