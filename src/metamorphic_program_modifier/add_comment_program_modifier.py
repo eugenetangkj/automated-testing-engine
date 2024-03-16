@@ -7,21 +7,16 @@ class AddCommentProgramModifier(MetamorphicProgramModifier):
     adding comments to a program should not affect its semantics.
 
     """
-    DEFAULT_COMMENT = "This is the default comment added by the AddCommentProgramModifier."
+    DEFAULT_COMMENT_C = "\\n//Default comment"
+    DEFAULT_COMMENT_PY = "\\n#Default Comment"
 
     def __init__(self):
         """
         Initialisation method for a AddCommentProgramModifier instance
         """
         pass
-    
-    ## Insert other methods of AddCommentProgramModifier here
-    def add_comment(self, original_program, comment):
-        lines = original_program.split('\n') # Split the program into lines
-        commented_lines = [f"{line.rstrip()} {comment}" for line in lines] # add a comment to each line
-        modified_program = '\n'.join(commented_lines)
-        return modified_program
-    
+
+
     def modify_program(self, language, original_program):
         """
         Modifies the base program by adding a comment to the end of each line.
@@ -35,5 +30,16 @@ class AddCommentProgramModifier(MetamorphicProgramModifier):
         """
         if language not in ["py", "c"]:
             raise ValueError("Unsupported programming language: {}".format(language))
-        modified_program = self.add_comment(original_program, self.DEFAULT_COMMENT)
+        
+        comment_to_add = self.DEFAULT_COMMENT_C if (language == "c") else self.DEFAULT_COMMENT_PY
+        modified_program = self.__add_comment(original_program, comment_to_add)
+          
+        return modified_program
+
+    
+
+    def __add_comment(self, original_program, comment):
+        lines = original_program.split('\\n') # Split the program into lines
+        commented_lines = [f"{line.rstrip()}{comment}" for line in lines] # add a comment to each line
+        modified_program = '\\n'.join(commented_lines)
         return modified_program

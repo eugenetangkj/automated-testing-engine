@@ -29,7 +29,22 @@ class TestEngine(object):
     
     ## Insert other methods of TestEngine here
     def test_add_comment_relation(self):
-        print("Generate base programs and modify them to test the add comment metamorphic relation")
+        # Prepares the program modifier
+        add_comment_program_modifier = AddCommentProgramModifier()
+
+
+
+
+        # Generate a random base program
+        # base_program_string = self.openai_base_program_generator.generate_test_case('py', '')
+        base_program_string = "def list_sum(lst):\\n\\tsum = 0\\n\\tfor num in lst:\\n\\t\\tsum += num\\n\\treturn sum"
+
+        print(base_program_string)
+        
+        # Modify the base program
+        modified_program_string = add_comment_program_modifier.modify_program('py', base_program_string)
+
+        print(modified_program_string)
 
         # Uncomment this to try the openai base program generator
         # print(self.openai_base_program_generator.generate_test_case('py', '1 while loop'))
