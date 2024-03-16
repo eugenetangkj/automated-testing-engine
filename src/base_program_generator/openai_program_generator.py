@@ -23,27 +23,27 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
     # Prompt constants
     # Adapted from https://community.openai.com/t/convert-few-shot-example-to-api-code/325614/2
     SYSTEM_PROMPT = "Create a totally random function given a language and constraints. " + \
-        "Just return the function in a single line without the prefix ###Function, using \\n for newlines and \\t for tabs. " + \
+        "Just return the function in a single line without the prefix ###Function" + \
         "Examples:\n"
     
     # Few-shot learning for Python
     SAMPLE_PY_PROGRAMS = "###Language: py\n" + \
         "###Constraints: None\n" + \
-        "###Function: def add_numbers(a, b):\\n\\treturn a + b\n" + \
+        "###Function: def add_numbers(a, b):\n\treturn a + b\n" + \
         "---\n" + \
         "###Language: py\n" + \
         "###Constraints: Have 1 while loop\n" + \
-        "###Function: def factorial(n):\\n\\tresult = 1\\n\\twhile n > 1:\\n\\t\\tresult *= n\\n\\t\\tn -= 1\\n\\treturn result"
+        "###Function: def factorial(n):\n\tresult = 1\n\twhile n > 1:\n\t\tresult *= n\n\t\tn -= 1\n\treturn result"
 
     
     # Few-shot learning for C
     SAMPLE_C_PROGRAMS = "###Language: c\n" + \
         "###Constraints: Have 1 for loop\n" + \
-        "###Output: #include <stdio.h>\\n\\nint sum_of_squares(int n) {\\n\\tint sum = 0;\\n\\tfor (int i = 1; i <= n; i++) {\\n\\t\\tsum += i * i;\\n\\t}\\n\\treturn sum;\\n}\n" + \
+        "###Output: #include <stdio.h>\n\nint sum_of_squares(int n) {\n\tint sum = 0;\n\tfor (int i = 1; i <= n; i++) {\n\t\tsum += i * i;\n\t}\n\treturn sum;\n}\n" + \
         "---\n" + \
         "###Language: c\n" + \
         "###Constraints: Use 2 include statements\n" + \
-        "###Output: #include <stdio.h>\\n#include <math.h>\\n\\nfloat calculate_square_root(float num) {\\n\\treturn sqrt(num);\\n}"
+        "###Output: #include <stdio.h>\n#include <math.h>\n\nfloat calculate_square_root(float num) {\n\treturn sqrt(num);\n}"
     
 
     # File path of pre-generated random C programs
@@ -113,7 +113,7 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
     def __process_newlines_and_tabs(self, raw_program_string):
         """
-        Transforms newlines and tabs into \\n and \\t respectively, as required for the ITS API input.
+        Transforms newlines and tabs into \n and \t respectively, as required for the ITS API input.
         Also removes filler content that is sometimes returned by OpenAI's API
 
         Note that OpenAi's output returns 4 whitespace characters in lieu of tabs.
@@ -122,16 +122,16 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
         # Python programs
         if (raw_program_string.startswith("```py\n") and raw_program_string.endswith("\n```")):
-            processed_program_string = raw_program_string[6:-4].replace('\n', '\\n').replace('    ', '\\t')
+            processed_program_string = raw_program_string[6:-4].replace('\n', '\n').replace('    ', '\t')
             return processed_program_string
         
         # C programs
         elif (raw_program_string.startswith("```c\n") and raw_program_string.endswith("\n```")):
-            processed_program_string = raw_program_string[5:-4].replace('\n', '\\n').replace('    ', '\\t')
+            processed_program_string = raw_program_string[5:-4].replace('\n', '\n').replace('    ', '\t')
             return processed_program_string
         else:
             # Input is as intended
-            processed_program_string = raw_program_string.replace('\n', '\\n').replace('    ', '\\t')
+            processed_program_string = raw_program_string.replace('\n', '\n').replace('    ', '\t')
             return processed_program_string
 
 

@@ -7,8 +7,8 @@ class AddCommentProgramModifier(MetamorphicProgramModifier):
     adding comments to a program should not affect its semantics.
 
     """
-    DEFAULT_COMMENT_C = "\\n//Default comment"
-    DEFAULT_COMMENT_PY = "\\n#Default Comment"
+    DEFAULT_COMMENT_C = "\n//Default comment"
+    DEFAULT_COMMENT_PY = "\n#Default Comment"
 
     def __init__(self):
         """
@@ -39,7 +39,7 @@ class AddCommentProgramModifier(MetamorphicProgramModifier):
     
 
     def __add_comment(self, original_program, comment):
-        lines = original_program.split('\\n') # Split the program into lines
+        lines = original_program.split('\n') # Split the program into lines
         commented_lines = [f"{line.rstrip()}{comment}" for line in lines] # add a comment to each line
-        modified_program = '\\n'.join(commented_lines)
+        modified_program = '\n'.join(commented_lines)
         return modified_program

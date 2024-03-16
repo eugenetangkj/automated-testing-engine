@@ -107,6 +107,7 @@ class ItsApiConnection(object):
         param_arr = [language, reference_solution, student_solution, function, inputs, args]
         params = self.__package_params(param_arr, "feedback_fix")
         response = self.__make_api_call(feedback_fix_url, params)
+
         return response.json()
 
     def call_feedback_error_endpoint(self, language, reference_solution, student_solution, function,
