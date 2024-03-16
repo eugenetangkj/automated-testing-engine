@@ -24,7 +24,7 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
     # Prompt constants
     # Adapted from https://community.openai.com/t/convert-few-shot-example-to-api-code/325614/2
     SYSTEM_PROMPT_C = "Create a totally random c function given constraints. " + \
-        "The function takes either 0 or 1 argument, whose type must be a int, double or float. Return type must either be void, int double or float." + \
+        "Apart from the given constraints, the function must take either 0 or 1 argument, whose type must be a int, double or float. Return type must either be void, int double or float." + \
         "Just return the function in a single line without the prefix ###Function. " + \
         "Examples:\n"
 
@@ -92,8 +92,6 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
             # Extract output from API
             program_string = response.choices[0].message.content
-
-            print(program_string)
 
             output = self.__process_newlines_and_tabs(program_string)
 

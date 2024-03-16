@@ -7,7 +7,8 @@ class MetamorphicResultWriter(object):
     """
 
     PATH_OF_RESULT_FILES = {
-        MetamorphicRelationEnum.ADD_COMMENT: "././results/add_comment.txt"
+        MetamorphicRelationEnum.ADD_COMMENT: "././results/add_comment.txt",
+        MetamorphicRelationEnum.ADDITION_ASSIGNMENT: "././results/addition_assignment.txt"
     }
 
     

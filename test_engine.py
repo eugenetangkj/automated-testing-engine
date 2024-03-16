@@ -1,5 +1,5 @@
-from src.metamorphic_relation_tester import AddCommentRelationTester
-import logging
+from src.metamorphic_relation_tester import AddCommentRelationTester, AdditionAssignmentRelationTester
+from src.metamorphic_program_modifier import AdditionAssignmentProgramModifier
 
 class TestEngine(object):
     """
@@ -10,10 +10,6 @@ class TestEngine(object):
         PATH_OF_ERROR_FILE (str): Path of file that contains the errors detected
 
     """
-
-    PATH_OF_RESULT_FILES = {
-        "add_comment_relation": "results/add_comment.txt"
-    }
 
     def __init__(self):
         """
@@ -28,7 +24,19 @@ if __name__ == "__main__":
     test_engine = TestEngine()
 
     
-    print("Testing add comment relation...")
-    AddCommentRelationTester(5).test_relation() # Generates 5 test cases for now
-    print("Testing add comment relation completed.\n")
+    # print("Testing add comment relation...")
+    # AddCommentRelationTester(5).test_relation() # Generates 5 test cases for now
+    # print("Testing add comment relation completed.\n")
+
+    print("Testing addition assignment relation...")
+    AdditionAssignmentRelationTester(3).test_relation() # Generates 5 test cases for now
+    print("Testing addition assignment relation completed.\n")
+
+    # test_string = "int increment_by_value(int n) { int value = 2; n += value; return n; }"
+    # print(test_string)
+    # print("\n###\n")
+    # print(AdditionAssignmentProgramModifier().modify_program("c", test_string))
+
+
+    
 

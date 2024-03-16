@@ -1,0 +1,10 @@
+[
+    "def sum_of_squares(n):\n\tsum = 0\n\tfor i in range(1, n + 1):\n\t\tsum += i ** 2\n\treturn sum",
+    "def sum_of_cubes(n):\n\tsum = 0\n\tfor i in range(1, n + 1):\n\t\tsum += i ** 3\n\treturn sum",
+    "def factorial(n):\n\tresult = 1\n\tfor i in range(2, n + 1):\n\t\tresult *= i\n\treturn result",
+    "def sum_of_even_numbers():\n\tsum = 0\n\tfor i in range(2, 11, 2):\n\t\tsum += i\n\treturn sum",
+    "def sum_up_to_ten():\n\tsum = 0\n\tfor i in range(1, 11):\n\t\tsum += i\n\treturn sum",
+    "def reverse_number(number):\n\treverse = 0\n\twhile number != 0:\n\t\treverse += number % 10 * 10\n\t\tnumber //= 10\n\treturn reverse",
+    "def count_digits(number):\n\tcount = 0\n\twhile number != 0:\n\t\tcount += 1\n\t\tnumber //= 10\n\treturn count"
+
+]

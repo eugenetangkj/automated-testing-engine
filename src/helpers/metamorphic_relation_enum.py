@@ -8,5 +8,6 @@ class MetamorphicRelationEnum(Enum):
     
     """
     ADD_COMMENT = "add_comment"
+    ADDITION_ASSIGNMENT = "addition_assignment"
     
 

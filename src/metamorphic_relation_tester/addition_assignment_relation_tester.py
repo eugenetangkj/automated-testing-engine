@@ -1,5 +1,5 @@
 from .metamorphic_relation_tester import MetamorphicRelationTester
-from ..metamorphic_program_modifier import AddCommentProgramModifier
+from ..metamorphic_program_modifier import AdditionAssignmentProgramModifier
 from ..its_api_connection import ItsApiConnection
 from ..inter_representation_processer import InterRepresentationProcesser
 from ..helpers.type_of_metamorphic_relation import TypeOfMetamorphicRelation
@@ -10,13 +10,13 @@ from ..base_program_generator import OpenAiProgramGenerator
 import json
 import random
 
-class AddCommentRelationTester(MetamorphicRelationTester):
+class AdditionAssignmentRelationTester(MetamorphicRelationTester):
     """
-    This class tests the add comment relation
+    This class tests the addition assignment relation.
     
     """
 
-    METAMORPHIC_RELATION_ENUM = MetamorphicRelationEnum.ADD_COMMENT
+    METAMORPHIC_RELATION_ENUM = MetamorphicRelationEnum.ADDITION_ASSIGNMENT
     TYPE_OF_RELATION = TypeOfMetamorphicRelation.EQUIVALENT
 
 
@@ -28,7 +28,7 @@ class AddCommentRelationTester(MetamorphicRelationTester):
             number_of_test_cases: Number of test cases to generate for testing this relation
         """
         super().__init__(number_of_test_cases)
-        self.add_comment_program_modifier = AddCommentProgramModifier()
+        self.addition_assignment_program_modifier = AdditionAssignmentProgramModifier()
         self.its_api_connection = ItsApiConnection()
         self.inter_representation_processer = InterRepresentationProcesser()
         self.openai_base_program_generator = OpenAiProgramGenerator()
@@ -64,7 +64,9 @@ class AddCommentRelationTester(MetamorphicRelationTester):
             try:
 
                 # Step 1a: Generate a random base program
-                base_program_string = self.openai_base_program_generator.generate_test_case('c', '')["program"]
+                base_program_string = self.openai_base_program_generator.generate_test_case('c', 'Use +=')["program"]
+                #base_program_string = "float sum_minus_one() {\n\tfloat sum = 0;\n\tfor (int i = 1; i <= 10; i ++) sum += i * i;\n\treturn sum;\n}"
+
                 self.__process_relation_c(base_program_string)
 
 
@@ -72,7 +74,7 @@ class AddCommentRelationTester(MetamorphicRelationTester):
             
             except:
                 # Step 1a: Randomly pick a c program
-                with open('././datafiles/random_c_programs.json', 'r') as file:
+                with open('././datafiles/random_c_programs_addition_assignment.json', 'r') as file:
                     data = json.load(file)
                     base_program_string = random.choice(data)
                 self.__process_relation_c(base_program_string)
@@ -94,7 +96,7 @@ class AddCommentRelationTester(MetamorphicRelationTester):
 
             try:
                 # Step 1b: Generate a random base program
-                base_program = self.openai_base_program_generator.generate_test_case('py', '')
+                base_program = self.openai_base_program_generator.generate_test_case('py', 'Use +=')
                 base_program_string = base_program["program"]
                 base_program_data_type = base_program["data_type"]
                 self.__process_relation_py(base_program_string, base_program_data_type)
@@ -103,12 +105,12 @@ class AddCommentRelationTester(MetamorphicRelationTester):
             
             except:
                 # Step 1b: Randomly pick from a safe pool of Python programs
-                with open('././datafiles/random_py_programs.json') as file:
+                with open('././datafiles/random_py_programs_addition_assignment.json') as file:
                     random_py_programs = json.load(file)
                 
                 random_index = random.randrange(len(random_py_programs))
 
-                with open('././datafiles/random_py_datatypes.json') as file:
+                with open('././datafiles/random_py_datatypes_addition_assignment.json') as file:
                     random_data_types = json.load(file)
 
                 base_program_string = random_py_programs[random_index]
@@ -127,13 +129,12 @@ class AddCommentRelationTester(MetamorphicRelationTester):
 
         '''
         # Step 2a: Modify the base program
-        modified_program_string = self.add_comment_program_modifier.modify_program("c", base_program_string)
-
+        modified_program_string = self.addition_assignment_program_modifier.modify_program("c", base_program_string)
+        
         
         # Step 3a: Put the base and modified programs into parser endpoint to get intermediate representation
         base_program_intermediate_representation_dict = self.its_api_connection.call_parser_endpoint("c", base_program_string)
         modified_program_intermediate_representation_dict = self.its_api_connection.call_parser_endpoint("c", modified_program_string)
-    
 
         # Step 4a: Extract information from intermediate representation
         program_information = self.inter_representation_processer.break_down_inter_representation_c(base_program_intermediate_representation_dict)
@@ -207,7 +208,7 @@ class AddCommentRelationTester(MetamorphicRelationTester):
 
         '''
          # Step 2b: Modify the base program
-        modified_program_string = self.add_comment_program_modifier.modify_program("py", base_program_string)
+        modified_program_string = self.addition_assignment_program_modifier.modify_program("py", base_program_string)
 
         
         # Step 3b: Put the base and modified programs into parser endpoint to get intermediate representation
