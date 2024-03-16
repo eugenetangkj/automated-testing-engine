@@ -79,7 +79,7 @@ class ItsApiConnection(object):
 
     def call_alignment_variable_endpoint(self, reference_solution, student_solution, structural_alignment):
         """
-        Returns the response of the call to the variable assignment service enpoint of the ITS API
+        Returns the response of the call to the variable assignment service endpoint of the ITS API
         """
         alignment_variable_url = self.BASE_API_URL + "alignment_variable"
         param_arr = [reference_solution, student_solution, structural_alignment]
@@ -90,10 +90,21 @@ class ItsApiConnection(object):
     def call_feedback_fix_endpoint(self, language, reference_solution, student_solution, function,
                                    inputs, args):
         """
-        Returns the response of the call to the feedback fix service endpoint of the ITS API
+        Returns the response of the call to the feedback fix endpoint of the feedback service in the ITS API
         """
         feedback_fix_url = self.BASE_API_URL + "feedback_fix"
         param_arr = [language, reference_solution, student_solution, function, inputs, args]
         params = self.__package_params(param_arr, "feedback_fix")
         response = self.__make_api_call(feedback_fix_url, params)
+        return response.json()
+
+    def call_feedback_error_endpoint(self, language, reference_solution, student_solution, function,
+                                     inputs, args):
+        """
+        Returns the response of the call to the feedback error endpoint of the feedback service in the ITS API
+        """
+        feedback_error_url = self.BASE_API_URL + "feedback_error"
+        param_arr = [language, reference_solution, student_solution, function, inputs, args]
+        params = self.__package_params(param_arr, "feedback_error")
+        response = self.__make_api_call(feedback_error_url, params)
         return response.json()
