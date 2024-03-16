@@ -3,6 +3,7 @@ from src.metamorphic_program_modifier import MetamorphicProgramModifier, AddComm
 from src.base_program_generator import BaseProgramGenerator, CsmithProgramGenerator, OpenAiProgramGenerator
 from src.api_output_comparator import ApiOutputComparator
 from src.inter_representation_processer import InterRepresentationProcesser
+from src.helpers.type_of_metamorphic_relation import TypeOfMetamorphicRelation
 import json
 
 class TestEngine(object):
@@ -18,7 +19,9 @@ class TestEngine(object):
 
     """
 
-    PATH_OF_ERROR_FILE = "" # To be updated again
+    PATH_OF_RESULT_FILES = {
+        "add_comment_relation": "results/add_comment.txt"
+    }
 
     def __init__(self):
         """
@@ -31,18 +34,21 @@ class TestEngine(object):
         self.inter_representation_processer = InterRepresentationProcesser()
     
     ## Insert other methods of TestEngine here
-    #TODO: Handle different languages
+
+
+
     def test_add_comment_relation(self):
         # Prepares the program modifier
         add_comment_program_modifier = AddCommentProgramModifier()
-
+        results_file = self.PATH_OF_RESULT_FILES["add_comment_relation"]
 
 
 
         # Step 1: Generate a random base program
         # base_program_string = self.openai_base_program_generator.generate_test_case('py', '')
-        base_program_string = "int power(int base, int exponent) {\n\tint result = 1;\n\twhile (exponent > 0) {\n\t\tresult *= base;\n\t\texponent--;\n\t}\n\treturn result;\n}"
-
+        base_program_string = "int factorial(int n) {\n\tint result = 1;\n\twhile (n > 1) {\n\t\tresult *= n;\n\t\tn--;\n\t}\n\treturn result;\n}"
+       
+    
         # Step 2: Modify the base program
         modified_program_string = add_comment_program_modifier.modify_program("c", base_program_string)
 
@@ -55,7 +61,7 @@ class TestEngine(object):
         # Step 4: Extract information from intermediate representation
         program_information = self.inter_representation_processer.break_down_inter_representation_c(base_program_intermediate_representation_dict)
 
-      
+
         
         # Step 5: Write to feedback fix API to check for discrepencies
         output = self.its_api_connection.call_feedback_fix_endpoint(
@@ -64,27 +70,30 @@ class TestEngine(object):
             json.dumps(modified_program_intermediate_representation_dict, indent=4),
             program_information["function"],
             program_information["inputs"],
-            "[2], [3]"
+            "[2]"
         )
 
+        status = self.api_output_comparator.check_feedback_fix_output(output,TypeOfMetamorphicRelation.EQUIVALENT)
 
-        print(output)
-       
+
+
+        # Step 6: Write output to file
+        with open(results_file, "a") as file:
+            # Append the string to the file
+            file.write("Base Program:\n")
+            file.write(base_program_string)
+            file.write("\n\n")
+            file.write("Modified Program:\n")
+            file.write(modified_program_string)
+            file.write("\n\n")
+            file.write("Feedback Fix API Output:\n")
+            file.write(json.dumps(output, indent=4))
+            file.write("\n\n")
+            file.write("Status:\n")
+            file.write(status)
+            file.write("\n\n\n########\n\n\n")
         
-
-
-
-
-
-
-
-
-
-
-
-        # Uncomment this to try the openai base program generator
-        # print(self.openai_base_program_generator.generate_test_case('py', '1 while loop'))
-
+       
 
         
 if __name__ == "__main__":

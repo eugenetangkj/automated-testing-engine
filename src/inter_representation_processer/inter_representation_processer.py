@@ -52,13 +52,17 @@ class InterRepresentationProcesser(object):
             
             parameter_data_types.append(parameter_type)
 
-        parameter_string_output = "["
-        for parameter_data_type in parameter_data_types:
-            parameter_string_output += self.__generate_random_argument_c(parameter_data_type)
-            parameter_string_output += ", "
+
+        parameter_string_output = ""
+
+        if (len(parameter_data_types) != 0):
+            parameter_string_output = "["
+            for parameter_data_type in parameter_data_types:
+                parameter_string_output += self.__generate_random_argument_c(parameter_data_type)
+                parameter_string_output += ", "
 
 
-        parameter_string_output = parameter_string_output[:-2] + ']'
+            parameter_string_output = parameter_string_output[:-2] + ']'
 
         return {
             "function": function_name_output,

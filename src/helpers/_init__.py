@@ -1,0 +1,1 @@
+from .type_of_metamorphic_relation import TypeOfMetamorphicRelation
