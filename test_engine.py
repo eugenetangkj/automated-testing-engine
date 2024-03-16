@@ -23,20 +23,17 @@ if __name__ == "__main__":
     # and runs it to execute the test cases for the relations
     test_engine = TestEngine()
 
-    
-    # print("Testing add comment relation...")
-    # AddCommentRelationTester(5).test_relation() # Generates 5 test cases for now
-    # print("Testing add comment relation completed.\n")
+    # Test add comment relation
+    print("Testing add comment relation...")
+    AddCommentRelationTester(5).test_relation() # Generates 5 test cases for now
+    print("Testing add comment relation completed.\n")
 
+    # Test addition assignment relation
     print("Testing addition assignment relation...")
     AdditionAssignmentRelationTester(3).test_relation() # Generates 5 test cases for now
     print("Testing addition assignment relation completed.\n")
 
-    # test_string = "int increment_by_value(int n) { int value = 2; n += value; return n; }"
-    # print(test_string)
-    # print("\n###\n")
-    # print(AdditionAssignmentProgramModifier().modify_program("c", test_string))
-
+ 
 
     
 
