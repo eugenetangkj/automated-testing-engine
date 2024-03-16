@@ -1,4 +1,4 @@
-from helpers.type_of_metamorphic_relation import TypeOfMetamorphicRelation
+from ..helpers.type_of_metamorphic_relation import TypeOfMetamorphicRelation
 
 class ApiOutputComparator(object):
     """
@@ -15,11 +15,29 @@ class ApiOutputComparator(object):
         pass
     
     
+    def check_error_localizer_output(self, error_localizer_output, type_of_metamorphic_relation):
+        """
+        Success or failure is depending on the type of metamorphic relation that we
+        are testing. If successful, return true. Else, return false
+
+        Parameters:
+            feedback_fix_output: Dictionary that is obtained from the error localizer API
+            type_of_metamorphic_relation: The type of relation we are testing for, whether equivalent or variant
+
+        """
+        # We are testing that the base and modified programs should be equivalent
+        if (type_of_metamorphic_relation == TypeOfMetamorphicRelation.EQUIVALENT):
+            return True if (error_localizer_output["errorLocations"] == {}) else False
+
+        # We are testing that the base and modified programs should be different
+        else:
+            return True if (len(error_localizer_output) != {}) else False
+
 
     def check_feedback_fix_output(self, feedback_fix_output, type_of_metamorphic_relation):
         """
-        Returns success or failure depending on the type of metamorphic relation that we
-        are testing
+        Success or failure is depending on the type of metamorphic relation that we
+        are testing. If successful, return true. Else, return false
 
         Parameters:
             feedback_fix_output: Dictionary that is obtained from the feedback fix API
@@ -27,13 +45,66 @@ class ApiOutputComparator(object):
 
         """
         
+        return self.__check_feedback_output__(feedback_fix_output, type_of_metamorphic_relation)
+        
+
+    
+    def check_feedback_fix_output(self, feedback_fix_output, type_of_metamorphic_relation):
+        """
+        Success or failure is depending on the type of metamorphic relation that we
+        are testing. If successful, return true. Else, return false
+
+        Parameters:
+            feedback_fix_output: Dictionary that is obtained from the feedback fix API
+            type_of_metamorphic_relation: The type of relation we are testing for, whether equivalent or variant
+
+        """
+        return self.__check_feedback_output__(feedback_fix_output, type_of_metamorphic_relation)
+
+    
+    def check_feedback_error_output(self, feedback_error_output, type_of_metamorphic_relation):
+        """
+        Success or failure is depending on the type of metamorphic relation that we
+        are testing. If successful, return true. Else, return false
+
+        Parameters:
+            feedback_fix_output: Dictionary that is obtained from the feedback error API
+            type_of_metamorphic_relation: The type of relation we are testing for, whether equivalent or variant
+
+        """
+        return self.__check_feedback_output__(feedback_error_output, type_of_metamorphic_relation)
+
+    
+    def check_repair_output(self, repair_output, type_of_metamorphic_relation):
+        """
+        Success or failure is depending on the type of metamorphic relation that we
+        are testing. If successful, return true. Else, return false
+
+        Parameters:
+            feedback_fix_output: Dictionary that is obtained from the repair API
+            type_of_metamorphic_relation: The type of relation we are testing for, whether equivalent or variant
+
+        """
+        return self.__check_feedback_output__(repair_output, type_of_metamorphic_relation)
+        
+
+    def __check_feedback_output__(self, output, type_of_metamorphic_relation):
+        """
+        Success or failure is depending on the type of metamorphic relation that we
+        are testing. If successful, return true. Else, return false
+
+        Parameters:
+            output: Dictionary that is obtained from the feedback fix, feedback error, or repair API
+            type_of_metamorphic_relation: The type of relation we are testing for, whether equivalent or variant
+
+        """
         # We are testing that the base and modified programs should be equivalent
         if (type_of_metamorphic_relation == TypeOfMetamorphicRelation.EQUIVALENT):
-            return "PASS" if (len(feedback_fix_output) == 0) else "FAIL"
+            return True if (len(output) == 0) else False
 
         # We are testing that the base and modified programs should be different
         else:
-            return "PASS" if (len(feedback_fix_output) != 0) else "FAIL"
+            return True if (len(output) != 0) else False
 
 
 

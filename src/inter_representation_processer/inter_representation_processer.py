@@ -115,18 +115,3 @@ class InterRepresentationProcesser(object):
             random_string = ''.join(random.choice(possible_characters) for _ in range(random.randint(1, 10)))
             return "\"" + random_string + "\""
     
-
-
-
-
-
-            
-
-
-
-
-
-
-        
-
-

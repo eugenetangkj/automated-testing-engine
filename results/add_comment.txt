@@ -26,7 +26,18 @@ int factorial(int n) {
 }
 //Default comment
 
+Error Localizer API Output:
+{
+    "errorLocations": {}
+}
+
 Feedback Fix API Output:
+[]
+
+Feedback Error API Output:
+[]
+
+Repair API Output:
 []
 
 Status:
