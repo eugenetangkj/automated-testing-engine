@@ -18,8 +18,6 @@ class ItsApiConnection(object):
         """
         pass
 
-    ## Insert other methods of ItsApiConnection here
-
     def __make_api_call(self, url, params):
         return requests.post(url, json=params)
 
@@ -36,7 +34,10 @@ class ItsApiConnection(object):
         if endpoint == "interpreter":
             return {"language": params[0], "program_model": params[1],
                     "function": params[2], "inputs": params[3], "args": params[4]}
-            
+
+        if endpoint == "structural_alignment":
+            return {"reference_solution": params[0], "student_solution": params[1]}
+
         if endpoint in ["errorlocalizer", "feedback_fix", "feedback_error", "repair"]:
             return {"language": params[0], "reference_solution": params[1],
                     "student_solution": params[2], "function": params[3], "inputs": params[4],
@@ -44,7 +45,7 @@ class ItsApiConnection(object):
 
     def call_parser_endpoint(self, language, source_code):
         """
-        Returns the response of the call to the parser endpoint of the ITS API
+        Returns the response of the call to the parser service endpoint of the ITS API
         """
         parser_url = self.BASE_API_URL + "parser"
         param_arr = [language, source_code]
@@ -54,7 +55,7 @@ class ItsApiConnection(object):
 
     def call_interpreter_endpoint(self, language, program_model, function, inputs, args):
         """
-        Returns the response of the call to the interpreter endpoint of the ITS API
+        Returns the response of the call to the interpreter service endpoint of the ITS API
         """
         interpreter_url = self.BASE_API_URL + "interpreter"
         param_arr = [language, program_model, function, inputs, args]
@@ -62,10 +63,20 @@ class ItsApiConnection(object):
         response = self.__make_api_call(interpreter_url, params)
         return response.json()
 
+    def call_alignment_structural_endpoint(self, reference_solution, student_solution):
+        """
+        Returns the response of the call to the structural alignment service endpoint of the ITS API
+        """
+        alighnment_structural_url = self.BASE_API_URL + "alignment_structural"
+        param_arr = [reference_solution, student_solution]
+        params = self.__package_params(param_arr, "alignment structural")
+        response = self.__make_api_call(alighnment_structural_url, params)
+        return response.json()
+
     def call_feedback_fix_endpoint(self, language, reference_solution, student_solution, function,
                                    inputs, args):
         """
-        Returns the response of the call to the feedback fix endpoint of the ITS API
+        Returns the response of the call to the feedback fix service endpoint of the ITS API
         """
         feedback_fix_url = self.BASE_API_URL + "feedback_fix"
         param_arr = [language, reference_solution, student_solution, function, inputs, args]
