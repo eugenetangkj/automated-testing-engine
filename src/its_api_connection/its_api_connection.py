@@ -87,6 +87,17 @@ class ItsApiConnection(object):
         response = self.__make_api_call(alignment_variable_url, params)
         return response.json()
 
+    def call_errorlocalizer_endpoint(self, language, reference_solution, student_solution, function,
+                            inputs, args):
+        """
+        Returns the response of the call to the error localizer service endpoint of the ITS API
+        """
+        errorlocalizer_url = self.BASE_API_URL + "errorlocalizer"
+        param_arr = [language, reference_solution, student_solution, function, inputs, args]
+        params = self.__package_params(param_arr, "errorlocalizer")
+        response = self.__make_api_call(errorlocalizer_url, params)
+        return response.json()
+
     def call_feedback_fix_endpoint(self, language, reference_solution, student_solution, function,
                                    inputs, args):
         """
@@ -107,4 +118,15 @@ class ItsApiConnection(object):
         param_arr = [language, reference_solution, student_solution, function, inputs, args]
         params = self.__package_params(param_arr, "feedback_error")
         response = self.__make_api_call(feedback_error_url, params)
+        return response.json()
+
+    def call_repair_endpoint(self, language, reference_solution, student_solution, function,
+                             inputs, args):
+        """
+        Returns the response of the call to the repair service endpoint of the ITS API
+        """
+        repair_url = self.BASE_API_URL + "repair"
+        param_arr = [language, reference_solution, student_solution, function, inputs, args]
+        params = self.__package_params(param_arr, "repair")
+        response = self.__make_api_call(repair_url, params)
         return response.json()
