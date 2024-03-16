@@ -1,4 +1,5 @@
 import requests
+import json
 
 class ItsApiConnection(object):
     """
@@ -95,6 +96,11 @@ class ItsApiConnection(object):
         errorlocalizer_url = self.BASE_API_URL + "errorlocalizer"
         param_arr = [language, reference_solution, student_solution, function, inputs, args]
         params = self.__package_params(param_arr, "errorlocalizer")
+
+        with open("output1.json", "w") as file:
+            # Convert the dictionary to a JSON string and write it to the file
+            json.dump(params, file)
+
         response = self.__make_api_call(errorlocalizer_url, params)
         return response.json()
 

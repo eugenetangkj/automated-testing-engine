@@ -1,27 +1,18 @@
 Base Program:
-void totally_random_function(int num) {
-	if(num == 0) {
-		printf("No argument supplied");
-	} else {
-		printf("Number %d used as argument", num);
-	}
-}
+def countdown(n):
+	while n >= 0:
+		print(n)
+		n -= 1
 
 Modified Program:
-void totally_random_function(int num) {
-//Default comment
-	if(num == 0) {
-//Default comment
-		printf("No argument supplied");
-//Default comment
-	} else {
-//Default comment
-		printf("Number %d used as argument", num);
-//Default comment
-	}
-//Default comment
-}
-//Default comment
+def countdown(n):
+#Default Comment
+	while n >= 0:
+#Default Comment
+		print(n)
+#Default Comment
+		n -= 1
+#Default Comment
 
 Error Localizer API Output:
 {
@@ -45,29 +36,14 @@ PASS
 
 
 Base Program:
-int judged_by_zero(int n) {
-	if (n == 0) {
-		return 1;
-	} else {
-		return 0;
-	}
-}
+def perform_math_operation(x):
+	return x * 10 if x % 2 == 0 else x / 2
 
 Modified Program:
-int judged_by_zero(int n) {
-//Default comment
-	if (n == 0) {
-//Default comment
-		return 1;
-//Default comment
-	} else {
-//Default comment
-		return 0;
-//Default comment
-	}
-//Default comment
-}
-//Default comment
+def perform_math_operation(x):
+#Default Comment
+	return x * 10 if x % 2 == 0 else x / 2
+#Default Comment
 
 Error Localizer API Output:
 {

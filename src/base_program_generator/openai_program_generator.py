@@ -5,6 +5,7 @@ import os
 import httpx
 import json
 import random
+import re
 
 load_dotenv() # Loads environment variables for OpenAI API key
 
@@ -22,29 +23,35 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
     # Prompt constants
     # Adapted from https://community.openai.com/t/convert-few-shot-example-to-api-code/325614/2
-    SYSTEM_PROMPT = "Create a totally random function given a language and constraints. " + \
-        "The function takes either 0 or 1 argument, which must be a number." + \
-        "Just return the function in a single line without the prefix ###Function" + \
+    SYSTEM_PROMPT_C = "Create a totally random c function given constraints. " + \
+        "The function takes either 0 or 1 argument, whose type must be a NUMBER. " + \
+        "Just return the function in a single line without the prefix ###Function. " + \
+        "Examples:\n"
+
+
+    SYSTEM_PROMPT_PY =  "Create a totally random py function given constraints. " + \
+        "The function takes either 0 or 1 argument, whose type must be int, float or none if there is no argument." + \
+        "Return the function in a single line " + \
+        "and return the type of the argument in the next line." + \
         "Examples:\n"
     
+    
     # Few-shot learning for Python
-    SAMPLE_PY_PROGRAMS = "###Language: py\n" + \
-        "###Constraints: None\n" + \
-        "###Function: def countdown(n):\n\twhile n >= 0:\n\t\tprint(n)\n\t\tn -= 1" + \
+    SAMPLE_PY_PROGRAMS = "###Constraints: None\n" + \
+        "###Function: def generate_random_number():\n\timport random\n\treturn random.randint(1, 100)" + \
+        "###Type: none\n" + \
         "---\n" + \
-        "###Language: py\n" + \
         "###Constraints: Have 1 while loop\n" + \
-        "###Function: def factorial(n):\n\tresult = 1\n\twhile n > 1:\n\t\tresult *= n\n\t\tn -= 1\n\treturn result"
+        "###Function: def sum_of_digits(n):\n\ttotal = 0\n\twhile n > 0:\n\t\ttotal += int(n % 10)\n\t\tn //= 10\n\treturn total\n" + \
+        "###Type: float"
 
     
     # Few-shot learning for C
-    SAMPLE_C_PROGRAMS = "###Language: c\n" + \
-        "###Constraints: Have 1 for loop\n" + \
-        "###Output: #include <stdio.h>\n\nint sum_of_squares(int n) {\n\tint sum = 0;\n\tfor (int i = 1; i <= n; i++) {\n\t\tsum += i * i;\n\t}\n\treturn sum;\n}\n" + \
+    SAMPLE_C_PROGRAMS = "###Constraints: Have 1 for loop\n" + \
+        "###Function: #include <stdio.h>\n\nint sum_of_squares(int n) {\n\tint sum = 0;\n\tfor (int i = 1; i <= n; i++) {\n\t\tsum += i * i;\n\t}\n\treturn sum;\n}\n" + \
         "---\n" + \
-        "###Language: c\n" + \
         "###Constraints: Use 2 include statements\n" + \
-        "###Output: #include <stdio.h>\n#include <math.h>\n\nfloat calculate_square_root(float num) {\n\treturn sqrt(num);\n}"
+        "###Function: #include <stdio.h>\n#include <math.h>\n\nfloat calculate_square_root(float num) {\n\treturn sqrt(num);\n}"
     
 
     # File path of pre-generated random C programs
@@ -75,20 +82,30 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
         # Calls the chat completion API to generate the base program
         try:
-            user_prompt = self.__generate_user_prompt(language, constraints)
+            user_prompt = self.__generate_user_prompt(constraints)
+            system_prompt = self.SYSTEM_PROMPT_C + self.SAMPLE_C_PROGRAMS if (language == 'c') else self.SYSTEM_PROMPT_PY + self.SAMPLE_PY_PROGRAMS
+
+            output = system_prompt
             response = self.OPENAI_CLIENT.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
-                    {"role": "system", "content": self.SYSTEM_PROMPT + (self.SAMPLE_PY_PROGRAMS if (language == 'py') else self.SAMPLE_C_PROGRAMS)},
+                    {"role": "system", "content": system_prompt },
                     {"role": "user", "content": user_prompt }
                 ],
-                temperature=1.5, # We want more randomness in generating these base programs
+                temperature=1, # We want more randomness in generating these base programs
             )
 
             # Extract output from API
             program_string = response.choices[0].message.content
             output = self.__process_newlines_and_tabs(program_string)
 
+            if (language == 'py'):
+                output = self.__process_data(output)
+            else:
+                output = {
+                    "program": output,
+                    "data_type": ""
+                }
             return output
         
         except httpx.TimeoutException:
@@ -98,18 +115,16 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
 
 
-    def __generate_user_prompt(self, language, constraints):
+    def __generate_user_prompt(self, constraints):
         """
         Prompt engineers a user prompt to be passed into the OpenAI model
 
         Parameters:
-            language: A string indicating the language in which the base program is written in.
             constraints: A string indicating some constraints and guidelines to generate the base program with.
         
         """
 
-        return f"###Language: { language }\n" + \
-            f"###Constraints: { constraints }"
+        return f"###Constraints: { constraints }"
         
 
     def __process_newlines_and_tabs(self, raw_program_string):
@@ -134,6 +149,29 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
             # Input is as intended
             processed_program_string = raw_program_string.replace('\n', '\n').replace('    ', '\t')
             return processed_program_string
+
+
+    def __process_data(self, output):
+        """
+        Removes the labels from the raw input
+
+        Parameters:
+            output: The program to be processed
+        
+        """
+        # Obtained from ChatGPT
+        function_pattern = re.compile(r'###Function: (.+?)###Type:', re.DOTALL)
+        type_pattern = re.compile(r'###Type: (.+)', re.DOTALL)
+        function_match = function_pattern.search(output)
+        type_match = type_pattern.search(output)
+
+        raw_program = function_match.group(1).strip()
+        data_type = type_match.group(1).strip()
+
+        return {
+            "program": raw_program,
+            "data_type": data_type
+        }
 
 
     def __get_random_program_from_file(self, language):

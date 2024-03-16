@@ -1,10 +1,10 @@
 [
     "def countdown(n):\n\twhile n >= 0:\n\t\tprint(n)\n\t\tn -= 1",
-    "def reverse_string(s):\n\tresult = ''\n\twhile s:\n\t\tresult += s[-1]\n\t\ts = s[:-1]\n\treturn result",
-    "def find_maximum(lst):\n\tmax_value = float('-inf')\n\twhile lst:\n\t\tvalue = lst.pop()\n\t\tif value > max_value:\n\t\t\tmax_value = value\n\treturn max_value",
     "def sum_of_digits(n):\n\ttotal = 0\n\twhile n > 0:\n\t\ttotal += n % 10\n\t\tn //= 10\n\treturn total",
     "def fibonacci(n):\n\ta, b = 0, 1\n\twhile n > 0:\n\t\tprint(a)\n\t\ta, b = b, a + b\n\t\tn -= 1",
     "def is_prime(n):\n\tif n <= 1:\n\t\treturn False\n\ti = 2\n\twhile i * i <= n:\n\t\tif n % i == 0:\n\t\t\treturn False\n\t\ti += 1\n\treturn True",
-    "def reverse_digits(n):\n\treversed_num = 0\n\twhile n != 0:\n\t\tdigit = n % 10\n\t\treversed_num = reversed_num * 10 + digit\n\t\tn //= 10\n\treturn reversed_num"
-
+    "def reverse_digits(n):\n\treversed_num = 0\n\twhile n != 0:\n\t\tdigit = n % 10\n\t\treversed_num = reversed_num * 10 + digit\n\t\tn //= 10\n\treturn reversed_num",
+    "def sum_of_digits(n):\n\ttotal = 0\n\twhile n > 0:\n\t\ttotal += int(n % 10)\n\t\tn //= 10\n\treturn total",
+    "def greet():\n\treturn 'Hello, world!'",
+    "def generate_random_number(num: int = 5):\n\treturn num * 10.5 if isinstance(num, int) else None"
 ]

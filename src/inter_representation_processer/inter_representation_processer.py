@@ -23,13 +23,6 @@ class InterRepresentationProcesser(object):
         Parameters:
             inter_representation: Intermediate representation of a program to be broken down
 
-            
-        - language: c | py
-        - reference_solution: string
-        - student_solution: string
-        - function: string (the entry function of the program)
-        - inputs: IO inputs
-        - args: arguments of the entry function (for e.g. "[2]") (string wrapped in '[]')
         """
     
         # Retrieves function information
@@ -69,6 +62,46 @@ class InterRepresentationProcesser(object):
             "inputs": inputs_output,
             "args": parameter_string_output
         }
+
+
+    def break_down_inter_representation_py(self, inter_representation, data_type):
+        """
+        Breaks down the intermediate representation for a py program
+
+        Parameters:
+            inter_representation: Intermediate representation of a program to be broken down
+            data_type: Type of parameter
+
+            
+        - language: c | py
+        - reference_solution: string
+        - student_solution: string
+        - function: string (the entry function of the program)
+        - inputs: IO inputs
+        - args: arguments of the entry function (for e.g. "[2]") (string wrapped in '[]')
+        """
+    
+        # Retrieves function information
+        # Assume base programs have only 1 function
+        function_name_output = next(iter(inter_representation["fncs"]))
+
+        # Assumes empty inputs
+        inputs_output = ""
+
+        # Determine arguments for the single function
+        parameter_string_output = ""
+
+        if (data_type != "none"):
+            parameter_string_output = "["
+            parameter_string_output += self.__generate_random_argument_py(data_type)
+            parameter_string_output += ']'
+        
+        return {
+            "function": function_name_output,
+            "inputs": inputs_output,
+            "args": parameter_string_output
+        }
+
 
 
     def __generate_random_argument_c(self, data_type):
@@ -114,4 +147,24 @@ class InterRepresentationProcesser(object):
             possible_characters = string.ascii_letters
             random_string = ''.join(random.choice(possible_characters) for _ in range(random.randint(1, 10)))
             return "\"" + random_string + "\""
+    
+
+    def __generate_random_argument_py(self, data_type):
+        """
+            Randomly generates an argument given a data type in py
+
+            Parameters:
+                data_type: String representing the data type
+
+        """
+        if (data_type == "int"):
+            # Random int between 1 to 10
+            return str(random.randint(1, 10))
+        
+        elif (data_type =="float"):
+            # Random float or double between 1 to 10
+            return str(random.uniform(1, 10))
+
+        else:
+            return ""
     
