@@ -22,7 +22,7 @@ class AdditionAssignmentProgramModifier(MetamorphicProgramModifier):
         for line in lines:  # find all instances in program
             if '+=' in line:
                 var_name = line.split('+=')[0].strip().split()[-1]
-                before_var = self.find_substring_before_target(line.split('+=')[0], var_name)
+                before_var = self._find_substring_before_target(line.split('+=')[0], var_name)
                 increment_val = line.split('+=')[1].strip() # remove additional spaces
 
                 modified_lines.append(f"{before_var}{var_name} = {var_name.strip()} + {increment_val}")
@@ -45,10 +45,11 @@ class AdditionAssignmentProgramModifier(MetamorphicProgramModifier):
             raise ValueError("Unsupported programming language: {}".format(language))
         modified_program = self.convert_addition_assignment(original_program)
         return modified_program
-    
+
 
     # Obtained from ChatGPT
-    def find_substring_before_target(self, s, target):
+    # Inserted by @eugenetangkj
+    def _find_substring_before_target(self, s, target):
         index_of_target = s.rfind(target)  # Find the last occurrence of the target string
         if index_of_target != -1:
             return s[:index_of_target]  # Return substring before the target string

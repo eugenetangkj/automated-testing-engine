@@ -172,7 +172,7 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
             output: The program to be processed
         
         """
-        # Obtained from ChatGPT
+        # Obtained from ChatGPT, inserted by @eugenetangkj
         function_pattern = re.compile(r'###Function: (.+?)###Type:', re.DOTALL)
         type_pattern = re.compile(r'###Type: (.+)', re.DOTALL)
         function_match = function_pattern.search(output)
