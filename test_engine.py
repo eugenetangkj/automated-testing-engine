@@ -1,44 +1,48 @@
-from src.its_api_connection import ItsApiConnection
-from src.metamorphic_program_modifier import MetamorphicProgramModifier, AddCommentProgramModifier
-from src.base_program_generator import BaseProgramGenerator, CsmithProgramGenerator, OpenAiProgramGenerator
-from src.api_output_comparator import ApiOutputComparator
+"""
+This module is the entry point to the test engine
+"""
 
-class TestEngine(object):
+from src.metamorphic_relation_tester import AddCommentRelationTester
+from src.metamorphic_relation_tester import AdditionAssignmentRelationTester
+
+class TestEngine():
     """
-    This class is the test engine responsible for running test cases against metamorphic relations
-    and writing potential bugs to a data file. It acts as the main point of entry for the app.
+    This class is the test engine responsible for running test cases against metamorphic relations.
+    It acts as the main point of entry for the app.
     
     Attributes:
         PATH_OF_ERROR_FILE (str): Path of file that contains the errors detected
-        its_api_connection (ItsApiConnection): To connect to the ITS API
-        csmith_base_program_generator (CsmithProgramGenerator): To generate random C base programs
-        openai_base_program_generator (OpenAiProgramGenerator): To generate random C and Python base programs
 
     """
-
-    PATH_OF_ERROR_FILE = "" # To be updated again
 
     def __init__(self):
         """
         Initialisation method for a TestEngine instance
         """
-        self.its_api_connection = ItsApiConnection()
-        self.csmith_base_program_generator = CsmithProgramGenerator()
-        self.openai_base_program_generator = OpenAiProgramGenerator()
-        self.api_output_comparator = ApiOutputComparator()
-    
-    ## Insert other methods of TestEngine here
+
     def test_add_comment_relation(self):
-        print("Generate base programs and modify them to test the add comment metamorphic relation")
+        """
+        Tests the add comment relation
+        """
+        print("Testing add comment relation...")
+        AddCommentRelationTester(5).test_relation() # Generates 5 test cases for now
+        print("Testing add comment relation completed.\n")
 
-        # Uncomment this to try the openai base program generator
-        # print(self.openai_base_program_generator.generate_test_case('py', '1 while loop'))
+    def test_addition_assignment_relation(self):
+        """
+        Tests the addition assignment relation
+        """
+        print("Testing addition assignment relation...")
+        AdditionAssignmentRelationTester(5).test_relation() # Generates 5 test cases for now
+        print("Testing addition assignment relation completed.\n")
 
 
-        
+
 if __name__ == "__main__":
     # Main driver method that creates an instance of TestEngine
-    # and runs it to execute the test cases
+    # and runs it to execute the test cases for the relations
     test_engine = TestEngine()
 
+    # Test relations
     test_engine.test_add_comment_relation()
+    test_engine.test_addition_assignment_relation()

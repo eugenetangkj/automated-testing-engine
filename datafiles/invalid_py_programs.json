@@ -1,0 +1,5 @@
+[
+    "def fibonacci(n):\n\ta, b = 0, 1\n\twhile n > 0:\n\t\tprint(a)\n\t\ta, b = b, a + b\n\t\tn -= 1",
+    "def generate_random_number(num: int = 5):\n\treturn num * 10.5 if isinstance(num, int) else None",
+    "import math\ndef sqrt_two():\n\treturn math.sqrt(2)"
+]

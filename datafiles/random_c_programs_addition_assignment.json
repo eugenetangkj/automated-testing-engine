@@ -1,0 +1,9 @@
+[
+    "int increment_by_n(int num) {\n\tint result = 0;\n\tint i;\n\tfor (i = 1; i <= num; i++) {\n\t\tresult += i;\n\t}\n\treturn result;\n}",
+    "int sum_of_digits(int n) {\n\tint sum = 0;\n\twhile (n != 0) {\n\t\tsum += n % 10;\n\t\tn /= 10;\n\t}\n\treturn sum;\n}",
+    "int square_sum(int n) {\n\tint sum = 0;\n\tint i;\n\tfor (i = 1; i <= n; i++) {\n\t\tsum += i * i;\n\t}\n\treturn sum;\n}",
+    "int sum_of_cubes(int n) {\n\tint sum = 0;\n\tint i;\n\tfor (i = 1; i <= n; i++) {\n\t\tsum += i * i * i;\n\t}\n\treturn sum;\n}",
+    "int factorial(int n) {\n\tint result = 1;\n\tint i;\n\tfor (i = 2; i <= n; i++) {\n\t\tresult *= i;\n\t}\n\treturn result;\n}",
+    "int sum_up_to_ten() {\n\tint sum = 0;\n\tint i;\n\tfor (i = 1; i <= 10; i++) {\n\t\tsum += i;\n\t}\n\treturn sum;\n}",
+    "int sum_of_even_numbers() {\n\tint sum = 0;\n\tint i;\n\tfor (i = 2; i <= 10; i += 2) {\n\t\tsum += i;\n\t}\n\treturn sum;\n}"
+]
