@@ -1,0 +1,175 @@
+Base Program:
+int sum_up_to_ten() {
+	int sum = 0;
+	int i;
+	for (i = 1; i <= 10; i++) {
+		sum += i;
+	}
+	return sum;
+}
+
+Modified Program:
+int sum_up_to_ten() {
+	int sum = 0;
+	int i;
+	for (i = 1; i <= 10; i++) {
+		sum = sum + i;
+	}
+	return sum;
+}
+
+Error Localizer API Output:
+{
+    "errorLocations": {}
+}
+
+Feedback Fix API Output:
+[]
+
+Feedback Error API Output:
+[]
+
+Repair API Output:
+[]
+
+Status:
+PASS
+
+
+########
+
+
+Base Program:
+#include <stdio.h>
+
+void increment_by_value(int n) { n += 5; }
+
+Modified Program:
+#include <stdio.h>
+
+void increment_by_value(int n) { n = n + 5; }
+
+Error Localizer API Output:
+{
+    "errorLocations": {}
+}
+
+Feedback Fix API Output:
+[]
+
+Feedback Error API Output:
+[]
+
+Repair API Output:
+[]
+
+Status:
+PASS
+
+
+########
+
+
+Base Program:
+int sum_of_numbers(int n) { int sum=0; for(int i=1;i<=n;i++) { sum+=i; } return sum; }
+
+Modified Program:
+int sum_of_numbers(int n) { int sum=0; for(int i=1;i<=n;i++) { sum = sum + i; } return sum; }
+
+Error Localizer API Output:
+{
+    "errorLocations": {}
+}
+
+Feedback Fix API Output:
+[]
+
+Feedback Error API Output:
+[]
+
+Repair API Output:
+[]
+
+Status:
+PASS
+
+
+########
+
+
+Base Program:
+def even_or_odd(input_number=10):
+	result = input_number
+	if input_number % 2 == 0:
+		result += 2
+	else:
+		result -= 2
+	return result
+
+Modified Program:
+def even_or_odd(input_number=10):
+	result = input_number
+	if input_number % 2 == 0:
+		result = result + 2
+	else:
+		result -= 2
+	return result
+
+Error Localizer API Output:
+{
+    "errorLocations": {}
+}
+
+Feedback Fix API Output:
+[]
+
+Feedback Error API Output:
+[]
+
+Repair API Output:
+[]
+
+Status:
+PASS
+
+
+########
+
+
+Base Program:
+def reverse_number(number):
+	reverse = 0
+	while number != 0:
+		reverse += number % 10 * 10
+		number //= 10
+	return reverse
+
+Modified Program:
+def reverse_number(number):
+	reverse = 0
+	while number != 0:
+		reverse = reverse + number % 10 * 10
+		number //= 10
+	return reverse
+
+Error Localizer API Output:
+{
+    "errorLocations": {}
+}
+
+Feedback Fix API Output:
+[]
+
+Feedback Error API Output:
+[]
+
+Repair API Output:
+[]
+
+Status:
+PASS
+
+
+########
+
+

@@ -30,7 +30,7 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
     SYSTEM_PROMPT_C = "Create a totally random c function given constraints. " + \
         "Apart from the given constraints, the function must take either 0 or 1 " + \
         "argument, whose type must be a int, " +\
-        "double or float. Return type must either be void, int double or float." + \
+        "double or float. Return type must either be void, int, double or float." + \
         "Just return the function in a single line without the prefix ###Function. " + \
         "Examples:\n"
 
