@@ -45,7 +45,7 @@ class ApiOutputComparator():
             type_of_metamorphic_relation: The type of relation we are testing for, whether
                                           equivalent or variant
         """
-        return self.__check_feedback_output__(feedback_fix_output, type_of_metamorphic_relation)
+        return self.__check_feedback_output(feedback_fix_output, type_of_metamorphic_relation)
 
 
     def check_feedback_error_output(self, feedback_error_output, type_of_metamorphic_relation):
@@ -60,7 +60,7 @@ class ApiOutputComparator():
                                           equivalent or variant
 
         """
-        return self.__check_feedback_output__(feedback_error_output, type_of_metamorphic_relation)
+        return self.__check_feedback_output(feedback_error_output, type_of_metamorphic_relation)
 
 
 
@@ -76,10 +76,10 @@ class ApiOutputComparator():
                                           equivalent or variant
 
         """
-        return self.__check_feedback_output__(repair_output, type_of_metamorphic_relation)
+        return self.__check_feedback_output(repair_output, type_of_metamorphic_relation)
 
 
-    def __check_feedback_output__(self, output, type_of_metamorphic_relation):
+    def __check_feedback_output(self, output, type_of_metamorphic_relation):
         """
         Helper method to check for feedback fix, feedback error and repair outputs
 
