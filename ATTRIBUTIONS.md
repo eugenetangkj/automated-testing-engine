@@ -10,6 +10,9 @@ This method is obtained from ChatGPT. Inserted by @eugenetangkj.
 
 This method is obtained from ChatGPT. Inserted by @eugenetangkj.
 
+3. `pylint.yml` from [pylint workflow](.github/workflows/pylint.yml)
+
+This workflow file is obtained from the [_starter-workflows_](https://github.com/actions/starter-workflows/blob/main/ci/pylint.yml) repository. I modified it to make the workflow run when pull requests to `main` are being made. Inserted by @eugenetangkj.
 
 #### References (Useful links that helped us)
 1. [Setting request timeout for OpenAI API](https://community.openai.com/t/setting-request-timeout-in-openai-v1-2-2/492772)
