@@ -10,9 +10,6 @@ class TestEngine():
     This class is the test engine responsible for running test cases against metamorphic relations.
     It acts as the main point of entry for the app.
     
-    Attributes:
-        PATH_OF_ERROR_FILE (str): Path of file that contains the errors detected
-
     """
 
     def __init__(self):

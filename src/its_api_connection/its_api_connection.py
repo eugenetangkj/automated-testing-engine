@@ -30,6 +30,10 @@ class ItsApiConnection(object):
         ITS API endpoint.
         The errorlocalizer, feedback_fix, feedback_error and repair services take in the same
         parameters.
+
+        Parameters:
+            params: List of parameters to be packed
+            endpoint: The API endpoint to call to
         """
         if endpoint == "parser":
             return {"language": params[0], "source_code": params[1]}
