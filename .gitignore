@@ -160,3 +160,5 @@ cython_debug/
 #.idea/
 
 pynguin-report/
+
+.DS_Store
