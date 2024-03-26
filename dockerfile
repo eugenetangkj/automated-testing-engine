@@ -8,8 +8,9 @@ RUN apk add --no-cache gcc musl-dev linux-headers libffi-dev openssl-dev curl ru
 
 RUN pip install poetry pytest
 
-RUN poetry install
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-interaction --no-ansi
 
-RUN echo "export PYNGUIN_DANGER_AWARE=1" >> ~/.bashrc
+ENV PYNGUIN_DANGER_AWARE=1
 
 CMD ["poetry", "run", "python", "main.py"]
