@@ -6,7 +6,7 @@ from its_test_engine.python.modifier import VariableRenamer, BinOpModifier
 from its_test_engine.base.input_generator.random_input_generator import (
     RandomInputGenerator,
 )
-from its_test_engine.base.modifier import mutate_code
+from its_test_engine.utils import mutate_code
 
 
 def run_python():
