@@ -1,8 +1,0 @@
-[
-    "def countdown(n):\n\twhile n >= 0:\n\t\tprint(n)\n\t\tn -= 1",
-    "def sum_of_digits(n):\n\ttotal = 0\n\twhile n > 0:\n\t\ttotal += n % 10\n\t\tn //= 10\n\treturn total",
-    "def is_prime(n):\n\tif n <= 1:\n\t\treturn False\n\ti = 2\n\twhile i * i <= n:\n\t\tif n % i == 0:\n\t\t\treturn False\n\t\ti += 1\n\treturn True",
-    "def reverse_digits(n):\n\treversed_num = 0\n\twhile n != 0:\n\t\tdigit = n % 10\n\t\treversed_num = reversed_num * 10 + digit\n\t\tn //= 10\n\treturn reversed_num",
-    "def sum_of_digits(n):\n\ttotal = 0\n\twhile n > 0:\n\t\ttotal += int(n % 10)\n\t\tn //= 10\n\treturn total",
-    "def greet():\n\treturn 'Hello, world!'"
-]
