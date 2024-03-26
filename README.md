@@ -12,3 +12,5 @@ Therefore, our team has developed an automated testing engine that aims to ident
 2. Run `docker build . -t automated-test-engine` to build the Docker image.
 3. Run `docker run -v "<current_working_directory>":/app -it --entrypoint /bin/sh automated-test-engine` to start the Docker container, and map the current working directory to the `/app` directory in the container.
 4. Run `poetry install` to install the required dependencies in the docker container.
+5. Run `poetry shell` to activate the virtual environment.
+6. Run `pytest` to run the test cases.

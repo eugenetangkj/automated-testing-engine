@@ -1,15 +1,10 @@
-from its_test_engine.python.program_generator import LeetCodeProgramGenerator
+from its_test_engine.python.program_generator import LeetCodePythonProgramGenerator
 
 
-def test_leetcode_program_generator():
-
-    generator = LeetCodeProgramGenerator()
+def test_leetcode_python_program_generator():
+    generator = LeetCodePythonProgramGenerator()
 
     signature, code = generator.generate_test_case()
 
     assert signature is not None
     assert code is not None
-
-    print(signature)
-
-    print(code)

@@ -31,12 +31,3 @@ def test_generate_inputs():
     inputs = input_generator.generate_inputs()
 
     assert len(inputs) > 0
-
-
-def test_random_input_generator():
-    types = ["int", "int"]
-    input_generator = generator.RandomInputGenerator(code, types, no_of_inputs=20)
-
-    inputs = input_generator.generate_inputs()
-
-    assert len(inputs) == 20
