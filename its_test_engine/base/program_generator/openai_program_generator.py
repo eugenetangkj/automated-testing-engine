@@ -29,7 +29,7 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
     )
 
     SYSTEM_PROMPT_PY = (
-        "Create a totally random and creative py function given constraints. " +\
+        "Create a totally random py function given constraints. Be creative! " +\
         "The function takes arguments of only pure numeric types int, float or double. and it cannot have import statements. " +\
         "Return the function, name of function, the argument types and return type in the format of a JSON. Examples:\n"
     )

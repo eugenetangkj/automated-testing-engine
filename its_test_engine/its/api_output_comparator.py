@@ -76,7 +76,12 @@ class ApiOutputComparator():
                                           equivalent or variant
 
         """
-        return self.__check_feedback_output(repair_output, type_of_metamorphic_relation)
+        if type_of_metamorphic_relation == TypeOfMetamorphicRelation.EQUIVALENT:
+            # We are testing for them to be equal
+            return len(repair_output[0]['localRepairs']) == 0
+        else:
+            # We are testing for programs to be unequal
+            return len(repair_output[0]['localRepairs']) != 0
 
 
     def __check_feedback_output(self, output, type_of_metamorphic_relation):

@@ -54,7 +54,6 @@ class ApiTester(object):
         # STEP 1: Put base and modified programs into parser endpoint to get
         # intermediate representations
 
-
         base_program_intermediate, modified_program_intermediate = self._test_program_parser(
             base_program_string,
             modified_program_string,
@@ -64,18 +63,17 @@ class ApiTester(object):
             return
 
 
-        # # STEP 2: Prepare function information for subsequent API endpoints
+        # STEP 2: Prepare function information for subsequent API endpoints
         function_name = function_signature["name"]
         function_arguments = function_signature["arguments"]
         # For now, take 1 set of inputs
-        print(function_arguments)
         function_inputs = self.input_generator.generate_inputs(function_arguments, 1)[0]
-
-
         # Processes arguments to ITS API standard
         function_arguments_processed = process_arguments(function_inputs)
 
-        print(function_arguments_processed)
+        # print(function_name)
+        # print(function_arguments)
+        # print(function_arguments_processed)
 
 
 
@@ -109,90 +107,90 @@ class ApiTester(object):
             )
             return
 
-        # # STEP 4: Call feedback fix endpoint and check whether it pass
-        # output_feedback_fix = self._test_program_feedbackfix(
-        #     base_program_string=base_program_string,
-        #     modified_program_string=modified_program_string,
-        #     base_program_intermediate=base_program_intermediate,
-        #     modified_program_intermediate=modified_program_intermediate,
-        #     language=language,
-        #     function_name=function_name,
-        #     function_arguments_processed=function_arguments_processed
-        # )
+        # STEP 4: Call feedback fix endpoint and check whether it pass
+        output_feedback_fix = self._test_program_feedbackfix(
+            base_program_string=base_program_string,
+            modified_program_string=modified_program_string,
+            base_program_intermediate=base_program_intermediate,
+            modified_program_intermediate=modified_program_intermediate,
+            language=language,
+            function_name=function_name,
+            function_arguments_processed=function_arguments_processed
+        )
 
-        # if output_feedback_fix is None:
-        #     return
+        if output_feedback_fix is None:
+            return
 
-        # did_feedback_fix_pass = self.api_output_comparator.check_feedback_fix_output(
-        #     feedback_fix_output= output_feedback_fix,
-        #     type_of_metamorphic_relation= type_of_metamorphic_relation
-        # )
-        # if not did_feedback_fix_pass:
-        #     # Process error and return
-        #     self._output_feedbackfix_error(
-        #         base_program_string=base_program_string,
-        #         modified_program_string=modified_program_string,
-        #         inputs=function_arguments_processed,
-        #         feedback_fix_output=output_feedback_fix
-        #     )
-        #     return
+        did_feedback_fix_pass = self.api_output_comparator.check_feedback_fix_output(
+            feedback_fix_output= output_feedback_fix,
+            type_of_metamorphic_relation= type_of_metamorphic_relation
+        )
+        if not did_feedback_fix_pass:
+            # Process error and return
+            self._output_feedbackfix_error(
+                base_program_string=base_program_string,
+                modified_program_string=modified_program_string,
+                inputs=function_arguments_processed,
+                feedback_fix_output=output_feedback_fix
+            )
+            return
 
 
-        # # STEP 5: Call feedback error endpoint and check whether it pass
-        # output_feedback_error = self._test_program_feedbackerror(
-        #     base_program_string=base_program_string,
-        #     modified_program_string=modified_program_string,
-        #     base_program_intermediate=base_program_intermediate,
-        #     modified_program_intermediate=modified_program_intermediate,
-        #     language=language,
-        #     function_name=function_name,
-        #     function_arguments_processed=function_arguments_processed
-        # )
+        # STEP 5: Call feedback error endpoint and check whether it pass
+        output_feedback_error = self._test_program_feedbackerror(
+            base_program_string=base_program_string,
+            modified_program_string=modified_program_string,
+            base_program_intermediate=base_program_intermediate,
+            modified_program_intermediate=modified_program_intermediate,
+            language=language,
+            function_name=function_name,
+            function_arguments_processed=function_arguments_processed
+        )
 
-        # if output_feedback_error is None:
-        #     return
+        if output_feedback_error is None:
+            return
 
-        # did_feedback_error_pass = self.api_output_comparator.check_feedback_error_output(
-        #     feedback_error_output= output_feedback_error,
-        #     type_of_metamorphic_relation= type_of_metamorphic_relation
-        # )
-        # if not did_feedback_error_pass:
-        #     # Process error and return
-        #     self._output_feedbackerror_error(
-        #         base_program_string=base_program_string,
-        #         modified_program_string=modified_program_string,
-        #         inputs=function_arguments_processed,
-        #         feedback_error_output=output_feedback_error
-        #     )
-        #     return
+        did_feedback_error_pass = self.api_output_comparator.check_feedback_error_output(
+            feedback_error_output= output_feedback_error,
+            type_of_metamorphic_relation= type_of_metamorphic_relation
+        )
+        if not did_feedback_error_pass:
+            # Process error and return
+            self._output_feedbackerror_error(
+                base_program_string=base_program_string,
+                modified_program_string=modified_program_string,
+                inputs=function_arguments_processed,
+                feedback_error_output=output_feedback_error
+            )
+            return
 
-        # # STEP 6: Call feedback error endpoint and check whether it pass
-        # output_repair = self._test_program_repair(
-        #     base_program_string=base_program_string,
-        #     modified_program_string=modified_program_string,
-        #     base_program_intermediate=base_program_intermediate,
-        #     modified_program_intermediate=modified_program_intermediate,
-        #     language=language,
-        #     function_name=function_name,
-        #     function_arguments_processed=function_arguments_processed
-        # )
+        # STEP 6: Call repair endpoint and check whether it pass
+        output_repair = self._test_program_repair(
+            base_program_string=base_program_string,
+            modified_program_string=modified_program_string,
+            base_program_intermediate=base_program_intermediate,
+            modified_program_intermediate=modified_program_intermediate,
+            language=language,
+            function_name=function_name,
+            function_arguments_processed=function_arguments_processed
+        )
 
-        # if output_repair is None:
-        #     return
+        if output_repair is None:
+            return
 
-        # did_repair_pass = self.api_output_comparator.check_repair_output(
-        #     repair_output= output_repair,
-        #     type_of_metamorphic_relation= type_of_metamorphic_relation
-        # )
-        # if not did_repair_pass:
-        #     # Process error and return
-        #     self._output_repair_error(
-        #         base_program_string=base_program_string,
-        #         modified_program_string=modified_program_string,
-        #         inputs=function_arguments_processed,
-        #        repair_output=output_repair
-        #     )
-        #     return
+        did_repair_pass = self.api_output_comparator.check_repair_output(
+            repair_output= output_repair,
+            type_of_metamorphic_relation= type_of_metamorphic_relation
+        )
+        if not did_repair_pass:
+            # Process error and return
+            self._output_repair_error(
+                base_program_string=base_program_string,
+                modified_program_string=modified_program_string,
+                inputs=function_arguments_processed,
+               repair_output=output_repair
+            )
+            return
 
         # STEP 7: Return success
         test_result = TestResult(
