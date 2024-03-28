@@ -9,8 +9,8 @@ from its_test_engine.utils import mutate_code
 
 
 def run_python():
-    open_ai_program_generator = OpenAiProgramGenerator()
-    open_ai_program_generator.generate_test_case("py", "none")
+    open_ai_program_generator = OpenAiProgramGenerator("py", "None")
+    open_ai_program_generator.generate_test_case()
 
     program_generator = LeetCodeProgramGenerator("python")
     random_input_generator = RandomInputGenerator()
@@ -18,7 +18,7 @@ def run_python():
 
     # Step 1: Generate the test case
     function_signature, code = program_generator.generate_test_case()
-    #print(function_signature)
+    # print(function_signature)
 
     # Step 2: Generate the inputs
     inputs = random_input_generator.generate_inputs(function_signature["arguments"], 10)

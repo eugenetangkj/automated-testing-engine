@@ -32,45 +32,49 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
     SYSTEM_PROMPT_PY = (
         "Create a totally random and creative py function given constraints. " +\
         "The function takes arguments of only pure numeric types int, float or double. and it cannot have import statements. " +\
-        "Return the function and the argument types in the format of a JSON. Examples:\n"
+        "Return the function, name of function, the argument types and return type in the format of a JSON. Examples:\n"
     )
 
     # Few-shot learning for Python
     SAMPLE_PY_PROGRAMS = (
         "###Constraints: Have 1 while loop\n" +\
         "###Output: " +\
-        '''{"function": "def countdown(n):\n\twhile n >= 0:\n\t\tprint(n)\n\t\tn -= 1", "arguments": ["int"]}''' +\
+        '''{"function": "def countdown(n):\n\twhile n >= 0:\n\t\tprint(n)\n\t\tn -= 1", "name": "countdown", "arguments": ["int"], "return_type": "none"}''' +\
         "\n\n"
         "###Constraints: None\n" +\
         "###Output: " +\
-        '''{"function": "def sum_of_two_digits(x, y):\n\treturn x + y", "arguments": ["int", "int"]}'''
+        '''{"function": "def sum_of_two_digits(x, y):\n\treturn x + y", "name": "sum_of_two_digits", "arguments": ["int", "int"], "return_type": "int"}'''
     )
 
 
-    def __init__(self):
+    def __init__(self, language: str, constraints: str):
         """
         Initialisation method for a OpenAiProgramGenerator instance
-        """
-
-    def generate_test_case(self, language, constraints):
-        """
-        Generates a random base program written in a given language with
-        specific constraints to guide the creation of the base program.
 
         Parameters:
             language: A string indicating the language in which the base program is written in.
             constraints: A string indicating some constraints and guidelines to generate the
                          base program with.
+        """
+        super().__init__()
+        self.language = language
+        self.constraints = constraints
+
+
+    def generate_test_case(self):
+        """
+        Generates a random base program written in a given language with
+        specific constraints to guide the creation of the base program.
 
         """
 
         # Calls the chat completion API to generate the base program
         try:
             # Generate user prompt
-            user_prompt = self.__generate_user_prompt(constraints)
+            user_prompt = self.__generate_user_prompt(self.constraints)
 
             # Prepare system prompt
-            if language == "py":
+            if self.language == "py":
                 system_prompt = self.SYSTEM_PROMPT_PY + self.SAMPLE_PY_PROGRAMS
             else:
                 system_prompt = "" # TODO: Update system prompt for C programs
@@ -88,18 +92,30 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
             # Extract output from API
             json_string = response.choices[0].message.content
+            print(json_string)
             json_object = json.loads(json_string)
-            base_program_string, arguments = json_object["function"], json_object["arguments"]
+            base_program_string = json_object["function"]
+            function_name = json_object["name"]
+            arguments = json_object["arguments"]
+            return_type = json_object["return_type"]
 
-            return base_program_string, arguments
+            # Pack outputs together into a tuple
+            output = (base_program_string, {
+                "name": function_name,
+                "arguments": arguments,
+                "return_type": return_type,
+            })
 
-
+            return output
 
         except httpx.TimeoutException:
-            # OpenAI API takes too long to create a test case. We just fetch one randomly
-            # from the pre-generated list. However, for now, this means that we cannot take
-            # into consideration the constraints.
-            return self.__get_random_program_from_file(language)
+            # OpenAI API takes too long to create a test case. We just move on.
+            return None
+
+        except json.decoder.JSONDecodeError as decode_error:
+            # OpenAI API gives invalid output. We just move on.
+            print(decode_error)
+            return None
 
     def __generate_user_prompt(self, constraints):
         """
@@ -112,53 +128,3 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         """
 
         return f"###Constraints: { constraints }"
-
-
-        """
-        Converts the raw JSON string from OpenAI API into a JSON, and extract the function and arguments type.
-
-        Parameters:
-            raw_json: Raw JSON string obtained from chat completions API
-        """
-        # Convert raw string into a JSON object
-        print(raw_json)
-        # program_json = json.loads(raw_json)
-        # base_program_string = program_json['function']
-        # arguments = program_json['arguments']
-        # return base_program_string, arguments
-        return 1, 1
-
-    def __get_random_program_from_file(self, language):
-        """
-        Retrieves a random program string from a file of pre-generated programs
-
-        Parameters:
-        language: Language of program to retrieve, either c or python
-
-        """
-        if language == "c":
-            with open(
-                "././datafiles/random_py_programs.json", "r", encoding="utf-8"
-            ) as file:
-                data = json.load(file)
-                base_program_string = random.choice(data)
-
-            return {"program": base_program_string, "data_type": ""}
-
-        else:
-            with open(
-                "././datafiles/random_py_programs.json", "r", encoding="utf-8"
-            ) as file:
-                random_py_programs = json.load(file)
-
-            random_index = random.randrange(len(random_py_programs))
-
-            with open(
-                "././datafiles/random_py_datatypes.json", "r", encoding="utf-8"
-            ) as file:
-                random_data_types = json.load(file)
-
-            base_program_string = random_py_programs[random_index]
-            base_program_data_type = random_data_types[random_index]
-
-            return {"program": base_program_string, "data_type": base_program_data_type}
