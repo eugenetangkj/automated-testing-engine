@@ -4,7 +4,6 @@
 
 import json
 import random
-import re
 import os
 import httpx
 from dotenv import load_dotenv
@@ -31,20 +30,20 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
     )
 
     SYSTEM_PROMPT_PY = (
-        "Create a totally random py function given constraints. " +\
-        "The function takes arguments of only numeric types and cannot have import statements. " +\
-        "Return the function and the argument types in a JSON string. Examples:\n"
+        "Create a totally random and creative py function given constraints. " +\
+        "The function takes arguments of only pure numeric types int, float or double. and it cannot have import statements. " +\
+        "Return the function and the argument types in the format of a JSON. Examples:\n"
     )
 
     # Few-shot learning for Python
     SAMPLE_PY_PROGRAMS = (
         "###Constraints: Have 1 while loop\n" +\
         "###Output: " +\
-        "{ 'function': 'def countdown(n):\n\twhile n >= 0:\n\t\tprint(n)\n\t\tn -= 1', 'arguments': ['int']}" +\
+        '''{"function": "def countdown(n):\n\twhile n >= 0:\n\t\tprint(n)\n\t\tn -= 1", "arguments": ["int"]}''' +\
         "\n\n"
         "###Constraints: None\n" +\
         "###Output: " +\
-        "{ 'function': 'def sum_of_two_digits(x, y):\n\treturn x + y', 'arguments': ['int', 'int']}"
+        '''{"function": "def sum_of_two_digits(x, y):\n\treturn x + y", "arguments": ["int", "int"]}'''
     )
 
 
@@ -52,10 +51,6 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         """
         Initialisation method for a OpenAiProgramGenerator instance
         """
-
-
-    def print_sample(self):
-        print(self.SYSTEM_PROMPT_PY + self.SAMPLE_PY_PROGRAMS)
 
     def generate_test_case(self, language, constraints):
         """
@@ -71,13 +66,16 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
         # Calls the chat completion API to generate the base program
         try:
+            # Generate user prompt
             user_prompt = self.__generate_user_prompt(constraints)
-            if language == "c":
-                system_prompt = "" # TODO: Update system prompt for C programs
-            else:
-                system_prompt = self.SYSTEM_PROMPT_PY + self.SAMPLE_PY_PROGRAMS
 
-            output = system_prompt
+            # Prepare system prompt
+            if language == "py":
+                system_prompt = self.SYSTEM_PROMPT_PY + self.SAMPLE_PY_PROGRAMS
+            else:
+                system_prompt = "" # TODO: Update system prompt for C programs
+
+            # Call OpenAI API
             response = self.OPENAI_CLIENT.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
@@ -85,18 +83,17 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
                     {"role": "user", "content": user_prompt},
                 ],
                 temperature=1.5,  # We want more randomness in generating these base programs
+                response_format={ "type": "json_object" } # We want to get a JSON object
             )
 
             # Extract output from API
-            program_string = response.choices[0].message.content
+            json_string = response.choices[0].message.content
+            json_object = json.loads(json_string)
+            base_program_string, arguments = json_object["function"], json_object["arguments"]
 
-            output = self.__process_newlines_and_tabs(program_string)
+            return base_program_string, arguments
 
-            if language == "py":
-                output = self.__process_data(output)
-            else:
-                output = {"program": output, "data_type": ""}
-            return output
+
 
         except httpx.TimeoutException:
             # OpenAI API takes too long to create a test case. We just fetch one randomly
@@ -116,55 +113,20 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
         return f"###Constraints: { constraints }"
 
-    def __process_newlines_and_tabs(self, raw_program_string):
-        """
-        Transforms newlines and tabs into \n and \t respectively, as required for the ITS API input.
-        Also removes filler content that is sometimes returned by OpenAI's API
-
-        Note that OpenAi's output returns 4 whitespace characters in lieu of tabs.
 
         """
-
-        # Python programs
-        if raw_program_string.startswith("```py\n") and raw_program_string.endswith(
-            "\n```"
-        ):
-            processed_program_string = raw_program_string[6:-4].replace("\n", "\n")
-            processed_program_string = processed_program_string.replace("    ", "\t")
-            return processed_program_string
-
-        # C programs
-        if raw_program_string.startswith("```c\n") and raw_program_string.endswith(
-            "\n```"
-        ):
-            processed_program_string = raw_program_string[5:-4].replace("\n", "\n")
-            processed_program_string = processed_program_string.replace("    ", "\t")
-            return processed_program_string
-        else:
-            # Input is as intended
-            processed_program_string = raw_program_string.replace("\n", "\n").replace(
-                "    ", "\t"
-            )
-            return processed_program_string
-
-    def __process_data(self, output):
-        """
-        Removes the labels from the raw input
+        Converts the raw JSON string from OpenAI API into a JSON, and extract the function and arguments type.
 
         Parameters:
-            output: The program to be processed
-
+            raw_json: Raw JSON string obtained from chat completions API
         """
-        # Obtained from ChatGPT, inserted by @eugenetangkj
-        function_pattern = re.compile(r"###Function: (.+?)###Type:", re.DOTALL)
-        type_pattern = re.compile(r"###Type: (.+)", re.DOTALL)
-        function_match = function_pattern.search(output)
-        type_match = type_pattern.search(output)
-
-        raw_program = function_match.group(1).strip()
-        data_type = type_match.group(1).strip()
-
-        return {"program": raw_program, "data_type": data_type}
+        # Convert raw string into a JSON object
+        print(raw_json)
+        # program_json = json.loads(raw_json)
+        # base_program_string = program_json['function']
+        # arguments = program_json['arguments']
+        # return base_program_string, arguments
+        return 1, 1
 
     def __get_random_program_from_file(self, language):
         """

@@ -10,7 +10,7 @@ from its_test_engine.utils import mutate_code
 
 def run_python():
     open_ai_program_generator = OpenAiProgramGenerator()
-    open_ai_program_generator.print_sample()
+    open_ai_program_generator.generate_test_case("py", "none")
 
     program_generator = LeetCodeProgramGenerator("python")
     random_input_generator = RandomInputGenerator()
