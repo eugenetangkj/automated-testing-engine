@@ -1,6 +1,5 @@
 import os
 import re
-import ast
 import json
 import random
 from its_test_engine.base.program_generator.base_program_generator import (
@@ -76,7 +75,8 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
         return None
 
     def _get_function_name(self, code: str):
-        return None
+        # TODO: Update this function
+        return code
 
     def generate_test_case(self):
         # open leetcode-solutions.jsonl file and read random line

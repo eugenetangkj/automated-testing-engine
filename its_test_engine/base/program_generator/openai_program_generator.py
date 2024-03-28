@@ -9,7 +9,9 @@ import os
 import httpx
 from dotenv import load_dotenv
 from openai import OpenAI
-from its_test_engine.base.base_program_generator import BaseProgramGenerator
+from its_test_engine.base.program_generator.base_program_generator import (
+    BaseProgramGenerator,
+)
 
 
 load_dotenv()  # Loads environment variables for OpenAI API key
@@ -28,55 +30,32 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         api_key=os.environ.get("CS3213_OPENAI_API_KEY"), timeout=httpx.Timeout(20.0)
     )
 
-    # Prompt constants
-    # Adapted from https://community.openai.com/t/convert-few-shot-example-to-api-code/325614/2
-    SYSTEM_PROMPT_C = (
-        "Create a totally random c function given constraints. "
-        + "Apart from the given constraints, the function must take either 0 or 1 "
-        + "argument, whose type must be a int, "
-        + "double or float. Return type must either be void, int, double or float."
-        + "Just return the function in a single line without the prefix ###Function. "
-        + "Examples:\n"
-    )
-
     SYSTEM_PROMPT_PY = (
-        "Create a totally random py function given constraints without "
-        + "import statements. The function takes either 0 or 1 argument, "
-        + "whose type must be int, float or none if there is no argument."
-        + "Return the function in a single line "
-        + "and return the type of the argument in the next line."
-        + "Examples:\n"
+        "Create a totally random py function given constraints. " +\
+        "The function takes arguments of only numeric types and cannot have import statements. " +\
+        "Return the function and the argument types in a JSON string. Examples:\n"
     )
 
     # Few-shot learning for Python
     SAMPLE_PY_PROGRAMS = (
-        "###Constraints: None\n"
-        + "###Function: def generate_random_number():\n\timport random\n\treturn "
-        + "random.randint(1, 100)"
-        + "###Type: none\n"
-        + "---\n"
-        + "###Constraints: Have 1 while loop\n"
-        + "###Function: def sum_of_digits(n):\n\ttotal = 0\n\twhile n > 0:\n\t\ttotal += "
-        + "int(n % 10)\n\t\tn //= 10\n\treturn total\n"
-        + "###Type: float"
+        "###Constraints: Have 1 while loop\n" +\
+        "###Output: " +\
+        "{ 'function': 'def countdown(n):\n\twhile n >= 0:\n\t\tprint(n)\n\t\tn -= 1', 'arguments': ['int']}" +\
+        "\n\n"
+        "###Constraints: None\n" +\
+        "###Output: " +\
+        "{ 'function': 'def sum_of_two_digits(x, y):\n\treturn x + y', 'arguments': ['int', 'int']}"
     )
 
-    # Few-shot learning for C
-    SAMPLE_C_PROGRAMS = (
-        "###Constraints: Have 1 for loop\n"
-        + "###Function: #include <stdio.h>\n\nint sum_of_squares(int n) {\n\tint "
-        + "sum = 0;\n\tfor (int i = 1; i <= n; i++) {\n\t\tsum += i * i;\n\t}\n\treturn "
-        + "sum;\n}\n"
-        + "---\n"
-        + "###Constraints: Use 2 include statements\n"
-        + "###Function: #include <stdio.h>\n#include <math.h>\n\nfloat "
-        + "calculate_square_root(float num) {\n\treturn sqrt(num);\n}"
-    )
 
     def __init__(self):
         """
         Initialisation method for a OpenAiProgramGenerator instance
         """
+
+
+    def print_sample(self):
+        print(self.SYSTEM_PROMPT_PY + self.SAMPLE_PY_PROGRAMS)
 
     def generate_test_case(self, language, constraints):
         """
@@ -94,7 +73,7 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         try:
             user_prompt = self.__generate_user_prompt(constraints)
             if language == "c":
-                system_prompt = self.SYSTEM_PROMPT_C + self.SAMPLE_C_PROGRAMS
+                system_prompt = "" # TODO: Update system prompt for C programs
             else:
                 system_prompt = self.SYSTEM_PROMPT_PY + self.SAMPLE_PY_PROGRAMS
 

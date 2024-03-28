@@ -1,4 +1,5 @@
 import random
+import string
 from its_test_engine.base.input_generator.base_input_generator import BaseInputGenerator
 
 
