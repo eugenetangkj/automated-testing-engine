@@ -2,6 +2,7 @@
     Responsible for writing of test case results to a file
 '''
 from .test_result import TestResult
+from ..enums.type_of_test_result import TypeOfTestResult
 
 class ResultWriter():
     """
@@ -9,7 +10,7 @@ class ResultWriter():
     
     """
 
-    PATH_OF_RESULT_FILE = "././results/results.txt"
+    PATH_OF_RESULT_FILE = "../results/results.txt"
 
 
 
@@ -39,15 +40,15 @@ class ResultWriter():
             file.write(test_result.modified_program_string)
             file.write("\n\n")
 
-            # Append inputs, if any
+            # Append arguments, if any
             if test_result.inputs is not None:
-                file.write("Inputs:\n")
+                file.write("Arguments:\n")
                 file.write(test_result.inputs)
                 file.write("\n\n")
 
             # Append status
             file.write("Status:\n")
-            file.write(test_result.status)
+            file.write("PASS" if test_result.status == TypeOfTestResult.PASS else "FAIL")
             file.write("\n\n")
 
             if test_result.problematic_output is not None:
@@ -59,7 +60,7 @@ class ResultWriter():
             if test_result.exception_message is not None:
                 # Append exceptions, if any
                 file.write("Exceptions:\n")
-                file.write(test_result.status)
+                file.write(test_result.exception_message)
 
             # Append delimiter between test cases
             file.write("\n\n\n########\n\n\n")

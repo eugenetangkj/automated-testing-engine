@@ -43,6 +43,7 @@ def process_arguments(raw_arguments):
             [2, 3] -> "[[2,3]]"
     """
 
+
     if len(raw_arguments) == 0:
         return "[]"
     elif len(raw_arguments) == 1:
@@ -56,3 +57,4 @@ def process_arguments(raw_arguments):
                 output += ","
 
         output += "]]"
+        return output

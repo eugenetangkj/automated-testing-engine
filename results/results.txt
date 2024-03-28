@@ -1,0 +1,100 @@
+Base Program:
+def sum_of_three_numbers(a, b, c):
+    return a + b + c
+
+Modified Program:
+def sum_of_three_numbers(a, b, c):
+    return a + b + c
+
+Arguments:
+[[-601977630,-348749678,-159639820]]
+
+Status:
+PASS
+
+
+
+
+########
+
+
+Base Program:
+def sum_of_two_digits(x, y):
+	return x + y
+
+Modified Program:
+def sum_of_two_digits(x, y):
+    return x + y
+
+Arguments:
+[[718224508,157433671]]
+
+Status:
+PASS
+
+
+
+
+########
+
+
+Base Program:
+def sum_of_two_digits(x, y):
+	return x + y
+
+Modified Program:
+def sum_of_two_digits(var_0, var_1):
+    return var_0 + var_1
+
+Arguments:
+[[361961229,-467086919]]
+
+Status:
+PASS
+
+
+
+
+########
+
+
+Base Program:
+def sum_of_two_digits(x, y):
+	return x + y
+
+Modified Program:
+def sum_of_two_digits(x, y):
+    return y + x
+
+Arguments:
+[[-550719911,-703490963]]
+
+Status:
+PASS
+
+
+
+
+########
+
+
+Base Program:
+def sum_of_two_digits(x, y):
+	return x + y
+
+Modified Program:
+def sum_of_two_digits(var_2, var_3):
+    return var_3 + var_2
+
+Arguments:
+[[-182412585,900338449]]
+
+Status:
+PASS
+
+
+
+
+########
+
+

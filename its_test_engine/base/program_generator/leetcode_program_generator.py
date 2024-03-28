@@ -75,8 +75,14 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
         return None
 
     def _get_function_name(self, code: str):
-        # TODO: Update this function
-        return code
+        #Assumes Python for now
+        start_index = code.index('def') + 3
+        end_index = code.index('(')
+
+        # Extract the substring between 'def' and '('
+        function_name = code[start_index:end_index].strip()
+        return function_name
+
 
     def generate_test_case(self):
         # open leetcode-solutions.jsonl file and read random line
@@ -95,6 +101,8 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
         func = question["answer"][self.language]
 
         func = func.replace("```" + self.language, "").replace("```", "")
+
+        print(func)
 
         signature = self.get_function_signatures(question)
 
