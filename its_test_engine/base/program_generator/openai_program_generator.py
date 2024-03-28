@@ -92,7 +92,6 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
             # Extract output from API
             json_string = response.choices[0].message.content
-            print(json_string)
             json_object = json.loads(json_string)
             base_program_string = json_object["function"]
             function_name = json_object["name"]

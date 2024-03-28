@@ -10,14 +10,14 @@ from its_test_engine.utils import mutate_code
 
 def run_python():
     open_ai_program_generator = OpenAiProgramGenerator("py", "None")
-    open_ai_program_generator.generate_test_case()
+    code, function_signature = open_ai_program_generator.generate_test_case()
 
-    program_generator = LeetCodeProgramGenerator("python")
+    # program_generator = LeetCodeProgramGenerator("python")
     random_input_generator = RandomInputGenerator()
     transformers = [VariableRenamer(), BinOpModifier()]
 
     # Step 1: Generate the test case
-    function_signature, code = program_generator.generate_test_case()
+    # function_signature, code = program_generator.generate_test_case()
     # print(function_signature)
 
     # Step 2: Generate the inputs
@@ -28,7 +28,7 @@ def run_python():
 
     # Step 4: Ready to test
     #print(inputs)  # List of inputs
-    #print(mutated_codes)  # First element is the original code
+    print(mutated_codes)  # First element is the original code
 
 
 if __name__ == "__main__":
