@@ -161,6 +161,4 @@ class Tester:
                 )
                 test_case.add_result(feedback_fix_test_result)
 
-                return test_suites
-
         return test_suites
