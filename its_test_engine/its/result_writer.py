@@ -1,6 +1,7 @@
 '''
     Responsible for writing of test case results to a file
 '''
+import os
 from .test_result import TestResult
 from ..enums.type_of_test_result import TypeOfTestResult
 
@@ -28,6 +29,16 @@ class ResultWriter():
             test_result: The test result object containing information about the test result
         """
 
+        # Check if file exists
+        # Obtained from ChatGPT by @eugenetangkj
+        if not os.path.exists(self.PATH_OF_RESULT_FILE):
+            # Create the directory if it does not exist
+            os.makedirs(os.path.dirname(self.PATH_OF_RESULT_FILE), exist_ok=True)
+            # Create the file
+            with open(self.PATH_OF_RESULT_FILE, "w", encoding="utf-8"):
+                pass
+
+        # Perform append
         with open(self.PATH_OF_RESULT_FILE, "a", encoding="utf-8") as file:
 
             # Append base program
