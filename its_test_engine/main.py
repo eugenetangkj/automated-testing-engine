@@ -22,9 +22,10 @@ def run_leetcode_programs():
     input_generator = RandomInputGenerator()
     transformers = [VariableRenamer(), BinOpModifier()]
 
-    tester = Tester(Language.PYTHON, program_generator, transformers, input_generator)
+    tester = Tester(
+        Language.PYTHON, program_generator, transformers, input_generator, writer
+    )
     test_results = tester.run_tests()
-    writer.write(test_results)
 
 
 def run_open_ai_programs():
@@ -32,9 +33,10 @@ def run_open_ai_programs():
     input_generator = RandomInputGenerator()
     transformers = [VariableRenamer(), BinOpModifier()]
 
-    tester = Tester(Language.PYTHON, program_generator, transformers, input_generator)
+    tester = Tester(
+        Language.PYTHON, program_generator, transformers, input_generator, writer
+    )
     test_results = tester.run_tests()
-    writer.write(test_results)
 
 
 if __name__ == "__main__":

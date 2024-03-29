@@ -25,11 +25,13 @@ class Tester:
         program_generator: BaseProgramGenerator,
         transformers: list[any],
         input_generator: BaseInputGenerator,
+        writer,
     ):
         self.language = language
         self.program_generator = program_generator
         self.transformers = transformers
         self.input_generator = input_generator
+        self.writer = writer
 
     def run_tests(self) -> list[ItsTestSuite]:
         its_api_connection = ItsApiConnection(self.language)
@@ -73,6 +75,8 @@ class Tester:
             parsed_modified_programs.append(
                 (modified_code, parsed_modified_program, parser_result)
             )
+
+        self.writer.write(test_suite)
 
         # if all programs failed to parse
         if all(
@@ -161,4 +165,5 @@ class Tester:
                 )
                 test_case.add_result(feedback_fix_test_result)
 
+            self.writer.write(test_suite)
         return test_suites
