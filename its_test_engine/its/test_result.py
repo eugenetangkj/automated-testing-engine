@@ -77,10 +77,8 @@ class ItsTestSuitesMarkdownWriter:
         self._test_results = []
 
     def write(self, test_suites: list[ItsTestSuite]):
-        date_today = datetime.today().strftime("%Y%m%d_%H_%M")
-
         # Create directory if not exists
-        folder_path = os.path.join(self._test_result_dir, date_today)
+        folder_path = os.path.join(self._test_result_dir)
 
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
@@ -90,7 +88,7 @@ class ItsTestSuitesMarkdownWriter:
             h.update(test_suite.base_program_string.encode())
             hash_value = h.hexdigest()
 
-            test_num = f"{index+1:04d}"
+            test_num = f"{index+1:02d}"
             file_name = f"{hash_value[:8]}_test_{test_num}_{'pass' if test_suite.is_success() else 'fail'}.md"
             file_path = os.path.join(folder_path, file_name)
 
