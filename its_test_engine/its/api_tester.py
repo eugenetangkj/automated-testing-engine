@@ -22,7 +22,7 @@ class ApiTester(object):
 
 
     def __init__(self, its_api_connection: ItsApiConnection, input_generator: BaseInputGenerator,
-                 api_output_comparator: ApiOutputComparator):
+                 api_output_comparator: ApiOutputComparator, ):
         """
         Initialisation method for an ItsApiConnection instance
 
@@ -39,7 +39,8 @@ class ApiTester(object):
                      type_of_metamorphic_relation: TypeOfMetamorphicRelation,
                      language: str):
         """
-        Tests the given program and determines if test case passed or not
+        Tests the given program and determines if test case passed or not.
+        Returns a test result object that we can further process.
 
         Parameters:
             base_program_string: Program string of base program
@@ -71,9 +72,9 @@ class ApiTester(object):
         # Processes arguments to ITS API standard
         function_arguments_processed = process_arguments(function_inputs)
 
-        # print(function_name)
-        # print(function_arguments)
-        # print(function_arguments_processed)
+        print(function_name)
+        print(function_arguments)
+        print(function_arguments_processed)
 
 
 
