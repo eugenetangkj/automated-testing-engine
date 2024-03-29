@@ -166,4 +166,6 @@ class Tester:
                 test_case.add_result(feedback_fix_test_result)
 
             self.writer.write(test_suite)
+            if not test_suite.success:
+                break
         return test_suites
