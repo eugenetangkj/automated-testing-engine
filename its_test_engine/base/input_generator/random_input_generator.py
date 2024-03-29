@@ -4,7 +4,7 @@ from its_test_engine.base.input_generator.base_input_generator import BaseInputG
 
 
 class RandomInputGenerator(BaseInputGenerator):
-    def _generate_random_integer(self, min_value=-1e9, max_value=1e9):
+    def _generate_random_integer(self, min_value=0, max_value=1e2):
         return random.randint(min_value, max_value)
 
     def _generate_random_float(self, min_value=-1e5, max_value=1e5):
@@ -17,11 +17,11 @@ class RandomInputGenerator(BaseInputGenerator):
     def _generate_random_boolean(self):
         return random.choice([True, False])
 
-    def generate_inputs(self, types: list[str], no_of_inputs: int):
+    def generate_inputs(self, function_signature: dict, code: str, no_of_inputs: int):
         results = []
         for _ in range(no_of_inputs):
             inputs = []
-            for t in types:
+            for t in function_signature["argument_types"]:
                 if t == "int":
                     inputs.append(self._generate_random_integer())
                 elif t == "float":

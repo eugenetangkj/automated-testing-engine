@@ -7,9 +7,7 @@ import os
 import httpx
 from dotenv import load_dotenv
 from openai import OpenAI
-from its_test_engine.base.program_generator.base_program_generator import (
-    BaseProgramGenerator,
-)
+from its_test_engine.base.program_generator import BaseProgramGenerator
 
 
 load_dotenv()  # Loads environment variables for OpenAI API key
@@ -29,22 +27,21 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
     )
 
     SYSTEM_PROMPT_PY = (
-        "Create a totally random py function given constraints. Be creative! " +\
-        "The function takes arguments of only pure numeric types int, float or double. and it cannot have import statements. " +\
-        "Return the function, name of function, the argument types and return type in the format of a JSON. Examples:\n"
+        "Create a totally random py function given constraints. Be creative! "
+        + "The function takes arguments of only pure numeric types int, float or double. and it cannot have import statements. "
+        + "Return the function, name of function, the argument types and return type in the format of a JSON. Examples:\n"
     )
 
     # Few-shot learning for Python
     SAMPLE_PY_PROGRAMS = (
-        "###Constraints: Have 1 while loop\n" +\
-        "###Output: " +\
-        '''{"function": "def countdown(n):\n\twhile n >= 0:\n\t\tprint(n)\n\t\tn -= 1", "name": "countdown", "arguments": ["int"], "return_type": "none"}''' +\
-        "\n\n"
-        "###Constraints: None\n" +\
-        "###Output: " +\
-        '''{"function": "def sum_of_two_digits(x, y):\n\treturn x + y", "name": "sum_of_two_digits", "arguments": ["int", "int"], "return_type": "int"}'''
+        "###Constraints: Have 1 while loop\n"
+        + "###Output: "
+        + """{"function": "def countdown(n):\n\twhile n >= 0:\n\t\tprint(n)\n\t\tn -= 1", "name": "countdown", "arguments": ["int"], "return_type": "none"}"""
+        + "\n\n"
+        "###Constraints: None\n"
+        + "###Output: "
+        + """{"function": "def sum_of_two_digits(x, y):\n\treturn x + y", "name": "sum_of_two_digits", "arguments": ["int", "int"], "return_type": "int"}"""
     )
-
 
     def __init__(self, language: str, constraints: str):
         """
@@ -58,7 +55,6 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         super().__init__()
         self.language = language
         self.constraints = constraints
-
 
     def generate_test_case(self):
         """
@@ -76,7 +72,7 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
             if self.language == "py":
                 system_prompt = self.SYSTEM_PROMPT_PY + self.SAMPLE_PY_PROGRAMS
             else:
-                system_prompt = "" # TODO: Update system prompt for C programs
+                system_prompt = ""  # TODO: Update system prompt for C programs
 
             # Call OpenAI API
             response = self.OPENAI_CLIENT.chat.completions.create(
@@ -86,7 +82,7 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
                     {"role": "user", "content": user_prompt},
                 ],
                 temperature=1.5,  # We want more randomness in generating these base programs
-                response_format={ "type": "json_object" } # We want to get a JSON object
+                response_format={"type": "json_object"},  # We want to get a JSON object
             )
 
             # Extract output from API
@@ -98,11 +94,14 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
             return_type = json_object["return_type"]
 
             # Pack outputs together into a tuple
-            output = (base_program_string, {
-                "name": function_name,
-                "arguments": arguments,
-                "return_type": return_type,
-            })
+            output = (
+                base_program_string,
+                {
+                    "name": function_name,
+                    "arguments": arguments,
+                    "return_type": return_type,
+                },
+            )
 
             return output
 

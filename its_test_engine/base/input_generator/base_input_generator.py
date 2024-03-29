@@ -17,14 +17,15 @@ class BaseInputGenerator(ABC):
         """
 
     @abstractmethod
-    def generate_inputs(self, arguments_types: list[str], no_of_inputs: int):
+    def generate_inputs(self, function_signature: dict, code: str, no_of_inputs: int):
         """
         Abstract method to be overridden by concrete program generator classes.
         This method aims to generate a random base program written in a given language with
         specific constraints to guide the creation of the base program.
 
         Parameters:
-            arguments_types: A list of strings indicating the types of the arguments of the function.
-                For example, ["int", "int"] indicates that the function has two arguments of type int.
+            function_signature: A dictionary containing the function signature
+            code: The code snippet to be tested
+            no_of_inputs: Number of inputs to be generated
 
         """

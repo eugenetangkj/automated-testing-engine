@@ -1,6 +1,7 @@
 """
     Helper functions
 """
+
 import ast
 from copy import deepcopy
 from itertools import chain, combinations
@@ -32,17 +33,17 @@ def mutate_code(code, transformers):
 
     return mutated_codes
 
+
 def process_arguments(raw_arguments):
     """
-        The argument format accepted by the ITS API is unique. We need to transform
-        our internal argument format to be the format accepted by the ITS API
+    The argument format accepted by the ITS API is unique. We need to transform
+    our internal argument format to be the format accepted by the ITS API
 
-        Examples of transformations:
-            [] -> "[]"
-            [2] -> "[2]"
-            [2, 3] -> "[[2,3]]"
+    Examples of transformations:
+        [] -> "[]"
+        [2] -> "[2]"
+        [2, 3] -> "[[2,3]]"
     """
-
 
     if len(raw_arguments) == 0:
         return "[]"

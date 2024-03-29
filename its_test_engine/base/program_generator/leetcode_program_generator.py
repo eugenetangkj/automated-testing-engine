@@ -38,7 +38,7 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
         match = re.search(function_signature_regex, java_solution)
 
         fs = {
-            "arguments": [],
+            "argument_types": [],
             "return_type": None,
         }
 
@@ -57,21 +57,20 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
                 if arg_type not in self.types_mapping:
                     return None
 
-                fs["arguments"].append(self.types_mapping[arg_type])
+                fs["argument_types"].append(self.types_mapping[arg_type])
 
             fs["return_type"] = return_type
             return fs
         return None
 
     def _get_function_name(self, code: str):
-        #Assumes Python for now
-        start_index = code.index('def') + 3
-        end_index = code.index('(')
+        # Assumes Python for now
+        start_index = code.index("def") + 3
+        end_index = code.index("(")
 
         # Extract the substring between 'def' and '('
         function_name = code[start_index:end_index].strip()
         return function_name
-
 
     def generate_test_case(self):
         # open leetcode-solutions.jsonl file and read random line
@@ -90,8 +89,6 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
         func = question["answer"][self.language]
 
         func = func.replace("```" + self.language, "").replace("```", "")
-
-        #print(func)
 
         signature = self.get_function_signatures(question)
 
