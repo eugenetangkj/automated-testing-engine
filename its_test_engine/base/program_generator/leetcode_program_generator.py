@@ -13,17 +13,6 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
         "int": "int",
         "float": "float",
         "double": "float",
-        "string": "str",
-        "char": "str",
-        "int[]": "List[int]",
-        "float[]": "List[float]",
-        "double[]": "List[float]",
-        "string[]": "List[str]",
-        "char[]": "List[str]",
-        "List<String>": "List[str]",
-        "List<Integer>": "List[int]",
-        "List<Float>": "List[float]",
-        "List<Double>": "List[float]",
     }
 
     def __init__(self, language: str):
@@ -102,7 +91,7 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
 
         func = func.replace("```" + self.language, "").replace("```", "")
 
-        print(func)
+        #print(func)
 
         signature = self.get_function_signatures(question)
 

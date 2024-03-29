@@ -1,5 +1,5 @@
 """
-    Tester for the error localizer endpoint
+    Tester for the feedback fixendpoint
 """
 
 import json
@@ -13,9 +13,9 @@ from ..enums.type_of_test_result import TypeOfTestResult
 
 
 
-class ErrorLocalizerEndpointTester(EndpointTester):
+class FeedbackFixEndpointTester(EndpointTester):
     """
-    This is a concrete class that is responsible for testing the error localizer endpoint
+    This is a concrete class that is responsible for testing the feedback fix endpoint
 
     """
 
@@ -23,7 +23,7 @@ class ErrorLocalizerEndpointTester(EndpointTester):
                  its_api_connection: ItsApiConnection,
                  type_of_metamorphic_relation: TypeOfMetamorphicRelation):
         """
-        Initialisation method for a ErrorLocalizer endpoint instance
+        Initialisation method for a FeedbackFixEndpointTester instance
         """
         self.api_output_comparator = api_output_comparator
         self.its_api_connection = its_api_connection
@@ -39,12 +39,12 @@ class ErrorLocalizerEndpointTester(EndpointTester):
 
         Returns:
            A TestResult instance containing the information regarding the outcome
-           of testing the test case with the error localizer endpoint if an error
+           of testing the test case with the feedback fix endpoint if an error
            was detected, else returns None if all pass
         """
         try:
             # Make API call
-            output_error_localizer = self.its_api_connection.call_errorlocalizer_endpoint(
+            output_feedback_fix = self.its_api_connection.call_feedback_fix_endpoint(
                 language=language,
                 reference_solution=json.dumps(base_program_intermediate, indent=4),
                 student_solution=json.dumps(modified_program_intermediate, indent=4),
@@ -53,15 +53,15 @@ class ErrorLocalizerEndpointTester(EndpointTester):
                 args=function_arguments_processed)
 
             # API call is successful. Check if test case pass or not
-            did_error_localizer_pass = self.check_status_of_result(output_error_localizer)
-            if not did_error_localizer_pass:
+            did_feedback_fix_pass = self.check_status_of_result(output_feedback_fix)
+            if not did_feedback_fix_pass:
                 # Test case did not pass
                 test_result = TestResult(
                     status=TypeOfTestResult.FAIL,
                     base_program_string=base_program_string,
                     modified_program_string=modified_program_string,
                     inputs=function_arguments_processed,
-                    problematic_output=json.dumps(output_error_localizer, indent=4)
+                    problematic_output=json.dumps(output_feedback_fix, indent=4)
                 )
                 return test_result
             else:
@@ -72,7 +72,7 @@ class ErrorLocalizerEndpointTester(EndpointTester):
             # Exception occurred during parsing
 
             # Create exception instance
-            exception_message = "Error localizer exception: " + str(e)
+            exception_message = "Feedback fix exception: " + str(e)
             test_result = TestResult(
                 status=TypeOfTestResult.FAIL,
                 base_program_string=base_program_string,
@@ -84,13 +84,13 @@ class ErrorLocalizerEndpointTester(EndpointTester):
 
     def check_status_of_result(self, api_result: dict):
         """
-        Determines if the error localizer output is considered to be successful or not.
+        Determines if the feedback fix output is considered to be successful or not.
         It uses the API output comparator
         Returns true if pass, else return false
 
         """
-        did_error_localizer_pass = self.api_output_comparator.check_error_localizer_output(
-            error_localizer_output= api_result,
+        did_feedback_fix_pass = self.api_output_comparator.check_feedback_fix_output(
+            feedback_fix_output= api_result,
             type_of_metamorphic_relation= self.type_of_metamorphic_relation
         )
-        return did_error_localizer_pass
+        return did_feedback_fix_pass

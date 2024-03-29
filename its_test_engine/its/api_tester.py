@@ -3,15 +3,15 @@
 '''
 
 from json.decoder import JSONDecodeError
-import json
-from ..enums.type_of_metamorphic_relation import TypeOfMetamorphicRelation
 from ..enums.type_of_test_result import TypeOfTestResult
 from .its_api_connection import ItsApiConnection
 from .test_result import TestResult
-from .result_writer import ResultWriter
 from ..base.input_generator import BaseInputGenerator
-from .api_output_comparator import ApiOutputComparator
 from ..utils import process_arguments
+from .error_localizer_endpoint_tester import ErrorLocalizerEndpointTester
+from .feedback_fix_endpoint_tester import FeedbackFixEndpointTester
+from .feedback_error_endpoint_tester import FeedbackErrorEndpointTester
+from .repair_endpoint_tester import RepairEndpointTester
 
 
 class ApiTester(object):
@@ -21,22 +21,27 @@ class ApiTester(object):
     """
 
 
-    def __init__(self, its_api_connection: ItsApiConnection, input_generator: BaseInputGenerator,
-                 api_output_comparator: ApiOutputComparator, ):
+    def __init__(self,
+                 its_api_connection: ItsApiConnection,
+                 input_generator: BaseInputGenerator,
+                 error_localizer_endpoint_tester: ErrorLocalizerEndpointTester,
+                 feedback_fix_endpoint_tester: FeedbackFixEndpointTester,
+                 feedback_error_endpoint_tester: FeedbackErrorEndpointTester,
+                 repair_endpoint_tester: RepairEndpointTester):
         """
         Initialisation method for an ItsApiConnection instance
 
-        Parameters:
-            its_api_connection: Provides access to ITS API
         """
         self.its_api_connection = its_api_connection
         self.input_generator = input_generator
-        self.api_output_comparator = api_output_comparator
+        self.error_localizer_endpoint_tester = error_localizer_endpoint_tester
+        self.feedback_fix_endpoint_tester = feedback_fix_endpoint_tester
+        self.feedback_error_endpoint_tester = feedback_error_endpoint_tester
+        self.repair_endpoint_tester = repair_endpoint_tester
 
 
     def test_program(self, base_program_string: str, modified_program_string: str,
                      function_signature: dict,
-                     type_of_metamorphic_relation: TypeOfMetamorphicRelation,
                      language: str):
         """
         Tests the given program and determines if test case passed or not.
@@ -54,16 +59,16 @@ class ApiTester(object):
 
         # STEP 1: Put base and modified programs into parser endpoint to get
         # intermediate representations
-
         base_program_intermediate, modified_program_intermediate = self._test_program_parser(
             base_program_string,
             modified_program_string,
             language
         )
-        if base_program_intermediate is None:
-            return
+        if isinstance(base_program_intermediate, TestResult):
+            # Cannot parse
+            return base_program_intermediate
 
-
+        # Successfully parsed
         # STEP 2: Prepare function information for subsequent API endpoints
         function_name = function_signature["name"]
         function_arguments = function_signature["arguments"]
@@ -72,14 +77,8 @@ class ApiTester(object):
         # Processes arguments to ITS API standard
         function_arguments_processed = process_arguments(function_inputs)
 
-        print(function_name)
-        print(function_arguments)
-        print(function_arguments_processed)
-
-
-
         # STEP 3: Call error localizer endpoint and check whether it pass
-        output_error_localizer = self._test_program_errorlocalizer(
+        test_result_error_localizer = self.error_localizer_endpoint_tester.test_endpoint(
             base_program_string=base_program_string,
             modified_program_string=modified_program_string,
             base_program_intermediate=base_program_intermediate,
@@ -89,27 +88,13 @@ class ApiTester(object):
             function_arguments_processed=function_arguments_processed
         )
 
+        if test_result_error_localizer is not None:
+            # Got error or never pass error localizer test
+            return test_result_error_localizer
 
-
-        if output_error_localizer is None:
-            return
-
-        did_error_localizer_pass = self.api_output_comparator.check_error_localizer_output(
-            error_localizer_output= output_error_localizer,
-            type_of_metamorphic_relation= type_of_metamorphic_relation
-        )
-        if not did_error_localizer_pass:
-            # Process error and return
-            self._output_errorlocalizer_error(
-                base_program_string=base_program_string,
-                modified_program_string=modified_program_string,
-                inputs=function_arguments_processed,
-                error_localizer_output=output_error_localizer
-            )
-            return
 
         # STEP 4: Call feedback fix endpoint and check whether it pass
-        output_feedback_fix = self._test_program_feedbackfix(
+        test_result_feedback_fix = self.feedback_fix_endpoint_tester.test_endpoint(
             base_program_string=base_program_string,
             modified_program_string=modified_program_string,
             base_program_intermediate=base_program_intermediate,
@@ -118,27 +103,13 @@ class ApiTester(object):
             function_name=function_name,
             function_arguments_processed=function_arguments_processed
         )
-
-        if output_feedback_fix is None:
-            return
-
-        did_feedback_fix_pass = self.api_output_comparator.check_feedback_fix_output(
-            feedback_fix_output= output_feedback_fix,
-            type_of_metamorphic_relation= type_of_metamorphic_relation
-        )
-        if not did_feedback_fix_pass:
-            # Process error and return
-            self._output_feedbackfix_error(
-                base_program_string=base_program_string,
-                modified_program_string=modified_program_string,
-                inputs=function_arguments_processed,
-                feedback_fix_output=output_feedback_fix
-            )
-            return
+        if test_result_feedback_fix is not None:
+            # Got error or never pass feedback fix test
+            return test_result_feedback_fix
 
 
         # STEP 5: Call feedback error endpoint and check whether it pass
-        output_feedback_error = self._test_program_feedbackerror(
+        test_result_feedback_error = self.feedback_error_endpoint_tester.test_endpoint(
             base_program_string=base_program_string,
             modified_program_string=modified_program_string,
             base_program_intermediate=base_program_intermediate,
@@ -147,26 +118,12 @@ class ApiTester(object):
             function_name=function_name,
             function_arguments_processed=function_arguments_processed
         )
-
-        if output_feedback_error is None:
-            return
-
-        did_feedback_error_pass = self.api_output_comparator.check_feedback_error_output(
-            feedback_error_output= output_feedback_error,
-            type_of_metamorphic_relation= type_of_metamorphic_relation
-        )
-        if not did_feedback_error_pass:
-            # Process error and return
-            self._output_feedbackerror_error(
-                base_program_string=base_program_string,
-                modified_program_string=modified_program_string,
-                inputs=function_arguments_processed,
-                feedback_error_output=output_feedback_error
-            )
-            return
+        if test_result_feedback_error is not None:
+            # Got error or never pass feedback error test
+            return test_result_feedback_error
 
         # STEP 6: Call repair endpoint and check whether it pass
-        output_repair = self._test_program_repair(
+        test_result_repair = self.repair_endpoint_tester.test_endpoint(
             base_program_string=base_program_string,
             modified_program_string=modified_program_string,
             base_program_intermediate=base_program_intermediate,
@@ -175,38 +132,25 @@ class ApiTester(object):
             function_name=function_name,
             function_arguments_processed=function_arguments_processed
         )
+        if test_result_repair is not None:
+            # Got error or never pass repair test
+            return test_result_feedback_error
 
-        if output_repair is None:
-            return
-
-        did_repair_pass = self.api_output_comparator.check_repair_output(
-            repair_output= output_repair,
-            type_of_metamorphic_relation= type_of_metamorphic_relation
-        )
-        if not did_repair_pass:
-            # Process error and return
-            self._output_repair_error(
-                base_program_string=base_program_string,
-                modified_program_string=modified_program_string,
-                inputs=function_arguments_processed,
-               repair_output=output_repair
-            )
-            return
-
+        # STEP 7: Reach here means all successful. Return successful test result
         # STEP 7: Return success
-        test_result = TestResult(
+        successful_test_result = TestResult(
             status=TypeOfTestResult.PASS,
             base_program_string=base_program_string,
             modified_program_string=modified_program_string,
             inputs=function_arguments_processed)
-
-        ResultWriter().write_results_to_file(test_result)
-        print("Test case completed")
+        return successful_test_result
 
 
     def _test_program_parser(self, base_program_string, modified_program_string, language):
         """
             Helper function for parser
+
+            Returns test result object if not successful, else return program intermediates
         """
         try:
             base_program_intermediate = self.its_api_connection.call_parser_endpoint(language, base_program_string)
@@ -222,202 +166,4 @@ class ApiTester(object):
                 base_program_string=base_program_string,
                 modified_program_string=modified_program_string,
                 exception_message=exception_message)
-
-            ResultWriter().write_results_to_file(test_result)
-            print("Test case completed")
-            return None, None
-
-    def _test_program_errorlocalizer(self, base_program_string, modified_program_string,
-                                     base_program_intermediate, modified_program_intermediate,
-                                     language, function_name, function_arguments_processed):
-        """
-            Helper function for error localizer
-        """
-        try:
-            output_error_localizer = self.its_api_connection.call_errorlocalizer_endpoint(
-                language=language,
-                reference_solution=json.dumps(base_program_intermediate, indent=4),
-                student_solution=json.dumps(modified_program_intermediate, indent=4),
-                function=function_name,
-                inputs="[]",
-                args=function_arguments_processed)
-            return output_error_localizer
-
-
-        except JSONDecodeError as e:
-            # Exception occurred during parsing
-
-            # Create exception instance
-            exception_message = "Error localizer exception: " + str(e)
-            test_result = TestResult(
-                status=TypeOfTestResult.FAIL,
-                base_program_string=base_program_string,
-                modified_program_string=modified_program_string,
-                exception_message=exception_message)
-
-            ResultWriter().write_results_to_file(test_result)
-            print("Test case completed")
-            return None
-
-    def _output_errorlocalizer_error(self, base_program_string, modified_program_string,
-                                      inputs, error_localizer_output):
-        """
-            Helper to output error localizer error, indicating potential bug
-        """
-        test_result = TestResult(
-            status=TypeOfTestResult.FAIL,
-            base_program_string=base_program_string,
-            modified_program_string=modified_program_string,
-            inputs=inputs,
-            problematic_output=json.dumps(error_localizer_output, indent=4)
-        )
-
-        ResultWriter().write_results_to_file(test_result)
-        print("Test case completed")
-        return
-
-    def _test_program_feedbackfix(self, base_program_string, modified_program_string,
-                                    base_program_intermediate, modified_program_intermediate,
-                                    language, function_name, function_arguments_processed):
-        """
-            Helper function for feedback fix
-        """
-        try:
-            output_feedbackfix = self.its_api_connection.call_feedback_fix_endpoint(
-                language=language,
-                reference_solution=json.dumps(base_program_intermediate, indent=4),
-                student_solution=json.dumps(modified_program_intermediate, indent=4),
-                function=function_name,
-                inputs="[]",
-                args=function_arguments_processed)
-            return output_feedbackfix
-
-
-        except JSONDecodeError as e:
-            # Exception occurred during parsing
-
-            # Create exception instance
-            exception_message = "Feedback fix exception: " + str(e)
-            test_result = TestResult(
-                status=TypeOfTestResult.FAIL,
-                base_program_string=base_program_string,
-                modified_program_string=modified_program_string,
-                exception_message=exception_message)
-
-            ResultWriter().write_results_to_file(test_result)
-            print("Test case completed")
-            return None
-
-    def _output_feedbackfix_error(self, base_program_string, modified_program_string,
-                                    inputs, feedback_fix_output):
-        """
-            Helper to output feedback fix error, indicating potential bug
-        """
-        test_result = TestResult(
-            status=TypeOfTestResult.FAIL,
-            base_program_string=base_program_string,
-            modified_program_string=modified_program_string,
-            inputs=inputs,
-            problematic_output=json.dumps(feedback_fix_output, indent=4)
-        )
-
-        ResultWriter().write_results_to_file(test_result)
-        print("Test case completed")
-        return
-
-    def _test_program_feedbackerror(self, base_program_string, modified_program_string,
-                                    base_program_intermediate, modified_program_intermediate,
-                                    language, function_name, function_arguments_processed):
-        """
-            Helper function for feedback error
-        """
-        try:
-            output_feedback_error = self.its_api_connection.call_feedback_error_endpoint(
-                language=language,
-                reference_solution=json.dumps(base_program_intermediate, indent=4),
-                student_solution=json.dumps(modified_program_intermediate, indent=4),
-                function=function_name,
-                inputs="[]",
-                args=function_arguments_processed)
-            return output_feedback_error
-
-
-        except JSONDecodeError as e:
-            # Exception occurred during parsing
-
-            # Create exception instance
-            exception_message = "Feedback error exception: " + str(e)
-            test_result = TestResult(
-                status=TypeOfTestResult.FAIL,
-                base_program_string=base_program_string,
-                modified_program_string=modified_program_string,
-                exception_message=exception_message)
-
-            ResultWriter().write_results_to_file(test_result)
-            print("Test case completed")
-            return None
-
-    def _output_feedbackerror_error(self, base_program_string, modified_program_string,
-                                    inputs, feedback_error_output):
-        """
-            Helper to output feedback error error, indicating potential bug
-        """
-        test_result = TestResult(
-            status=TypeOfTestResult.FAIL,
-            base_program_string=base_program_string,
-            modified_program_string=modified_program_string,
-            inputs=inputs,
-            problematic_output=json.dumps(feedback_error_output, indent=4)
-        )
-
-        ResultWriter().write_results_to_file(test_result)
-        print("Test case completed")
-        return
-
-    def _test_program_repair(self, base_program_string, modified_program_string,
-                                     base_program_intermediate, modified_program_intermediate,
-                                     language, function_name, function_arguments_processed):
-        """
-            Helper function for repair
-        """
-        try:
-            output_repair = self.its_api_connection.call_repair_endpoint(
-                language=language,
-                reference_solution=json.dumps(base_program_intermediate, indent=4),
-                student_solution=json.dumps(modified_program_intermediate, indent=4),
-                function=function_name,
-                inputs="[]",
-                args=function_arguments_processed)
-            return output_repair
-
-        except JSONDecodeError as e:
-            # Exception occurred during parsing
-
-            # Create exception instance
-            exception_message = "Repair exception: " + str(e)
-            test_result = TestResult(
-                status=TypeOfTestResult.FAIL,
-                base_program_string=base_program_string,
-                modified_program_string=modified_program_string,
-                exception_message=exception_message)
-
-            ResultWriter().write_results_to_file(test_result)
-            print("Test case completed")
-            return None
-
-    def _output_repair_error(self, base_program_string, modified_program_string,
-                                    inputs, repair_output):
-        """
-            Helper to output repair error, indicating potential bug
-        """
-        test_result = TestResult(
-            status=TypeOfTestResult.FAIL,
-            base_program_string=base_program_string,
-            modified_program_string=modified_program_string,
-            inputs=inputs,
-            problematic_output=json.dumps(repair_output, indent=4)
-        )
-
-        ResultWriter().write_results_to_file(test_result)
-        print("Test case completed")
-        return
+            return test_result, test_result

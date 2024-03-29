@@ -6,7 +6,6 @@ from abc import ABC, abstractmethod
 from .api_output_comparator import ApiOutputComparator
 from .its_api_connection import ItsApiConnection
 from ..enums.type_of_metamorphic_relation import TypeOfMetamorphicRelation
-from ..enums.type_of_metamorphic_relation import TypeOfMetamorphicRelation
 
 
 class EndpointTester(ABC):
@@ -28,6 +27,29 @@ class EndpointTester(ABC):
         self.its_api_connection = its_api_connection
         self.type_of_metamorphic_relation = type_of_metamorphic_relation
 
+    @abstractmethod
+    def test_endpoint(self,
+                      base_program_string: str,
+                      modified_program_string: str,
+                      base_program_intermediate: dict,
+                      modified_program_intermediate: dict,
+                      language: dict,
+                      function_name: str,
+                      function_arguments_processed:str):
+        """
+        Abstract method to be overridden by concrete endpoint tester classes.
+        This method aims to generate an test result instance that represents the
+        outcome of testing a test case with the endpoint.
+
+        Returns:
+           A TestResult instance containing the information regarding the outcome
+           of testing the test case with the endpoint, if not successful. If successful,
+           return None.
+        """
+
+        # self, base_program_string, modified_program_string, base_program_intermediate,
+        #               modified_program_intermediate, language, function_name,
+        #               function_arguments_processed
 
     @abstractmethod
     def check_status_of_result(self, api_result: dict):
