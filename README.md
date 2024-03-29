@@ -16,6 +16,10 @@ Therefore, our team has developed an automated testing engine that aims to ident
 6. Run `pytest` to run the test cases.
 7. Run `coverage run --source=its_test_engine -m pytest && coverage report` to generate a coverage report.
 
+> Note: Replace `<current_working_directory>` with the path to the current working directory.
+
+> Run all the commands in the Docker container.
+
 ### High-Level Design
 
 ```mermaid
