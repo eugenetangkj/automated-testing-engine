@@ -18,6 +18,7 @@ class ItsTestSuite:
         self.inputs = inputs
         self.language = language
         self.base_program_string = base_program_string.strip("\n")
+        self.time = datetime.now()
 
         self.test_cases = []
         self.parser_result = None
@@ -93,6 +94,7 @@ class ItsTestSuitesMarkdownWriter:
             file_path = os.path.join(folder_path, file_name)
 
             markdown = f"# Test {test_num}\n\n"
+            markdown += f"Time: {test_suite.time}\n\n"
             markdown += "### Base Program\n\n"
             markdown += f"```{test_suite.language.value}\n{test_suite.base_program_string}\n```\n\n"
             markdown += "### Input\n\n"
