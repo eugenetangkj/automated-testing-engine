@@ -20,12 +20,6 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
     """
 
-    # OpenAI client instance
-    # Adapted from https://community.openai.com/t/setting-request-timeout-in-openai-v1-2-2/492772
-    OPENAI_CLIENT = OpenAI(
-        api_key=os.environ.get("CS3213_OPENAI_API_KEY"), timeout=httpx.Timeout(20.0)
-    )
-
     SYSTEM_PROMPT_PY = (
         "Create a totally random py function given constraints. Be creative! "
         + "The function takes arguments of only pure numeric types int, float or double. and it cannot have import statements. "
@@ -55,6 +49,12 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         super().__init__()
         self.language = language
         self.constraints = constraints
+
+        # OpenAI client instance
+        # Adapted from https://community.openai.com/t/setting-request-timeout-in-openai-v1-2-2/492772
+        self.OPENAI_CLIENT = OpenAI(
+            api_key=os.environ.get("CS3213_OPENAI_API_KEY"), timeout=httpx.Timeout(20.0)
+        )
 
     def generate_test_case(self):
         """
