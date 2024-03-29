@@ -27,9 +27,11 @@ class ItsApiConnection(object):
 
     def __make_api_call(self, url, params):
         retry = 0
+        response = None
         while retry < 3:
             try:
                 response = requests.post(url, json=params, timeout=10)
+                break
             except requests.exceptions.Timeout:
                 print("Timeout error. Retrying...")
                 retry += 1
