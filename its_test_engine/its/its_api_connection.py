@@ -26,11 +26,14 @@ class ItsApiConnection(object):
         self.language = langauge
 
     def __make_api_call(self, url, params):
-        response = requests.post(url, json=params, timeout=10)
         retry = 0
-        while response.status_code == 500 and retry < 3:
-            response = requests.post(url, json=params, timeout=30)
-            retry += 1
+        while retry < 3:
+            try:
+                response = requests.post(url, json=params, timeout=10)
+            except requests.exceptions.Timeout:
+                print("Timeout error. Retrying...")
+                retry += 1
+                continue
 
         if response.status_code != 200:
             raise Exception(
