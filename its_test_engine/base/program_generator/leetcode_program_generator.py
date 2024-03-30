@@ -2,9 +2,7 @@ import os
 import re
 import json
 import random
-from its_test_engine.base.program_generator.base_program_generator import (
-    BaseProgramGenerator,
-)
+from .base_program_generator import BaseProgramGenerator
 
 
 class LeetCodeProgramGenerator(BaseProgramGenerator):
@@ -21,7 +19,8 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
         self.file = open(
             os.path.join(
                 os.path.dirname(__file__),
-                "../../../datasets/" "leetcode-solutions.jsonl",
+                "../../../datasets/",
+                "leetcode-solutions.jsonl",
             ),
             "r",
         )
@@ -44,7 +43,6 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
 
         if match:
             return_type = match.group(1)
-            function_name = match.group(2)
             arguments = match.group(3)
 
             if return_type not in self.types_mapping:
@@ -53,7 +51,7 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
             return_type = self.types_mapping[return_type]
 
             for arg in arguments.split(","):
-                arg_type, arg_name = arg.strip().split(" ")
+                arg_type, _ = arg.strip().split(" ")
                 if arg_type not in self.types_mapping:
                     return None
 

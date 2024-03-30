@@ -1,7 +1,7 @@
-import ast, copy
+import ast
 import its_test_engine.python.modifier as mutator
 
-code = """
+CODE = """
 def add(a, b):
     return a + b
 """
@@ -26,7 +26,7 @@ def evaluate_function(func_node, *args):
 def test_variable_renamer():
     transformer = mutator.VariableRenamer()
 
-    node = ast.parse(code)
+    node = ast.parse(CODE)
     modified_node = transformer.visit(node)
 
     assert (

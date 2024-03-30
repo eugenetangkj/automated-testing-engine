@@ -2,8 +2,6 @@
     Entry point of application
 """
 
-import json
-
 from its_test_engine.enums import Language
 from its_test_engine.its.tester import Tester
 from its_test_engine.base.input_generator import RandomInputGenerator
@@ -25,7 +23,7 @@ def run_leetcode_programs():
     tester = Tester(
         Language.PYTHON, program_generator, transformers, input_generator, writer
     )
-    test_results = tester.run_tests()
+    tester.run_tests()
 
 
 def run_open_ai_programs():
@@ -36,7 +34,7 @@ def run_open_ai_programs():
     tester = Tester(
         Language.PYTHON, program_generator, transformers, input_generator, writer
     )
-    test_results = tester.run_tests()
+    tester.run_tests()
 
 
 if __name__ == "__main__":

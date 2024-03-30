@@ -1,27 +1,6 @@
 import random
-import pynguin.configuration as config
-from pynguin.generator import (
-    run_pynguin,
-    set_configuration,
-    _run,
-    _setup_and_check,
-    _instantiate_test_generation_strategy,
-    _track_search_metrics,
-    _track_final_metrics,
-    _generate_assertions,
-    _export_chromosome,
-)
-import random
-import string
 import os
-import time
-import logging
 import ast
-import pynguin.ga.chromosomevisitor as cv
-import pynguin.testcase.testcase_to_ast as tc_to_ast
-from pynguin.utils.report import get_coverage_report
-import pynguin.utils.namingscope as ns
-from pynguin.testcase import export
 import subprocess
 
 
@@ -31,6 +10,7 @@ def add_print_to_functions(code):
 
     # Create a NodeTransformer to modify the AST
     class PrintTransformer(ast.NodeTransformer):
+        # pylint: disable=invalid-name
         def visit_FunctionDef(self, node):
             # Get the list of argument names
             arg_names = [arg.arg for arg in node.args.args]
@@ -40,7 +20,7 @@ def add_print_to_functions(code):
                 value=ast.Call(
                     func=ast.Name(id="print", ctx=ast.Load()),
                     args=[
-                        ast.Str(s=f"__arguments__"),
+                        ast.Str(s="__arguments__"),
                         ast.List(
                             elts=[
                                 ast.Name(id=name, ctx=ast.Load()) for name in arg_names
@@ -104,8 +84,10 @@ class PynGuinInputGenerator:
                 timeout=12,
             )
         except subprocess.CalledProcessError as e:
+            print(e)
             return []
         except subprocess.TimeoutExpired as e:
+            print(e)
             return []
 
         if not os.path.exists(os.path.join(self.folder_path, "test_example.py")):
@@ -120,7 +102,9 @@ class PynGuinInputGenerator:
         open(modified_code_path, "w").write(modified_code)
 
         output_path = os.path.join(self.folder_path, "test_example.py")
-        result = subprocess.run(["pytest", "-s", output_path], stdout=subprocess.PIPE)
+        result = subprocess.run(
+            ["pytest", "-s", output_path], stdout=subprocess.PIPE, check=True
+        )
 
         # Replace back the original code
         # os.rename(os.path.join(self.folder_path, "example2.py"), self.code_path)
@@ -131,8 +115,9 @@ class PynGuinInputGenerator:
         for line in result.stdout.decode().split("\n"):
             if "__arguments__" in line:
                 try:
-                    arguments.append(eval(line.split("__arguments__ ")[1]))
-                except:
-                    pass
+                    argument = eval(line.split("__arguments__ ")[1])
+                    arguments.append(argument)
+                except Exception as e:
+                    print(e)
 
         return arguments

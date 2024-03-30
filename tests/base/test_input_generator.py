@@ -1,15 +1,13 @@
-import pytest
-from its_test_engine.base.input_generator.random_input_generator import (
-    RandomInputGenerator,
-)
+from its_test_engine.base.input_generator import RandomInputGenerator
 
-code = """
+
+CODE = """
 def add(a, b):
     return a + b
 """
 
 # generate a complicated code semgnet
-complicated_code = """
+COMPLICAED_CODE = """
 def generate_random(seed, n):
     a = 1664525
     c = 1013904223
@@ -23,11 +21,16 @@ def generate_random(seed, n):
 
 
 def test_random_input_generator():
-    types = ["int", "int"]
     input_generator = RandomInputGenerator()
 
     inputs = input_generator.generate_inputs(
-        {"name": "add", "argument_types": ["int", "int"]}, code, 20
+        {"name": "add", "argument_types": ["int", "int"]}, CODE, 20
+    )
+
+    assert len(inputs) == 20
+
+    inputs = input_generator.generate_inputs(
+        {"name": "add", "argument_types": ["int", "int"]}, COMPLICAED_CODE, 20
     )
 
     assert len(inputs) == 20

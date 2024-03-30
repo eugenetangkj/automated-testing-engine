@@ -1,8 +1,4 @@
-import os
-import re
 import ast
-import json
-import random
 from its_test_engine.base.program_generator import (
     LeetCodeProgramGenerator,
     OpenAiProgramGenerator,

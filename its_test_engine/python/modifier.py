@@ -7,6 +7,7 @@ class VariableRenamer(ast.NodeTransformer):
         self.var_count = 0
         self.name_mapping = {}
 
+    # pylint: disable=invalid-name
     def visit_FunctionDef(self, node):
         self.name_mapping = {}
         for arg in node.args.args:
@@ -17,6 +18,7 @@ class VariableRenamer(ast.NodeTransformer):
         self.generic_visit(node)
         return node
 
+    # pylint: disable=invalid-name
     def visit_Name(self, node):
         if node.id in self.name_mapping:
             node.id = self.name_mapping[node.id]
@@ -24,6 +26,7 @@ class VariableRenamer(ast.NodeTransformer):
 
 
 class BinOpModifier(ast.NodeTransformer):
+    # pylint: disable=invalid-name
     def visit_BinOp(self, node):
         # Commutative Operations
         if isinstance(node.op, (ast.Add, ast.Mult)):
