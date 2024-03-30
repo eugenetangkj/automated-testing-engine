@@ -21,12 +21,12 @@ def test_error_localizer_endpoint_tester():
     error_localizer_tester = ErrorLocalizerEndpointTester(its_api_connection)
 
     test_result = error_localizer_tester.run_test(
-        "add", "", "", PROGRAM_TO_SUCCESS, PROGRAM_TO_SUCCESS, []
+        {"name":"add"}, "", "", PROGRAM_TO_SUCCESS, PROGRAM_TO_SUCCESS, []
     )
     assert test_result.success
 
     test_result = error_localizer_tester.run_test(
-        "add", "", "", PROGRAM_TO_FAIL, PROGRAM_TO_FAIL, []
+        {"name":"add"}, "", "", PROGRAM_TO_FAIL, PROGRAM_TO_FAIL, []
     )
     assert not test_result.success
     
