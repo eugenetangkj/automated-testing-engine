@@ -1,12 +1,12 @@
 # Test Report
 
-Time: 2024-03-30 07:47:10.404214
+Time: 2024-03-30 07:48:14.243498
 
 ### Base Program
 
 ```py
-def count_odds(low, high):
-    return (high + 1) // 2 - low // 2
+def smallest_multiple(n):
+    return n if n % 2 == 0 else n * 2
 ```
 
 ## Test Case 1
@@ -14,8 +14,8 @@ def count_odds(low, high):
 ### Modified Program
 
 ```py
-def count_odds(low, high):
-    return (high + 1) // 2 - low // 2
+def smallest_multiple(n):
+    return n if n % 2 == 0 else n * 2
 ```
 
 <details>
@@ -25,7 +25,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def count_odds(low, high):\n    return (high + 1) // 2 - low // 2"
+    "source_code": "def smallest_multiple(n):\n    return n if n % 2 == 0 else n * 2"
 }
 ```
 
@@ -39,33 +39,21 @@ Actual Output:
 {
     "importStatements": [],
     "fncs": {
-        "count_odds": {
-            "name": "count_odds",
+        "smallest_multiple": {
+            "name": "smallest_multiple",
             "rettype": "*",
             "initloc": 1,
             "endloc": 0,
             "params": [
                 {
-                    "val0": "low",
+                    "val0": "n",
                     "val1": "*",
                     "valueArray": [
-                        "low",
+                        "n",
                         "*"
                     ],
                     "valueList": [
-                        "low",
-                        "*"
-                    ]
-                },
-                {
-                    "val0": "high",
-                    "val1": "*",
-                    "valueArray": [
-                        "high",
-                        "*"
-                    ],
-                    "valueList": [
-                        "high",
+                        "n",
                         "*"
                     ]
                 }
@@ -75,22 +63,22 @@ Actual Output:
                     {
                         "val0": "$ret",
                         "val1": {
-                            "name": "Sub",
+                            "name": "ite",
                             "args": [
                                 {
-                                    "name": "FloorDiv",
+                                    "name": "Eq",
                                     "args": [
                                         {
-                                            "name": "Add",
+                                            "name": "Mod",
                                             "args": [
                                                 {
-                                                    "name": "high",
+                                                    "name": "n",
                                                     "primed": false,
                                                     "line": 2,
                                                     "tokentype": "Variable"
                                                 },
                                                 {
-                                                    "value": "1",
+                                                    "value": "2",
                                                     "line": 2,
                                                     "tokentype": "Constant"
                                                 }
@@ -99,7 +87,7 @@ Actual Output:
                                             "tokentype": "Operation"
                                         },
                                         {
-                                            "value": "2",
+                                            "value": "0",
                                             "line": 2,
                                             "tokentype": "Constant"
                                         }
@@ -108,10 +96,16 @@ Actual Output:
                                     "tokentype": "Operation"
                                 },
                                 {
-                                    "name": "FloorDiv",
+                                    "name": "n",
+                                    "primed": false,
+                                    "line": 2,
+                                    "tokentype": "Variable"
+                                },
+                                {
+                                    "name": "Mult",
                                     "args": [
                                         {
-                                            "name": "low",
+                                            "name": "n",
                                             "primed": false,
                                             "line": 2,
                                             "tokentype": "Variable"
@@ -132,22 +126,22 @@ Actual Output:
                         "valueArray": [
                             "$ret",
                             {
-                                "name": "Sub",
+                                "name": "ite",
                                 "args": [
                                     {
-                                        "name": "FloorDiv",
+                                        "name": "Eq",
                                         "args": [
                                             {
-                                                "name": "Add",
+                                                "name": "Mod",
                                                 "args": [
                                                     {
-                                                        "name": "high",
+                                                        "name": "n",
                                                         "primed": false,
                                                         "line": 2,
                                                         "tokentype": "Variable"
                                                     },
                                                     {
-                                                        "value": "1",
+                                                        "value": "2",
                                                         "line": 2,
                                                         "tokentype": "Constant"
                                                     }
@@ -156,7 +150,7 @@ Actual Output:
                                                 "tokentype": "Operation"
                                             },
                                             {
-                                                "value": "2",
+                                                "value": "0",
                                                 "line": 2,
                                                 "tokentype": "Constant"
                                             }
@@ -165,10 +159,16 @@ Actual Output:
                                         "tokentype": "Operation"
                                     },
                                     {
-                                        "name": "FloorDiv",
+                                        "name": "n",
+                                        "primed": false,
+                                        "line": 2,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "name": "Mult",
                                         "args": [
                                             {
-                                                "name": "low",
+                                                "name": "n",
                                                 "primed": false,
                                                 "line": 2,
                                                 "tokentype": "Variable"
@@ -189,22 +189,22 @@ Actual Output:
                         "valueList": [
                             "$ret",
                             {
-                                "name": "Sub",
+                                "name": "ite",
                                 "args": [
                                     {
-                                        "name": "FloorDiv",
+                                        "name": "Eq",
                                         "args": [
                                             {
-                                                "name": "Add",
+                                                "name": "Mod",
                                                 "args": [
                                                     {
-                                                        "name": "high",
+                                                        "name": "n",
                                                         "primed": false,
                                                         "line": 2,
                                                         "tokentype": "Variable"
                                                     },
                                                     {
-                                                        "value": "1",
+                                                        "value": "2",
                                                         "line": 2,
                                                         "tokentype": "Constant"
                                                     }
@@ -213,7 +213,7 @@ Actual Output:
                                                 "tokentype": "Operation"
                                             },
                                             {
-                                                "value": "2",
+                                                "value": "0",
                                                 "line": 2,
                                                 "tokentype": "Constant"
                                             }
@@ -222,10 +222,16 @@ Actual Output:
                                         "tokentype": "Operation"
                                     },
                                     {
-                                        "name": "FloorDiv",
+                                        "name": "n",
+                                        "primed": false,
+                                        "line": 2,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "name": "Mult",
                                         "args": [
                                             {
-                                                "name": "low",
+                                                "name": "n",
                                                 "primed": false,
                                                 "line": 2,
                                                 "tokentype": "Variable"
@@ -250,7 +256,7 @@ Actual Output:
                 "1": {}
             },
             "locdescs": {
-                "1": "around the beginning of function 'count_odds'"
+                "1": "around the beginning of function 'smallest_multiple'"
             },
             "types": {}
         }
@@ -265,8 +271,8 @@ Actual Output:
 ### Modified Program
 
 ```py
-def count_odds(var_0, var_1):
-    return (var_1 + 1) // 2 - var_0 // 2
+def smallest_multiple(var_0):
+    return var_0 if var_0 % 2 == 0 else var_0 * 2
 ```
 
 <details>
@@ -276,7 +282,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def count_odds(var_0, var_1):\n    return (var_1 + 1) // 2 - var_0 // 2"
+    "source_code": "def smallest_multiple(var_0):\n    return var_0 if var_0 % 2 == 0 else var_0 * 2"
 }
 ```
 
@@ -290,8 +296,8 @@ Actual Output:
 {
     "importStatements": [],
     "fncs": {
-        "count_odds": {
-            "name": "count_odds",
+        "smallest_multiple": {
+            "name": "smallest_multiple",
             "rettype": "*",
             "initloc": 1,
             "endloc": 0,
@@ -307,18 +313,6 @@ Actual Output:
                         "var_0",
                         "*"
                     ]
-                },
-                {
-                    "val0": "var_1",
-                    "val1": "*",
-                    "valueArray": [
-                        "var_1",
-                        "*"
-                    ],
-                    "valueList": [
-                        "var_1",
-                        "*"
-                    ]
                 }
             ],
             "locexprs": {
@@ -326,22 +320,22 @@ Actual Output:
                     {
                         "val0": "$ret",
                         "val1": {
-                            "name": "Sub",
+                            "name": "ite",
                             "args": [
                                 {
-                                    "name": "FloorDiv",
+                                    "name": "Eq",
                                     "args": [
                                         {
-                                            "name": "Add",
+                                            "name": "Mod",
                                             "args": [
                                                 {
-                                                    "name": "var_1",
+                                                    "name": "var_0",
                                                     "primed": false,
                                                     "line": 2,
                                                     "tokentype": "Variable"
                                                 },
                                                 {
-                                                    "value": "1",
+                                                    "value": "2",
                                                     "line": 2,
                                                     "tokentype": "Constant"
                                                 }
@@ -350,7 +344,7 @@ Actual Output:
                                             "tokentype": "Operation"
                                         },
                                         {
-                                            "value": "2",
+                                            "value": "0",
                                             "line": 2,
                                             "tokentype": "Constant"
                                         }
@@ -359,7 +353,13 @@ Actual Output:
                                     "tokentype": "Operation"
                                 },
                                 {
-                                    "name": "FloorDiv",
+                                    "name": "var_0",
+                                    "primed": false,
+                                    "line": 2,
+                                    "tokentype": "Variable"
+                                },
+                                {
+                                    "name": "Mult",
                                     "args": [
                                         {
                                             "name": "var_0",
@@ -383,22 +383,22 @@ Actual Output:
                         "valueArray": [
                             "$ret",
                             {
-                                "name": "Sub",
+                                "name": "ite",
                                 "args": [
                                     {
-                                        "name": "FloorDiv",
+                                        "name": "Eq",
                                         "args": [
                                             {
-                                                "name": "Add",
+                                                "name": "Mod",
                                                 "args": [
                                                     {
-                                                        "name": "var_1",
+                                                        "name": "var_0",
                                                         "primed": false,
                                                         "line": 2,
                                                         "tokentype": "Variable"
                                                     },
                                                     {
-                                                        "value": "1",
+                                                        "value": "2",
                                                         "line": 2,
                                                         "tokentype": "Constant"
                                                     }
@@ -407,7 +407,7 @@ Actual Output:
                                                 "tokentype": "Operation"
                                             },
                                             {
-                                                "value": "2",
+                                                "value": "0",
                                                 "line": 2,
                                                 "tokentype": "Constant"
                                             }
@@ -416,7 +416,13 @@ Actual Output:
                                         "tokentype": "Operation"
                                     },
                                     {
-                                        "name": "FloorDiv",
+                                        "name": "var_0",
+                                        "primed": false,
+                                        "line": 2,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "name": "Mult",
                                         "args": [
                                             {
                                                 "name": "var_0",
@@ -440,22 +446,22 @@ Actual Output:
                         "valueList": [
                             "$ret",
                             {
-                                "name": "Sub",
+                                "name": "ite",
                                 "args": [
                                     {
-                                        "name": "FloorDiv",
+                                        "name": "Eq",
                                         "args": [
                                             {
-                                                "name": "Add",
+                                                "name": "Mod",
                                                 "args": [
                                                     {
-                                                        "name": "var_1",
+                                                        "name": "var_0",
                                                         "primed": false,
                                                         "line": 2,
                                                         "tokentype": "Variable"
                                                     },
                                                     {
-                                                        "value": "1",
+                                                        "value": "2",
                                                         "line": 2,
                                                         "tokentype": "Constant"
                                                     }
@@ -464,7 +470,7 @@ Actual Output:
                                                 "tokentype": "Operation"
                                             },
                                             {
-                                                "value": "2",
+                                                "value": "0",
                                                 "line": 2,
                                                 "tokentype": "Constant"
                                             }
@@ -473,7 +479,13 @@ Actual Output:
                                         "tokentype": "Operation"
                                     },
                                     {
-                                        "name": "FloorDiv",
+                                        "name": "var_0",
+                                        "primed": false,
+                                        "line": 2,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "name": "Mult",
                                         "args": [
                                             {
                                                 "name": "var_0",
@@ -501,7 +513,7 @@ Actual Output:
                 "1": {}
             },
             "locdescs": {
-                "1": "around the beginning of function 'count_odds'"
+                "1": "around the beginning of function 'smallest_multiple'"
             },
             "types": {}
         }
@@ -516,8 +528,8 @@ Actual Output:
 ### Modified Program
 
 ```py
-def count_odds(low, high):
-    return (1 + high) // 2 + -(low // 2)
+def smallest_multiple(n):
+    return n if n % 2 == 0 else 2 * n
 ```
 
 <details>
@@ -527,7 +539,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def count_odds(low, high):\n    return (1 + high) // 2 + -(low // 2)"
+    "source_code": "def smallest_multiple(n):\n    return n if n % 2 == 0 else 2 * n"
 }
 ```
 
@@ -541,33 +553,21 @@ Actual Output:
 {
     "importStatements": [],
     "fncs": {
-        "count_odds": {
-            "name": "count_odds",
+        "smallest_multiple": {
+            "name": "smallest_multiple",
             "rettype": "*",
             "initloc": 1,
             "endloc": 0,
             "params": [
                 {
-                    "val0": "low",
+                    "val0": "n",
                     "val1": "*",
                     "valueArray": [
-                        "low",
+                        "n",
                         "*"
                     ],
                     "valueList": [
-                        "low",
-                        "*"
-                    ]
-                },
-                {
-                    "val0": "high",
-                    "val1": "*",
-                    "valueArray": [
-                        "high",
-                        "*"
-                    ],
-                    "valueList": [
-                        "high",
+                        "n",
                         "*"
                     ]
                 }
@@ -577,46 +577,16 @@ Actual Output:
                     {
                         "val0": "$ret",
                         "val1": {
-                            "name": "Add",
+                            "name": "ite",
                             "args": [
                                 {
-                                    "name": "FloorDiv",
+                                    "name": "Eq",
                                     "args": [
                                         {
-                                            "name": "Add",
+                                            "name": "Mod",
                                             "args": [
                                                 {
-                                                    "value": "1",
-                                                    "line": 2,
-                                                    "tokentype": "Constant"
-                                                },
-                                                {
-                                                    "name": "high",
-                                                    "primed": false,
-                                                    "line": 2,
-                                                    "tokentype": "Variable"
-                                                }
-                                            ],
-                                            "line": 2,
-                                            "tokentype": "Operation"
-                                        },
-                                        {
-                                            "value": "2",
-                                            "line": 2,
-                                            "tokentype": "Constant"
-                                        }
-                                    ],
-                                    "line": 2,
-                                    "tokentype": "Operation"
-                                },
-                                {
-                                    "name": "USub",
-                                    "args": [
-                                        {
-                                            "name": "FloorDiv",
-                                            "args": [
-                                                {
-                                                    "name": "low",
+                                                    "name": "n",
                                                     "primed": false,
                                                     "line": 2,
                                                     "tokentype": "Variable"
@@ -629,6 +599,35 @@ Actual Output:
                                             ],
                                             "line": 2,
                                             "tokentype": "Operation"
+                                        },
+                                        {
+                                            "value": "0",
+                                            "line": 2,
+                                            "tokentype": "Constant"
+                                        }
+                                    ],
+                                    "line": 2,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "n",
+                                    "primed": false,
+                                    "line": 2,
+                                    "tokentype": "Variable"
+                                },
+                                {
+                                    "name": "Mult",
+                                    "args": [
+                                        {
+                                            "value": "2",
+                                            "line": 2,
+                                            "tokentype": "Constant"
+                                        },
+                                        {
+                                            "name": "n",
+                                            "primed": false,
+                                            "line": 2,
+                                            "tokentype": "Variable"
                                         }
                                     ],
                                     "line": 2,
@@ -641,46 +640,16 @@ Actual Output:
                         "valueArray": [
                             "$ret",
                             {
-                                "name": "Add",
+                                "name": "ite",
                                 "args": [
                                     {
-                                        "name": "FloorDiv",
+                                        "name": "Eq",
                                         "args": [
                                             {
-                                                "name": "Add",
+                                                "name": "Mod",
                                                 "args": [
                                                     {
-                                                        "value": "1",
-                                                        "line": 2,
-                                                        "tokentype": "Constant"
-                                                    },
-                                                    {
-                                                        "name": "high",
-                                                        "primed": false,
-                                                        "line": 2,
-                                                        "tokentype": "Variable"
-                                                    }
-                                                ],
-                                                "line": 2,
-                                                "tokentype": "Operation"
-                                            },
-                                            {
-                                                "value": "2",
-                                                "line": 2,
-                                                "tokentype": "Constant"
-                                            }
-                                        ],
-                                        "line": 2,
-                                        "tokentype": "Operation"
-                                    },
-                                    {
-                                        "name": "USub",
-                                        "args": [
-                                            {
-                                                "name": "FloorDiv",
-                                                "args": [
-                                                    {
-                                                        "name": "low",
+                                                        "name": "n",
                                                         "primed": false,
                                                         "line": 2,
                                                         "tokentype": "Variable"
@@ -693,6 +662,35 @@ Actual Output:
                                                 ],
                                                 "line": 2,
                                                 "tokentype": "Operation"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 2,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 2,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "n",
+                                        "primed": false,
+                                        "line": 2,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "name": "Mult",
+                                        "args": [
+                                            {
+                                                "value": "2",
+                                                "line": 2,
+                                                "tokentype": "Constant"
+                                            },
+                                            {
+                                                "name": "n",
+                                                "primed": false,
+                                                "line": 2,
+                                                "tokentype": "Variable"
                                             }
                                         ],
                                         "line": 2,
@@ -705,46 +703,16 @@ Actual Output:
                         "valueList": [
                             "$ret",
                             {
-                                "name": "Add",
+                                "name": "ite",
                                 "args": [
                                     {
-                                        "name": "FloorDiv",
+                                        "name": "Eq",
                                         "args": [
                                             {
-                                                "name": "Add",
+                                                "name": "Mod",
                                                 "args": [
                                                     {
-                                                        "value": "1",
-                                                        "line": 2,
-                                                        "tokentype": "Constant"
-                                                    },
-                                                    {
-                                                        "name": "high",
-                                                        "primed": false,
-                                                        "line": 2,
-                                                        "tokentype": "Variable"
-                                                    }
-                                                ],
-                                                "line": 2,
-                                                "tokentype": "Operation"
-                                            },
-                                            {
-                                                "value": "2",
-                                                "line": 2,
-                                                "tokentype": "Constant"
-                                            }
-                                        ],
-                                        "line": 2,
-                                        "tokentype": "Operation"
-                                    },
-                                    {
-                                        "name": "USub",
-                                        "args": [
-                                            {
-                                                "name": "FloorDiv",
-                                                "args": [
-                                                    {
-                                                        "name": "low",
+                                                        "name": "n",
                                                         "primed": false,
                                                         "line": 2,
                                                         "tokentype": "Variable"
@@ -757,6 +725,35 @@ Actual Output:
                                                 ],
                                                 "line": 2,
                                                 "tokentype": "Operation"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 2,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 2,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "n",
+                                        "primed": false,
+                                        "line": 2,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "name": "Mult",
+                                        "args": [
+                                            {
+                                                "value": "2",
+                                                "line": 2,
+                                                "tokentype": "Constant"
+                                            },
+                                            {
+                                                "name": "n",
+                                                "primed": false,
+                                                "line": 2,
+                                                "tokentype": "Variable"
                                             }
                                         ],
                                         "line": 2,
@@ -773,7 +770,7 @@ Actual Output:
                 "1": {}
             },
             "locdescs": {
-                "1": "around the beginning of function 'count_odds'"
+                "1": "around the beginning of function 'smallest_multiple'"
             },
             "types": {}
         }
@@ -788,8 +785,8 @@ Actual Output:
 ### Modified Program
 
 ```py
-def count_odds(var_2, var_3):
-    return (1 + var_3) // 2 + -(var_2 // 2)
+def smallest_multiple(var_1):
+    return var_1 if var_1 % 2 == 0 else 2 * var_1
 ```
 
 <details>
@@ -799,7 +796,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def count_odds(var_2, var_3):\n    return (1 + var_3) // 2 + -(var_2 // 2)"
+    "source_code": "def smallest_multiple(var_1):\n    return var_1 if var_1 % 2 == 0 else 2 * var_1"
 }
 ```
 
@@ -813,33 +810,21 @@ Actual Output:
 {
     "importStatements": [],
     "fncs": {
-        "count_odds": {
-            "name": "count_odds",
+        "smallest_multiple": {
+            "name": "smallest_multiple",
             "rettype": "*",
             "initloc": 1,
             "endloc": 0,
             "params": [
                 {
-                    "val0": "var_2",
+                    "val0": "var_1",
                     "val1": "*",
                     "valueArray": [
-                        "var_2",
+                        "var_1",
                         "*"
                     ],
                     "valueList": [
-                        "var_2",
-                        "*"
-                    ]
-                },
-                {
-                    "val0": "var_3",
-                    "val1": "*",
-                    "valueArray": [
-                        "var_3",
-                        "*"
-                    ],
-                    "valueList": [
-                        "var_3",
+                        "var_1",
                         "*"
                     ]
                 }
@@ -849,46 +834,16 @@ Actual Output:
                     {
                         "val0": "$ret",
                         "val1": {
-                            "name": "Add",
+                            "name": "ite",
                             "args": [
                                 {
-                                    "name": "FloorDiv",
+                                    "name": "Eq",
                                     "args": [
                                         {
-                                            "name": "Add",
+                                            "name": "Mod",
                                             "args": [
                                                 {
-                                                    "value": "1",
-                                                    "line": 2,
-                                                    "tokentype": "Constant"
-                                                },
-                                                {
-                                                    "name": "var_3",
-                                                    "primed": false,
-                                                    "line": 2,
-                                                    "tokentype": "Variable"
-                                                }
-                                            ],
-                                            "line": 2,
-                                            "tokentype": "Operation"
-                                        },
-                                        {
-                                            "value": "2",
-                                            "line": 2,
-                                            "tokentype": "Constant"
-                                        }
-                                    ],
-                                    "line": 2,
-                                    "tokentype": "Operation"
-                                },
-                                {
-                                    "name": "USub",
-                                    "args": [
-                                        {
-                                            "name": "FloorDiv",
-                                            "args": [
-                                                {
-                                                    "name": "var_2",
+                                                    "name": "var_1",
                                                     "primed": false,
                                                     "line": 2,
                                                     "tokentype": "Variable"
@@ -901,6 +856,35 @@ Actual Output:
                                             ],
                                             "line": 2,
                                             "tokentype": "Operation"
+                                        },
+                                        {
+                                            "value": "0",
+                                            "line": 2,
+                                            "tokentype": "Constant"
+                                        }
+                                    ],
+                                    "line": 2,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "var_1",
+                                    "primed": false,
+                                    "line": 2,
+                                    "tokentype": "Variable"
+                                },
+                                {
+                                    "name": "Mult",
+                                    "args": [
+                                        {
+                                            "value": "2",
+                                            "line": 2,
+                                            "tokentype": "Constant"
+                                        },
+                                        {
+                                            "name": "var_1",
+                                            "primed": false,
+                                            "line": 2,
+                                            "tokentype": "Variable"
                                         }
                                     ],
                                     "line": 2,
@@ -913,46 +897,16 @@ Actual Output:
                         "valueArray": [
                             "$ret",
                             {
-                                "name": "Add",
+                                "name": "ite",
                                 "args": [
                                     {
-                                        "name": "FloorDiv",
+                                        "name": "Eq",
                                         "args": [
                                             {
-                                                "name": "Add",
+                                                "name": "Mod",
                                                 "args": [
                                                     {
-                                                        "value": "1",
-                                                        "line": 2,
-                                                        "tokentype": "Constant"
-                                                    },
-                                                    {
-                                                        "name": "var_3",
-                                                        "primed": false,
-                                                        "line": 2,
-                                                        "tokentype": "Variable"
-                                                    }
-                                                ],
-                                                "line": 2,
-                                                "tokentype": "Operation"
-                                            },
-                                            {
-                                                "value": "2",
-                                                "line": 2,
-                                                "tokentype": "Constant"
-                                            }
-                                        ],
-                                        "line": 2,
-                                        "tokentype": "Operation"
-                                    },
-                                    {
-                                        "name": "USub",
-                                        "args": [
-                                            {
-                                                "name": "FloorDiv",
-                                                "args": [
-                                                    {
-                                                        "name": "var_2",
+                                                        "name": "var_1",
                                                         "primed": false,
                                                         "line": 2,
                                                         "tokentype": "Variable"
@@ -965,6 +919,35 @@ Actual Output:
                                                 ],
                                                 "line": 2,
                                                 "tokentype": "Operation"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 2,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 2,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "var_1",
+                                        "primed": false,
+                                        "line": 2,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "name": "Mult",
+                                        "args": [
+                                            {
+                                                "value": "2",
+                                                "line": 2,
+                                                "tokentype": "Constant"
+                                            },
+                                            {
+                                                "name": "var_1",
+                                                "primed": false,
+                                                "line": 2,
+                                                "tokentype": "Variable"
                                             }
                                         ],
                                         "line": 2,
@@ -977,46 +960,16 @@ Actual Output:
                         "valueList": [
                             "$ret",
                             {
-                                "name": "Add",
+                                "name": "ite",
                                 "args": [
                                     {
-                                        "name": "FloorDiv",
+                                        "name": "Eq",
                                         "args": [
                                             {
-                                                "name": "Add",
+                                                "name": "Mod",
                                                 "args": [
                                                     {
-                                                        "value": "1",
-                                                        "line": 2,
-                                                        "tokentype": "Constant"
-                                                    },
-                                                    {
-                                                        "name": "var_3",
-                                                        "primed": false,
-                                                        "line": 2,
-                                                        "tokentype": "Variable"
-                                                    }
-                                                ],
-                                                "line": 2,
-                                                "tokentype": "Operation"
-                                            },
-                                            {
-                                                "value": "2",
-                                                "line": 2,
-                                                "tokentype": "Constant"
-                                            }
-                                        ],
-                                        "line": 2,
-                                        "tokentype": "Operation"
-                                    },
-                                    {
-                                        "name": "USub",
-                                        "args": [
-                                            {
-                                                "name": "FloorDiv",
-                                                "args": [
-                                                    {
-                                                        "name": "var_2",
+                                                        "name": "var_1",
                                                         "primed": false,
                                                         "line": 2,
                                                         "tokentype": "Variable"
@@ -1029,6 +982,35 @@ Actual Output:
                                                 ],
                                                 "line": 2,
                                                 "tokentype": "Operation"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 2,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 2,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "var_1",
+                                        "primed": false,
+                                        "line": 2,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "name": "Mult",
+                                        "args": [
+                                            {
+                                                "value": "2",
+                                                "line": 2,
+                                                "tokentype": "Constant"
+                                            },
+                                            {
+                                                "name": "var_1",
+                                                "primed": false,
+                                                "line": 2,
+                                                "tokentype": "Variable"
                                             }
                                         ],
                                         "line": 2,
@@ -1045,7 +1027,7 @@ Actual Output:
                 "1": {}
             },
             "locdescs": {
-                "1": "around the beginning of function 'count_odds'"
+                "1": "around the beginning of function 'smallest_multiple'"
             },
             "types": {}
         }
