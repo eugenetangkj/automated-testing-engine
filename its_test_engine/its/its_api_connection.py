@@ -42,8 +42,8 @@ class ItsApiConnection:
             # pylint: disable=broad-exception-raised
             raise Exception(
                 f"Error in making API call to {url}. (Retry {retry} times)\n"
-                + f"Status code: {response.status_code}.\n"
-                + f"Response: {response.text}"
+                + f"Status code: {response.status_code if response is not None else 'Timeout'}.\n"
+                + f"Response: {response.text if response is not None else 'Timeout'}"
             )
 
         return response
