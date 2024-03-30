@@ -1,5 +1,3 @@
-import json
-
 from its_test_engine.enums import TypeOfMetamorphicRelation
 from its_test_engine.its.test_result import ItsTestResult
 from .endpoint_tester import EndpointTester
@@ -17,17 +15,17 @@ class ErrorLocalizerEndpointTester(EndpointTester):
         parsed_modified_program: str,
         arguments: list[any],
     ) -> ItsTestResult:
-
         function_name = function_signature["name"]
+        request_payload = self.its_api_connection.create_request_payload(
+            parsed_base_program,
+            parsed_modified_program,
+            function_name,
+            "[]",
+            arguments,
+        )
         try:
             error_localizer_output = (
-                self.its_api_connection.call_errorlocalizer_endpoint(
-                    parsed_base_program,
-                    parsed_modified_program,
-                    function_name,
-                    "[]",
-                    arguments,
-                )
+                self.its_api_connection.call_errorlocalizer_endpoint(request_payload)
             )
 
             passed = False
@@ -44,8 +42,9 @@ class ErrorLocalizerEndpointTester(EndpointTester):
                 passed,
                 self.endpoint,
                 "Success" if passed else "Error localizer endpoint failed",
-                json.dumps(error_localizer_output, indent=4),
+                request_payload,
+                error_localizer_output,
             )
         except Exception as e:
             message = e.__class__.__name__ + "\n" + str(e)
-            return ItsTestResult(False, self.endpoint, message, None)
+            return ItsTestResult(False, self.endpoint, message, request_payload)

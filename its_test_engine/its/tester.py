@@ -56,11 +56,11 @@ class Tester:
 
         test_suites = []
 
-        parsed_base_program, base_parser_result = parser_tester.run_test(base_code)
+        parsed_base_program, _ = parser_tester.run_test(base_code)
 
         parsed_modified_programs = []
 
-        test_suite = ItsTestSuite(Language.PYTHON, base_code, None)
+        test_suite = ItsTestSuite(Language.PYTHON, "parser", base_code)
         test_suites.append(test_suite)
 
         for modified_code in modified_programs:
@@ -87,85 +87,59 @@ class Tester:
         ):
             return test_suites
 
+        new_inputs = []
+
+        test_suite = ItsTestSuite(Language.PYTHON, "interpreter", base_code)
+        test_suites.append(test_suite)
+
         for program_input in inputs:
-            test_suite = ItsTestSuite(Language.PYTHON, base_code, program_input)
-            test_suites.append(test_suite)
+            test_case = ItsTestCase(base_code)
+            test_suite.add_test_case(test_case)
 
-            # Step 1: Parse base program
-            test_suite.set_parser_result(base_parser_result)
-            if not base_parser_result.success:
-                break
-
-            # Step 2: Run interpreter to check if base program runs successfully
             _, interpreter_result = interpreter_tester.run_test(
                 function_signature, parsed_base_program, program_input
             )
-            test_suite.set_interpreter_result(interpreter_result)
-            if not interpreter_result.success:
-                continue
+            test_case.add_result(interpreter_result)
+            if interpreter_result.success:
+                new_inputs.append(program_input)
 
-            # Step 3: Test each modified code
-            for index, modified_code in enumerate(modified_programs):
-                # Get pre-parsed modified program
-                _, parsed_modified_program, parser_result = parsed_modified_programs[
-                    index
-                ]
-                if not parser_result.success:
-                    continue
+        self.writer.write(test_suite)
 
+        inputs = new_inputs
+
+        # Remove inputs that failed to run in the interpreter
+        # This is done to avoid errors in the other endpoints.
+
+        endpoint_testers = {
+            "error_localizer": error_localizer_endpoint_tester,
+            "feedback_error": feedback_error_endpoint_tester,
+            "feedback_fix": feedback_fix_endpoint_tester,
+            "repair": repair_endpoint_tester,
+        }
+
+        if len(inputs) == 0:
+            return test_suites
+
+        print(inputs)
+
+        for endpoint, endpoint_tester in endpoint_testers.items():
+            test_suite = ItsTestSuite(Language.PYTHON, endpoint, base_code)
+            test_suites.append(test_suite)
+
+            for modified_code, parsed_modified_program, _ in parsed_modified_programs:
                 test_case = ItsTestCase(modified_code)
                 test_suite.add_test_case(test_case)
 
-                test_case.add_result(parser_result)
-
-                _, interpreter_result = interpreter_tester.run_test(
-                    function_signature, parsed_modified_program, program_input
-                )
-                test_case.add_result(interpreter_result)
-                if not interpreter_result.success:
-                    continue
-
-                repair_test_result = repair_endpoint_tester.run_test(
+                endpoint_test_result = endpoint_tester.run_test(
                     function_signature,
                     base_code,
                     modified_code,
                     parsed_base_program,
                     parsed_modified_program,
-                    program_input,
+                    inputs,
                 )
-                test_case.add_result(repair_test_result)
-
-                error_localizer_test_result = error_localizer_endpoint_tester.run_test(
-                    function_signature,
-                    base_code,
-                    modified_code,
-                    parsed_base_program,
-                    parsed_modified_program,
-                    program_input,
-                )
-                test_case.add_result(error_localizer_test_result)
-
-                feedback_error_test_result = feedback_error_endpoint_tester.run_test(
-                    function_signature,
-                    base_code,
-                    modified_code,
-                    parsed_base_program,
-                    parsed_modified_program,
-                    program_input,
-                )
-                test_case.add_result(feedback_error_test_result)
-
-                feedback_fix_test_result = feedback_fix_endpoint_tester.run_test(
-                    function_signature,
-                    base_code,
-                    modified_code,
-                    parsed_base_program,
-                    parsed_modified_program,
-                    program_input,
-                )
-                test_case.add_result(feedback_fix_test_result)
+                test_case.add_result(endpoint_test_result)
 
             self.writer.write(test_suite)
-            if not test_suite.is_success():
-                break
+
         return test_suites

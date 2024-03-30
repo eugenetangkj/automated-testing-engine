@@ -7,7 +7,7 @@ class RandomInputGenerator(BaseInputGenerator):
     def _generate_random_integer(self, min_value=0, max_value=1e2):
         return random.randint(min_value, max_value)
 
-    def _generate_random_float(self, min_value=-1e5, max_value=1e5):
+    def _generate_random_float(self, min_value=-1e2, max_value=1e2):
         return random.uniform(min_value, max_value)
 
     def _generate_random_string(self, length=10):
@@ -30,17 +30,6 @@ class RandomInputGenerator(BaseInputGenerator):
                     inputs.append(self._generate_random_string())
                 elif t == "bool":
                     inputs.append(self._generate_random_boolean())
-                elif t == "any":
-                    inputs.append(
-                        random.choice(
-                            [
-                                self._generate_random_integer(),
-                                self._generate_random_float(),
-                                self._generate_random_string(),
-                                self._generate_random_boolean(),
-                            ]
-                        )
-                    )
                 elif t == "List[int]":
                     inputs.append([self._generate_random_integer() for _ in range(10)])
                 elif t == "List[float]":

@@ -1,6 +1,3 @@
-import json
-
-
 from its_test_engine.enums import TypeOfMetamorphicRelation
 from its_test_engine.its.test_result import ItsTestResult
 from .endpoint_tester import EndpointTester
@@ -18,17 +15,17 @@ class FeedbackErrorEndpointTester(EndpointTester):
         parsed_modified_program: str,
         arguments: list[any],
     ) -> ItsTestResult:
-
         function_name = function_signature["name"]
+        request_payload = self.its_api_connection.create_request_payload(
+            parsed_base_program,
+            parsed_modified_program,
+            function_name,
+            "[]",
+            arguments,
+        )
         try:
             feedback_error_output = (
-                self.its_api_connection.call_feedback_error_endpoint(
-                    parsed_base_program,
-                    parsed_modified_program,
-                    function_name,
-                    "[]",
-                    arguments,
-                )
+                self.its_api_connection.call_feedback_error_endpoint(request_payload)
             )
 
             passed = False
@@ -45,8 +42,9 @@ class FeedbackErrorEndpointTester(EndpointTester):
                 passed,
                 self.endpoint,
                 "Success" if passed else "Feedback error endpoint failed",
-                json.dumps(feedback_error_output, indent=4),
+                request_payload,
+                feedback_error_output,
             )
         except Exception as e:
             message = e.__class__.__name__ + "\n" + str(e)
-            return ItsTestResult(False, self.endpoint, message, None)
+            return ItsTestResult(False, self.endpoint, message, request_payload)
