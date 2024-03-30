@@ -11,6 +11,18 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
         "int": "int",
         "float": "float",
         "double": "float",
+        # "String": "str", disabled because the inputs need to be in specific format
+        "boolean": "bool",
+        "List<Integer>": "List[int]",
+        # "List<String>": "List[str]", disabled because the inputs need to be in specific format
+        "List<Float>": "List[float]",
+        "List<Double>": "List[float]",
+        "List<Boolean>": "List[bool]",
+        "int[]": "List[int]",
+        "float[]": "List[float]",
+        "double[]": "List[float]",
+        # "String[]": "List[str]", disabled because the inputs need to be in specific format
+        "boolean[]": "List[bool]",
     }
 
     def __init__(self, language: str):
