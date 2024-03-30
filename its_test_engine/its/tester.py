@@ -87,6 +87,8 @@ class Tester:
         ):
             return test_suites
 
+        new_inputs = []
+
         test_suite = ItsTestSuite(Language.PYTHON, "interpreter", base_code)
         test_suites.append(test_suite)
 
@@ -98,16 +100,15 @@ class Tester:
                 function_signature, parsed_base_program, program_input
             )
             test_case.add_result(interpreter_result)
+            if interpreter_result.success:
+                new_inputs.append(program_input)
 
         self.writer.write(test_suite)
 
+        inputs = new_inputs
+
         # Remove inputs that failed to run in the interpreter
         # This is done to avoid errors in the other endpoints.
-        inputs = [
-            program_input
-            for program_input, interpreter_result in zip(inputs, test_case.results)
-            if interpreter_result.success
-        ]
 
         endpoint_testers = {
             "error_localizer": error_localizer_endpoint_tester,
@@ -115,6 +116,11 @@ class Tester:
             "feedback_fix": feedback_fix_endpoint_tester,
             "repair": repair_endpoint_tester,
         }
+
+        if len(inputs) == 0:
+            return test_suites
+
+        print(inputs)
 
         for endpoint, endpoint_tester in endpoint_testers.items():
             test_suite = ItsTestSuite(Language.PYTHON, endpoint, base_code)

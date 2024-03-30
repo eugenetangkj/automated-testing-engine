@@ -10,12 +10,23 @@ from its_test_engine.enums import Language
 
 
 class ItsTestSuite:
+    steps = {
+        "parser": 1,
+        "interpreter": 2,
+        "error_localizer": 3,
+        "feedback_error": 4,
+        "feedback_fix": 5,
+        "repair": 6,
+    }
+
     def __init__(
         self,
         language: Language,
         endpoint: str,
         base_program_string: str,
     ):
+        assert endpoint in self.steps, f"Invalid endpoint: {endpoint}"
+        self.step = self.steps[endpoint]
         self.endpoint = endpoint
         self.language = language
         self.base_program_string = base_program_string.strip("\n")
@@ -88,7 +99,7 @@ class ItsTestSuitesMarkdownWriter:
         h.update(test_suite.base_program_string.encode())
         hash_value = h.hexdigest()
 
-        file_name = f"{hash_value[:8]}_{test_suite.endpoint}_{'pass' if test_suite.is_success() else 'fail'}.md"
+        file_name = f"{hash_value[:8]}_{test_suite.step}_{test_suite.endpoint}_{'pass' if test_suite.is_success() else 'fail'}.md"
         file_path = os.path.join(folder_path, file_name)
 
         markdown = "# Test Report\n\n"
