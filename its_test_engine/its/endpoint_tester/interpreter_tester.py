@@ -18,7 +18,7 @@ class InterpreterTester:
         try:
             result = self.its_api_connection.call_interpreter_endpoint(request_payload)
 
-            if "entries" not in result:
+            if result is None or "entries" not in result:
                 return None, ItsTestResult(
                     False,
                     "interpreter",
