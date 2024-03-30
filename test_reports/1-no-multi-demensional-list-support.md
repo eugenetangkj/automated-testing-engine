@@ -45,7 +45,3 @@ curl -X 'POST' 'https://its.comp.nus.edu.sg/cs3213/parser' \
 ### Expected Output
 
 It should return valid parsed output.
-
-### Related Tests
-
-- [2a90393c_20240329_22_08_20_fail](../test_results/2a90393c_20240329_22_08_20_fail.md)
