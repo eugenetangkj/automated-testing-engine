@@ -46,14 +46,3 @@ class EndpointTester(ABC):
            of testing the test case with the endpoint, if not successful. If successful,
            return None.
         """
-
-    # @abstractmethod
-    # def check_status_of_result(self, api_result: dict):
-    #     """
-    #     Abstract method to be overridden by concrete endpoint tester classes.
-    #     This method determines if a result is considered success or failure depending on
-    #     type of metamorphic relation being tested.
-
-    #     Parameters:
-    #         api_result: Dictionary output from API
-    #     """
