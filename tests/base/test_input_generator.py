@@ -26,6 +26,8 @@ def test_random_input_generator():
     types = ["int", "int"]
     input_generator = RandomInputGenerator()
 
-    inputs = input_generator.generate_inputs(["int"], 20)
+    inputs = input_generator.generate_inputs(
+        {"name": "add", "argument_types": ["int", "int"]}, code, 20
+    )
 
     assert len(inputs) == 20

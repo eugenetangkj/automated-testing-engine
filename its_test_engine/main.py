@@ -1,32 +1,43 @@
-import ast
-from copy import deepcopy
+"""
+    Entry point of application
+"""
 
-from its_test_engine.python.program_generator import LeetCodeProgramGenerator
+import json
+
+from its_test_engine.enums import Language
+from its_test_engine.its.tester import Tester
+from its_test_engine.base.input_generator import RandomInputGenerator
 from its_test_engine.python.modifier import VariableRenamer, BinOpModifier
-from its_test_engine.base.input_generator.random_input_generator import (
-    RandomInputGenerator,
+from its_test_engine.python.program_generator import (
+    LeetCodePythonProgramGenerator,
+    OpenAIPythonProgramGenerator,
 )
-from its_test_engine.utils import mutate_code
+from its_test_engine.its.test_result import ItsTestSuitesMarkdownWriter
+
+writer = ItsTestSuitesMarkdownWriter("test_results")
 
 
-def run_python():
-    program_generator = LeetCodeProgramGenerator()
-    random_input_generator = RandomInputGenerator()
+def run_leetcode_programs():
+    program_generator = LeetCodePythonProgramGenerator()
+    input_generator = RandomInputGenerator()
     transformers = [VariableRenamer(), BinOpModifier()]
 
-    # Step 1: Generate the test case
-    function_signature, code = program_generator.generate_test_case()
+    tester = Tester(
+        Language.PYTHON, program_generator, transformers, input_generator, writer
+    )
+    test_results = tester.run_tests()
 
-    # Step 2: Generate the inputs
-    inputs = random_input_generator.generate_inputs(function_signature["arguments"], 10)
 
-    # Step 3: Mutate the code
-    mutated_codes = mutate_code(code, transformers)
+def run_open_ai_programs():
+    program_generator = OpenAIPythonProgramGenerator()
+    input_generator = RandomInputGenerator()
+    transformers = [VariableRenamer(), BinOpModifier()]
 
-    # Step 4: Ready to test
-    print(inputs)  # List of inputs
-    print(mutated_codes)  # First element is the original code
+    tester = Tester(
+        Language.PYTHON, program_generator, transformers, input_generator, writer
+    )
+    test_results = tester.run_tests()
 
 
 if __name__ == "__main__":
-    run_python()
+    run_leetcode_programs()

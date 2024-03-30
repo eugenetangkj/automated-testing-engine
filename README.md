@@ -13,8 +13,12 @@ Therefore, our team has developed an automated testing engine that aims to ident
 3. Run `docker run -v "<current_working_directory>":/app -it --entrypoint /bin/sh automated-test-engine` to start the Docker container, and map the current working directory to the `/app` directory in the container.
 4. Run `poetry install` to install the required dependencies in the docker container.
 5. Run `poetry shell` to activate the virtual environment.
-6. Run `source ~/.bashrc` to ensure that the virtual environment is activated in the shell session.
-7. Run `pytest` to run the test cases.
+6. Run `pytest` to run the test cases.
+7. Run `coverage run --source=its_test_engine -m pytest && coverage report` to generate a coverage report.
+
+> Note: Replace `<current_working_directory>` with the path to the current working directory.
+
+> Run all the commands in the Docker container.
 
 ### High-Level Design
 

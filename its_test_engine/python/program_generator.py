@@ -3,8 +3,9 @@ import re
 import ast
 import json
 import random
-from its_test_engine.base.program_generator.leetcode_program_generator import (
+from its_test_engine.base.program_generator import (
     LeetCodeProgramGenerator,
+    OpenAiProgramGenerator,
 )
 
 
@@ -19,3 +20,8 @@ class LeetCodePythonProgramGenerator(LeetCodeProgramGenerator):
                 return node.name
 
         return None
+
+
+class OpenAIPythonProgramGenerator(OpenAiProgramGenerator):
+    def __init__(self):
+        super().__init__(language="python", constraints="None")

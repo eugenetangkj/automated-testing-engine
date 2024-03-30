@@ -1,6 +1,5 @@
 import os
 import re
-import ast
 import json
 import random
 from its_test_engine.base.program_generator.base_program_generator import (
@@ -14,17 +13,6 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
         "int": "int",
         "float": "float",
         "double": "float",
-        "string": "str",
-        "char": "str",
-        "int[]": "List[int]",
-        "float[]": "List[float]",
-        "double[]": "List[float]",
-        "string[]": "List[str]",
-        "char[]": "List[str]",
-        "List<String>": "List[str]",
-        "List<Integer>": "List[int]",
-        "List<Float>": "List[float]",
-        "List<Double>": "List[float]",
     }
 
     def __init__(self, language: str):
@@ -50,7 +38,7 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
         match = re.search(function_signature_regex, java_solution)
 
         fs = {
-            "arguments": [],
+            "argument_types": [],
             "return_type": None,
         }
 
@@ -69,14 +57,20 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
                 if arg_type not in self.types_mapping:
                     return None
 
-                fs["arguments"].append(self.types_mapping[arg_type])
+                fs["argument_types"].append(self.types_mapping[arg_type])
 
             fs["return_type"] = return_type
             return fs
         return None
 
     def _get_function_name(self, code: str):
-        return None
+        # Assumes Python for now
+        start_index = code.index("def") + 3
+        end_index = code.index("(")
+
+        # Extract the substring between 'def' and '('
+        function_name = code[start_index:end_index].strip()
+        return function_name
 
     def generate_test_case(self):
         # open leetcode-solutions.jsonl file and read random line
