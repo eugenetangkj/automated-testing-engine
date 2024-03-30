@@ -8,7 +8,7 @@ class ErrorLocalizerEndpointTester(EndpointTester):
 
     def run_test(
         self,
-        function_signature: str,
+        function_signature: dict,
         base_program_string: str,
         modified_program_string: str,
         parsed_base_program: str,
