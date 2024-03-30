@@ -99,7 +99,8 @@ class ItsTestSuitesMarkdownWriter:
         h.update(test_suite.base_program_string.encode())
         hash_value = h.hexdigest()
 
-        file_name = f"{hash_value[:8]}_{test_suite.step}_{test_suite.endpoint}_{'pass' if test_suite.is_success() else 'fail'}.md"
+        file_name = f"{hash_value[:8]}_{test_suite.step}_{test_suite.endpoint}"
+        file_name += f"{'pass' if test_suite.is_success() else 'fail'}.md"
         file_path = os.path.join(folder_path, file_name)
 
         markdown = "# Test Report\n\n"
