@@ -1,4 +1,4 @@
-# Issue 1: No multi-demensional list support
+# Issue 1: No multi-demensional list assignment support
 
 ## Description
 
@@ -10,6 +10,20 @@ Parser does not support multi-demensional lists.
 def f():
     dp = [[0] * (10) for _ in range(10)]
     dp[0][0] = 1
+    return dp[0][0]
+```
+
+The above code doesn't get parsed and throws an error. However, if we remove the assignment `dp[0][0] = 1`, it gets parsed successfully.
+
+```
+def f():
+    dp = [[0] * (10) for _ in range(10)]
+    return dp[0][0]
+```
+
+```
+def f():
+    dp = [[0]]
     return dp[0][0]
 ```
 
