@@ -126,14 +126,14 @@ class ItsTestSuitesMarkdownWriter:
                 markdown += f"{'passed ✅' if result.success else 'failed ❌'}"
                 markdown += "</summary>\n\n"
 
-                markdown += f"Message: \n```\n{result.message}\n```\n\n"
-
                 if result.request_body:
                     markdown += (
                         f"Request Body: \n```json\n{result.request_body}\n```\n\n"
                     )
                 else:
                     markdown += "Request Body: None\n\n"
+
+                markdown += f"Message: \n```\n{result.message}\n```\n\n"
 
                 if result.actual_output:
                     markdown += (
