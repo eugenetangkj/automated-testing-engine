@@ -43,7 +43,6 @@ class ItsApiConnection:
             raise Exception(
                 f"Error in making API call to {url}. (Retry {retry} times)\n"
                 + f"Status code: {response.status_code}.\n"
-                + f"Body: \n{json.dumps(params, indent=4)}\n"
                 + f"Response: {response.text}"
             )
 
