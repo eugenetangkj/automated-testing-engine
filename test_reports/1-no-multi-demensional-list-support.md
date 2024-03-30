@@ -15,13 +15,13 @@ def f():
 
 The above code doesn't get parsed and throws an error. However, if we remove the assignment `dp[0][0] = 1`, it gets parsed successfully.
 
-```
+```python
 def f():
     dp = [[0] * (10) for _ in range(10)]
     return dp[0][0]
 ```
 
-```
+```python
 def f():
     dp = [[0]]
     return dp[0][0]
