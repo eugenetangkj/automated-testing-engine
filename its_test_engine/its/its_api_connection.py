@@ -37,7 +37,7 @@ class ItsApiConnection:
                 retry += 1
                 continue
 
-        if response.status_code != 200:
+        if response is None or response.status_code != 200:
             # Raise an exception if the status code is not 200
             # pylint: disable=broad-exception-raised
             raise Exception(
