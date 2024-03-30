@@ -1,6 +1,6 @@
 # Test Report
 
-Time: 2024-03-30 06:13:53.306793
+Time: 2024-03-30 07:47:17.834141
 
 ### Base Program
 
@@ -24,11 +24,6 @@ def count_odds(low, high):
 <details>
 <summary>interpreter endpoint: passed ✅</summary>
 
-Message: 
-```
-Success
-```
-
 Request Body: 
 ```json
 {
@@ -36,8 +31,13 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"count_odds\": {\"name\": \"count_odds\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"low\", \"val1\": \"*\", \"valueArray\": [\"low\", \"*\"], \"valueList\": [\"low\", \"*\"]}, {\"val0\": \"high\", \"val1\": \"*\", \"valueArray\": [\"high\", \"*\"], \"valueList\": [\"high\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}]}]}, \"loctrans\": {\"1\": {}}, \"locdescs\": {\"1\": \"around the beginning of function 'count_odds'\"}, \"types\": {}}}}",
     "function": "count_odds",
     "inputs": "[]",
-    "args": "[85, 33]"
+    "args": "[67, 47]"
 }
+```
+
+Message: 
+```
+Success
 ```
 
 Actual Output: 
@@ -48,9 +48,9 @@ Actual Output:
             "functionName": "count_odds",
             "location": 1,
             "mem": {
-                "high": 33,
-                "low": 85,
-                "$ret'": -25,
+                "high": 47,
+                "low": 67,
+                "$ret'": -9,
                 "$ret": "<undef>"
             },
             "isChecked": false
@@ -76,11 +76,6 @@ def count_odds(low, high):
 <details>
 <summary>interpreter endpoint: passed ✅</summary>
 
-Message: 
-```
-Success
-```
-
 Request Body: 
 ```json
 {
@@ -88,8 +83,13 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"count_odds\": {\"name\": \"count_odds\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"low\", \"val1\": \"*\", \"valueArray\": [\"low\", \"*\"], \"valueList\": [\"low\", \"*\"]}, {\"val0\": \"high\", \"val1\": \"*\", \"valueArray\": [\"high\", \"*\"], \"valueList\": [\"high\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}]}]}, \"loctrans\": {\"1\": {}}, \"locdescs\": {\"1\": \"around the beginning of function 'count_odds'\"}, \"types\": {}}}}",
     "function": "count_odds",
     "inputs": "[]",
-    "args": "[33, 50]"
+    "args": "[4, 64]"
 }
+```
+
+Message: 
+```
+Success
 ```
 
 Actual Output: 
@@ -100,9 +100,9 @@ Actual Output:
             "functionName": "count_odds",
             "location": 1,
             "mem": {
-                "high": 50,
-                "low": 33,
-                "$ret'": 9,
+                "high": 64,
+                "low": 4,
+                "$ret'": 30,
                 "$ret": "<undef>"
             },
             "isChecked": false
@@ -128,11 +128,6 @@ def count_odds(low, high):
 <details>
 <summary>interpreter endpoint: passed ✅</summary>
 
-Message: 
-```
-Success
-```
-
 Request Body: 
 ```json
 {
@@ -140,8 +135,13 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"count_odds\": {\"name\": \"count_odds\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"low\", \"val1\": \"*\", \"valueArray\": [\"low\", \"*\"], \"valueList\": [\"low\", \"*\"]}, {\"val0\": \"high\", \"val1\": \"*\", \"valueArray\": [\"high\", \"*\"], \"valueList\": [\"high\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}]}]}, \"loctrans\": {\"1\": {}}, \"locdescs\": {\"1\": \"around the beginning of function 'count_odds'\"}, \"types\": {}}}}",
     "function": "count_odds",
     "inputs": "[]",
-    "args": "[39, 4]"
+    "args": "[47, 6]"
 }
+```
+
+Message: 
+```
+Success
 ```
 
 Actual Output: 
@@ -152,9 +152,9 @@ Actual Output:
             "functionName": "count_odds",
             "location": 1,
             "mem": {
-                "high": 4,
-                "low": 39,
-                "$ret'": -17,
+                "high": 6,
+                "low": 47,
+                "$ret'": -20,
                 "$ret": "<undef>"
             },
             "isChecked": false
@@ -180,11 +180,6 @@ def count_odds(low, high):
 <details>
 <summary>interpreter endpoint: passed ✅</summary>
 
-Message: 
-```
-Success
-```
-
 Request Body: 
 ```json
 {
@@ -192,8 +187,13 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"count_odds\": {\"name\": \"count_odds\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"low\", \"val1\": \"*\", \"valueArray\": [\"low\", \"*\"], \"valueList\": [\"low\", \"*\"]}, {\"val0\": \"high\", \"val1\": \"*\", \"valueArray\": [\"high\", \"*\"], \"valueList\": [\"high\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}]}]}, \"loctrans\": {\"1\": {}}, \"locdescs\": {\"1\": \"around the beginning of function 'count_odds'\"}, \"types\": {}}}}",
     "function": "count_odds",
     "inputs": "[]",
-    "args": "[53, 16]"
+    "args": "[69, 84]"
 }
+```
+
+Message: 
+```
+Success
 ```
 
 Actual Output: 
@@ -204,9 +204,9 @@ Actual Output:
             "functionName": "count_odds",
             "location": 1,
             "mem": {
-                "high": 16,
-                "low": 53,
-                "$ret'": -18,
+                "high": 84,
+                "low": 69,
+                "$ret'": 8,
                 "$ret": "<undef>"
             },
             "isChecked": false
@@ -232,11 +232,6 @@ def count_odds(low, high):
 <details>
 <summary>interpreter endpoint: passed ✅</summary>
 
-Message: 
-```
-Success
-```
-
 Request Body: 
 ```json
 {
@@ -244,8 +239,13 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"count_odds\": {\"name\": \"count_odds\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"low\", \"val1\": \"*\", \"valueArray\": [\"low\", \"*\"], \"valueList\": [\"low\", \"*\"]}, {\"val0\": \"high\", \"val1\": \"*\", \"valueArray\": [\"high\", \"*\"], \"valueList\": [\"high\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}]}]}, \"loctrans\": {\"1\": {}}, \"locdescs\": {\"1\": \"around the beginning of function 'count_odds'\"}, \"types\": {}}}}",
     "function": "count_odds",
     "inputs": "[]",
-    "args": "[94, 52]"
+    "args": "[83, 26]"
 }
+```
+
+Message: 
+```
+Success
 ```
 
 Actual Output: 
@@ -256,9 +256,9 @@ Actual Output:
             "functionName": "count_odds",
             "location": 1,
             "mem": {
-                "high": 52,
-                "low": 94,
-                "$ret'": -21,
+                "high": 26,
+                "low": 83,
+                "$ret'": -28,
                 "$ret": "<undef>"
             },
             "isChecked": false
@@ -284,11 +284,6 @@ def count_odds(low, high):
 <details>
 <summary>interpreter endpoint: passed ✅</summary>
 
-Message: 
-```
-Success
-```
-
 Request Body: 
 ```json
 {
@@ -296,8 +291,13 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"count_odds\": {\"name\": \"count_odds\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"low\", \"val1\": \"*\", \"valueArray\": [\"low\", \"*\"], \"valueList\": [\"low\", \"*\"]}, {\"val0\": \"high\", \"val1\": \"*\", \"valueArray\": [\"high\", \"*\"], \"valueList\": [\"high\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}]}]}, \"loctrans\": {\"1\": {}}, \"locdescs\": {\"1\": \"around the beginning of function 'count_odds'\"}, \"types\": {}}}}",
     "function": "count_odds",
     "inputs": "[]",
-    "args": "[39, 78]"
+    "args": "[15, 7]"
 }
+```
+
+Message: 
+```
+Success
 ```
 
 Actual Output: 
@@ -308,9 +308,9 @@ Actual Output:
             "functionName": "count_odds",
             "location": 1,
             "mem": {
-                "high": 78,
-                "low": 39,
-                "$ret'": 20,
+                "high": 7,
+                "low": 15,
+                "$ret'": -3,
                 "$ret": "<undef>"
             },
             "isChecked": false
@@ -336,11 +336,6 @@ def count_odds(low, high):
 <details>
 <summary>interpreter endpoint: passed ✅</summary>
 
-Message: 
-```
-Success
-```
-
 Request Body: 
 ```json
 {
@@ -348,8 +343,13 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"count_odds\": {\"name\": \"count_odds\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"low\", \"val1\": \"*\", \"valueArray\": [\"low\", \"*\"], \"valueList\": [\"low\", \"*\"]}, {\"val0\": \"high\", \"val1\": \"*\", \"valueArray\": [\"high\", \"*\"], \"valueList\": [\"high\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}]}]}, \"loctrans\": {\"1\": {}}, \"locdescs\": {\"1\": \"around the beginning of function 'count_odds'\"}, \"types\": {}}}}",
     "function": "count_odds",
     "inputs": "[]",
-    "args": "[80, 81]"
+    "args": "[40, 76]"
 }
+```
+
+Message: 
+```
+Success
 ```
 
 Actual Output: 
@@ -360,9 +360,9 @@ Actual Output:
             "functionName": "count_odds",
             "location": 1,
             "mem": {
-                "high": 81,
-                "low": 80,
-                "$ret'": 1,
+                "high": 76,
+                "low": 40,
+                "$ret'": 18,
                 "$ret": "<undef>"
             },
             "isChecked": false
@@ -388,11 +388,6 @@ def count_odds(low, high):
 <details>
 <summary>interpreter endpoint: passed ✅</summary>
 
-Message: 
-```
-Success
-```
-
 Request Body: 
 ```json
 {
@@ -400,8 +395,13 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"count_odds\": {\"name\": \"count_odds\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"low\", \"val1\": \"*\", \"valueArray\": [\"low\", \"*\"], \"valueList\": [\"low\", \"*\"]}, {\"val0\": \"high\", \"val1\": \"*\", \"valueArray\": [\"high\", \"*\"], \"valueList\": [\"high\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}]}]}, \"loctrans\": {\"1\": {}}, \"locdescs\": {\"1\": \"around the beginning of function 'count_odds'\"}, \"types\": {}}}}",
     "function": "count_odds",
     "inputs": "[]",
-    "args": "[2, 69]"
+    "args": "[61, 27]"
 }
+```
+
+Message: 
+```
+Success
 ```
 
 Actual Output: 
@@ -412,9 +412,9 @@ Actual Output:
             "functionName": "count_odds",
             "location": 1,
             "mem": {
-                "high": 69,
-                "low": 2,
-                "$ret'": 34,
+                "high": 27,
+                "low": 61,
+                "$ret'": -16,
                 "$ret": "<undef>"
             },
             "isChecked": false
@@ -440,11 +440,6 @@ def count_odds(low, high):
 <details>
 <summary>interpreter endpoint: passed ✅</summary>
 
-Message: 
-```
-Success
-```
-
 Request Body: 
 ```json
 {
@@ -452,8 +447,13 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"count_odds\": {\"name\": \"count_odds\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"low\", \"val1\": \"*\", \"valueArray\": [\"low\", \"*\"], \"valueList\": [\"low\", \"*\"]}, {\"val0\": \"high\", \"val1\": \"*\", \"valueArray\": [\"high\", \"*\"], \"valueList\": [\"high\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}]}]}, \"loctrans\": {\"1\": {}}, \"locdescs\": {\"1\": \"around the beginning of function 'count_odds'\"}, \"types\": {}}}}",
     "function": "count_odds",
     "inputs": "[]",
-    "args": "[10, 22]"
+    "args": "[10, 94]"
 }
+```
+
+Message: 
+```
+Success
 ```
 
 Actual Output: 
@@ -464,9 +464,9 @@ Actual Output:
             "functionName": "count_odds",
             "location": 1,
             "mem": {
-                "high": 22,
+                "high": 94,
                 "low": 10,
-                "$ret'": 6,
+                "$ret'": 42,
                 "$ret": "<undef>"
             },
             "isChecked": false
@@ -492,11 +492,6 @@ def count_odds(low, high):
 <details>
 <summary>interpreter endpoint: passed ✅</summary>
 
-Message: 
-```
-Success
-```
-
 Request Body: 
 ```json
 {
@@ -504,8 +499,13 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"count_odds\": {\"name\": \"count_odds\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"low\", \"val1\": \"*\", \"valueArray\": [\"low\", \"*\"], \"valueList\": [\"low\", \"*\"]}, {\"val0\": \"high\", \"val1\": \"*\", \"valueArray\": [\"high\", \"*\"], \"valueList\": [\"high\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"FloorDiv\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"high\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"low\", \"primed\": false, \"line\": 3, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 3, \"tokentype\": \"Constant\"}], \"line\": 3, \"tokentype\": \"Operation\"}], \"line\": 3}]}]}, \"loctrans\": {\"1\": {}}, \"locdescs\": {\"1\": \"around the beginning of function 'count_odds'\"}, \"types\": {}}}}",
     "function": "count_odds",
     "inputs": "[]",
-    "args": "[20, 79]"
+    "args": "[25, 47]"
 }
+```
+
+Message: 
+```
+Success
 ```
 
 Actual Output: 
@@ -516,9 +516,9 @@ Actual Output:
             "functionName": "count_odds",
             "location": 1,
             "mem": {
-                "high": 79,
-                "low": 20,
-                "$ret'": 30,
+                "high": 47,
+                "low": 25,
+                "$ret'": 12,
                 "$ret": "<undef>"
             },
             "isChecked": false
