@@ -120,8 +120,6 @@ class Tester:
         if len(inputs) == 0:
             return test_suites
 
-        print(inputs)
-
         for endpoint, endpoint_tester in endpoint_testers.items():
             test_suite = ItsTestSuite(Language.PYTHON, endpoint, base_code)
             test_suites.append(test_suite)
