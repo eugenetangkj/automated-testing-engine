@@ -1,4 +1,3 @@
-import json
 from its_test_engine.its.test_result import ItsTestResult
 from its_test_engine.its.its_api_connection import ItsApiConnection
 
@@ -11,10 +10,17 @@ class ParserTester:
         self.its_api_connection = its_api_connection
 
     def run_test(self, program: str):
+        request_payload = self.its_api_connection.create_parser_request_payload(program)
         try:
-            parsed_program = self.its_api_connection.call_parser_endpoint(program)
+            parsed_program = self.its_api_connection.call_parser_endpoint(
+                request_payload
+            )
             return parsed_program, ItsTestResult(
-                True, "parser", "Success", json.dumps(parsed_program, indent=4)
+                True,
+                "parser",
+                "Success",
+                request_payload,
+                parsed_program,
             )
         except Exception as e:
-            return None, ItsTestResult(False, "parser", str(e), None)
+            return None, ItsTestResult(False, "parser", str(e), request_payload)

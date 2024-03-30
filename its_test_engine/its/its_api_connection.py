@@ -94,30 +94,40 @@ class ItsApiConnection:
 
         return {}
 
-    def call_parser_endpoint(self, source_code):
+    def create_parser_request_payload(self, source_code):
+        """
+        Returns the payload for the parser service endpoint of the ITS API
+        """
+        return {"language": self.language.value, "source_code": source_code}
+
+    def call_parser_endpoint(self, payload):
         """
         Returns the response of the call to the parser service endpoint of the ITS API
         """
         parser_url = self.BASE_API_URL + "parser"
-        param_arr = [self.language.value, source_code]
-        params = self.__package_params(param_arr, "parser")
-        response = self.__make_api_call(parser_url, params)
+        response = self.__make_api_call(parser_url, payload)
         return response.json()
 
-    def call_interpreter_endpoint(self, program_model, function, inputs, args):
+    def create_interpreter_request_payload(
+        self, program_model: str, function: str, inputs: list, args: list
+    ):
+        """
+        Returns the payload for the interpreter service endpoint of the ITS API
+        """
+        return {
+            "language": self.language.value,
+            "program_model": json.dumps(program_model),
+            "function": function,
+            "inputs": json.dumps(inputs),
+            "args": json.dumps(args),
+        }
+
+    def call_interpreter_endpoint(self, payload):
         """
         Returns the response of the call to the interpreter service endpoint of the ITS API
         """
         interpreter_url = self.BASE_API_URL + "interpreter"
-        param_arr = [
-            self.language.value,
-            json.dumps(program_model),
-            function,
-            json.dumps(inputs),
-            json.dumps(args),
-        ]
-        params = self.__package_params(param_arr, "interpreter")
-        response = self.__make_api_call(interpreter_url, params)
+        response = self.__make_api_call(interpreter_url, payload)
         return response.json()
 
     def call_alignment_structural_endpoint(self, reference_solution, student_solution):
@@ -142,83 +152,50 @@ class ItsApiConnection:
         response = self.__make_api_call(alignment_variable_url, params)
         return response.json()
 
-    def call_errorlocalizer_endpoint(
+    def create_request_payload(
         self, reference_solution, student_solution, function, inputs, args
     ):
+        return {
+            "language": self.language.value,
+            "reference_solution": json.dumps(reference_solution),
+            "student_solution": json.dumps(student_solution),
+            "function": function,
+            "inputs": inputs,
+            "args": json.dumps(args),
+        }
+
+    def call_errorlocalizer_endpoint(self, request_payload):
         """
         Returns the response of the call to the error localizer service endpoint of the ITS API
         """
         errorlocalizer_url = self.BASE_API_URL + "errorlocalizer"
-        param_arr = [
-            self.language.value,
-            json.dumps(reference_solution),
-            json.dumps(student_solution),
-            function,
-            inputs,
-            json.dumps(args),
-        ]
-
-        params = self.__package_params(param_arr, "errorlocalizer")
-        response = self.__make_api_call(errorlocalizer_url, params)
+        response = self.__make_api_call(errorlocalizer_url, request_payload)
         return response.json()
 
-    def call_feedback_fix_endpoint(
-        self, reference_solution, student_solution, function, inputs, args
-    ):
+    def call_feedback_fix_endpoint(self, request_payload):
         """
         Returns the response of the call to the feedback fix endpoint of the
         feedback service in the ITS API
         """
         feedback_fix_url = self.BASE_API_URL + "feedback_fix"
-        param_arr = [
-            self.language.value,
-            json.dumps(reference_solution),
-            json.dumps(student_solution),
-            function,
-            inputs,
-            json.dumps(args),
-        ]
-        params = self.__package_params(param_arr, "feedback_fix")
-        response = self.__make_api_call(feedback_fix_url, params)
+        response = self.__make_api_call(feedback_fix_url, request_payload)
 
         return response.json()
 
-    def call_feedback_error_endpoint(
-        self, reference_solution, student_solution, function, inputs, args
-    ):
+    def call_feedback_error_endpoint(self, request_payload):
         """
         Returns the response of the call to the feedback error endpoint of the feedback service
         in the ITS API
         """
         feedback_error_url = self.BASE_API_URL + "feedback_error"
-        param_arr = [
-            self.language.value,
-            json.dumps(reference_solution),
-            json.dumps(student_solution),
-            function,
-            inputs,
-            json.dumps(args),
-        ]
-        params = self.__package_params(param_arr, "feedback_error")
-        response = self.__make_api_call(feedback_error_url, params)
+        response = self.__make_api_call(feedback_error_url, request_payload)
         return response.json()
 
-    def call_repair_endpoint(
-        self, reference_solution, student_solution, function, inputs, args
-    ):
+    def call_repair_endpoint(self, request_payload):
         """
         Returns the response of the call to the repair service endpoint of the ITS API
         """
         repair_url = self.BASE_API_URL + "repair"
-        param_arr = [
-            self.language.value,
-            json.dumps(reference_solution),
-            json.dumps(student_solution),
-            function,
-            inputs,
-            json.dumps(args),
-        ]
-        params = self.__package_params(param_arr, "repair")
-        response = self.__make_api_call(repair_url, params)
+        response = self.__make_api_call(repair_url, request_payload)
 
         return response.json()

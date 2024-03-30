@@ -3,6 +3,7 @@
 """
 
 import os
+import json
 import hashlib
 from datetime import datetime
 from its_test_engine.enums import Language
@@ -12,23 +13,15 @@ class ItsTestSuite:
     def __init__(
         self,
         language: Language,
+        endpoint: str,
         base_program_string: str,
-        inputs: list[any],
     ):
-        self.inputs = inputs
+        self.endpoint = endpoint
         self.language = language
         self.base_program_string = base_program_string.strip("\n")
         self.time = datetime.now()
 
         self.test_cases = []
-        self.parser_result = None
-        self.interpreter_result = None
-
-    def set_parser_result(self, parser_result):
-        self.parser_result = parser_result
-
-    def set_interpreter_result(self, interpreter_result):
-        self.interpreter_result = interpreter_result
 
     def add_test_case(self, test_case):
         self.test_cases.append(test_case)
@@ -37,12 +30,6 @@ class ItsTestSuite:
         for test_case in self.test_cases:
             if not test_case.is_success():
                 return False
-
-        if self.parser_result is not None and not self.parser_result.success:
-            return False
-
-        if self.interpreter_result is not None and not self.interpreter_result.success:
-            return False
 
         return True
 
@@ -64,11 +51,23 @@ class ItsTestCase:
 
 
 class ItsTestResult:
-    def __init__(self, success, endpoint, message, actual_output):
+    def __init__(
+        self,
+        success,
+        endpoint,
+        message,
+        request_payload=None,
+        actual_output=None,
+    ):
         self.success = success
         self.endpoint = endpoint
         self.message = message
-        self.actual_output = actual_output
+        self.actual_output = (
+            json.dumps(actual_output, indent=4) if actual_output else None
+        )
+        self.request_body = (
+            json.dumps(request_payload, indent=4) if request_payload else None
+        )
 
 
 class ItsTestSuitesMarkdownWriter:
@@ -89,8 +88,7 @@ class ItsTestSuitesMarkdownWriter:
         h.update(test_suite.base_program_string.encode())
         hash_value = h.hexdigest()
 
-        date_time = test_suite.time.strftime("%Y%m%d_%H_%M_%S")
-        file_name = f"{hash_value[:8]}_{date_time}_{'pass' if test_suite.is_success() else 'fail'}.md"
+        file_name = f"{hash_value[:8]}_{test_suite.endpoint}_{'pass' if test_suite.is_success() else 'fail'}.md"
         file_path = os.path.join(folder_path, file_name)
 
         markdown = "# Test Report\n\n"
@@ -99,32 +97,6 @@ class ItsTestSuitesMarkdownWriter:
         markdown += (
             f"```{test_suite.language.value}\n{test_suite.base_program_string}\n```\n\n"
         )
-        markdown += "### Input\n\n"
-        markdown += f"```json\n{test_suite.inputs}\n```\n\n"
-
-        if test_suite.parser_result:
-            markdown += "<details>\n"
-            markdown += "<summary>"
-            markdown += "Parser Result: "
-            markdown += (
-                f"{'Passed ✅' if test_suite.parser_result.success else 'Failed ❌'}"
-            )
-            markdown += "</summary>\n\n"
-            markdown += f"Message: \n```\n{test_suite.parser_result.message}\n```\n\n"
-            markdown += f"Actual Output: \n```json\n{test_suite.parser_result.actual_output}\n```\n\n"
-            markdown += "</details>\n\n"
-
-        if test_suite.interpreter_result:
-            markdown += "<details>\n"
-            markdown += "<summary>"
-            markdown += "Interpreter Result: "
-            markdown += f"{'Passed ✅' if test_suite.interpreter_result.success else 'Failed ❌'}"
-            markdown += "</summary>\n\n"
-            markdown += (
-                f"Message: \n```\n{test_suite.interpreter_result.message}\n```\n\n"
-            )
-            markdown += f"Actual Output: \n```json\n{test_suite.interpreter_result.actual_output}\n```\n\n"
-            markdown += "</details>\n\n"
 
         for index, test_case in enumerate(test_suite.test_cases):
             markdown += f"## Test Case {index + 1}\n\n"
@@ -143,6 +115,14 @@ class ItsTestSuitesMarkdownWriter:
                 markdown += "</summary>\n\n"
 
                 markdown += f"Message: \n```\n{result.message}\n```\n\n"
+
+                if result.request_body:
+                    markdown += (
+                        f"Request Body: \n```json\n{result.request_body}\n```\n\n"
+                    )
+                else:
+                    markdown += "Request Body: None\n\n"
+
                 if result.actual_output:
                     markdown += (
                         f"Actual Output: \n```json\n{result.actual_output}\n```\n\n"
