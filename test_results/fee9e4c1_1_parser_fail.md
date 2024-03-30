@@ -1,19 +1,22 @@
 # Test Report
 
-Time: 2024-03-30 08:03:28.199620
+Time: 2024-03-30 08:30:51.491276
 
 ### Base Program
 
 ```py
-def findKthPositive(nums, k):
-    left, right = 0, len(nums)
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
+def findKthNumber(m, n, k):
+    low, high = 1, m * n
+    while low < high:
+        mid = low + (high - low) // 2
+        count = 0
+        for i in range(1, m+1):
+            count += min(mid // i, n)
+        if count < k:
+            low = mid + 1
         else:
-            right = mid
-    return left + k
+            high = mid
+    return low
 ```
 
 ## Test Case 1
@@ -21,15 +24,18 @@ def findKthPositive(nums, k):
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
+def findKthNumber(m, n, k):
+    (low, high) = (1, m * n)
+    while low < high:
+        mid = low + (high - low) // 2
+        count = 0
+        for i in range(1, m + 1):
+            count += min(mid // i, n)
+        if count < k:
+            low = mid + 1
         else:
-            right = mid
-    return left + k
+            high = mid
+    return low
 ```
 
 <details>
@@ -39,7 +45,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = left + (right - left) // 2\n        if nums[mid] - mid - 1 < k:\n            left = mid + 1\n        else:\n            right = mid\n    return left + k"
+    "source_code": "def findKthNumber(m, n, k):\n    (low, high) = (1, m * n)\n    while low < high:\n        mid = low + (high - low) // 2\n        count = 0\n        for i in range(1, m + 1):\n            count += min(mid // i, n)\n        if count < k:\n            low = mid + 1\n        else:\n            high = mid\n    return low"
 }
 ```
 
@@ -59,15 +65,18 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_0, var_1):
-    (left, right) = (0, len(var_0))
-    while left < right:
-        mid = left + (right - left) // 2
-        if var_0[mid] - mid - 1 < var_1:
-            left = mid + 1
+def findKthNumber(var_0, var_1, var_2):
+    (low, high) = (1, var_0 * var_1)
+    while low < high:
+        mid = low + (high - low) // 2
+        count = 0
+        for i in range(1, var_0 + 1):
+            count += min(mid // i, var_1)
+        if count < var_2:
+            low = mid + 1
         else:
-            right = mid
-    return left + var_1
+            high = mid
+    return low
 ```
 
 <details>
@@ -77,7 +86,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_0, var_1):\n    (left, right) = (0, len(var_0))\n    while left < right:\n        mid = left + (right - left) // 2\n        if var_0[mid] - mid - 1 < var_1:\n            left = mid + 1\n        else:\n            right = mid\n    return left + var_1"
+    "source_code": "def findKthNumber(var_0, var_1, var_2):\n    (low, high) = (1, var_0 * var_1)\n    while low < high:\n        mid = low + (high - low) // 2\n        count = 0\n        for i in range(1, var_0 + 1):\n            count += min(mid // i, var_1)\n        if count < var_2:\n            low = mid + 1\n        else:\n            high = mid\n    return low"
 }
 ```
 
@@ -97,15 +106,18 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if nums[mid] + -mid + -1 < k:
-            left = 1 + mid
+def findKthNumber(m, n, k):
+    (low, high) = (1, n * m)
+    while low < high:
+        mid = (high + -low) // 2 + low
+        count = 0
+        for i in range(1, 1 + m):
+            count += min(mid // i, n)
+        if count < k:
+            low = 1 + mid
         else:
-            right = mid
-    return k + left
+            high = mid
+    return low
 ```
 
 <details>
@@ -115,7 +127,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if nums[mid] + -mid + -1 < k:\n            left = 1 + mid\n        else:\n            right = mid\n    return k + left"
+    "source_code": "def findKthNumber(m, n, k):\n    (low, high) = (1, n * m)\n    while low < high:\n        mid = (high + -low) // 2 + low\n        count = 0\n        for i in range(1, 1 + m):\n            count += min(mid // i, n)\n        if count < k:\n            low = 1 + mid\n        else:\n            high = mid\n    return low"
 }
 ```
 
@@ -135,15 +147,18 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_2, var_3):
-    (left, right) = (0, len(var_2))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if var_2[mid] + -mid + -1 < var_3:
-            left = 1 + mid
+def findKthNumber(var_3, var_4, var_5):
+    (low, high) = (1, var_4 * var_3)
+    while low < high:
+        mid = (high + -low) // 2 + low
+        count = 0
+        for i in range(1, 1 + var_3):
+            count += min(mid // i, var_4)
+        if count < var_5:
+            low = 1 + mid
         else:
-            right = mid
-    return var_3 + left
+            high = mid
+    return low
 ```
 
 <details>
@@ -153,7 +168,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_2, var_3):\n    (left, right) = (0, len(var_2))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if var_2[mid] + -mid + -1 < var_3:\n            left = 1 + mid\n        else:\n            right = mid\n    return var_3 + left"
+    "source_code": "def findKthNumber(var_3, var_4, var_5):\n    (low, high) = (1, var_4 * var_3)\n    while low < high:\n        mid = (high + -low) // 2 + low\n        count = 0\n        for i in range(1, 1 + var_3):\n            count += min(mid // i, var_4)\n        if count < var_5:\n            low = 1 + mid\n        else:\n            high = mid\n    return low"
 }
 ```
 

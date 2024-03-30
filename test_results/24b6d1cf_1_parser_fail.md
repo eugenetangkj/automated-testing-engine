@@ -1,19 +1,19 @@
 # Test Report
 
-Time: 2024-03-30 08:03:28.199620
+Time: 2024-03-30 07:54:21.810555
 
 ### Base Program
 
 ```py
-def findKthPositive(nums, k):
-    left, right = 0, len(nums)
+def first_bad_version(n):
+    left, right = 1, n
     while left < right:
         mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
-        else:
+        if is_bad_version(mid):
             right = mid
-    return left + k
+        else:
+            left = mid + 1
+    return left
 ```
 
 ## Test Case 1
@@ -21,15 +21,15 @@ def findKthPositive(nums, k):
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
+def first_bad_version(n):
+    (left, right) = (1, n)
     while left < right:
         mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
-        else:
+        if is_bad_version(mid):
             right = mid
-    return left + k
+        else:
+            left = mid + 1
+    return left
 ```
 
 <details>
@@ -39,7 +39,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = left + (right - left) // 2\n        if nums[mid] - mid - 1 < k:\n            left = mid + 1\n        else:\n            right = mid\n    return left + k"
+    "source_code": "def first_bad_version(n):\n    (left, right) = (1, n)\n    while left < right:\n        mid = left + (right - left) // 2\n        if is_bad_version(mid):\n            right = mid\n        else:\n            left = mid + 1\n    return left"
 }
 ```
 
@@ -59,15 +59,15 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_0, var_1):
-    (left, right) = (0, len(var_0))
+def first_bad_version(var_0):
+    (left, right) = (1, var_0)
     while left < right:
         mid = left + (right - left) // 2
-        if var_0[mid] - mid - 1 < var_1:
-            left = mid + 1
-        else:
+        if is_bad_version(mid):
             right = mid
-    return left + var_1
+        else:
+            left = mid + 1
+    return left
 ```
 
 <details>
@@ -77,7 +77,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_0, var_1):\n    (left, right) = (0, len(var_0))\n    while left < right:\n        mid = left + (right - left) // 2\n        if var_0[mid] - mid - 1 < var_1:\n            left = mid + 1\n        else:\n            right = mid\n    return left + var_1"
+    "source_code": "def first_bad_version(var_0):\n    (left, right) = (1, var_0)\n    while left < right:\n        mid = left + (right - left) // 2\n        if is_bad_version(mid):\n            right = mid\n        else:\n            left = mid + 1\n    return left"
 }
 ```
 
@@ -97,15 +97,15 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
+def first_bad_version(n):
+    (left, right) = (1, n)
     while left < right:
         mid = (right + -left) // 2 + left
-        if nums[mid] + -mid + -1 < k:
-            left = 1 + mid
-        else:
+        if is_bad_version(mid):
             right = mid
-    return k + left
+        else:
+            left = 1 + mid
+    return left
 ```
 
 <details>
@@ -115,7 +115,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if nums[mid] + -mid + -1 < k:\n            left = 1 + mid\n        else:\n            right = mid\n    return k + left"
+    "source_code": "def first_bad_version(n):\n    (left, right) = (1, n)\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if is_bad_version(mid):\n            right = mid\n        else:\n            left = 1 + mid\n    return left"
 }
 ```
 
@@ -135,15 +135,15 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_2, var_3):
-    (left, right) = (0, len(var_2))
+def first_bad_version(var_1):
+    (left, right) = (1, var_1)
     while left < right:
         mid = (right + -left) // 2 + left
-        if var_2[mid] + -mid + -1 < var_3:
-            left = 1 + mid
-        else:
+        if is_bad_version(mid):
             right = mid
-    return var_3 + left
+        else:
+            left = 1 + mid
+    return left
 ```
 
 <details>
@@ -153,7 +153,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_2, var_3):\n    (left, right) = (0, len(var_2))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if var_2[mid] + -mid + -1 < var_3:\n            left = 1 + mid\n        else:\n            right = mid\n    return var_3 + left"
+    "source_code": "def first_bad_version(var_1):\n    (left, right) = (1, var_1)\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if is_bad_version(mid):\n            right = mid\n        else:\n            left = 1 + mid\n    return left"
 }
 ```
 

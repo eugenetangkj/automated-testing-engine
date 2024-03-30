@@ -1,19 +1,18 @@
 # Test Report
 
-Time: 2024-03-30 08:03:28.199620
+Time: 2024-03-30 07:44:35.482007
 
 ### Base Program
 
 ```py
-def findKthPositive(nums, k):
-    left, right = 0, len(nums)
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
-        else:
-            right = mid
-    return left + k
+def findLengthOfLCIS(nums):
+    if not nums:
+        return 0
+    result, current = 1, 1
+    for i in range(1, len(nums)):
+        current = current + 1 if nums[i] > nums[i - 1] else 1
+        result = max(result, current)
+    return result
 ```
 
 ## Test Case 1
@@ -21,15 +20,14 @@ def findKthPositive(nums, k):
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
-        else:
-            right = mid
-    return left + k
+def findLengthOfLCIS(nums):
+    if not nums:
+        return 0
+    (result, current) = (1, 1)
+    for i in range(1, len(nums)):
+        current = current + 1 if nums[i] > nums[i - 1] else 1
+        result = max(result, current)
+    return result
 ```
 
 <details>
@@ -39,7 +37,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = left + (right - left) // 2\n        if nums[mid] - mid - 1 < k:\n            left = mid + 1\n        else:\n            right = mid\n    return left + k"
+    "source_code": "def findLengthOfLCIS(nums):\n    if not nums:\n        return 0\n    (result, current) = (1, 1)\n    for i in range(1, len(nums)):\n        current = current + 1 if nums[i] > nums[i - 1] else 1\n        result = max(result, current)\n    return result"
 }
 ```
 
@@ -59,15 +57,14 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_0, var_1):
-    (left, right) = (0, len(var_0))
-    while left < right:
-        mid = left + (right - left) // 2
-        if var_0[mid] - mid - 1 < var_1:
-            left = mid + 1
-        else:
-            right = mid
-    return left + var_1
+def findLengthOfLCIS(var_0):
+    if not var_0:
+        return 0
+    (result, current) = (1, 1)
+    for i in range(1, len(var_0)):
+        current = current + 1 if var_0[i] > var_0[i - 1] else 1
+        result = max(result, current)
+    return result
 ```
 
 <details>
@@ -77,7 +74,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_0, var_1):\n    (left, right) = (0, len(var_0))\n    while left < right:\n        mid = left + (right - left) // 2\n        if var_0[mid] - mid - 1 < var_1:\n            left = mid + 1\n        else:\n            right = mid\n    return left + var_1"
+    "source_code": "def findLengthOfLCIS(var_0):\n    if not var_0:\n        return 0\n    (result, current) = (1, 1)\n    for i in range(1, len(var_0)):\n        current = current + 1 if var_0[i] > var_0[i - 1] else 1\n        result = max(result, current)\n    return result"
 }
 ```
 
@@ -97,15 +94,14 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if nums[mid] + -mid + -1 < k:
-            left = 1 + mid
-        else:
-            right = mid
-    return k + left
+def findLengthOfLCIS(nums):
+    if not nums:
+        return 0
+    (result, current) = (1, 1)
+    for i in range(1, len(nums)):
+        current = 1 + current if nums[i] > nums[i + -1] else 1
+        result = max(result, current)
+    return result
 ```
 
 <details>
@@ -115,7 +111,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if nums[mid] + -mid + -1 < k:\n            left = 1 + mid\n        else:\n            right = mid\n    return k + left"
+    "source_code": "def findLengthOfLCIS(nums):\n    if not nums:\n        return 0\n    (result, current) = (1, 1)\n    for i in range(1, len(nums)):\n        current = 1 + current if nums[i] > nums[i + -1] else 1\n        result = max(result, current)\n    return result"
 }
 ```
 
@@ -135,15 +131,14 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_2, var_3):
-    (left, right) = (0, len(var_2))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if var_2[mid] + -mid + -1 < var_3:
-            left = 1 + mid
-        else:
-            right = mid
-    return var_3 + left
+def findLengthOfLCIS(var_1):
+    if not var_1:
+        return 0
+    (result, current) = (1, 1)
+    for i in range(1, len(var_1)):
+        current = 1 + current if var_1[i] > var_1[i + -1] else 1
+        result = max(result, current)
+    return result
 ```
 
 <details>
@@ -153,7 +148,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_2, var_3):\n    (left, right) = (0, len(var_2))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if var_2[mid] + -mid + -1 < var_3:\n            left = 1 + mid\n        else:\n            right = mid\n    return var_3 + left"
+    "source_code": "def findLengthOfLCIS(var_1):\n    if not var_1:\n        return 0\n    (result, current) = (1, 1)\n    for i in range(1, len(var_1)):\n        current = 1 + current if var_1[i] > var_1[i + -1] else 1\n        result = max(result, current)\n    return result"
 }
 ```
 

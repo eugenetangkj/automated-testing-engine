@@ -1,19 +1,17 @@
 # Test Report
 
-Time: 2024-03-30 08:03:28.199620
+Time: 2024-03-30 07:57:08.558965
 
 ### Base Program
 
 ```py
-def findKthPositive(nums, k):
-    left, right = 0, len(nums)
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
-        else:
-            right = mid
-    return left + k
+def maxAlternatingSum(nums):
+    odd, even = 0, 0
+    for num in nums:
+        newOdd = max(even + num, odd)
+        even = max(odd - num, even)
+        odd = newOdd
+    return odd
 ```
 
 ## Test Case 1
@@ -21,15 +19,13 @@ def findKthPositive(nums, k):
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
-        else:
-            right = mid
-    return left + k
+def maxAlternatingSum(nums):
+    (odd, even) = (0, 0)
+    for num in nums:
+        newOdd = max(even + num, odd)
+        even = max(odd - num, even)
+        odd = newOdd
+    return odd
 ```
 
 <details>
@@ -39,7 +35,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = left + (right - left) // 2\n        if nums[mid] - mid - 1 < k:\n            left = mid + 1\n        else:\n            right = mid\n    return left + k"
+    "source_code": "def maxAlternatingSum(nums):\n    (odd, even) = (0, 0)\n    for num in nums:\n        newOdd = max(even + num, odd)\n        even = max(odd - num, even)\n        odd = newOdd\n    return odd"
 }
 ```
 
@@ -59,15 +55,13 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_0, var_1):
-    (left, right) = (0, len(var_0))
-    while left < right:
-        mid = left + (right - left) // 2
-        if var_0[mid] - mid - 1 < var_1:
-            left = mid + 1
-        else:
-            right = mid
-    return left + var_1
+def maxAlternatingSum(var_0):
+    (odd, even) = (0, 0)
+    for num in var_0:
+        newOdd = max(even + num, odd)
+        even = max(odd - num, even)
+        odd = newOdd
+    return odd
 ```
 
 <details>
@@ -77,7 +71,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_0, var_1):\n    (left, right) = (0, len(var_0))\n    while left < right:\n        mid = left + (right - left) // 2\n        if var_0[mid] - mid - 1 < var_1:\n            left = mid + 1\n        else:\n            right = mid\n    return left + var_1"
+    "source_code": "def maxAlternatingSum(var_0):\n    (odd, even) = (0, 0)\n    for num in var_0:\n        newOdd = max(even + num, odd)\n        even = max(odd - num, even)\n        odd = newOdd\n    return odd"
 }
 ```
 
@@ -97,15 +91,13 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if nums[mid] + -mid + -1 < k:
-            left = 1 + mid
-        else:
-            right = mid
-    return k + left
+def maxAlternatingSum(nums):
+    (odd, even) = (0, 0)
+    for num in nums:
+        newOdd = max(num + even, odd)
+        even = max(odd + -num, even)
+        odd = newOdd
+    return odd
 ```
 
 <details>
@@ -115,7 +107,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if nums[mid] + -mid + -1 < k:\n            left = 1 + mid\n        else:\n            right = mid\n    return k + left"
+    "source_code": "def maxAlternatingSum(nums):\n    (odd, even) = (0, 0)\n    for num in nums:\n        newOdd = max(num + even, odd)\n        even = max(odd + -num, even)\n        odd = newOdd\n    return odd"
 }
 ```
 
@@ -135,15 +127,13 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_2, var_3):
-    (left, right) = (0, len(var_2))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if var_2[mid] + -mid + -1 < var_3:
-            left = 1 + mid
-        else:
-            right = mid
-    return var_3 + left
+def maxAlternatingSum(var_1):
+    (odd, even) = (0, 0)
+    for num in var_1:
+        newOdd = max(num + even, odd)
+        even = max(odd + -num, even)
+        odd = newOdd
+    return odd
 ```
 
 <details>
@@ -153,7 +143,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_2, var_3):\n    (left, right) = (0, len(var_2))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if var_2[mid] + -mid + -1 < var_3:\n            left = 1 + mid\n        else:\n            right = mid\n    return var_3 + left"
+    "source_code": "def maxAlternatingSum(var_1):\n    (odd, even) = (0, 0)\n    for num in var_1:\n        newOdd = max(num + even, odd)\n        even = max(odd + -num, even)\n        odd = newOdd\n    return odd"
 }
 ```
 

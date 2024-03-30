@@ -1,19 +1,18 @@
 # Test Report
 
-Time: 2024-03-30 08:03:28.199620
+Time: 2024-03-30 07:38:24.142543
 
 ### Base Program
 
 ```py
-def findKthPositive(nums, k):
-    left, right = 0, len(nums)
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
-        else:
-            right = mid
-    return left + k
+def maxScore(nums: List[int]) -> int:
+    nums.sort()
+    result, prefixSum = 0, 0
+    for i in range(len(nums)):
+        if prefixSum + nums[i] > 0:
+            result += 1
+            prefixSum += nums[i]
+    return result
 ```
 
 ## Test Case 1
@@ -21,15 +20,14 @@ def findKthPositive(nums, k):
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
-        else:
-            right = mid
-    return left + k
+def maxScore(nums: List[int]) -> int:
+    nums.sort()
+    (result, prefixSum) = (0, 0)
+    for i in range(len(nums)):
+        if prefixSum + nums[i] > 0:
+            result += 1
+            prefixSum += nums[i]
+    return result
 ```
 
 <details>
@@ -39,7 +37,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = left + (right - left) // 2\n        if nums[mid] - mid - 1 < k:\n            left = mid + 1\n        else:\n            right = mid\n    return left + k"
+    "source_code": "def maxScore(nums: List[int]) -> int:\n    nums.sort()\n    (result, prefixSum) = (0, 0)\n    for i in range(len(nums)):\n        if prefixSum + nums[i] > 0:\n            result += 1\n            prefixSum += nums[i]\n    return result"
 }
 ```
 
@@ -59,15 +57,14 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_0, var_1):
-    (left, right) = (0, len(var_0))
-    while left < right:
-        mid = left + (right - left) // 2
-        if var_0[mid] - mid - 1 < var_1:
-            left = mid + 1
-        else:
-            right = mid
-    return left + var_1
+def maxScore(var_0: List[int]) -> int:
+    var_0.sort()
+    (result, prefixSum) = (0, 0)
+    for i in range(len(var_0)):
+        if prefixSum + var_0[i] > 0:
+            result += 1
+            prefixSum += var_0[i]
+    return result
 ```
 
 <details>
@@ -77,7 +74,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_0, var_1):\n    (left, right) = (0, len(var_0))\n    while left < right:\n        mid = left + (right - left) // 2\n        if var_0[mid] - mid - 1 < var_1:\n            left = mid + 1\n        else:\n            right = mid\n    return left + var_1"
+    "source_code": "def maxScore(var_0: List[int]) -> int:\n    var_0.sort()\n    (result, prefixSum) = (0, 0)\n    for i in range(len(var_0)):\n        if prefixSum + var_0[i] > 0:\n            result += 1\n            prefixSum += var_0[i]\n    return result"
 }
 ```
 
@@ -97,15 +94,14 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if nums[mid] + -mid + -1 < k:
-            left = 1 + mid
-        else:
-            right = mid
-    return k + left
+def maxScore(nums: List[int]) -> int:
+    nums.sort()
+    (result, prefixSum) = (0, 0)
+    for i in range(len(nums)):
+        if nums[i] + prefixSum > 0:
+            result += 1
+            prefixSum += nums[i]
+    return result
 ```
 
 <details>
@@ -115,7 +111,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if nums[mid] + -mid + -1 < k:\n            left = 1 + mid\n        else:\n            right = mid\n    return k + left"
+    "source_code": "def maxScore(nums: List[int]) -> int:\n    nums.sort()\n    (result, prefixSum) = (0, 0)\n    for i in range(len(nums)):\n        if nums[i] + prefixSum > 0:\n            result += 1\n            prefixSum += nums[i]\n    return result"
 }
 ```
 
@@ -135,15 +131,14 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_2, var_3):
-    (left, right) = (0, len(var_2))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if var_2[mid] + -mid + -1 < var_3:
-            left = 1 + mid
-        else:
-            right = mid
-    return var_3 + left
+def maxScore(var_1: List[int]) -> int:
+    var_1.sort()
+    (result, prefixSum) = (0, 0)
+    for i in range(len(var_1)):
+        if var_1[i] + prefixSum > 0:
+            result += 1
+            prefixSum += var_1[i]
+    return result
 ```
 
 <details>
@@ -153,7 +148,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_2, var_3):\n    (left, right) = (0, len(var_2))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if var_2[mid] + -mid + -1 < var_3:\n            left = 1 + mid\n        else:\n            right = mid\n    return var_3 + left"
+    "source_code": "def maxScore(var_1: List[int]) -> int:\n    var_1.sort()\n    (result, prefixSum) = (0, 0)\n    for i in range(len(var_1)):\n        if var_1[i] + prefixSum > 0:\n            result += 1\n            prefixSum += var_1[i]\n    return result"
 }
 ```
 

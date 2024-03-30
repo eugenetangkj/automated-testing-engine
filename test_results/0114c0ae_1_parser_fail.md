@@ -1,19 +1,22 @@
 # Test Report
 
-Time: 2024-03-30 08:03:28.199620
+Time: 2024-03-30 07:38:15.425546
 
 ### Base Program
 
 ```py
-def findKthPositive(nums, k):
-    left, right = 0, len(nums)
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
-        else:
-            right = mid
-    return left + k
+def findLength(nums1, nums2):
+    m, n = len(nums1), len(nums2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    maxLength = 0
+
+    for i in range(m - 1, -1, -1):
+        for j in range(n - 1, -1, -1):
+            if nums1[i] == nums2[j]:
+                dp[i][j] = dp[i + 1][j + 1] + 1
+                maxLength = max(maxLength, dp[i][j])
+
+    return maxLength
 ```
 
 ## Test Case 1
@@ -21,15 +24,16 @@ def findKthPositive(nums, k):
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
-        else:
-            right = mid
-    return left + k
+def findLength(nums1, nums2):
+    (m, n) = (len(nums1), len(nums2))
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    maxLength = 0
+    for i in range(m - 1, -1, -1):
+        for j in range(n - 1, -1, -1):
+            if nums1[i] == nums2[j]:
+                dp[i][j] = dp[i + 1][j + 1] + 1
+                maxLength = max(maxLength, dp[i][j])
+    return maxLength
 ```
 
 <details>
@@ -39,7 +43,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = left + (right - left) // 2\n        if nums[mid] - mid - 1 < k:\n            left = mid + 1\n        else:\n            right = mid\n    return left + k"
+    "source_code": "def findLength(nums1, nums2):\n    (m, n) = (len(nums1), len(nums2))\n    dp = [[0] * (n + 1) for _ in range(m + 1)]\n    maxLength = 0\n    for i in range(m - 1, -1, -1):\n        for j in range(n - 1, -1, -1):\n            if nums1[i] == nums2[j]:\n                dp[i][j] = dp[i + 1][j + 1] + 1\n                maxLength = max(maxLength, dp[i][j])\n    return maxLength"
 }
 ```
 
@@ -59,15 +63,16 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_0, var_1):
-    (left, right) = (0, len(var_0))
-    while left < right:
-        mid = left + (right - left) // 2
-        if var_0[mid] - mid - 1 < var_1:
-            left = mid + 1
-        else:
-            right = mid
-    return left + var_1
+def findLength(var_0, var_1):
+    (m, n) = (len(var_0), len(var_1))
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    maxLength = 0
+    for i in range(m - 1, -1, -1):
+        for j in range(n - 1, -1, -1):
+            if var_0[i] == var_1[j]:
+                dp[i][j] = dp[i + 1][j + 1] + 1
+                maxLength = max(maxLength, dp[i][j])
+    return maxLength
 ```
 
 <details>
@@ -77,7 +82,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_0, var_1):\n    (left, right) = (0, len(var_0))\n    while left < right:\n        mid = left + (right - left) // 2\n        if var_0[mid] - mid - 1 < var_1:\n            left = mid + 1\n        else:\n            right = mid\n    return left + var_1"
+    "source_code": "def findLength(var_0, var_1):\n    (m, n) = (len(var_0), len(var_1))\n    dp = [[0] * (n + 1) for _ in range(m + 1)]\n    maxLength = 0\n    for i in range(m - 1, -1, -1):\n        for j in range(n - 1, -1, -1):\n            if var_0[i] == var_1[j]:\n                dp[i][j] = dp[i + 1][j + 1] + 1\n                maxLength = max(maxLength, dp[i][j])\n    return maxLength"
 }
 ```
 
@@ -97,15 +102,16 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if nums[mid] + -mid + -1 < k:
-            left = 1 + mid
-        else:
-            right = mid
-    return k + left
+def findLength(nums1, nums2):
+    (m, n) = (len(nums1), len(nums2))
+    dp = [(1 + n) * [0] for _ in range(1 + m)]
+    maxLength = 0
+    for i in range(m + -1, -1, -1):
+        for j in range(n + -1, -1, -1):
+            if nums1[i] == nums2[j]:
+                dp[i][j] = 1 + dp[1 + i][1 + j]
+                maxLength = max(maxLength, dp[i][j])
+    return maxLength
 ```
 
 <details>
@@ -115,7 +121,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if nums[mid] + -mid + -1 < k:\n            left = 1 + mid\n        else:\n            right = mid\n    return k + left"
+    "source_code": "def findLength(nums1, nums2):\n    (m, n) = (len(nums1), len(nums2))\n    dp = [(1 + n) * [0] for _ in range(1 + m)]\n    maxLength = 0\n    for i in range(m + -1, -1, -1):\n        for j in range(n + -1, -1, -1):\n            if nums1[i] == nums2[j]:\n                dp[i][j] = 1 + dp[1 + i][1 + j]\n                maxLength = max(maxLength, dp[i][j])\n    return maxLength"
 }
 ```
 
@@ -135,15 +141,16 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_2, var_3):
-    (left, right) = (0, len(var_2))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if var_2[mid] + -mid + -1 < var_3:
-            left = 1 + mid
-        else:
-            right = mid
-    return var_3 + left
+def findLength(var_2, var_3):
+    (m, n) = (len(var_2), len(var_3))
+    dp = [(1 + n) * [0] for _ in range(1 + m)]
+    maxLength = 0
+    for i in range(m + -1, -1, -1):
+        for j in range(n + -1, -1, -1):
+            if var_2[i] == var_3[j]:
+                dp[i][j] = 1 + dp[1 + i][1 + j]
+                maxLength = max(maxLength, dp[i][j])
+    return maxLength
 ```
 
 <details>
@@ -153,7 +160,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_2, var_3):\n    (left, right) = (0, len(var_2))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if var_2[mid] + -mid + -1 < var_3:\n            left = 1 + mid\n        else:\n            right = mid\n    return var_3 + left"
+    "source_code": "def findLength(var_2, var_3):\n    (m, n) = (len(var_2), len(var_3))\n    dp = [(1 + n) * [0] for _ in range(1 + m)]\n    maxLength = 0\n    for i in range(m + -1, -1, -1):\n        for j in range(n + -1, -1, -1):\n            if var_2[i] == var_3[j]:\n                dp[i][j] = 1 + dp[1 + i][1 + j]\n                maxLength = max(maxLength, dp[i][j])\n    return maxLength"
 }
 ```
 

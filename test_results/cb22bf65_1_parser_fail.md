@@ -1,19 +1,17 @@
 # Test Report
 
-Time: 2024-03-30 08:03:28.199620
+Time: 2024-03-30 07:56:52.066174
 
 ### Base Program
 
 ```py
-def findKthPositive(nums, k):
-    left, right = 0, len(nums)
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
-        else:
-            right = mid
-    return left + k
+def fib(n: int) -> int:
+    if n < 2:
+        return n
+    a, b = 0, 1
+    for _ in range(2, n + 1):
+        a, b = b, a + b
+    return b
 ```
 
 ## Test Case 1
@@ -21,15 +19,13 @@ def findKthPositive(nums, k):
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
-        else:
-            right = mid
-    return left + k
+def fib(n: int) -> int:
+    if n < 2:
+        return n
+    (a, b) = (0, 1)
+    for _ in range(2, n + 1):
+        (a, b) = (b, a + b)
+    return b
 ```
 
 <details>
@@ -39,7 +35,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = left + (right - left) // 2\n        if nums[mid] - mid - 1 < k:\n            left = mid + 1\n        else:\n            right = mid\n    return left + k"
+    "source_code": "def fib(n: int) -> int:\n    if n < 2:\n        return n\n    (a, b) = (0, 1)\n    for _ in range(2, n + 1):\n        (a, b) = (b, a + b)\n    return b"
 }
 ```
 
@@ -59,15 +55,13 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_0, var_1):
-    (left, right) = (0, len(var_0))
-    while left < right:
-        mid = left + (right - left) // 2
-        if var_0[mid] - mid - 1 < var_1:
-            left = mid + 1
-        else:
-            right = mid
-    return left + var_1
+def fib(var_0: int) -> int:
+    if var_0 < 2:
+        return var_0
+    (a, b) = (0, 1)
+    for _ in range(2, var_0 + 1):
+        (a, b) = (b, a + b)
+    return b
 ```
 
 <details>
@@ -77,7 +71,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_0, var_1):\n    (left, right) = (0, len(var_0))\n    while left < right:\n        mid = left + (right - left) // 2\n        if var_0[mid] - mid - 1 < var_1:\n            left = mid + 1\n        else:\n            right = mid\n    return left + var_1"
+    "source_code": "def fib(var_0: int) -> int:\n    if var_0 < 2:\n        return var_0\n    (a, b) = (0, 1)\n    for _ in range(2, var_0 + 1):\n        (a, b) = (b, a + b)\n    return b"
 }
 ```
 
@@ -97,15 +91,13 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if nums[mid] + -mid + -1 < k:
-            left = 1 + mid
-        else:
-            right = mid
-    return k + left
+def fib(n: int) -> int:
+    if n < 2:
+        return n
+    (a, b) = (0, 1)
+    for _ in range(2, 1 + n):
+        (a, b) = (b, b + a)
+    return b
 ```
 
 <details>
@@ -115,7 +107,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if nums[mid] + -mid + -1 < k:\n            left = 1 + mid\n        else:\n            right = mid\n    return k + left"
+    "source_code": "def fib(n: int) -> int:\n    if n < 2:\n        return n\n    (a, b) = (0, 1)\n    for _ in range(2, 1 + n):\n        (a, b) = (b, b + a)\n    return b"
 }
 ```
 
@@ -135,15 +127,13 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_2, var_3):
-    (left, right) = (0, len(var_2))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if var_2[mid] + -mid + -1 < var_3:
-            left = 1 + mid
-        else:
-            right = mid
-    return var_3 + left
+def fib(var_1: int) -> int:
+    if var_1 < 2:
+        return var_1
+    (a, b) = (0, 1)
+    for _ in range(2, 1 + var_1):
+        (a, b) = (b, b + a)
+    return b
 ```
 
 <details>
@@ -153,7 +143,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_2, var_3):\n    (left, right) = (0, len(var_2))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if var_2[mid] + -mid + -1 < var_3:\n            left = 1 + mid\n        else:\n            right = mid\n    return var_3 + left"
+    "source_code": "def fib(var_1: int) -> int:\n    if var_1 < 2:\n        return var_1\n    (a, b) = (0, 1)\n    for _ in range(2, 1 + var_1):\n        (a, b) = (b, b + a)\n    return b"
 }
 ```
 

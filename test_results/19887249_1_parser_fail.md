@@ -1,19 +1,21 @@
 # Test Report
 
-Time: 2024-03-30 08:03:28.199620
+Time: 2024-03-30 07:44:07.306178
 
 ### Base Program
 
 ```py
-def findKthPositive(nums, k):
-    left, right = 0, len(nums)
-    while left < right:
+def search(nums: List[int], target: int) -> int:
+    left, right = 0, len(nums) - 1
+    while left <= right:
         mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
+        if nums[mid] == target:
+            return mid
+        if nums[mid] < target:
             left = mid + 1
         else:
-            right = mid
-    return left + k
+            right = mid - 1
+    return -1
 ```
 
 ## Test Case 1
@@ -21,15 +23,17 @@ def findKthPositive(nums, k):
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
+def search(nums: List[int], target: int) -> int:
+    (left, right) = (0, len(nums) - 1)
+    while left <= right:
         mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
+        if nums[mid] == target:
+            return mid
+        if nums[mid] < target:
             left = mid + 1
         else:
-            right = mid
-    return left + k
+            right = mid - 1
+    return -1
 ```
 
 <details>
@@ -39,7 +43,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = left + (right - left) // 2\n        if nums[mid] - mid - 1 < k:\n            left = mid + 1\n        else:\n            right = mid\n    return left + k"
+    "source_code": "def search(nums: List[int], target: int) -> int:\n    (left, right) = (0, len(nums) - 1)\n    while left <= right:\n        mid = left + (right - left) // 2\n        if nums[mid] == target:\n            return mid\n        if nums[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1"
 }
 ```
 
@@ -59,15 +63,17 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_0, var_1):
-    (left, right) = (0, len(var_0))
-    while left < right:
+def search(var_0: List[int], var_1: int) -> int:
+    (left, right) = (0, len(var_0) - 1)
+    while left <= right:
         mid = left + (right - left) // 2
-        if var_0[mid] - mid - 1 < var_1:
+        if var_0[mid] == var_1:
+            return mid
+        if var_0[mid] < var_1:
             left = mid + 1
         else:
-            right = mid
-    return left + var_1
+            right = mid - 1
+    return -1
 ```
 
 <details>
@@ -77,7 +83,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_0, var_1):\n    (left, right) = (0, len(var_0))\n    while left < right:\n        mid = left + (right - left) // 2\n        if var_0[mid] - mid - 1 < var_1:\n            left = mid + 1\n        else:\n            right = mid\n    return left + var_1"
+    "source_code": "def search(var_0: List[int], var_1: int) -> int:\n    (left, right) = (0, len(var_0) - 1)\n    while left <= right:\n        mid = left + (right - left) // 2\n        if var_0[mid] == var_1:\n            return mid\n        if var_0[mid] < var_1:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1"
 }
 ```
 
@@ -97,15 +103,17 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
+def search(nums: List[int], target: int) -> int:
+    (left, right) = (0, len(nums) + -1)
+    while left <= right:
         mid = (right + -left) // 2 + left
-        if nums[mid] + -mid + -1 < k:
+        if nums[mid] == target:
+            return mid
+        if nums[mid] < target:
             left = 1 + mid
         else:
-            right = mid
-    return k + left
+            right = mid + -1
+    return -1
 ```
 
 <details>
@@ -115,7 +123,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if nums[mid] + -mid + -1 < k:\n            left = 1 + mid\n        else:\n            right = mid\n    return k + left"
+    "source_code": "def search(nums: List[int], target: int) -> int:\n    (left, right) = (0, len(nums) + -1)\n    while left <= right:\n        mid = (right + -left) // 2 + left\n        if nums[mid] == target:\n            return mid\n        if nums[mid] < target:\n            left = 1 + mid\n        else:\n            right = mid + -1\n    return -1"
 }
 ```
 
@@ -135,15 +143,17 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_2, var_3):
-    (left, right) = (0, len(var_2))
-    while left < right:
+def search(var_2: List[int], var_3: int) -> int:
+    (left, right) = (0, len(var_2) + -1)
+    while left <= right:
         mid = (right + -left) // 2 + left
-        if var_2[mid] + -mid + -1 < var_3:
+        if var_2[mid] == var_3:
+            return mid
+        if var_2[mid] < var_3:
             left = 1 + mid
         else:
-            right = mid
-    return var_3 + left
+            right = mid + -1
+    return -1
 ```
 
 <details>
@@ -153,7 +163,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_2, var_3):\n    (left, right) = (0, len(var_2))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if var_2[mid] + -mid + -1 < var_3:\n            left = 1 + mid\n        else:\n            right = mid\n    return var_3 + left"
+    "source_code": "def search(var_2: List[int], var_3: int) -> int:\n    (left, right) = (0, len(var_2) + -1)\n    while left <= right:\n        mid = (right + -left) // 2 + left\n        if var_2[mid] == var_3:\n            return mid\n        if var_2[mid] < var_3:\n            left = 1 + mid\n        else:\n            right = mid + -1\n    return -1"
 }
 ```
 

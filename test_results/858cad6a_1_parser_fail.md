@@ -1,19 +1,19 @@
 # Test Report
 
-Time: 2024-03-30 08:03:28.199620
+Time: 2024-03-30 07:56:23.839917
 
 ### Base Program
 
 ```py
-def findKthPositive(nums, k):
-    left, right = 0, len(nums)
+def findPeakElement(nums):
+    left, right = 0, len(nums) - 1
     while left < right:
         mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
+        if nums[mid] < nums[mid + 1]:
             left = mid + 1
         else:
             right = mid
-    return left + k
+    return left
 ```
 
 ## Test Case 1
@@ -21,15 +21,15 @@ def findKthPositive(nums, k):
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
+def findPeakElement(nums):
+    (left, right) = (0, len(nums) - 1)
     while left < right:
         mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
+        if nums[mid] < nums[mid + 1]:
             left = mid + 1
         else:
             right = mid
-    return left + k
+    return left
 ```
 
 <details>
@@ -39,7 +39,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = left + (right - left) // 2\n        if nums[mid] - mid - 1 < k:\n            left = mid + 1\n        else:\n            right = mid\n    return left + k"
+    "source_code": "def findPeakElement(nums):\n    (left, right) = (0, len(nums) - 1)\n    while left < right:\n        mid = left + (right - left) // 2\n        if nums[mid] < nums[mid + 1]:\n            left = mid + 1\n        else:\n            right = mid\n    return left"
 }
 ```
 
@@ -59,15 +59,15 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_0, var_1):
-    (left, right) = (0, len(var_0))
+def findPeakElement(var_0):
+    (left, right) = (0, len(var_0) - 1)
     while left < right:
         mid = left + (right - left) // 2
-        if var_0[mid] - mid - 1 < var_1:
+        if var_0[mid] < var_0[mid + 1]:
             left = mid + 1
         else:
             right = mid
-    return left + var_1
+    return left
 ```
 
 <details>
@@ -77,7 +77,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_0, var_1):\n    (left, right) = (0, len(var_0))\n    while left < right:\n        mid = left + (right - left) // 2\n        if var_0[mid] - mid - 1 < var_1:\n            left = mid + 1\n        else:\n            right = mid\n    return left + var_1"
+    "source_code": "def findPeakElement(var_0):\n    (left, right) = (0, len(var_0) - 1)\n    while left < right:\n        mid = left + (right - left) // 2\n        if var_0[mid] < var_0[mid + 1]:\n            left = mid + 1\n        else:\n            right = mid\n    return left"
 }
 ```
 
@@ -97,15 +97,15 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
+def findPeakElement(nums):
+    (left, right) = (0, len(nums) + -1)
     while left < right:
         mid = (right + -left) // 2 + left
-        if nums[mid] + -mid + -1 < k:
+        if nums[mid] < nums[1 + mid]:
             left = 1 + mid
         else:
             right = mid
-    return k + left
+    return left
 ```
 
 <details>
@@ -115,7 +115,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if nums[mid] + -mid + -1 < k:\n            left = 1 + mid\n        else:\n            right = mid\n    return k + left"
+    "source_code": "def findPeakElement(nums):\n    (left, right) = (0, len(nums) + -1)\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if nums[mid] < nums[1 + mid]:\n            left = 1 + mid\n        else:\n            right = mid\n    return left"
 }
 ```
 
@@ -135,15 +135,15 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_2, var_3):
-    (left, right) = (0, len(var_2))
+def findPeakElement(var_1):
+    (left, right) = (0, len(var_1) + -1)
     while left < right:
         mid = (right + -left) // 2 + left
-        if var_2[mid] + -mid + -1 < var_3:
+        if var_1[mid] < var_1[1 + mid]:
             left = 1 + mid
         else:
             right = mid
-    return var_3 + left
+    return left
 ```
 
 <details>
@@ -153,7 +153,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_2, var_3):\n    (left, right) = (0, len(var_2))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if var_2[mid] + -mid + -1 < var_3:\n            left = 1 + mid\n        else:\n            right = mid\n    return var_3 + left"
+    "source_code": "def findPeakElement(var_1):\n    (left, right) = (0, len(var_1) + -1)\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if var_1[mid] < var_1[1 + mid]:\n            left = 1 + mid\n        else:\n            right = mid\n    return left"
 }
 ```
 

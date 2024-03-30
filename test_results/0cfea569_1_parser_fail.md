@@ -1,19 +1,23 @@
 # Test Report
 
-Time: 2024-03-30 08:03:28.199620
+Time: 2024-03-30 07:23:04.664682
 
 ### Base Program
 
 ```py
-def findKthPositive(nums, k):
-    left, right = 0, len(nums)
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
-        else:
-            right = mid
-    return left + k
+def minWastedSpace(nums, k):
+    n = len(nums)
+    dp = [[float('inf')] * (k + 1) for _ in range(n + 1)]
+    dp[0][0] = 0
+
+    for i in range(1, n + 1):
+        total = 0
+        for j in range(i, 0, -1):
+            total += nums[j - 1]
+            for l in range(k):
+                dp[i][l + 1] = min(dp[i][l + 1], dp[j - 1][l] + (i - j + 1) * nums[j - 1] - total)
+
+    return min(dp[n])
 ```
 
 ## Test Case 1
@@ -21,15 +25,17 @@ def findKthPositive(nums, k):
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
-        else:
-            right = mid
-    return left + k
+def minWastedSpace(nums, k):
+    n = len(nums)
+    dp = [[float('inf')] * (k + 1) for _ in range(n + 1)]
+    dp[0][0] = 0
+    for i in range(1, n + 1):
+        total = 0
+        for j in range(i, 0, -1):
+            total += nums[j - 1]
+            for l in range(k):
+                dp[i][l + 1] = min(dp[i][l + 1], dp[j - 1][l] + (i - j + 1) * nums[j - 1] - total)
+    return min(dp[n])
 ```
 
 <details>
@@ -39,7 +45,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = left + (right - left) // 2\n        if nums[mid] - mid - 1 < k:\n            left = mid + 1\n        else:\n            right = mid\n    return left + k"
+    "source_code": "def minWastedSpace(nums, k):\n    n = len(nums)\n    dp = [[float('inf')] * (k + 1) for _ in range(n + 1)]\n    dp[0][0] = 0\n    for i in range(1, n + 1):\n        total = 0\n        for j in range(i, 0, -1):\n            total += nums[j - 1]\n            for l in range(k):\n                dp[i][l + 1] = min(dp[i][l + 1], dp[j - 1][l] + (i - j + 1) * nums[j - 1] - total)\n    return min(dp[n])"
 }
 ```
 
@@ -59,15 +65,17 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_0, var_1):
-    (left, right) = (0, len(var_0))
-    while left < right:
-        mid = left + (right - left) // 2
-        if var_0[mid] - mid - 1 < var_1:
-            left = mid + 1
-        else:
-            right = mid
-    return left + var_1
+def minWastedSpace(var_0, var_1):
+    n = len(var_0)
+    dp = [[float('inf')] * (var_1 + 1) for _ in range(n + 1)]
+    dp[0][0] = 0
+    for i in range(1, n + 1):
+        total = 0
+        for j in range(i, 0, -1):
+            total += var_0[j - 1]
+            for l in range(var_1):
+                dp[i][l + 1] = min(dp[i][l + 1], dp[j - 1][l] + (i - j + 1) * var_0[j - 1] - total)
+    return min(dp[n])
 ```
 
 <details>
@@ -77,7 +85,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_0, var_1):\n    (left, right) = (0, len(var_0))\n    while left < right:\n        mid = left + (right - left) // 2\n        if var_0[mid] - mid - 1 < var_1:\n            left = mid + 1\n        else:\n            right = mid\n    return left + var_1"
+    "source_code": "def minWastedSpace(var_0, var_1):\n    n = len(var_0)\n    dp = [[float('inf')] * (var_1 + 1) for _ in range(n + 1)]\n    dp[0][0] = 0\n    for i in range(1, n + 1):\n        total = 0\n        for j in range(i, 0, -1):\n            total += var_0[j - 1]\n            for l in range(var_1):\n                dp[i][l + 1] = min(dp[i][l + 1], dp[j - 1][l] + (i - j + 1) * var_0[j - 1] - total)\n    return min(dp[n])"
 }
 ```
 
@@ -97,15 +105,17 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if nums[mid] + -mid + -1 < k:
-            left = 1 + mid
-        else:
-            right = mid
-    return k + left
+def minWastedSpace(nums, k):
+    n = len(nums)
+    dp = [(1 + k) * [float('inf')] for _ in range(1 + n)]
+    dp[0][0] = 0
+    for i in range(1, 1 + n):
+        total = 0
+        for j in range(i, 0, -1):
+            total += nums[j + -1]
+            for l in range(k):
+                dp[i][1 + l] = min(dp[i][1 + l], nums[j + -1] * (1 + (i + -j)) + dp[j + -1][l] + -total)
+    return min(dp[n])
 ```
 
 <details>
@@ -115,7 +125,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if nums[mid] + -mid + -1 < k:\n            left = 1 + mid\n        else:\n            right = mid\n    return k + left"
+    "source_code": "def minWastedSpace(nums, k):\n    n = len(nums)\n    dp = [(1 + k) * [float('inf')] for _ in range(1 + n)]\n    dp[0][0] = 0\n    for i in range(1, 1 + n):\n        total = 0\n        for j in range(i, 0, -1):\n            total += nums[j + -1]\n            for l in range(k):\n                dp[i][1 + l] = min(dp[i][1 + l], nums[j + -1] * (1 + (i + -j)) + dp[j + -1][l] + -total)\n    return min(dp[n])"
 }
 ```
 
@@ -135,15 +145,17 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_2, var_3):
-    (left, right) = (0, len(var_2))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if var_2[mid] + -mid + -1 < var_3:
-            left = 1 + mid
-        else:
-            right = mid
-    return var_3 + left
+def minWastedSpace(var_2, var_3):
+    n = len(var_2)
+    dp = [(1 + var_3) * [float('inf')] for _ in range(1 + n)]
+    dp[0][0] = 0
+    for i in range(1, 1 + n):
+        total = 0
+        for j in range(i, 0, -1):
+            total += var_2[j + -1]
+            for l in range(var_3):
+                dp[i][1 + l] = min(dp[i][1 + l], var_2[j + -1] * (1 + (i + -j)) + dp[j + -1][l] + -total)
+    return min(dp[n])
 ```
 
 <details>
@@ -153,7 +165,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_2, var_3):\n    (left, right) = (0, len(var_2))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if var_2[mid] + -mid + -1 < var_3:\n            left = 1 + mid\n        else:\n            right = mid\n    return var_3 + left"
+    "source_code": "def minWastedSpace(var_2, var_3):\n    n = len(var_2)\n    dp = [(1 + var_3) * [float('inf')] for _ in range(1 + n)]\n    dp[0][0] = 0\n    for i in range(1, 1 + n):\n        total = 0\n        for j in range(i, 0, -1):\n            total += var_2[j + -1]\n            for l in range(var_3):\n                dp[i][1 + l] = min(dp[i][1 + l], var_2[j + -1] * (1 + (i + -j)) + dp[j + -1][l] + -total)\n    return min(dp[n])"
 }
 ```
 

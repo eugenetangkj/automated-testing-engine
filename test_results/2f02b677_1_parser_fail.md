@@ -1,19 +1,23 @@
 # Test Report
 
-Time: 2024-03-30 08:03:28.199620
+Time: 2024-03-30 07:12:46.358885
 
 ### Base Program
 
 ```py
-def findKthPositive(nums, k):
-    left, right = 0, len(nums)
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
-        else:
-            right = mid
-    return left + k
+def kBigIndices(nums, k):
+    n = len(nums)
+    left, right = [0] * n, [0] * n
+
+    for i in range(1, n):
+        if nums[i] > nums[i - 1]:
+            left[i] = left[i - 1] + 1
+
+        j = n - i - 1
+        if nums[j] < nums[j + 1]:
+            right[j] = right[j + 1] + 1
+
+    return sum(1 for i in range(n) if left[i] >= k and right[i] >= k)
 ```
 
 ## Test Case 1
@@ -21,15 +25,16 @@ def findKthPositive(nums, k):
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
-        else:
-            right = mid
-    return left + k
+def kBigIndices(nums, k):
+    n = len(nums)
+    (left, right) = ([0] * n, [0] * n)
+    for i in range(1, n):
+        if nums[i] > nums[i - 1]:
+            left[i] = left[i - 1] + 1
+        j = n - i - 1
+        if nums[j] < nums[j + 1]:
+            right[j] = right[j + 1] + 1
+    return sum((1 for i in range(n) if left[i] >= k and right[i] >= k))
 ```
 
 <details>
@@ -39,7 +44,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = left + (right - left) // 2\n        if nums[mid] - mid - 1 < k:\n            left = mid + 1\n        else:\n            right = mid\n    return left + k"
+    "source_code": "def kBigIndices(nums, k):\n    n = len(nums)\n    (left, right) = ([0] * n, [0] * n)\n    for i in range(1, n):\n        if nums[i] > nums[i - 1]:\n            left[i] = left[i - 1] + 1\n        j = n - i - 1\n        if nums[j] < nums[j + 1]:\n            right[j] = right[j + 1] + 1\n    return sum((1 for i in range(n) if left[i] >= k and right[i] >= k))"
 }
 ```
 
@@ -59,15 +64,16 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_0, var_1):
-    (left, right) = (0, len(var_0))
-    while left < right:
-        mid = left + (right - left) // 2
-        if var_0[mid] - mid - 1 < var_1:
-            left = mid + 1
-        else:
-            right = mid
-    return left + var_1
+def kBigIndices(var_0, var_1):
+    n = len(var_0)
+    (left, right) = ([0] * n, [0] * n)
+    for i in range(1, n):
+        if var_0[i] > var_0[i - 1]:
+            left[i] = left[i - 1] + 1
+        j = n - i - 1
+        if var_0[j] < var_0[j + 1]:
+            right[j] = right[j + 1] + 1
+    return sum((1 for i in range(n) if left[i] >= var_1 and right[i] >= var_1))
 ```
 
 <details>
@@ -77,7 +83,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_0, var_1):\n    (left, right) = (0, len(var_0))\n    while left < right:\n        mid = left + (right - left) // 2\n        if var_0[mid] - mid - 1 < var_1:\n            left = mid + 1\n        else:\n            right = mid\n    return left + var_1"
+    "source_code": "def kBigIndices(var_0, var_1):\n    n = len(var_0)\n    (left, right) = ([0] * n, [0] * n)\n    for i in range(1, n):\n        if var_0[i] > var_0[i - 1]:\n            left[i] = left[i - 1] + 1\n        j = n - i - 1\n        if var_0[j] < var_0[j + 1]:\n            right[j] = right[j + 1] + 1\n    return sum((1 for i in range(n) if left[i] >= var_1 and right[i] >= var_1))"
 }
 ```
 
@@ -97,15 +103,16 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if nums[mid] + -mid + -1 < k:
-            left = 1 + mid
-        else:
-            right = mid
-    return k + left
+def kBigIndices(nums, k):
+    n = len(nums)
+    (left, right) = (n * [0], n * [0])
+    for i in range(1, n):
+        if nums[i] > nums[i + -1]:
+            left[i] = 1 + left[i + -1]
+        j = n + -i + -1
+        if nums[j] < nums[1 + j]:
+            right[j] = 1 + right[1 + j]
+    return sum((1 for i in range(n) if left[i] >= k and right[i] >= k))
 ```
 
 <details>
@@ -115,7 +122,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if nums[mid] + -mid + -1 < k:\n            left = 1 + mid\n        else:\n            right = mid\n    return k + left"
+    "source_code": "def kBigIndices(nums, k):\n    n = len(nums)\n    (left, right) = (n * [0], n * [0])\n    for i in range(1, n):\n        if nums[i] > nums[i + -1]:\n            left[i] = 1 + left[i + -1]\n        j = n + -i + -1\n        if nums[j] < nums[1 + j]:\n            right[j] = 1 + right[1 + j]\n    return sum((1 for i in range(n) if left[i] >= k and right[i] >= k))"
 }
 ```
 
@@ -135,15 +142,16 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_2, var_3):
-    (left, right) = (0, len(var_2))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if var_2[mid] + -mid + -1 < var_3:
-            left = 1 + mid
-        else:
-            right = mid
-    return var_3 + left
+def kBigIndices(var_2, var_3):
+    n = len(var_2)
+    (left, right) = (n * [0], n * [0])
+    for i in range(1, n):
+        if var_2[i] > var_2[i + -1]:
+            left[i] = 1 + left[i + -1]
+        j = n + -i + -1
+        if var_2[j] < var_2[1 + j]:
+            right[j] = 1 + right[1 + j]
+    return sum((1 for i in range(n) if left[i] >= var_3 and right[i] >= var_3))
 ```
 
 <details>
@@ -153,7 +161,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_2, var_3):\n    (left, right) = (0, len(var_2))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if var_2[mid] + -mid + -1 < var_3:\n            left = 1 + mid\n        else:\n            right = mid\n    return var_3 + left"
+    "source_code": "def kBigIndices(var_2, var_3):\n    n = len(var_2)\n    (left, right) = (n * [0], n * [0])\n    for i in range(1, n):\n        if var_2[i] > var_2[i + -1]:\n            left[i] = 1 + left[i + -1]\n        j = n + -i + -1\n        if var_2[j] < var_2[1 + j]:\n            right[j] = 1 + right[1 + j]\n    return sum((1 for i in range(n) if left[i] >= var_3 and right[i] >= var_3))"
 }
 ```
 

@@ -1,19 +1,22 @@
 # Test Report
 
-Time: 2024-03-30 08:03:28.199620
+Time: 2024-03-30 08:03:36.200482
 
 ### Base Program
 
 ```py
-def findKthPositive(nums, k):
-    left, right = 0, len(nums)
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
+def guessNumber(n):
+    low, high = 1, n
+    while low <= high:
+        mid = low + (high - low) // 2
+        result = guess(mid)
+        if result == 0:
+            return mid
+        elif result < 0:
+            high = mid - 1
         else:
-            right = mid
-    return left + k
+            low = mid + 1
+    return -1
 ```
 
 ## Test Case 1
@@ -21,15 +24,18 @@ def findKthPositive(nums, k):
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
+def guessNumber(n):
+    (low, high) = (1, n)
+    while low <= high:
+        mid = low + (high - low) // 2
+        result = guess(mid)
+        if result == 0:
+            return mid
+        elif result < 0:
+            high = mid - 1
         else:
-            right = mid
-    return left + k
+            low = mid + 1
+    return -1
 ```
 
 <details>
@@ -39,7 +45,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = left + (right - left) // 2\n        if nums[mid] - mid - 1 < k:\n            left = mid + 1\n        else:\n            right = mid\n    return left + k"
+    "source_code": "def guessNumber(n):\n    (low, high) = (1, n)\n    while low <= high:\n        mid = low + (high - low) // 2\n        result = guess(mid)\n        if result == 0:\n            return mid\n        elif result < 0:\n            high = mid - 1\n        else:\n            low = mid + 1\n    return -1"
 }
 ```
 
@@ -59,15 +65,18 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_0, var_1):
-    (left, right) = (0, len(var_0))
-    while left < right:
-        mid = left + (right - left) // 2
-        if var_0[mid] - mid - 1 < var_1:
-            left = mid + 1
+def guessNumber(var_0):
+    (low, high) = (1, var_0)
+    while low <= high:
+        mid = low + (high - low) // 2
+        result = guess(mid)
+        if result == 0:
+            return mid
+        elif result < 0:
+            high = mid - 1
         else:
-            right = mid
-    return left + var_1
+            low = mid + 1
+    return -1
 ```
 
 <details>
@@ -77,7 +86,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_0, var_1):\n    (left, right) = (0, len(var_0))\n    while left < right:\n        mid = left + (right - left) // 2\n        if var_0[mid] - mid - 1 < var_1:\n            left = mid + 1\n        else:\n            right = mid\n    return left + var_1"
+    "source_code": "def guessNumber(var_0):\n    (low, high) = (1, var_0)\n    while low <= high:\n        mid = low + (high - low) // 2\n        result = guess(mid)\n        if result == 0:\n            return mid\n        elif result < 0:\n            high = mid - 1\n        else:\n            low = mid + 1\n    return -1"
 }
 ```
 
@@ -97,15 +106,18 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if nums[mid] + -mid + -1 < k:
-            left = 1 + mid
+def guessNumber(n):
+    (low, high) = (1, n)
+    while low <= high:
+        mid = (high + -low) // 2 + low
+        result = guess(mid)
+        if result == 0:
+            return mid
+        elif result < 0:
+            high = mid + -1
         else:
-            right = mid
-    return k + left
+            low = 1 + mid
+    return -1
 ```
 
 <details>
@@ -115,7 +127,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if nums[mid] + -mid + -1 < k:\n            left = 1 + mid\n        else:\n            right = mid\n    return k + left"
+    "source_code": "def guessNumber(n):\n    (low, high) = (1, n)\n    while low <= high:\n        mid = (high + -low) // 2 + low\n        result = guess(mid)\n        if result == 0:\n            return mid\n        elif result < 0:\n            high = mid + -1\n        else:\n            low = 1 + mid\n    return -1"
 }
 ```
 
@@ -135,15 +147,18 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_2, var_3):
-    (left, right) = (0, len(var_2))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if var_2[mid] + -mid + -1 < var_3:
-            left = 1 + mid
+def guessNumber(var_1):
+    (low, high) = (1, var_1)
+    while low <= high:
+        mid = (high + -low) // 2 + low
+        result = guess(mid)
+        if result == 0:
+            return mid
+        elif result < 0:
+            high = mid + -1
         else:
-            right = mid
-    return var_3 + left
+            low = 1 + mid
+    return -1
 ```
 
 <details>
@@ -153,7 +168,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_2, var_3):\n    (left, right) = (0, len(var_2))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if var_2[mid] + -mid + -1 < var_3:\n            left = 1 + mid\n        else:\n            right = mid\n    return var_3 + left"
+    "source_code": "def guessNumber(var_1):\n    (low, high) = (1, var_1)\n    while low <= high:\n        mid = (high + -low) // 2 + low\n        result = guess(mid)\n        if result == 0:\n            return mid\n        elif result < 0:\n            high = mid + -1\n        else:\n            low = 1 + mid\n    return -1"
 }
 ```
 

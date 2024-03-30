@@ -1,19 +1,19 @@
 # Test Report
 
-Time: 2024-03-30 08:03:28.199620
+Time: 2024-03-30 07:23:14.001057
 
 ### Base Program
 
 ```py
-def findKthPositive(nums, k):
-    left, right = 0, len(nums)
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
+def maxDistance(nums1, nums2):
+    i, j, maxDist = 0, 0, 0
+    while i < len(nums1) and j < len(nums2):
+        if nums1[i] > nums2[j]:
+            i += 1
         else:
-            right = mid
-    return left + k
+            maxDist = max(maxDist, j - i)
+            j += 1
+    return maxDist
 ```
 
 ## Test Case 1
@@ -21,15 +21,15 @@ def findKthPositive(nums, k):
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
+def maxDistance(nums1, nums2):
+    (i, j, maxDist) = (0, 0, 0)
+    while i < len(nums1) and j < len(nums2):
+        if nums1[i] > nums2[j]:
+            i += 1
         else:
-            right = mid
-    return left + k
+            maxDist = max(maxDist, j - i)
+            j += 1
+    return maxDist
 ```
 
 <details>
@@ -39,7 +39,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = left + (right - left) // 2\n        if nums[mid] - mid - 1 < k:\n            left = mid + 1\n        else:\n            right = mid\n    return left + k"
+    "source_code": "def maxDistance(nums1, nums2):\n    (i, j, maxDist) = (0, 0, 0)\n    while i < len(nums1) and j < len(nums2):\n        if nums1[i] > nums2[j]:\n            i += 1\n        else:\n            maxDist = max(maxDist, j - i)\n            j += 1\n    return maxDist"
 }
 ```
 
@@ -59,15 +59,15 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_0, var_1):
-    (left, right) = (0, len(var_0))
-    while left < right:
-        mid = left + (right - left) // 2
-        if var_0[mid] - mid - 1 < var_1:
-            left = mid + 1
+def maxDistance(var_0, var_1):
+    (i, j, maxDist) = (0, 0, 0)
+    while i < len(var_0) and j < len(var_1):
+        if var_0[i] > var_1[j]:
+            i += 1
         else:
-            right = mid
-    return left + var_1
+            maxDist = max(maxDist, j - i)
+            j += 1
+    return maxDist
 ```
 
 <details>
@@ -77,7 +77,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_0, var_1):\n    (left, right) = (0, len(var_0))\n    while left < right:\n        mid = left + (right - left) // 2\n        if var_0[mid] - mid - 1 < var_1:\n            left = mid + 1\n        else:\n            right = mid\n    return left + var_1"
+    "source_code": "def maxDistance(var_0, var_1):\n    (i, j, maxDist) = (0, 0, 0)\n    while i < len(var_0) and j < len(var_1):\n        if var_0[i] > var_1[j]:\n            i += 1\n        else:\n            maxDist = max(maxDist, j - i)\n            j += 1\n    return maxDist"
 }
 ```
 
@@ -97,15 +97,15 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if nums[mid] + -mid + -1 < k:
-            left = 1 + mid
+def maxDistance(nums1, nums2):
+    (i, j, maxDist) = (0, 0, 0)
+    while i < len(nums1) and j < len(nums2):
+        if nums1[i] > nums2[j]:
+            i += 1
         else:
-            right = mid
-    return k + left
+            maxDist = max(maxDist, j + -i)
+            j += 1
+    return maxDist
 ```
 
 <details>
@@ -115,7 +115,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if nums[mid] + -mid + -1 < k:\n            left = 1 + mid\n        else:\n            right = mid\n    return k + left"
+    "source_code": "def maxDistance(nums1, nums2):\n    (i, j, maxDist) = (0, 0, 0)\n    while i < len(nums1) and j < len(nums2):\n        if nums1[i] > nums2[j]:\n            i += 1\n        else:\n            maxDist = max(maxDist, j + -i)\n            j += 1\n    return maxDist"
 }
 ```
 
@@ -135,15 +135,15 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_2, var_3):
-    (left, right) = (0, len(var_2))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if var_2[mid] + -mid + -1 < var_3:
-            left = 1 + mid
+def maxDistance(var_2, var_3):
+    (i, j, maxDist) = (0, 0, 0)
+    while i < len(var_2) and j < len(var_3):
+        if var_2[i] > var_3[j]:
+            i += 1
         else:
-            right = mid
-    return var_3 + left
+            maxDist = max(maxDist, j + -i)
+            j += 1
+    return maxDist
 ```
 
 <details>
@@ -153,7 +153,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_2, var_3):\n    (left, right) = (0, len(var_2))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if var_2[mid] + -mid + -1 < var_3:\n            left = 1 + mid\n        else:\n            right = mid\n    return var_3 + left"
+    "source_code": "def maxDistance(var_2, var_3):\n    (i, j, maxDist) = (0, 0, 0)\n    while i < len(var_2) and j < len(var_3):\n        if var_2[i] > var_3[j]:\n            i += 1\n        else:\n            maxDist = max(maxDist, j + -i)\n            j += 1\n    return maxDist"
 }
 ```
 

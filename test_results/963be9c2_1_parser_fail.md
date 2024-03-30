@@ -1,19 +1,25 @@
 # Test Report
 
-Time: 2024-03-30 08:03:28.199620
+Time: 2024-03-30 07:34:58.090756
 
 ### Base Program
 
 ```py
-def findKthPositive(nums, k):
-    left, right = 0, len(nums)
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
+def arraysIntersection(arr1, arr2, arr3):
+    i, j, k = 0, 0, 0
+    result = []
+    while i < len(arr1) and j < len(arr2) and k < len(arr3):
+        if arr1[i] == arr2[j] and arr2[j] == arr3[k]:
+            result.append(arr1[i])
+            i, j, k = i + 1, j + 1, k + 1
         else:
-            right = mid
-    return left + k
+            if arr1[i] <= arr2[j] and arr1[i] <= arr3[k]:
+                i += 1
+            elif arr2[j] <= arr3[k]:
+                j += 1
+            else:
+                k += 1
+    return result
 ```
 
 ## Test Case 1
@@ -21,15 +27,20 @@ def findKthPositive(nums, k):
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = left + (right - left) // 2
-        if nums[mid] - mid - 1 < k:
-            left = mid + 1
+def arraysIntersection(arr1, arr2, arr3):
+    (i, j, k) = (0, 0, 0)
+    result = []
+    while i < len(arr1) and j < len(arr2) and (k < len(arr3)):
+        if arr1[i] == arr2[j] and arr2[j] == arr3[k]:
+            result.append(arr1[i])
+            (i, j, k) = (i + 1, j + 1, k + 1)
+        elif arr1[i] <= arr2[j] and arr1[i] <= arr3[k]:
+            i += 1
+        elif arr2[j] <= arr3[k]:
+            j += 1
         else:
-            right = mid
-    return left + k
+            k += 1
+    return result
 ```
 
 <details>
@@ -39,7 +50,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = left + (right - left) // 2\n        if nums[mid] - mid - 1 < k:\n            left = mid + 1\n        else:\n            right = mid\n    return left + k"
+    "source_code": "def arraysIntersection(arr1, arr2, arr3):\n    (i, j, k) = (0, 0, 0)\n    result = []\n    while i < len(arr1) and j < len(arr2) and (k < len(arr3)):\n        if arr1[i] == arr2[j] and arr2[j] == arr3[k]:\n            result.append(arr1[i])\n            (i, j, k) = (i + 1, j + 1, k + 1)\n        elif arr1[i] <= arr2[j] and arr1[i] <= arr3[k]:\n            i += 1\n        elif arr2[j] <= arr3[k]:\n            j += 1\n        else:\n            k += 1\n    return result"
 }
 ```
 
@@ -59,15 +70,20 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_0, var_1):
-    (left, right) = (0, len(var_0))
-    while left < right:
-        mid = left + (right - left) // 2
-        if var_0[mid] - mid - 1 < var_1:
-            left = mid + 1
+def arraysIntersection(var_0, var_1, var_2):
+    (i, j, k) = (0, 0, 0)
+    result = []
+    while i < len(var_0) and j < len(var_1) and (k < len(var_2)):
+        if var_0[i] == var_1[j] and var_1[j] == var_2[k]:
+            result.append(var_0[i])
+            (i, j, k) = (i + 1, j + 1, k + 1)
+        elif var_0[i] <= var_1[j] and var_0[i] <= var_2[k]:
+            i += 1
+        elif var_1[j] <= var_2[k]:
+            j += 1
         else:
-            right = mid
-    return left + var_1
+            k += 1
+    return result
 ```
 
 <details>
@@ -77,7 +93,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_0, var_1):\n    (left, right) = (0, len(var_0))\n    while left < right:\n        mid = left + (right - left) // 2\n        if var_0[mid] - mid - 1 < var_1:\n            left = mid + 1\n        else:\n            right = mid\n    return left + var_1"
+    "source_code": "def arraysIntersection(var_0, var_1, var_2):\n    (i, j, k) = (0, 0, 0)\n    result = []\n    while i < len(var_0) and j < len(var_1) and (k < len(var_2)):\n        if var_0[i] == var_1[j] and var_1[j] == var_2[k]:\n            result.append(var_0[i])\n            (i, j, k) = (i + 1, j + 1, k + 1)\n        elif var_0[i] <= var_1[j] and var_0[i] <= var_2[k]:\n            i += 1\n        elif var_1[j] <= var_2[k]:\n            j += 1\n        else:\n            k += 1\n    return result"
 }
 ```
 
@@ -97,15 +113,20 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(nums, k):
-    (left, right) = (0, len(nums))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if nums[mid] + -mid + -1 < k:
-            left = 1 + mid
+def arraysIntersection(arr1, arr2, arr3):
+    (i, j, k) = (0, 0, 0)
+    result = []
+    while i < len(arr1) and j < len(arr2) and (k < len(arr3)):
+        if arr1[i] == arr2[j] and arr2[j] == arr3[k]:
+            result.append(arr1[i])
+            (i, j, k) = (1 + i, 1 + j, 1 + k)
+        elif arr1[i] <= arr2[j] and arr1[i] <= arr3[k]:
+            i += 1
+        elif arr2[j] <= arr3[k]:
+            j += 1
         else:
-            right = mid
-    return k + left
+            k += 1
+    return result
 ```
 
 <details>
@@ -115,7 +136,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(nums, k):\n    (left, right) = (0, len(nums))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if nums[mid] + -mid + -1 < k:\n            left = 1 + mid\n        else:\n            right = mid\n    return k + left"
+    "source_code": "def arraysIntersection(arr1, arr2, arr3):\n    (i, j, k) = (0, 0, 0)\n    result = []\n    while i < len(arr1) and j < len(arr2) and (k < len(arr3)):\n        if arr1[i] == arr2[j] and arr2[j] == arr3[k]:\n            result.append(arr1[i])\n            (i, j, k) = (1 + i, 1 + j, 1 + k)\n        elif arr1[i] <= arr2[j] and arr1[i] <= arr3[k]:\n            i += 1\n        elif arr2[j] <= arr3[k]:\n            j += 1\n        else:\n            k += 1\n    return result"
 }
 ```
 
@@ -135,15 +156,20 @@ Actual Output: None
 ### Modified Program
 
 ```py
-def findKthPositive(var_2, var_3):
-    (left, right) = (0, len(var_2))
-    while left < right:
-        mid = (right + -left) // 2 + left
-        if var_2[mid] + -mid + -1 < var_3:
-            left = 1 + mid
+def arraysIntersection(var_3, var_4, var_5):
+    (i, j, k) = (0, 0, 0)
+    result = []
+    while i < len(var_3) and j < len(var_4) and (k < len(var_5)):
+        if var_3[i] == var_4[j] and var_4[j] == var_5[k]:
+            result.append(var_3[i])
+            (i, j, k) = (1 + i, 1 + j, 1 + k)
+        elif var_3[i] <= var_4[j] and var_3[i] <= var_5[k]:
+            i += 1
+        elif var_4[j] <= var_5[k]:
+            j += 1
         else:
-            right = mid
-    return var_3 + left
+            k += 1
+    return result
 ```
 
 <details>
@@ -153,7 +179,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def findKthPositive(var_2, var_3):\n    (left, right) = (0, len(var_2))\n    while left < right:\n        mid = (right + -left) // 2 + left\n        if var_2[mid] + -mid + -1 < var_3:\n            left = 1 + mid\n        else:\n            right = mid\n    return var_3 + left"
+    "source_code": "def arraysIntersection(var_3, var_4, var_5):\n    (i, j, k) = (0, 0, 0)\n    result = []\n    while i < len(var_3) and j < len(var_4) and (k < len(var_5)):\n        if var_3[i] == var_4[j] and var_4[j] == var_5[k]:\n            result.append(var_3[i])\n            (i, j, k) = (1 + i, 1 + j, 1 + k)\n        elif var_3[i] <= var_4[j] and var_3[i] <= var_5[k]:\n            i += 1\n        elif var_4[j] <= var_5[k]:\n            j += 1\n        else:\n            k += 1\n    return result"
 }
 ```
 
