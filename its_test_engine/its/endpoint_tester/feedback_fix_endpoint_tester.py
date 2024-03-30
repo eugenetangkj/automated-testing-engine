@@ -4,9 +4,9 @@
 
 import json
 
-from its_test_engine.its.endpoint_tester import EndpointTester
 from its_test_engine.enums import TypeOfMetamorphicRelation
 from its_test_engine.its.test_result import ItsTestResult
+from .endpoint_tester import EndpointTester
 
 
 class FeedbackFixEndpointTester(EndpointTester):

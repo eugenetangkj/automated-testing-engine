@@ -80,10 +80,10 @@ class Tester:
 
         # if all programs failed to parse
         if all(
-            [
+            (
                 not parser_result.success
                 for _, _, parser_result in parsed_modified_programs
-            ]
+            )
         ):
             return test_suites
 
@@ -97,7 +97,7 @@ class Tester:
                 break
 
             # Step 2: Run interpreter to check if base program runs successfully
-            interpreter_output, interpreter_result = interpreter_tester.run_test(
+            _, interpreter_result = interpreter_tester.run_test(
                 function_signature, parsed_base_program, program_input
             )
             test_suite.set_interpreter_result(interpreter_result)
@@ -118,7 +118,7 @@ class Tester:
 
                 test_case.add_result(parser_result)
 
-                interpreter_output, interpreter_result = interpreter_tester.run_test(
+                _, interpreter_result = interpreter_tester.run_test(
                     function_signature, parsed_modified_program, program_input
                 )
                 test_case.add_result(interpreter_result)

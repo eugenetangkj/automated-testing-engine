@@ -47,15 +47,16 @@ def process_arguments(raw_arguments):
 
     if len(raw_arguments) == 0:
         return "[]"
-    elif len(raw_arguments) == 1:
+
+    if len(raw_arguments) == 1:
         return "[" + str(raw_arguments[0]) + "]"
-    else:
-        output = "[["
 
-        for index, current_raw_argument in enumerate(raw_arguments):
-            output += str(current_raw_argument)
-            if index < len(raw_arguments) - 1:
-                output += ","
+    output = "[["
 
-        output += "]]"
-        return output
+    for index, current_raw_argument in enumerate(raw_arguments):
+        output += str(current_raw_argument)
+        if index < len(raw_arguments) - 1:
+            output += ","
+
+    output += "]]"
+    return output

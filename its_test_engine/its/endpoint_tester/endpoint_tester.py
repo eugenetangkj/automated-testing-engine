@@ -3,7 +3,7 @@
 """
 
 from abc import ABC, abstractmethod
-from its_test_engine.enums import TypeOfMetamorphicRelation, Language
+from its_test_engine.enums import TypeOfMetamorphicRelation
 from its_test_engine.its.its_api_connection import ItsApiConnection
 
 

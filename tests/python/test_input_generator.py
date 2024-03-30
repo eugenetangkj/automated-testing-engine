@@ -1,13 +1,13 @@
 import pytest
 import its_test_engine.python.input_generator as generator
 
-code = """
+CODE = """
 def add(a, b):
     return a + b
 """
 
 # generate a complicated code semgnet
-complicated_code = """
+COMPLICATED_CODE = """
 def generate_random(seed, n):
     a = 1664525
     c = 1013904223
@@ -22,12 +22,12 @@ def generate_random(seed, n):
 
 @pytest.mark.timeout(60)
 def test_generate_inputs():
-    input_generator = generator.PynGuinInputGenerator(code)
+    input_generator = generator.PynGuinInputGenerator(CODE)
     inputs = input_generator.generate_inputs()
 
     assert len(inputs) > 0
 
-    input_generator = generator.PynGuinInputGenerator(complicated_code)
+    input_generator = generator.PynGuinInputGenerator(COMPLICATED_CODE)
     inputs = input_generator.generate_inputs()
 
     assert len(inputs) > 0

@@ -93,7 +93,7 @@ class ItsTestSuitesMarkdownWriter:
         file_name = f"{hash_value[:8]}_{date_time}_{'pass' if test_suite.is_success() else 'fail'}.md"
         file_path = os.path.join(folder_path, file_name)
 
-        markdown = f"# Test Report\n\n"
+        markdown = "# Test Report\n\n"
         markdown += f"Time: {test_suite.time}\n\n"
         markdown += "### Base Program\n\n"
         markdown += (
@@ -103,8 +103,8 @@ class ItsTestSuitesMarkdownWriter:
         markdown += f"```json\n{test_suite.inputs}\n```\n\n"
 
         if test_suite.parser_result:
-            markdown += f"<details>\n"
-            markdown += f"<summary>"
+            markdown += "<details>\n"
+            markdown += "<summary>"
             markdown += "Parser Result: "
             markdown += (
                 f"{'Passed ✅' if test_suite.parser_result.success else 'Failed ❌'}"
@@ -115,8 +115,8 @@ class ItsTestSuitesMarkdownWriter:
             markdown += "</details>\n\n"
 
         if test_suite.interpreter_result:
-            markdown += f"<details>\n"
-            markdown += f"<summary>"
+            markdown += "<details>\n"
+            markdown += "<summary>"
             markdown += "Interpreter Result: "
             markdown += f"{'Passed ✅' if test_suite.interpreter_result.success else 'Failed ❌'}"
             markdown += "</summary>\n\n"
@@ -137,7 +137,7 @@ class ItsTestSuitesMarkdownWriter:
             for result in test_case.results:
                 markdown += "<details>\n"
 
-                markdown += f"<summary>"
+                markdown += "<summary>"
                 markdown += f"{result.endpoint} endpoint: "
                 markdown += f"{'passed ✅' if result.success else 'failed ❌'}"
                 markdown += "</summary>\n\n"

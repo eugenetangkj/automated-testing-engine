@@ -7,7 +7,7 @@ import requests
 from its_test_engine.enums import Language
 
 
-class ItsApiConnection(object):
+class ItsApiConnection:
     """
     This class is responsible for making the API calls to the respective endpoints available
     on the ITS API. It is the main way through which the automated test engine interacts
@@ -38,6 +38,8 @@ class ItsApiConnection(object):
                 continue
 
         if response.status_code != 200:
+            # Raise an exception if the status code is not 200
+            # pylint: disable=broad-exception-raised
             raise Exception(
                 f"Error in making API call to {url}. (Retry {retry} times)\n"
                 + f"Status code: {response.status_code}.\n"
@@ -89,6 +91,8 @@ class ItsApiConnection(object):
                 "inputs": params[4],
                 "args": params[5],
             }
+
+        return {}
 
     def call_parser_endpoint(self, source_code):
         """

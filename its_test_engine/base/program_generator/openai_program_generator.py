@@ -1,13 +1,15 @@
+# pylint: disable=line-too-long
 """
     Generates a random program using OpenAI LLM, gpt-3.5-turbo
 """
+
 
 import json
 import os
 import httpx
 from dotenv import load_dotenv
 from openai import OpenAI
-from its_test_engine.base.program_generator import BaseProgramGenerator
+from .base_program_generator import BaseProgramGenerator
 
 
 load_dotenv()  # Loads environment variables for OpenAI API key
@@ -52,7 +54,7 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
         # OpenAI client instance
         # Adapted from https://community.openai.com/t/setting-request-timeout-in-openai-v1-2-2/492772
-        self.OPENAI_CLIENT = OpenAI(
+        self.openai_client = OpenAI(
             api_key=os.environ.get("CS3213_OPENAI_API_KEY"), timeout=httpx.Timeout(20.0)
         )
 
@@ -72,10 +74,11 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
             if self.language == "py":
                 system_prompt = self.SYSTEM_PROMPT_PY + self.SAMPLE_PY_PROGRAMS
             else:
-                system_prompt = ""  # TODO: Update system prompt for C programs
+                # TODO: Update system prompt for C programs
+                system_prompt = ""
 
             # Call OpenAI API
-            response = self.OPENAI_CLIENT.chat.completions.create(
+            response = self.openai_client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": system_prompt},
