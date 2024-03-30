@@ -23,7 +23,7 @@ def f():
 
 The code snippets above use `while` loop. The interpreter does not support this feature properly.
 
-We notice that if the expression in the `while` loop is a binary operation, the interpreter will not be able to evaluate the expression correctly.
+We notice that if the expression in the `while` loop is a binary operation, the interpreter will be able to evaluate the expression correctly.
 
 ```py
 def f():
