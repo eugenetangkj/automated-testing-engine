@@ -19,11 +19,11 @@ class ItsApiConnection:
 
     BASE_API_URL = "https://its.comp.nus.edu.sg/cs3213/"
 
-    def __init__(self, langauge: Language):
+    def __init__(self, language: Language):
         """
         Initialisation method for an ItsApiConnection instance
         """
-        self.language = langauge
+        self.language = language
 
     def __make_api_call(self, url, params):
         retry = 0
