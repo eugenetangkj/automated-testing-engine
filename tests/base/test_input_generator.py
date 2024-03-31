@@ -6,8 +6,8 @@ def add(a, b):
     return a + b
 """
 
-# generate a complicated code semgnet
-COMPLICAED_CODE = """
+# generate a complicated code segment
+COMPLICATED_CODE = """
 def generate_random(seed, n):
     a = 1664525
     c = 1013904223
@@ -30,7 +30,7 @@ def test_random_input_generator():
     assert len(inputs) == 20
 
     inputs = input_generator.generate_inputs(
-        {"name": "add", "argument_types": ["int", "int"]}, COMPLICAED_CODE, 20
+        {"name": "add", "argument_types": ["int", "int"]}, COMPLICATED_CODE, 20
     )
 
     assert len(inputs) == 20
