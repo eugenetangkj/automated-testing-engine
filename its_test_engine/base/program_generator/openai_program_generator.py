@@ -54,39 +54,33 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
         # OpenAI client instance
         # Adapted from https://community.openai.com/t/setting-request-timeout-in-openai-v1-2-2/492772
-        self.openai_client = OpenAI(
-            api_key=os.environ.get("CS3213_OPENAI_API_KEY"), timeout=httpx.Timeout(20.0)
-        )
+        if (os.environ.get("CS3213_OPENAI_API_KEY") is None):
+            self.openai_client = OpenAI(api_key="", timeout=httpx.Timeout(20.0))
+        else:
+            self.openai_client = OpenAI(api_key=os.environ.get("CS3213_OPENAI_API_KEY"), timeout=httpx.Timeout(20.0))
 
-    def generate_test_case(self):
+    def generate_test_case(self, get_answer_from_prompt=None):
         """
         Generates a random base program written in a given language with
         specific constraints to guide the creation of the base program.
 
         """
+        if (get_answer_from_prompt == None):
+            get_answer_from_prompt = self._get_answer_from_openai_api
 
         # Calls the chat completion API to generate the base program
         try:
             # Generate user prompt
-            user_prompt = self.__generate_user_prompt(self.constraints)
+            user_prompt = self.generate_user_prompt(self.constraints)
 
             # Prepare system prompt
-            if self.language == "py":
-                system_prompt = self.SYSTEM_PROMPT_PY + self.SAMPLE_PY_PROGRAMS
-            else:
-                # TODO: Update system prompt for C programs
-                system_prompt = ""
+            system_prompt = self.SYSTEM_PROMPT_PY + self.SAMPLE_PY_PROGRAMS
+
+            # TODO: Update system prompt for C programs
+
 
             # Call OpenAI API
-            response = self.openai_client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt},
-                ],
-                temperature=1.5,  # We want more randomness in generating these base programs
-                response_format={"type": "json_object"},  # We want to get a JSON object
-            )
+            response = get_answer_from_prompt(user_prompt, system_prompt)
 
             # Extract output from API
             json_string = response.choices[0].message.content
@@ -98,12 +92,12 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
             # Pack outputs together into a tuple
             output = (
-                base_program_string,
                 {
                     "name": function_name,
                     "argument_types": arguments,
                     "return_type": return_type,
                 },
+                base_program_string
             )
 
             return output
@@ -116,8 +110,12 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
             # OpenAI API gives invalid output. We just move on.
             print(decode_error)
             return None
+        
+        except KeyError as key_error:
+            print(key_error)
+            return None
 
-    def __generate_user_prompt(self, constraints):
+    def generate_user_prompt(self, constraints):
         """
         Prompt engineers a user prompt to be passed into the OpenAI model
 
@@ -126,5 +124,18 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
                         the base program with.
 
         """
+        if (constraints is None):
+            return f"###Constraints: None"
 
         return f"###Constraints: { constraints }"
+
+    def _get_answer_from_openai_api(self, system_prompt, user_prompt):
+        return self.openai_client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            temperature=1.5,  # We want more randomness in generating these base programs
+            response_format={"type": "json_object"},  # We want to get a JSON object
+        )

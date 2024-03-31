@@ -37,14 +37,26 @@ class Tester:
         its_api_connection = ItsApiConnection(self.language)
 
         # Step 1: Generate test case
-        function_signature, base_code = self.program_generator.generate_test_case()
+        try:
+            function_signature, base_code = self.program_generator.generate_test_case()
+        except SyntaxError as syntax_error:
+            # Some LeetCode programs cannot be successfully parsed via their AST
+            print(syntax_error)
+            return None
 
         # Step 2: Generate inputs
         inputs = self.input_generator.generate_inputs(function_signature, base_code, 10)
 
         # Step 3: Mutate code
-        modified_programs = mutate_code(base_code, self.transformers)
-
+        try:
+            modified_programs = mutate_code(base_code, self.transformers)
+        except SyntaxError as syntax_error:
+            # OpenAI might give code that cannot be mutated by the transformers
+            # For example, it could have \n and \t in the base program string instead of using newlines and tabs
+            print(syntax_error)
+            return None
+        
+        # Step 4: Put base and mutated inputs into respective API endpoints
         parser_tester = ParserTester(its_api_connection)
         interpreter_tester = InterpreterTester(its_api_connection)
         repair_endpoint_tester = RepairEndpointTester(its_api_connection)
