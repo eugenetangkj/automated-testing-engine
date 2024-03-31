@@ -1,7 +1,6 @@
 import json
-import httpx
 from unittest.mock import patch, MagicMock
-import pytest
+import httpx
 from its_test_engine.base.program_generator.openai_program_generator import (
     OpenAiProgramGenerator,
 )
@@ -52,20 +51,6 @@ def test_openai_program_generator_generate_test_case_timeout(mocker):
     # Timeout exception
     output = open_ai_program_generator.generate_test_case()
     assert output is None
-
-
-@pytest.fixture
-def mock_invalid_json_openai_client():
-    with patch(
-        "its_test_engine.base.program_generator.openai_program_generator.OpenAI"
-    ) as mock_openai:
-        mock_openai_instance = MagicMock()
-        response = MagicMock()
-        response.choices = [MagicMock()]
-        response.choices[0].message.content = json.dumps({"return_type": "int"})
-        mock_openai_instance.chat.completions.create.return_value = response
-        mock_openai.return_value = mock_openai_instance
-        yield mock_openai_instance
 
 
 @patch("its_test_engine.base.program_generator.openai_program_generator.OpenAI")
