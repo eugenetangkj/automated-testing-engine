@@ -26,3 +26,11 @@ testpaths = ["tests"]
 
 [pytest]
 timeout = 300
+
+[tool.coverage.run]
+omit = [
+    "tests/*",
+    "its_test_engine/**/*/__init__.py",
+    "its_test_engine/main.py", # this is main execution logic
+    "its_test_engine/its/tester.py", # this is main execution logic
+]

@@ -5,6 +5,7 @@ from its_test_engine.its.endpoint_tester import InterpreterTester
 
 PROGRAM_TO_SUCCESS = "def add(a, b): return a + b"
 PROGRAM_TO_FAIL = "def add2(a, b): return a"
+PROGRAM_TO_FAIL2 = "def add3(a, b): return b"
 
 
 class MockItsApiConnection(ItsApiConnection):
@@ -12,6 +13,8 @@ class MockItsApiConnection(ItsApiConnection):
         function = payload["function"]
         if function == "add2":
             raise Exception("Invalid program")
+        if function == "add3":
+            return None
         return {"entries": [{"functionName": function}]}
 
 
@@ -29,5 +32,12 @@ def test_parser_tester():
     interpreter_output, test_result = interpreter_tester.run_test(
         {"name": "add2"}, PROGRAM_TO_FAIL, [1, 2]
     )
+    assert interpreter_output is None
+    assert not test_result.success
+
+    interpreter_output, test_result = interpreter_tester.run_test(
+        {"name": "add3"}, PROGRAM_TO_FAIL2, [1, 2]
+    )
+
     assert interpreter_output is None
     assert not test_result.success

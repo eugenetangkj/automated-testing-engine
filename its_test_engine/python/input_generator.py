@@ -62,9 +62,6 @@ class PynGuinInputGenerator:
         self.code_path = code_path
         self.folder_path = folder_path
 
-    def get_coverage(self):
-        pass
-
     def generate_inputs(self):
 
         try:

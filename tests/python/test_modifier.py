@@ -51,6 +51,7 @@ def test_bin_op_modified():
         ["a = 1 * a", "a = a"],
         ["a = a - b", "a = a + -b"],
         ["a = b - a", "a = b + -a"],
+        ["a = a + b + c", "a = a + c + b"],
     ]
 
     for test_case in test_cases:

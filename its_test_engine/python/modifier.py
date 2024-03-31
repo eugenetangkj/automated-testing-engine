@@ -72,12 +72,4 @@ class BinOpModifier(ast.NodeTransformer):
             node.op = ast.Add()
             node.right = ast.UnaryOp(op=ast.USub(), operand=node.right)
 
-        if (
-            isinstance(node, ast.UnaryOp)
-            and isinstance(node.op, ast.USub)
-            and isinstance(node.operand, ast.UnaryOp)
-            and isinstance(node.operand.op, ast.USub)
-        ):
-            return node.operand.operand
-
         return self.generic_visit(node)
