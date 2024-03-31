@@ -165,6 +165,4 @@ cython_debug/
 pynguin-report/
 
 .DS_Store
-/.vs/automated-testing-engine-group-18/v17
-/.vs/automated-testing-engine-group-18/FileContentIndex
-/.vs
+
