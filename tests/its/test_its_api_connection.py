@@ -10,6 +10,7 @@ def add(a, b):
     return a + b
 """
 
+# pylint: disable=line-too-long
 PARSED_CODE = '{"importStatements":[],"fncs":{"add":{"name":"add","rettype":"*","initloc":1,"endloc":0,"params":[{"val0":"a","val1":"*","valueArray":["a","*"],"valueList":["a","*"]},{"val0":"b","val1":"*","valueArray":["b","*"],"valueList":["b","*"]}],"locexprs":{"1":[{"val0":"$ret","val1":{"name":"Add","args":[{"name":"a","primed":false,"line":3,"tokentype":"Variable"},{"name":"b","primed":false,"line":3,"tokentype":"Variable"}],"line":3,"tokentype":"Operation"},"valueArray":["$ret",{"name":"Add","args":[{"name":"a","primed":false,"line":3,"tokentype":"Variable"},{"name":"b","primed":false,"line":3,"tokentype":"Variable"}],"line":3}],"valueList":["$ret",{"name":"Add","args":[{"name":"a","primed":false,"line":3,"tokentype":"Variable"},{"name":"b","primed":false,"line":3,"tokentype":"Variable"}],"line":3}]}]},"loctrans":{"1":{}},"locdescs":{"1":"around the beginning of function \'add\'"},"types":{}}}}'
 INTERPRETER_OUTPUT = '{"entries":[{"functionName":"add","location":1,"mem":{"a":1,"b":2,"$ret\'":3,"$ret":"<undef>"},"isChecked":false}]}'
 
