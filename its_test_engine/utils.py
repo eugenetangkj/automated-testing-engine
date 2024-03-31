@@ -32,31 +32,3 @@ def mutate_code(code, transformers):
             mutated_codes_exists.add(hash(mutated_code))
 
     return mutated_codes
-
-
-def process_arguments(raw_arguments):
-    """
-    The argument format accepted by the ITS API is unique. We need to transform
-    our internal argument format to be the format accepted by the ITS API
-
-    Examples of transformations:
-        [] -> "[]"
-        [2] -> "[2]"
-        [2, 3] -> "[[2,3]]"
-    """
-
-    if len(raw_arguments) == 0:
-        return "[]"
-
-    if len(raw_arguments) == 1:
-        return "[" + str(raw_arguments[0]) + "]"
-
-    output = "[["
-
-    for index, current_raw_argument in enumerate(raw_arguments):
-        output += str(current_raw_argument)
-        if index < len(raw_arguments) - 1:
-            output += ","
-
-    output += "]]"
-    return output
