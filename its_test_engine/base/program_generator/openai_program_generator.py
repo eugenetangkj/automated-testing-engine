@@ -54,20 +54,16 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
         # OpenAI client instance
         # Adapted from https://community.openai.com/t/setting-request-timeout-in-openai-v1-2-2/492772
-        if (os.environ.get("CS3213_OPENAI_API_KEY") is None):
-            self.openai_client = OpenAI(api_key="", timeout=httpx.Timeout(20.0))
-        else:
-            self.openai_client = OpenAI(api_key=os.environ.get("CS3213_OPENAI_API_KEY"), timeout=httpx.Timeout(20.0))
+        self.openai_client = OpenAI(
+            api_key=os.environ.get("CS3213_OPENAI_API_KEY"), timeout=httpx.Timeout(20.0)
+        )
 
-    def generate_test_case(self, get_answer_from_prompt=None):
+    def generate_test_case(self):
         """
         Generates a random base program written in a given language with
         specific constraints to guide the creation of the base program.
 
         """
-        if (get_answer_from_prompt == None):
-            get_answer_from_prompt = self._get_answer_from_openai_api
-
         # Calls the chat completion API to generate the base program
         try:
             # Generate user prompt
@@ -78,9 +74,8 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
             # TODO: Update system prompt for C programs
 
-
             # Call OpenAI API
-            response = get_answer_from_prompt(user_prompt, system_prompt)
+            response = self._get_answer_from_openai_api(system_prompt, user_prompt)
 
             # Extract output from API
             json_string = response.choices[0].message.content
@@ -97,7 +92,7 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
                     "argument_types": arguments,
                     "return_type": return_type,
                 },
-                base_program_string
+                base_program_string,
             )
 
             return output
@@ -110,7 +105,7 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
             # OpenAI API gives invalid output. We just move on.
             print(decode_error)
             return None
-        
+
         except KeyError as key_error:
             print(key_error)
             return None
@@ -124,8 +119,8 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
                         the base program with.
 
         """
-        if (constraints is None):
-            return f"###Constraints: None"
+        if constraints is None:
+            return "###Constraints: None"
 
         return f"###Constraints: { constraints }"
 

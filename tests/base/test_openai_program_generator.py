@@ -1,69 +1,96 @@
+import json
+import httpx
+from unittest.mock import patch, MagicMock
+import pytest
 from its_test_engine.base.program_generator.openai_program_generator import (
     OpenAiProgramGenerator,
 )
-import httpx
 
-# Mock classes that simulates OpenAI API
-class MockChatCompletionMessage():
-    def __init__(self, mock_content):
-        self.content = mock_content
 
-class MockChoice():
-    def __init__(self, mock_message: MockChatCompletionMessage):
-        self.message = mock_message
+def generate_mock_response(content):
+    response = MagicMock()
+    response.choices = [MagicMock()]
+    response.choices[0].message.content = content
+    return response
 
-class MockChatCompletion():
-    def __init__(self, mock_choice:MockChoice):
-        self.choices = []
-        self.choices.append(mock_choice)
 
-# Mock function to simulate a properly formatted JSON returned from OpenAI
-def mock_get_answer_from_openai_api(system_prompt, user_prompt):
-    mock_chat_completion_message = MockChatCompletionMessage('{ "function": "def sum_nums(x, y, z): \\n\\tres_sum = x + y + z \\n\\treturn res_sum", "name": "sum_nums","arguments": ["int", "int", "int"], "return_type": "int"}')
-    mock_choice = MockChoice(mock_chat_completion_message)
-    mock_chat_completion = MockChatCompletion(mock_choice)
-    return mock_chat_completion
-
-# Mock function to simulate a timeout from OpenAI
-def mock_get_timeout_from_openai_api(system_prompt, user_prompt):
-    raise httpx.TimeoutException("Mock timeout message")
-
-# Mock function that simulates a string that cannot be parsed into JSON, returned from OpenAI.
-# In this case, we just have a string that cannot parsed into JSON.
-def mock_get_invalid_json_from_openai_api(system_prompt, user_prompt):
-    mock_chat_completion_message = MockChatCompletionMessage('{"return_type": "int"}')
-    mock_choice = MockChoice(mock_chat_completion_message)
-    mock_chat_completion = MockChatCompletion(mock_choice)
-    return mock_chat_completion
-
-# Mock function that simulates a JSON without required keys returned from OpenAI. In this case, there is only
-# the key 'return_type' so in the actual function, it will throw a key error
-def mock_get_json_without_all_keys_from_openai_api(system_prompt, user_prompt):
-    mock_chat_completion_message = MockChatCompletionMessage('{"return_type": "int"}')
-    mock_choice = MockChoice(mock_chat_completion_message)
-    mock_chat_completion = MockChatCompletion(mock_choice)
-    return mock_chat_completion
-
-# Test the generate test_case() method
-def test_openai_program_generator_generate_test_case():
+@patch("its_test_engine.base.program_generator.openai_program_generator.OpenAI")
+def test_openai_program_generator_generate_test_case_successful(mocker):
+    mocker_instance = mocker.return_value
     open_ai_program_generator = OpenAiProgramGenerator("py", "")
 
-    # Test case 1: Valid JSON output, in the format we expect
-    output = open_ai_program_generator.generate_test_case(mock_get_answer_from_openai_api)
-    assert output == ({'name': 'sum_nums', 'argument_types': ['int', 'int', 'int'], 'return_type': 'int'},
-                      'def sum_nums(x, y, z): \n\tres_sum = x + y + z \n\treturn res_sum') 
-    
-    # Test case 2: Timeout exception
-    output = open_ai_program_generator.generate_test_case(mock_get_timeout_from_openai_api)
-    assert output == None
+    response = {
+        "function": "def add(a, b):\n    return a + b",
+        "name": "add",
+        "arguments": ["a", "b"],
+        "return_type": "int",
+    }
+    mocker_instance.chat.completions.create.return_value = generate_mock_response(
+        json.dumps(response)
+    )
 
-    # Test case 3: Invalid string that cannot be parsed into JSON
-    output = open_ai_program_generator.generate_test_case(mock_get_invalid_json_from_openai_api)
-    assert output == None
+    # Valid JSON output, in the format we expect
+    function_signature, code = open_ai_program_generator.generate_test_case()
 
-    # Test case 4: JSON with missing keys
-    output = open_ai_program_generator.generate_test_case(mock_get_json_without_all_keys_from_openai_api)
-    assert output == None
+    assert function_signature == {
+        "name": "add",
+        "argument_types": ["a", "b"],
+        "return_type": "int",
+    }
+
+    assert code == "def add(a, b):\n    return a + b"
+
+
+@patch("its_test_engine.base.program_generator.openai_program_generator.OpenAI")
+def test_openai_program_generator_generate_test_case_timeout(mocker):
+    mocker_instance = mocker.return_value
+    mocker_instance.chat.completions.create.side_effect = httpx.TimeoutException(
+        message="Timeout"
+    )
+
+    open_ai_program_generator = OpenAiProgramGenerator("py", "")
+    # Timeout exception
+    output = open_ai_program_generator.generate_test_case()
+    assert output is None
+
+
+@pytest.fixture
+def mock_invalid_json_openai_client():
+    with patch(
+        "its_test_engine.base.program_generator.openai_program_generator.OpenAI"
+    ) as mock_openai:
+        mock_openai_instance = MagicMock()
+        response = MagicMock()
+        response.choices = [MagicMock()]
+        response.choices[0].message.content = json.dumps({"return_type": "int"})
+        mock_openai_instance.chat.completions.create.return_value = response
+        mock_openai.return_value = mock_openai_instance
+        yield mock_openai_instance
+
+
+@patch("its_test_engine.base.program_generator.openai_program_generator.OpenAI")
+def test_openai_program_generator_generate_test_case_invalid_json(mocker):
+    mocker_instance = mocker.return_value
+    open_ai_program_generator = OpenAiProgramGenerator("py", "")
+
+    # Invalid string that cannot be parsed into JSON
+    mocker_instance.chat.completions.create.return_value = generate_mock_response("{}")
+    output = open_ai_program_generator.generate_test_case()
+    assert output is None
+
+    # JSON with missing keys
+    mocker_instance.chat.completions.create.return_value = generate_mock_response(
+        json.dumps({"return_type": "int"})
+    )
+    output = open_ai_program_generator.generate_test_case()
+    assert output is None
+
+    mocker_instance.chat.completions.create.return_value = generate_mock_response(
+        "invalid json"
+    )
+    output = open_ai_program_generator.generate_test_case()
+    assert output is None
+
 
 # Test the generate user prompt method
 def test_openai_program_generator_generate_user_prompt():
