@@ -24,7 +24,7 @@ def mock_get_answer_from_openai_api(system_prompt, user_prompt):
     mock_chat_completion = MockChatCompletion(mock_choice)
     return mock_chat_completion
 
-# Mock function to simulate a timeout
+# Mock function to simulate a timeout from OpenAI
 def mock_get_timeout_from_openai_api(system_prompt, user_prompt):
     raise httpx.TimeoutException("Mock timeout message")
 
