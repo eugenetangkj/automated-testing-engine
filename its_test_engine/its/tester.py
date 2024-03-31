@@ -55,7 +55,6 @@ class Tester:
             # For example, it could have \n and \t in the base program string instead of using newlines and tabs
             print(syntax_error)
             return None
-        
         # Step 4: Put base and mutated inputs into respective API endpoints
         parser_tester = ParserTester(its_api_connection)
         interpreter_tester = InterpreterTester(its_api_connection)
