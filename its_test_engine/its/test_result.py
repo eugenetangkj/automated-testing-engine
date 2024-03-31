@@ -148,8 +148,5 @@ class ItsTestSuitesMarkdownWriter:
             file.write(markdown)
 
     def bulk_write(self, test_suites: list[ItsTestSuite]):
-        # Create directory if not exists
-        folder_path = os.path.join(self._test_result_dir)
-
         for test_suite in test_suites:
             self.write(test_suite)
