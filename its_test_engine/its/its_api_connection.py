@@ -48,51 +48,6 @@ class ItsApiConnection:
 
         return response
 
-    def __package_params(self, params, endpoint):
-        """
-        Takes in an array of parameters and packages these parameters according to the specified
-        ITS API endpoint.
-        The errorlocalizer, feedback_fix, feedback_error and repair services take in the same
-        parameters.
-
-        Parameters:
-            params: List of parameters to be packed
-            endpoint: The API endpoint to call to
-        """
-        if endpoint == "parser":
-            return {"language": params[0], "source_code": params[1]}
-
-        if endpoint == "interpreter":
-            return {
-                "language": params[0],
-                "program_model": params[1],
-                "function": params[2],
-                "inputs": params[3],
-                "args": params[4],
-            }
-
-        if endpoint == "alignment_structural":
-            return {"reference_solution": params[0], "student_solution": params[1]}
-
-        if endpoint == "alignment_variable":
-            return {
-                "reference_solution": params[0],
-                "student_solution": params[1],
-                "structural_alignment": params[2],
-            }
-
-        if endpoint in ["errorlocalizer", "feedback_fix", "feedback_error", "repair"]:
-            return {
-                "language": params[0],
-                "reference_solution": params[1],
-                "student_solution": params[2],
-                "function": params[3],
-                "inputs": params[4],
-                "args": params[5],
-            }
-
-        return {}
-
     def create_parser_request_payload(self, source_code):
         """
         Returns the payload for the parser service endpoint of the ITS API
@@ -129,27 +84,27 @@ class ItsApiConnection:
         response = self.__make_api_call(interpreter_url, payload)
         return response.json()
 
-    def call_alignment_structural_endpoint(self, reference_solution, student_solution):
-        """
-        Returns the response of the call to the structural alignment service endpoint of the ITS API
-        """
-        alignment_structural_url = self.BASE_API_URL + "alignment_structural"
-        param_arr = [reference_solution, student_solution]
-        params = self.__package_params(param_arr, "alignment_structural")
-        response = self.__make_api_call(alignment_structural_url, params)
-        return response.json()
+    # def call_alignment_structural_endpoint(self, reference_solution, student_solution):
+    #     """
+    #     Returns the response of the call to the structural alignment service endpoint of the ITS API
+    #     """
+    #     alignment_structural_url = self.BASE_API_URL + "alignment_structural"
+    #     param_arr = [reference_solution, student_solution]
+    #     params = self.__package_params(param_arr, "alignment_structural")
+    #     response = self.__make_api_call(alignment_structural_url, params)
+    #     return response.json()
 
-    def call_alignment_variable_endpoint(
-        self, reference_solution, student_solution, structural_alignment
-    ):
-        """
-        Returns the response of the call to the variable assignment service endpoint of the ITS API
-        """
-        alignment_variable_url = self.BASE_API_URL + "alignment_variable"
-        param_arr = [reference_solution, student_solution, structural_alignment]
-        params = self.__package_params(param_arr, "alignment_variable")
-        response = self.__make_api_call(alignment_variable_url, params)
-        return response.json()
+    # def call_alignment_variable_endpoint(
+    #     self, reference_solution, student_solution, structural_alignment
+    # ):
+    #     """
+    #     Returns the response of the call to the variable assignment service endpoint of the ITS API
+    #     """
+    #     alignment_variable_url = self.BASE_API_URL + "alignment_variable"
+    #     param_arr = [reference_solution, student_solution, structural_alignment]
+    #     params = self.__package_params(param_arr, "alignment_variable")
+    #     response = self.__make_api_call(alignment_variable_url, params)
+    #     return response.json()
 
     def create_request_payload(
         self, reference_solution, student_solution, function, inputs, args
