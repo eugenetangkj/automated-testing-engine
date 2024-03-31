@@ -1,6 +1,6 @@
-import pytest
 import subprocess
 from unittest.mock import patch
+import pytest
 import its_test_engine.python.input_generator as generator
 
 CODE = """
