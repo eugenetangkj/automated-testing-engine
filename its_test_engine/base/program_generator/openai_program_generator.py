@@ -55,11 +55,9 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         # OpenAI client instance
         # Adapted from https://community.openai.com/t/setting-request-timeout-in-openai-v1-2-2/492772
         if (os.environ.get("CS3213_OPENAI_API_KEY") is None):
-             self.openai_client = OpenAI(
-            api_key="", timeout=httpx.Timeout(20.0))
+            self.openai_client = OpenAI(api_key="", timeout=httpx.Timeout(20.0))
         else:
-            self.openai_client = OpenAI(
-                api_key=os.environ.get("CS3213_OPENAI_API_KEY"), timeout=httpx.Timeout(20.0))
+            self.openai_client = OpenAI(api_key=os.environ.get("CS3213_OPENAI_API_KEY"), timeout=httpx.Timeout(20.0))
 
     def generate_test_case(self, get_answer_from_prompt=None):
         """
