@@ -1,4 +1,6 @@
 import pytest
+import subprocess
+from unittest.mock import patch
 import its_test_engine.python.input_generator as generator
 
 CODE = """
@@ -31,3 +33,18 @@ def test_generate_inputs():
     inputs = input_generator.generate_inputs()
 
     assert len(inputs) > 0
+
+
+@patch("subprocess.check_output")
+def test_generate_inputs_exception(mocker):
+    mocker.side_effect = subprocess.CalledProcessError(1, "cmd")
+    input_generator = generator.PynGuinInputGenerator(CODE)
+    inputs = input_generator.generate_inputs()
+
+    assert len(inputs) == 0
+
+    mocker.side_effect = subprocess.TimeoutExpired("cmd", 1)
+    input_generator = generator.PynGuinInputGenerator(CODE)
+    inputs = input_generator.generate_inputs()
+
+    assert len(inputs) == 0
