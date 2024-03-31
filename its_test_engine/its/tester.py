@@ -37,7 +37,12 @@ class Tester:
         its_api_connection = ItsApiConnection(self.language)
 
         # Step 1: Generate test case
-        function_signature, base_code = self.program_generator.generate_test_case()
+        try:
+            function_signature, base_code = self.program_generator.generate_test_case()
+        except SyntaxError as syntax_error:
+            # Some LeetCode programs cannot be successfully parsed via their AST
+            print(syntax_error)
+            return None
 
         # Step 2: Generate inputs
         inputs = self.input_generator.generate_inputs(function_signature, base_code, 10)
