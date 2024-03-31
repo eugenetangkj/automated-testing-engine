@@ -151,8 +151,5 @@ class ItsTestSuitesMarkdownWriter:
         # Create directory if not exists
         folder_path = os.path.join(self._test_result_dir)
 
-        if not os.path.exists(folder_path):
-            os.makedirs(folder_path)
-
         for test_suite in test_suites:
             self.write(test_suite)
