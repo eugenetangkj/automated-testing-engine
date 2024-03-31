@@ -41,35 +41,44 @@ class MockItsApiConnection(ItsApiConnection):
 def test_feedback_fix_equivalent_tester():
     its_api_connection = MockItsApiConnection(Language.PYTHON)
 
-    feedback_fix_tester = FeedbackFixEndpointTester(its_api_connection)
-    feedback_fix_tester.type_of_metamorphic_relation = TypeOfMetamorphicRelation.EQUIVALENT
+    feedback_fix_tester = FeedbackFixEndpointTester(its_api_connection, TypeOfMetamorphicRelation.EQUIVALENT)
 
     test_result = feedback_fix_tester.run_test(
-        {"name":"add1", "argument_types": ["int"], "return_type": "int"}, BASE_PROGRAM, EQUIVALENT_PROGRAM, PARSED_BASE_PROGRAM, PARSED_EQUIVALENT_PROGRAM, [1, 2]
+        {"name":"add1", "argument_types": ["int"], "return_type": "int"},
+        BASE_PROGRAM,
+        EQUIVALENT_PROGRAM,
+        PARSED_BASE_PROGRAM,
+        PARSED_EQUIVALENT_PROGRAM,
+        []
     )
-
     assert test_result.success
 
 def test_feedback_fix_variant_tester():
     its_api_connection = MockItsApiConnection(Language.PYTHON)
 
-    feedback_fix_tester = FeedbackFixEndpointTester(its_api_connection)
-    feedback_fix_tester.type_of_metamorphic_relation = TypeOfMetamorphicRelation.VARIANT
+    feedback_fix_tester = FeedbackFixEndpointTester(its_api_connection, TypeOfMetamorphicRelation.VARIANT)
 
     test_result = feedback_fix_tester.run_test(
-        {"name":"add2", "argument_types": ["int"], "return_type": "int"}, BASE_PROGRAM, VARIANT_PROGRAM, PARSED_BASE_PROGRAM, PARSED_VARIANT_PROGRAM, [1, 2]
+        {"name":"add2", "argument_types": ["int"], "return_type": "int"},
+        BASE_PROGRAM,
+        VARIANT_PROGRAM,
+        PARSED_BASE_PROGRAM,
+        PARSED_VARIANT_PROGRAM,
+        []
     )
-
     assert test_result.success
 
 def test_feedback_fix_exception_tester():
     its_api_connection = MockItsApiConnection(Language.PYTHON)
 
     feedback_fix_tester = FeedbackFixEndpointTester(its_api_connection)
-    feedback_fix_tester.type_of_metamorphic_relation = TypeOfMetamorphicRelation.VARIANT
 
     test_result = feedback_fix_tester.run_test(
-        {"name":"add3", "argument_types": ["int"], "return_type": "int"}, BASE_PROGRAM, FAIL_PROGRAM, PARSED_BASE_PROGRAM, PARSED_FAIL_PROGRAM, [1, 2]
+        {"name":"add3", "argument_types": ["int"], "return_type": "int"},
+        BASE_PROGRAM,
+        FAIL_PROGRAM,
+        PARSED_BASE_PROGRAM,
+        PARSED_FAIL_PROGRAM,
+        []
     )
-
     assert not test_result.success
