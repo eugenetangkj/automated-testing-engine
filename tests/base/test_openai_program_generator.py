@@ -50,7 +50,8 @@ def test_openai_program_generator_generate_test_case():
 
     # Test case 1: Valid JSON output, in the format we expect
     output = open_ai_program_generator.generate_test_case(mock_get_answer_from_openai_api)
-    assert output == ('def sum_nums(x, y, z): \n\tres_sum = x + y + z \n\treturn res_sum', {'name': 'sum_nums', 'argument_types': ['int', 'int', 'int'], 'return_type': 'int'}) 
+    assert output == ({'name': 'sum_nums', 'argument_types': ['int', 'int', 'int'], 'return_type': 'int'},
+                      'def sum_nums(x, y, z): \n\tres_sum = x + y + z \n\treturn res_sum') 
     
     # Test case 2: Timeout exception
     output = open_ai_program_generator.generate_test_case(mock_get_timeout_from_openai_api)

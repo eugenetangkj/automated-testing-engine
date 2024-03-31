@@ -39,3 +39,4 @@ def run_open_ai_programs():
 
 if __name__ == "__main__":
     run_leetcode_programs()
+    run_open_ai_programs()

@@ -91,12 +91,12 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
             # Pack outputs together into a tuple
             output = (
-                base_program_string,
                 {
                     "name": function_name,
                     "argument_types": arguments,
                     "return_type": return_type,
                 },
+                base_program_string
             )
 
             return output
