@@ -101,7 +101,7 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
                 base_program_string,
                 {
                     "name": function_name,
-                    "arguments": arguments,
+                    "argument_types": arguments,
                     "return_type": return_type,
                 },
             )
