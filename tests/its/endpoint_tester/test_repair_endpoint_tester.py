@@ -15,11 +15,12 @@ PARSED_FAIL_PROGRAM = "{\"importStatements\": [], \"fncs\": {\"add3\": {\"name\"
 
 class MockItsApiConnection(ItsApiConnection):
     def call_repair_endpoint(self, request_payload: dict):
-        function_name = request_payload["function"]
+        function_name = request_payload["student_solution"]
         unsuccessful = json.dumps(PARSED_FAIL_PROGRAM)
         if function_name == unsuccessful:
             raise Exception("Unsuccessful test result")
-        return {"totalCost": 0.0, "localRepairs": {}}
+        return [{"totalCost": 0.0,"localRepairs": []}]
+
 
 def test_repair_equivalent_tester():
     its_api_connection = MockItsApiConnection(Language.PYTHON)
@@ -27,7 +28,7 @@ def test_repair_equivalent_tester():
     repair_tester = RepairEndpointTester(its_api_connection, TypeOfMetamorphicRelation.EQUIVALENT)
 
     test_result = repair_tester.run_test(
-        {"name":"add1", "argument_types": ["int"], "return_type": "int"},
+        {"name":"add", "argument_types": ["int"], "return_type": "int"},
         BASE_PROGRAM,
         SUCCESS_PROGRAM,
         PARSED_BASE_PROGRAM,
@@ -36,10 +37,11 @@ def test_repair_equivalent_tester():
     )
     assert test_result.success
 
-def test_repair_variant_tester():
+
+def test_repair_exception_tester():
     its_api_connection = MockItsApiConnection(Language.PYTHON)
 
-    repair_tester = RepairEndpointTester(its_api_connection, TypeOfMetamorphicRelation.VARIANT)
+    repair_tester = RepairEndpointTester(its_api_connection, TypeOfMetamorphicRelation.EQUIVALENT)
 
     test_result = repair_tester.run_test(
         {"name":"add2", "argument_types": ["int"], "return_type": "int"},
@@ -47,6 +49,22 @@ def test_repair_variant_tester():
         FAIL_PROGRAM,
         PARSED_BASE_PROGRAM,
         PARSED_FAIL_PROGRAM,
+        [],
+    )
+    assert not test_result.success
+
+
+def test_repair_variant_tester():
+    its_api_connection = MockItsApiConnection(Language.PYTHON)
+
+    repair_tester = RepairEndpointTester(its_api_connection, TypeOfMetamorphicRelation.VARIANT)
+
+    test_result = repair_tester.run_test(
+        {"name":"add1", "argument_types": ["int"], "return_type": "int"},
+        BASE_PROGRAM,
+        SUCCESS_PROGRAM,
+        PARSED_BASE_PROGRAM,
+        PARSED_SUCCESS_PROGRAM,
         [],
     )
 
