@@ -121,12 +121,3 @@ class DeMorganModifier(ast.NodeTransformer):
         # Return final expression
         return ast.UnaryOp(op=ast.Not(),
                            operand=ast.BoolOp(op=new_boolean_operator, values=negated_operands))
-
-
-
-
-
-
-
-
-     
