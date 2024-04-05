@@ -83,8 +83,3 @@ def test_de_morgan_modifier():
         node = ast.parse(test_case[0])
         modified_node = transformer.visit(node)
         assert ast.unparse(modified_node) == test_case[1]
-    
-
-if __name__ == "__main__":
-    test_de_morgan_modifier()
-    
