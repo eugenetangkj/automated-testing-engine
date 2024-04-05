@@ -73,3 +73,60 @@ class BinOpModifier(ast.NodeTransformer):
             node.right = ast.UnaryOp(op=ast.USub(), operand=node.right)
 
         return self.generic_visit(node)
+
+
+class DeMorganModifier(ast.NodeTransformer):
+    '''
+    This class transforms a Boolean expression into its logical equivalent counterpart
+    using De Morgan's Law.
+
+    More specifically:
+    1. (a or b) -> ~(~a and ~b)
+    2. (a and b) -> ~(~a or ~b)
+    3. (~a or b) -> ~(a and ~b)
+    4. (a or ~b) -> ~(~a and b)
+    5. (~a and b) -> ~(a or ~b)
+    6. (a and ~b) -> ~(~a or b)
+    7. (~a or ~b) -> ~(a and b)
+    8. (~a and ~b) -> ~(a or b)
+    '''
+
+    def visit_BoolOp(self, node):
+        if isinstance(node.op, (ast.And, ast.Or)):
+            # Rewrite Boolean expressions
+            return self._rewrite_boolean_expression(node)
+        return node
+
+    def _rewrite_boolean_expression(self, node):
+        # Get new boolean operator
+        new_boolean_operator = ast.Or() if (isinstance(node.op, ast.And)) else ast.And()
+
+        # Negate each of the original operands
+        negated_operands = []
+        for value in node.values:
+            # Negate the current operand
+
+            # Check what form is the current operand
+            if isinstance(value, ast.UnaryOp) and isinstance(value.op, ast.Not):
+                # Case 1: Current operand is already a NOT expression.
+                # We simply remove the NOT expression.
+                new_operand = value.operand
+                negated_operands.append(new_operand)
+            else:
+                # Case 2: Current operand is not a NOT expression.
+                # We negate the operand.
+                new_operand = ast.UnaryOp(op=ast.Not(), operand=value)
+                negated_operands.append(new_operand)
+
+        # Return final expression
+        return ast.UnaryOp(op=ast.Not(),
+                           operand=ast.BoolOp(op=new_boolean_operator, values=negated_operands))
+
+
+
+
+
+
+
+
+     

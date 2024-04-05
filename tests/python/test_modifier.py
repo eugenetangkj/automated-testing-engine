@@ -58,3 +58,33 @@ def test_bin_op_modified():
         node = ast.parse(test_case[0])
         modified_node = transformer.visit(node)
         assert ast.unparse(modified_node) == test_case[1]
+
+def test_de_morgan_modifier():
+    transformer = mutator.DeMorganModifier()
+
+    test_cases = [
+        ["a or b", "not (not a and (not b))"], 
+        ["a and b", "not (not a or not b)"],
+        ["not a or b", "not (a and (not b))"],
+        ["a or not b", "not (not a and b)"],
+        ["not a and b", "not (a or not b)"],
+        ["a and not b", "not (not a or b)"],
+        ["not a or not b", "not (a and b)"],
+        ["not a and not b", "not (a or b)"],
+        ["a or (b and c)", "not (not a and (not (b and c)))"],
+        ["a and (b or c)", "not (not a or not (b or c))"],
+        ["a and not (b and c)", "not (not a or (b and c))"],
+        ["def test_function(a, b):\n    if a or b:\n        return True\n    else:\n        return False",
+         "def test_function(a, b):\n    if not (not a and (not b)):\n        return True\n    else:\n        return False"],
+        ["a + b", "a + b"],
+    ]
+
+    for test_case in test_cases:
+        node = ast.parse(test_case[0])
+        modified_node = transformer.visit(node)
+        assert ast.unparse(modified_node) == test_case[1]
+    
+
+if __name__ == "__main__":
+    test_de_morgan_modifier()
+    
