@@ -40,12 +40,12 @@ class Tester:
         try:
             # function_signature, base_code = self.program_generator.generate_test_case()
             # base_code = "def generate_random_number():\n    local_var = object()\n    seed = id(local_var)\n    a = 1140671485\n    c = 128201163\n    m = 2 ** 24\n    rand = seed\n    rand = (a * rand + c) % m\n    return rand"
-            base_code = "def test_function(a, b, c, d):\n\tc = (a if a > 5 else b) + (c if c < 10 else d)\n\treturn c"
+            base_code = "def test_function(a, b):\n    if not a < 20 or not b > 20:\n        return True\n    else:\n        return False"
             
             
             function_signature = {
                     "name": "test_function",
-                    "argument_types": ["int", "int", "int", "int"],
+                    "argument_types": ["int", "int"],
                     "return_type": "int",
             }
 
