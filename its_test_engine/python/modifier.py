@@ -150,3 +150,33 @@ class IdempotentModifier(ast.NodeTransformer):
         
         # Not a valid Idempotent transformation
         return node
+
+class IdentityModifier(ast.NodeTransformer):
+    '''
+    This class transforms a Boolean variable into its logical equivalent counterpart
+    using Identity Law
+
+    More specifically:
+    1. a -> a and True
+    2. a -> a or False
+    '''
+    def __init__(self, type_of_transformation):
+        '''
+        Parameters:
+            type_of_transformation: Decides which Identity transformation to perform
+                                    1 means Transformation 1, 2 means Transformation 2.
+        '''
+        super().__init__()
+        self.type_of_transformation = type_of_transformation
+
+    def visit_Name(self, node):
+        # Decide which of the 2 Idempotent transformations to undergo
+        if (self.type_of_transformation == 1):
+            # Apply a -> a and True transformation
+            return ast.BoolOp(op=ast.And(), values=[node, ast.Constant(value=True)])
+        elif (self.type_of_transformation == 2):
+            # Apply a -> a or False transformation
+            return ast.BoolOp(op=ast.Or(), values=[node, ast.Constant(value=False)])
+        
+        # Not a valid Idempotent transformation
+        return node
