@@ -428,3 +428,110 @@ class UnravelTernaryModifier(ast.NodeTransformer):
             return if_statement
 
         return node
+
+
+class ForRangeToWhileLoopModifier(ast.NodeTransformer):
+    """
+    This class transforms a for ... in range(...) loop into a while loop that has
+    the same semantics. It uses the documentation of the range(...) in Python to
+    determine how to break down the start, stop and step values.
+
+    Example: Both programs equivalently increment i by 3 every iteration
+        Base:
+            for i in range(0, 6, 2):
+                i = i + 1
+                call_func()
+        Modified:
+            i = 0
+            while i < 6:
+                i = i + 1
+                call_func()
+                i = i + 2
+    """
+    def visit_For(self, node):
+        # We want to detect if the range() function is used as the iterator in a for loop
+        is_iterator_a_function_call = isinstance(node.iter, ast.Call)
+        is_iterator_a_simple_function = isinstance(node.iter.func, ast.Name)
+        is_iterator_range_function = node.iter.func.id == "range"
+
+        if (is_iterator_a_function_call and
+            is_iterator_a_simple_function and
+            is_iterator_range_function):
+            # The current for loop indeed uses the range() function as an iterator
+
+            # Get the loop variable
+            loop_variable = node.target
+
+            # Decompose the arguments used in the range function
+            arguments_of_range_function = node.iter.args
+            # Case 1: Only 1 argument
+            if (len(arguments_of_range_function) == 1):
+                start_value = ast.Constant(n = 0) # Default start = 0
+                stop_value = arguments_of_range_function[0]
+                step_value = ast.Constant(n = 1) # Default step = 1
+            # Case 2: 2 arguments
+            elif (len(arguments_of_range_function) == 2):
+                start_value = arguments_of_range_function[0]
+                stop_value = arguments_of_range_function[1]
+                step_value = ast.Constant(n = 1) # Default step = 1
+            # Case 3: 3 arguments
+            elif (len(arguments_of_range_function) == 3):
+                start_value = arguments_of_range_function[0]
+                stop_value = arguments_of_range_function[1]
+                step_value = arguments_of_range_function[2]
+            
+
+            # We need to create an initialisation statement to initialise the
+            # variable in the while loop, since the initialisation statement
+            # was not required in the for loop
+            initialisation_statement = ast.Assign(
+                targets=[loop_variable],
+                value=start_value
+            )
+            initialisation_statement.lineno = node.lineno
+            initialisation_statement.col_offset = node.col_offset
+
+
+            # Determine operator to use in the while loop, depending on arguments in range()
+            if isinstance(step_value, ast.UnaryOp):
+                while_loop_operator = ast.Gt() if isinstance(step_value.op, ast.USub) else ast.Lt()
+            elif isinstance(step_value, ast.Constant):
+                while_loop_operator = ast.Gt() if step_value.value < 0 else ast.Lt()
+
+            
+            # Create the new while loop
+            new_while_loop = ast.While(
+                test=ast.Compare(
+                    left=loop_variable,
+                    ops=[while_loop_operator],
+                    comparators=[stop_value]
+                ),
+                body=[],
+                orelse=[]
+            )
+
+            # Add body of for loop into while loop
+            new_while_loop.body.extend(node.body)
+
+            # Add increment statement at the end of the body of the
+            # while loop to simulate changing of the loop variable,
+            # which was done internally within the range() function.
+            loop_variable_assignment_statement = ast.Assign(
+                targets=[loop_variable],
+                value=ast.BinOp(
+                    left=loop_variable,
+                    op=ast.Add(), # Includes handling of negative step values
+                    right=step_value
+                )
+            )
+            loop_variable_assignment_statement.lineno = node.lineno
+            while_loop_operator.col_offset = node.col_offset
+            new_while_loop.body.append(loop_variable_assignment_statement)
+            
+
+            # Return the combination of the initialisation statement and new while loop
+            return [initialisation_statement, new_while_loop]
+
+        else:
+            # Cases we do not handle
+            return node

@@ -167,6 +167,7 @@ def test_identity_modifier():
         modified_node = transformer_or.visit(node)
         assert ast.unparse(modified_node) == test_case[1]
 
+
 def test_unravel_ternary_modifier():
     
     transformer = mutator.UnravelTernaryModifier()
@@ -194,3 +195,36 @@ def test_unravel_ternary_modifier():
         modified_node = transformer.visit(node)
         assert ast.unparse(modified_node) == test_case[1]
 
+def test_for_range_to_while_loop_modifier():
+    transformer = mutator.ForRangeToWhileLoopModifier()
+
+    test_cases = [
+        ["for i in range(5):\n    print(i)",
+         "i = 0\nwhile i < 5:\n    print(i)\n    i = i + 1"],
+
+        ["for x in range(0, 6, 2):\n    x = x + 1\n    call_func()",
+         "x = 0\nwhile x < 6:\n    x = x + 1\n    call_func()\n    x = x + 2"],
+
+        ["for x in range(6, 1, -2):\n    x = x + 1\n    call_func()",
+         "x = 6\nwhile x > 1:\n    x = x + 1\n    call_func()\n    x = x + -2"],
+
+        ["for x in range(6, -5):\n    x = x + 1\n    call_func()",
+         "x = 6\nwhile x < -5:\n    x = x + 1\n    call_func()\n    x = x + 1"],
+
+        ["def func(x):\n    x = x + 1\n    for j in range(2, 5):\n        x += 1\n    return x",
+         "def func(x):\n    x = x + 1\n    j = 2\n    while j < 5:\n        x += 1\n        j = j + 1\n    return x"],
+
+        ["def func(x):\n    x = x + 1\n    for j in range(2, 5, 0):\n        x += 1\n    return x",
+         "def func(x):\n    x = x + 1\n    j = 2\n    while j < 5:\n        x += 1\n        j = j + 0\n    return x"],
+    ]
+
+    for test_case in test_cases:
+        node = ast.parse(test_case[0])
+        modified_node = transformer.visit(node)
+        assert ast.unparse(modified_node) == test_case[1]
+
+
+
+
+if __name__ == "__main__":
+    test_for_range_to_while_loop_modifier()
