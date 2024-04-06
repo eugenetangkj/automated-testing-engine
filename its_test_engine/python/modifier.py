@@ -130,7 +130,7 @@ class IdempotentModifier(ast.NodeTransformer):
     1. a -> a and a
     2. a -> a or a
     '''
-    def __init__(self, type_of_transformation):
+    def __init__(self, type_of_transformation=1):
         '''
         Parameters:
             type_of_transformation: Decides which Idempotent transformation to perform
@@ -160,7 +160,7 @@ class IdentityModifier(ast.NodeTransformer):
     1. a -> a and True
     2. a -> a or False
     '''
-    def __init__(self, type_of_transformation):
+    def __init__(self, type_of_transformation=1):
         '''
         Parameters:
             type_of_transformation: Decides which Identity transformation to perform
