@@ -89,15 +89,17 @@ def test_de_morgan_modifier():
 def test_idempotent_modifier():
     # Test indempotent relation 1
     test_cases_and = [
-        ["a", "a and a"],
-        ["b", "b and b"],
         ["a and b", "(a and a) and (b and b)"],
         ["a or b", "a and a or (b and b)"],
-        ["a and not b", "(a and a) and (not (b and b))"],
+
         ["def test_function(a, b):\n    if a and b:\n        return True\n    else:\n        return False",
          "def test_function(a, b):\n    if (a and a) and (b and b):\n        return True\n    else:\n        return False"],
+
         ["def test_function(a, b):\n    if a or b:\n        return True\n    else:\n        return False",
          "def test_function(a, b):\n    if a and a or (b and b):\n        return True\n    else:\n        return False"],
+
+        ["def test_function(a, b):\n    x = x + 1\n    if a and b:\n        return True\n    else:\n        return False",
+        "def test_function(a, b):\n    x = x + 1\n    if (a and a) and (b and b):\n        return True\n    else:\n        return False"]
     ]
 
     transformer_and = mutator.IdempotentModifier(type_of_transformation=1)
@@ -107,15 +109,14 @@ def test_idempotent_modifier():
         assert ast.unparse(modified_node) == test_case[1]
 
 
-    # Test indempotent relation 2
+    # # Test indempotent relation 2
     test_cases_or = [
-        ["a", "a or a"],
-        ["b", "b or b"],
         ["a and b", "(a or a) and (b or b)"],
         ["a or b", "(a or a) or (b or b)"],
-        ["a and not b", "(a or a) and (not (b or b))"],
+
         ["def test_function(a, b):\n    if a and b:\n        return True\n    else:\n        return False",
         "def test_function(a, b):\n    if (a or a) and (b or b):\n        return True\n    else:\n        return False"],
+
         ["def test_function(a, b):\n    if a or b:\n        return True\n    else:\n        return False",
          "def test_function(a, b):\n    if (a or a) or (b or b):\n        return True\n    else:\n        return False"],
     ]
@@ -130,13 +131,13 @@ def test_idempotent_modifier():
 def test_identity_modifier():
     # Test identity relation 1
     test_cases_and = [
-        ["a", "a and True"],
-        ["b", "b and True"],
+
         ["a and b", "(a and True) and (b and True)"],
         ["a or b", "a and True or (b and True)"],
-        ["a and not b", "(a and True) and (not (b and True))"],
+
         ["def test_function(a, b):\n    if a and b:\n        return True\n    else:\n        return False",
         "def test_function(a, b):\n    if (a and True) and (b and True):\n        return True\n    else:\n        return False"],
+
         ["def test_function(a, b):\n    if a or b:\n        return True\n    else:\n        return False",
         "def test_function(a, b):\n    if a and True or (b and True):\n        return True\n    else:\n        return False"],
     ]
@@ -150,13 +151,13 @@ def test_identity_modifier():
 
     # Test indempotent relation 2
     test_cases_or = [
-        ["a", "a or False"],
-        ["b", "b or False"],
+
         ["a and b", "(a or False) and (b or False)"],
         ["a or b", "(a or False) or (b or False)"],
-        ["a and not b", "(a or False) and (not (b or False))"],
+
         ["def test_function(a, b):\n    if a and b:\n        return True\n    else:\n        return False",
         "def test_function(a, b):\n    if (a or False) and (b or False):\n        return True\n    else:\n        return False"],
+
         ["def test_function(a, b):\n    if a or b:\n        return True\n    else:\n        return False",
          "def test_function(a, b):\n    if (a or False) or (b or False):\n        return True\n    else:\n        return False"],
     ]

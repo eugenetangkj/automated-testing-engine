@@ -140,16 +140,24 @@ class IdempotentModifier(ast.NodeTransformer):
         super().__init__()
         self.type_of_transformation = type_of_transformation
 
-    def visit_Name(self, node):
-        # Decide which of the 2 Idempotent transformations to undergo
-        if (self.type_of_transformation == 1):
-            # Apply a -> a and a transformation
-            return ast.BoolOp(op=ast.And(), values=[node, node])
-        elif (self.type_of_transformation == 2):
-            # Apply a -> a or a transformation
-            return ast.BoolOp(op=ast.Or(), values=[node, node])
+    def visit_BoolOp(self, node):
+        # Apply the idempotent transformation to each operand of the BoolOp
+        transformed_operands = []
+        for value in node.values:
+            transformed_operands.append(self._apply_idempotent_law(value))
         
-        # Not a valid Idempotent transformation
+        # Return a new BoolOp node with transformed operands
+        return ast.BoolOp(op=node.op, values=transformed_operands)
+
+    def _apply_idempotent_law(self, node):
+        # Apply the idempotent transformation to a single node
+        if isinstance(node, ast.Name):
+            if self.type_of_transformation == 1:
+                return ast.BoolOp(op=ast.And(), values=[node, node])
+            elif self.type_of_transformation == 2:
+                return ast.BoolOp(op=ast.Or(), values=[node, node])
+        
+        # Not a case to handle
         return node
 
 
@@ -171,16 +179,27 @@ class IdentityModifier(ast.NodeTransformer):
         super().__init__()
         self.type_of_transformation = type_of_transformation
 
-    def visit_Name(self, node):
-        # Decide which of the 2 Idempotent transformations to undergo
-        if (self.type_of_transformation == 1):
-            # Apply a -> a and True transformation
-            return ast.BoolOp(op=ast.And(), values=[node, ast.Constant(value=True)])
-        elif (self.type_of_transformation == 2):
-            # Apply a -> a or False transformation
-            return ast.BoolOp(op=ast.Or(), values=[node, ast.Constant(value=False)])
+
+    def visit_BoolOp(self, node):
+        # Apply the idempotent transformation to each operand of the BoolOp
+        transformed_operands = []
+        for value in node.values:
+            transformed_operands.append(self._apply_idempotent_law(value))
         
-        # Not a valid Idempotent transformation
+        # Return a new BoolOp node with transformed operands
+        return ast.BoolOp(op=node.op, values=transformed_operands)
+
+    def _apply_idempotent_law(self, node):
+        # Apply the idempotent transformation to a single node
+        if isinstance(node, ast.Name):
+            if self.type_of_transformation == 1:
+                # Apply a -> a and True transformation
+                return ast.BoolOp(op=ast.And(), values=[node, ast.Constant(value=True)])
+            elif self.type_of_transformation == 2:
+                # Apply a -> a or False transformation
+                return ast.BoolOp(op=ast.Or(), values=[node, ast.Constant(value=False)])
+        
+        # Not a case to handle
         return node
 
 
