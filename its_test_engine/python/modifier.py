@@ -1,6 +1,5 @@
 import ast
 
-
 class VariableRenamer(ast.NodeTransformer):
     def __init__(self):
         super().__init__()
@@ -121,3 +120,33 @@ class DeMorganModifier(ast.NodeTransformer):
         # Return final expression
         return ast.UnaryOp(op=ast.Not(),
                            operand=ast.BoolOp(op=new_boolean_operator, values=negated_operands))
+
+class IdempotentModifier(ast.NodeTransformer):
+    '''
+    This class transforms a Boolean variable into its logical equivalent counterpart
+    using Idempotent Law.
+
+    More specifically:
+    1. a -> a and a
+    2. a -> a or a
+    '''
+    def __init__(self, type_of_transformation):
+        '''
+        Parameters:
+            type_of_transformation: Decides which Idempotent transformation to perform
+                                    1 means Transformation 1, 2 means Transformation 2.
+        '''
+        super().__init__()
+        self.type_of_transformation = type_of_transformation
+
+    def visit_Name(self, node):
+        # Decide which of the 2 Idempotent transformations to undergo
+        if (self.type_of_transformation == 1):
+            # Apply a -> a and a transformation
+            return ast.BoolOp(op=ast.And(), values=[node, node])
+        elif (self.type_of_transformation == 2):
+            # Apply a -> a or a transformation
+            return ast.BoolOp(op=ast.Or(), values=[node, node])
+        
+        # Not a valid Idempotent transformation
+        return node

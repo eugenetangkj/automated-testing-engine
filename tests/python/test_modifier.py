@@ -83,3 +83,47 @@ def test_de_morgan_modifier():
         node = ast.parse(test_case[0])
         modified_node = transformer.visit(node)
         assert ast.unparse(modified_node) == test_case[1]
+
+def test_idempotent_modifier():
+    # Test indempotent relation 1
+    test_cases_and = [
+        ["a", "a and a"],
+        ["b", "b and b"],
+        ["a and b", "(a and a) and (b and b)"],
+        ["a or b", "a and a or (b and b)"],
+        ["a and not b", "(a and a) and (not (b and b))"],
+        ["def test_function(a, b):\n    if a and b:\n        return True\n    else:\n        return False",
+         "def test_function(a, b):\n    if (a and a) and (b and b):\n        return True\n    else:\n        return False"],
+        ["def test_function(a, b):\n    if a or b:\n        return True\n    else:\n        return False",
+         "def test_function(a, b):\n    if a and a or (b and b):\n        return True\n    else:\n        return False"],
+    ]
+
+    transformer_and = mutator.IdempotentModifier(type_of_transformation=1)
+    for test_case in test_cases_and:
+        node = ast.parse(test_case[0])
+        modified_node = transformer_and.visit(node)
+        assert ast.unparse(modified_node) == test_case[1]
+
+
+    # Test indempotent relation 2
+    test_cases_or = [
+        ["a", "a or a"],
+        ["b", "b or b"],
+        ["a and b", "(a or a) and (b or b)"],
+        ["a or b", "(a or a) or (b or b)"],
+        ["a and not b", "(a or a) and (not (b or b))"],
+        ["def test_function(a, b):\n    if a and b:\n        return True\n    else:\n        return False",
+        "def test_function(a, b):\n    if (a or a) and (b or b):\n        return True\n    else:\n        return False"],
+        ["def test_function(a, b):\n    if a or b:\n        return True\n    else:\n        return False",
+         "def test_function(a, b):\n    if (a or a) or (b or b):\n        return True\n    else:\n        return False"],
+    ]
+
+    transformer_or = mutator.IdempotentModifier(type_of_transformation=2)
+    for test_case in test_cases_or:
+        node = ast.parse(test_case[0])
+        modified_node = transformer_or.visit(node)
+        assert ast.unparse(modified_node) == test_case[1]
+
+
+if __name__ == "__main__":
+    test_idempotent_modifier()
