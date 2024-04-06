@@ -1,27 +1,25 @@
-# Test Report
+# Issue 9: Uncaught Invalid Dictionary
 
-Time: 2024-04-06 10:21:43.926505
+## Description
+
+When there is a syntax error in the modified program where a dictionary does not have a closing bracket, the ITS API does not detect the error. Instead, the `error_localizer`, `feedback_error`, `feedback_fix` and `repair` endpoints detect that the base and modified programs are equivalent. That is incorrect, where there is clearly a syntax error and thus, repair cost should be non-zero.
+
+We believe the problem arises because **the parser outputs for both the base and modified programs are identical**. Therefore, the other endpoints are unable to detect the syntax error because the parsed programs are identical.
 
 ### Base Program
 
 ```py
 def main():
-	 return {'key1': 1, 'key2': 2 }
+    return {'key1': 1, 'key2': 2 }
 ```
-
-## Test Case 1
 
 ### Modified Program
-
 ```py
 def main():
-	 return {'key1': 1, 'key2': 2 
+    return {'key1': 1, 'key2': 2 
 ```
 
-<details>
-<summary>feedback_fix endpoint: passed ✅</summary>
-
-Request Body: 
+### Input
 ```json
 {
     "language": "py",
@@ -33,12 +31,35 @@ Request Body:
 }
 ```
 
-Message: 
+### Output
+
+#### Error Localizer
+```json
+{
+    "errorLocations": {},
+    "errorInputs": []
+}
 ```
-Success
+
+#### Feedback Error
+```json
+None
 ```
 
-Actual Output: None
+#### Feedback Fix
+```json
+None
+```
 
-</details>
+#### Repair
+```json
+[
+    {
+        "totalCost": 0.0,
+        "localRepairs": []
+    }
+]
+```
 
+## Related Test Reports
+Refer to Test Report ID 474182eb.

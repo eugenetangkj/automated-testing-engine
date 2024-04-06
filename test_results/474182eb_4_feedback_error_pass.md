@@ -1,6 +1,6 @@
 # Test Report
 
-Time: 2024-04-06 10:21:42.291405
+Time: 2024-04-06 10:22:30.679800
 
 ### Base Program
 
@@ -19,7 +19,7 @@ def main():
 ```
 
 <details>
-<summary>error_localizer endpoint: passed ✅</summary>
+<summary>feedback_error endpoint: passed ✅</summary>
 
 Request Body: 
 ```json
@@ -38,13 +38,7 @@ Message:
 Success
 ```
 
-Actual Output: 
-```json
-{
-    "errorLocations": {},
-    "errorInputs": []
-}
-```
+Actual Output: None
 
 </details>
 

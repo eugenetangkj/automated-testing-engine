@@ -1,6 +1,6 @@
 # Test Report
 
-Time: 2024-04-06 10:21:42.788251
+Time: 2024-04-06 10:22:31.806027
 
 ### Base Program
 
@@ -19,7 +19,7 @@ def main():
 ```
 
 <details>
-<summary>feedback_error endpoint: passed ✅</summary>
+<summary>feedback_fix endpoint: passed ✅</summary>
 
 Request Body: 
 ```json
