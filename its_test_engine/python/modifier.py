@@ -180,3 +180,80 @@ class IdentityModifier(ast.NodeTransformer):
         
         # Not a valid Idempotent transformation
         return node
+
+class UnravelTernaryModifier(ast.NodeTransformer):
+    '''
+    In Python, a ternary operator is of the form
+    [true_value] if [condition] else [false_value].
+    
+    This is synthetic sugar for the standard if-else clause. Thus, this class
+    unravels a ternary operator into the standard if-else clause.
+    '''
+    def visit_Assign(self, node):
+        """
+        Visit Assign nodes and transform them if they contain a ternary expression.
+        """
+        if isinstance(node.value, ast.IfExp):
+            # Break down the ternary operator into its 3 components
+            condition = node.value.test # a > 5
+            true_value = node.value.body # a
+            false_value = node.value.orelse # b
+
+            # Create the new assignment for the truth block
+            true_assignment = ast.Assign(targets=node.targets, value=true_value)
+            true_assignment.lineno = node.lineno
+            true_assignment.col_offset = node.col_offset
+
+            # Create the new assignment for the false block
+            false_assignment = ast.Assign(targets=node.targets, value=false_value)
+            false_assignment.lineno = node.lineno
+            false_assignment.col_offset = node.col_offset
+
+            # Combine the truth and false blocks into a single if-else clause
+            combined_if_statement = ast.If(
+                test=condition,
+                body=[true_assignment],
+                orelse=[false_assignment]
+            )
+
+            return combined_if_statement
+
+
+        else:
+            #TODO: handle case where ternary is part of an assignment but not the entire
+            #assignment
+            pass
+    
+
+    def visit_FunctionDef(self, node):
+        """
+        Visit FunctionDef nodes and transform them to remove redundant return statements.
+        """
+        # Check if the first statement in the function body is a return statement without value
+        if node.body and isinstance(node.body[0], ast.Return) and not node.body[0].value:
+            # Remove the first statement from the function body
+            node.body.pop(0)
+
+        # Visit the function body recursively
+        node.body = [self.visit(stmt) for stmt in node.body]
+
+        return node
+
+    def visit_IfExp(self, node):
+        """
+        Visit IfExp nodes and transform them into equivalent if-else statements.
+        """
+        condition = node.test
+        true_value = node.body
+        false_value = node.orelse
+
+
+        # Create a new If statement with equivalent semantics
+        if_statement = ast.If(
+            test=condition,
+            body=[ast.Return(value=true_value)],
+            orelse=[ast.Return(value=false_value)]
+        )
+
+        # Return the transformed If statement
+        return if_statement

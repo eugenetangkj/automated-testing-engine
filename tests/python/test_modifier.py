@@ -59,6 +59,7 @@ def test_bin_op_modified():
         modified_node = transformer.visit(node)
         assert ast.unparse(modified_node) == test_case[1]
 
+
 def test_de_morgan_modifier():
     transformer = mutator.DeMorganModifier()
 
@@ -83,6 +84,7 @@ def test_de_morgan_modifier():
         node = ast.parse(test_case[0])
         modified_node = transformer.visit(node)
         assert ast.unparse(modified_node) == test_case[1]
+
 
 def test_idempotent_modifier():
     # Test indempotent relation 1
@@ -165,5 +167,23 @@ def test_identity_modifier():
         modified_node = transformer_or.visit(node)
         assert ast.unparse(modified_node) == test_case[1]
 
+def test_unravel_ternary_modifier():
+    
+    transformer = mutator.UnravelTernaryModifier()
+
+    test_cases = [
+        ##["c = a if a > 5 else b", "if a > 5:\n    c = a\nelse:\n    c = b"]
+        ["def test_function(a):\n    return True if (a > 5) else False",
+        "def test_function(a):\n    if (a > 5):\n        return True\n    else:\n        return False"],
+        #["c = 2 + (a if a > 5 else b)", ""]
+    ]
+
+    for test_case in test_cases:
+        node = ast.parse(test_case[0])
+        modified_node = transformer.visit(node)
+        print(ast.unparse(modified_node))
+        #assert ast.unparse(modified_node) == test_case[1]
+
+
 if __name__ == "__main__":
-    test_identity_modifier()
+    test_unravel_ternary_modifier()
