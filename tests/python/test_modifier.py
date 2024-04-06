@@ -173,9 +173,12 @@ def test_unravel_ternary_modifier():
 
     test_cases = [
         ##["c = a if a > 5 else b", "if a > 5:\n    c = a\nelse:\n    c = b"]
-        ["def test_function(a):\n    return True if (a > 5) else False",
-        "def test_function(a):\n    if (a > 5):\n        return True\n    else:\n        return False"],
+        ##["def test_function(a):\n    return True if (a > 5) else False",
+        ##"def test_function(a):\n    if (a > 5):\n        return True\n    else:\n        return False"],
+        ##["def test_function(a):\n    a = a + 1\n    return True if (a > 5) else False", ""]
         #["c = 2 + (a if a > 5 else b)", ""]
+        #["c = (a if a > 5 else b) + 2", ""]
+        ["c = (a if a > 5 else b) + (c if c < 10 else d)", ""]
     ]
 
     for test_case in test_cases:

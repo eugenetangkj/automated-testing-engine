@@ -121,6 +121,7 @@ class DeMorganModifier(ast.NodeTransformer):
         return ast.UnaryOp(op=ast.Not(),
                            operand=ast.BoolOp(op=new_boolean_operator, values=negated_operands))
 
+
 class IdempotentModifier(ast.NodeTransformer):
     '''
     This class transforms a Boolean variable into its logical equivalent counterpart
@@ -151,6 +152,7 @@ class IdempotentModifier(ast.NodeTransformer):
         # Not a valid Idempotent transformation
         return node
 
+
 class IdentityModifier(ast.NodeTransformer):
     '''
     This class transforms a Boolean variable into its logical equivalent counterpart
@@ -180,6 +182,7 @@ class IdentityModifier(ast.NodeTransformer):
         
         # Not a valid Idempotent transformation
         return node
+
 
 class UnravelTernaryModifier(ast.NodeTransformer):
     '''
@@ -217,43 +220,195 @@ class UnravelTernaryModifier(ast.NodeTransformer):
             )
 
             return combined_if_statement
+    
+        elif isinstance(node.value, ast.BinOp):
+            # Get the current variable that is being assigned
+            current_targets = node.targets
+
+            # Get operator for bin op
+            current_operator = node.value.op
+
+            # Check if any of the operands is a ternary expression
+            is_left_ternary = False
+            is_right_ternary = False
+            left_node = self.visit(node.value.left)
+            right_node = self.visit(node.value.right)
+
+            # Check if left operand is an IfExp
+            if isinstance(left_node, ast.IfExp):
+                is_left_ternary = True
+                # Transform left operand into an If statement
+
+            # Check if right operand is an IfExp
+            if isinstance(right_node, ast.IfExp):
+                is_right_ternary = True
+                # Transform right operand into an If statement
+            
+
+            if (not is_left_ternary and not is_right_ternary):
+                return node
+            
+            if (is_left_ternary and not is_right_ternary):
+                # Transform left
+                condition = left_node.test
+                true_value = left_node.body
+                false_value = left_node.orelse
+
+                # Create a new assignment statement
+                assignment_if = ast.Assign(targets=current_targets, value=ast.BinOp(left=true_value, op=current_operator, right=right_node))
+                assignment_if.lineno = node.lineno
+                assignment_if.col_offset = node.col_offset
+                assignment_else = ast.Assign(targets=current_targets, value=ast.BinOp(left=false_value, op=current_operator, right=right_node))
+                assignment_else.lineno = node.lineno
+                assignment_else.col_offset = node.col_offset
+                
+
+                # Create a new If statement with equivalent semantics
+                if_statement = ast.If(
+                    test=condition,
+                    body=[assignment_if],
+                    orelse=[assignment_else]
+                )
+                return if_statement
+
+            if (not is_left_ternary and is_right_ternary):
+                # Transform right
+                condition = right_node.test
+                true_value = right_node.body
+                false_value = right_node.orelse
+
+                # Create a new assignment statement
+                assignment_if = ast.Assign(targets=current_targets, value=ast.BinOp(left=left_node, op=current_operator, right=true_value))
+                assignment_if.lineno = node.lineno
+                assignment_if.col_offset = node.col_offset
+                assignment_else = ast.Assign(targets=current_targets, value=ast.BinOp(left=left_node, op=current_operator, right=false_value))
+                assignment_else.lineno = node.lineno
+                assignment_else.col_offset = node.col_offset
+                
+
+                # Create a new If statement with equivalent semantics
+                if_statement = ast.If(
+                    test=condition,
+                    body=[assignment_if],
+                    orelse=[assignment_else]
+                )
+                return if_statement
+
+
+            if (is_left_ternary and is_right_ternary):
+                # Transform left
+                condition_left = left_node.test
+                true_value_left = left_node.body
+                false_value_left = left_node.orelse
+
+                # Transform right
+                condition_right = right_node.test
+                true_value_right = right_node.body
+                false_value_right = right_node.orelse
+
+
+                # Create Boolean conditions for 4 combinations, since we have 2 ternary operators
+
+                # Condition 1: Both true
+                boolean_condition_one = ast.BoolOp(op=ast.And(), values=[condition_left, condition_right])
+                boolean_condition_two = ast.BoolOp(op=ast.And(), values=[condition_left, ast.UnaryOp(op=ast.Not(), operand=condition_right)])
+                boolean_condition_three = ast.BoolOp(op=ast.And(), values=[ast.UnaryOp(op=ast.Not(), operand=condition_left), condition_right])
+                boolean_condition_four = ast.BoolOp(op=ast.And(), values=[ast.UnaryOp(op=ast.Not(), operand=condition_left), ast.UnaryOp(op=ast.Not(), operand=condition_right)])
+
+
+
+
+                # Create assignment statements
+                assignment_one = ast.Assign(targets=current_targets, value=ast.BinOp(left=true_value_left, op=current_operator, right=true_value_right))
+                assignment_one.lineno = node.lineno
+                assignment_one.col_offset = node.col_offset
+                assignment_two = ast.Assign(targets=current_targets, value=ast.BinOp(left=true_value_left, op=current_operator, right=false_value_right))
+                assignment_two.lineno = node.lineno
+                assignment_two.col_offset = node.col_offset
+                assignment_three = ast.Assign(targets=current_targets, value=ast.BinOp(left=false_value_left, op=current_operator, right=true_value_right))
+                assignment_three.lineno = node.lineno
+                assignment_three.col_offset = node.col_offset
+                assignment_four = ast.Assign(targets=current_targets, value=ast.BinOp(left=false_value_left, op=current_operator, right=false_value_right))
+                assignment_four.lineno = node.lineno
+                assignment_four.col_offset = node.col_offset
+
+
+
+                # Create a new If statement with equivalent semantics
+                if_statement = ast.If(
+                    test=boolean_condition_one,
+                    body=[assignment_one],
+                    orelse=[ast.If(
+                        test=boolean_condition_two,
+                        body=[assignment_two],
+                        orelse=[ast.If(
+                            test=boolean_condition_three,
+                            body=[assignment_three],
+                            orelse=[ast.If(
+                                test=boolean_condition_four,
+                                body=[assignment_four],
+                                orelse=[]
+                                )
+                            ]
+                        )]
+                    )]
+                )
+                return if_statement
+
+
+
+
+
+
+            return right_node
 
 
         else:
             #TODO: handle case where ternary is part of an assignment but not the entire
             #assignment
-            pass
+            return node
     
-
-    def visit_FunctionDef(self, node):
+    def transform_if_exp(self, if_exp_node):
         """
-        Visit FunctionDef nodes and transform them to remove redundant return statements.
+        Transform an IfExp node into an equivalent If statement.
         """
-        # Check if the first statement in the function body is a return statement without value
-        if node.body and isinstance(node.body[0], ast.Return) and not node.body[0].value:
-            # Remove the first statement from the function body
-            node.body.pop(0)
-
-        # Visit the function body recursively
-        node.body = [self.visit(stmt) for stmt in node.body]
-
-        return node
-
-    def visit_IfExp(self, node):
-        """
-        Visit IfExp nodes and transform them into equivalent if-else statements.
-        """
-        condition = node.test
-        true_value = node.body
-        false_value = node.orelse
-
+        # Extract parts of the ternary expression
+        condition = if_exp_node.test
+        true_value = if_exp_node.body
+        false_value = if_exp_node.orelse
 
         # Create a new If statement with equivalent semantics
         if_statement = ast.If(
             test=condition,
-            body=[ast.Return(value=true_value)],
-            orelse=[ast.Return(value=false_value)]
+            body=[true_value],
+            orelse=[false_value]
         )
 
-        # Return the transformed If statement
         return if_statement
+    
+
+
+    def visit_Return(self, node):
+        """
+        Visit Return nodes and transform them if the value is an IfExp.
+        """
+        # Check if the value of the Return statement is an IfExp
+        if isinstance(node.value, ast.IfExp):
+            # Extract parts of the ternary expression
+            condition = node.value.test
+            true_value = node.value.body
+            false_value = node.value.orelse
+
+            # Create a new If statement with equivalent semantics
+            if_statement = ast.If(
+                test=condition,
+                body=[ast.Return(value=true_value)],
+                orelse=[ast.Return(value=false_value)]
+            )
+
+            # Return the transformed If statement
+            return if_statement
+
+        return node
+    
+    
