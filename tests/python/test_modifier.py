@@ -184,7 +184,9 @@ def test_unravel_ternary_modifier():
         ["c = (a if a > 5 else b) + 2", "if a > 5:\n    c = a + 2\nelse:\n    c = b + 2"],
 
         ["c = (a if a > 5 else b) + (c if c < 10 else d)",
-         "if a > 5 and c < 10:\n    c = a + c\nelif a > 5 and (not c < 10):\n    c = a + d\nelif not a > 5 and c < 10:\n    c = b + c\nelif not a > 5 and (not c < 10):\n    c = b + d"]
+         "if a > 5 and c < 10:\n    c = a + c\nelif a > 5 and (not c < 10):\n    c = a + d\nelif not a > 5 and c < 10:\n    c = b + c\nelif not a > 5 and (not c < 10):\n    c = b + d"],
+
+        ["c = 1 + 2", "c = 1 + 2"]
     ]
 
     for test_case in test_cases:
@@ -192,6 +194,3 @@ def test_unravel_ternary_modifier():
         modified_node = transformer.visit(node)
         assert ast.unparse(modified_node) == test_case[1]
 
-
-if __name__ == "__main__":
-    test_unravel_ternary_modifier()

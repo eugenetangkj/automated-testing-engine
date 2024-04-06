@@ -186,28 +186,61 @@ class IdentityModifier(ast.NodeTransformer):
 
 class UnravelTernaryModifier(ast.NodeTransformer):
     '''
-    In Python, a ternary operator is of the form
-    [true_value] if [condition] else [false_value].
+    In Python, a ternary operator is of the form [true_value] if [condition] else [false_value].
     
-    This is synthetic sugar for the standard if-else clause. Thus, this class
-    unravels a ternary operator into the standard if-else clause.
+    This is synthetic sugar for the standard if-else clause. Thus, this class unravels a ternary
+    operator into the standard if-else clause.
+
+    Primarily, this class handles the transformations of the following situations:
+
+    1. A ternary operator is used in a return statement.
+        Original: def function_x(x): return True if x > 5 else False
+        New: def function_x(x):
+                 if x > 5:
+                     return True
+                 else:
+                     return False
+
+    2. A ternary operator is directly used in an assignment statement.
+    Example:
+        Original: def function_x(x): c = 2 if x > 5 else 3
+        New: def function_x(x):
+                if x > 5:
+                    c = 2
+                else:
+                    c = 3
+                
+    3. A ternary operator is used as an operand in a binop of an assignment statement.
+    Example:
+        Original: def function_x(x): c = 2 + (3 if x > 5 else 1)
+        New: def function_x(x):
+            if (x > 5):
+                c = 2 + 3
+            else:
+                c = 2 + 1
+
     '''
+
     def visit_Assign(self, node):
         """
-        Visit Assign nodes and transform them if they contain a ternary expression.
-        """
-        if isinstance(node.value, ast.IfExp):
-            # Break down the ternary operator into its 3 components
-            condition = node.value.test # a > 5
-            true_value = node.value.body # a
-            false_value = node.value.orelse # b
+        Handles situations where the ternary operator is either directly used in an
+        assignment statement or as an operand in a bin op in an assignment statement.
 
-            # Create the new assignment for the truth block
+        """
+        # Case 1: The ternary operator is directly used in an assignment statement
+        if isinstance(node.value, ast.IfExp):
+            
+            # Break down the ternary operator into its 3 components
+            condition = node.value.test
+            true_value = node.value.body
+            false_value = node.value.orelse
+
+            # Create the new assignment statement for the truth block
             true_assignment = ast.Assign(targets=node.targets, value=true_value)
             true_assignment.lineno = node.lineno
             true_assignment.col_offset = node.col_offset
 
-            # Create the new assignment for the false block
+            # Create the new assignment statement for the false block
             false_assignment = ast.Assign(targets=node.targets, value=false_value)
             false_assignment.lineno = node.lineno
             false_assignment.col_offset = node.col_offset
@@ -221,6 +254,8 @@ class UnravelTernaryModifier(ast.NodeTransformer):
 
             return combined_if_statement
     
+        # Case 2: The ternary operator is used as an operand in a bin op that is found
+        # in an assignment statement
         elif isinstance(node.value, ast.BinOp):
             # Get the current variable that is being assigned
             current_targets = node.targets
@@ -228,37 +263,35 @@ class UnravelTernaryModifier(ast.NodeTransformer):
             # Get operator for bin op
             current_operator = node.value.op
 
-            # Check if any of the operands is a ternary expression
+            # Check if any of the operands is a ternary
             is_left_ternary = False
             is_right_ternary = False
             left_node = self.visit(node.value.left)
             right_node = self.visit(node.value.right)
-
-            # Check if left operand is an IfExp
             if isinstance(left_node, ast.IfExp):
                 is_left_ternary = True
-                # Transform left operand into an If statement
-
-            # Check if right operand is an IfExp
             if isinstance(right_node, ast.IfExp):
                 is_right_ternary = True
-                # Transform right operand into an If statement
             
-
+            # Case 2a: None of the operands are ternary
             if (not is_left_ternary and not is_right_ternary):
+                # Just return the original node
                 return node
             
+            # Case 2b: Left operand is ternary, right operand is not
             if (is_left_ternary and not is_right_ternary):
                 # Transform left
                 condition = left_node.test
                 true_value = left_node.body
                 false_value = left_node.orelse
 
-                # Create a new assignment statement
-                assignment_if = ast.Assign(targets=current_targets, value=ast.BinOp(left=true_value, op=current_operator, right=right_node))
+                # Create new assignment statements
+                assignment_if = ast.Assign(targets=current_targets,
+                                           value=ast.BinOp(left=true_value, op=current_operator, right=right_node))
                 assignment_if.lineno = node.lineno
                 assignment_if.col_offset = node.col_offset
-                assignment_else = ast.Assign(targets=current_targets, value=ast.BinOp(left=false_value, op=current_operator, right=right_node))
+                assignment_else = ast.Assign(targets=current_targets,
+                                             value=ast.BinOp(left=false_value, op=current_operator, right=right_node))
                 assignment_else.lineno = node.lineno
                 assignment_else.col_offset = node.col_offset
                 
@@ -271,17 +304,20 @@ class UnravelTernaryModifier(ast.NodeTransformer):
                 )
                 return if_statement
 
+            # Case 2c: Left operand is not ternary, right operand is
             if (not is_left_ternary and is_right_ternary):
                 # Transform right
                 condition = right_node.test
                 true_value = right_node.body
                 false_value = right_node.orelse
 
-                # Create a new assignment statement
-                assignment_if = ast.Assign(targets=current_targets, value=ast.BinOp(left=left_node, op=current_operator, right=true_value))
+                # Create new assignment statements
+                assignment_if = ast.Assign(targets=current_targets,
+                                           value=ast.BinOp(left=left_node, op=current_operator, right=true_value))
                 assignment_if.lineno = node.lineno
                 assignment_if.col_offset = node.col_offset
-                assignment_else = ast.Assign(targets=current_targets, value=ast.BinOp(left=left_node, op=current_operator, right=false_value))
+                assignment_else = ast.Assign(targets=current_targets,
+                                             value=ast.BinOp(left=left_node, op=current_operator, right=false_value))
                 assignment_else.lineno = node.lineno
                 assignment_else.col_offset = node.col_offset
                 
@@ -294,7 +330,7 @@ class UnravelTernaryModifier(ast.NodeTransformer):
                 )
                 return if_statement
 
-
+            # Case 2d: Both nodes are ternary
             if (is_left_ternary and is_right_ternary):
                 # Transform left
                 condition_left = left_node.test
@@ -309,32 +345,41 @@ class UnravelTernaryModifier(ast.NodeTransformer):
 
                 # Create Boolean conditions for 4 combinations, since we have 2 ternary operators
 
-                # Condition 1: Both true
+                # Both conditions true
                 boolean_condition_one = ast.BoolOp(op=ast.And(), values=[condition_left, condition_right])
-                boolean_condition_two = ast.BoolOp(op=ast.And(), values=[condition_left, ast.UnaryOp(op=ast.Not(), operand=condition_right)])
-                boolean_condition_three = ast.BoolOp(op=ast.And(), values=[ast.UnaryOp(op=ast.Not(), operand=condition_left), condition_right])
-                boolean_condition_four = ast.BoolOp(op=ast.And(), values=[ast.UnaryOp(op=ast.Not(), operand=condition_left), ast.UnaryOp(op=ast.Not(), operand=condition_right)])
-
-
-
+                # Left true, right false
+                boolean_condition_two = ast.BoolOp(op=ast.And(),
+                                                   values=[condition_left, ast.UnaryOp(op=ast.Not(),operand=condition_right)])
+                # Left false, right true
+                boolean_condition_three = ast.BoolOp(op=ast.And(),
+                                                     values=[ast.UnaryOp(op=ast.Not(), operand=condition_left),
+                                                             condition_right])
+                # Both conditions false
+                boolean_condition_four = ast.BoolOp(op=ast.And(),
+                                                    values=[ast.UnaryOp(op=ast.Not(), operand=condition_left),
+                                                            ast.UnaryOp(op=ast.Not(), operand=condition_right)])
+                
 
                 # Create assignment statements
-                assignment_one = ast.Assign(targets=current_targets, value=ast.BinOp(left=true_value_left, op=current_operator, right=true_value_right))
+                assignment_one = ast.Assign(targets=current_targets,
+                                            value=ast.BinOp(left=true_value_left, op=current_operator, right=true_value_right))
                 assignment_one.lineno = node.lineno
                 assignment_one.col_offset = node.col_offset
-                assignment_two = ast.Assign(targets=current_targets, value=ast.BinOp(left=true_value_left, op=current_operator, right=false_value_right))
+                assignment_two = ast.Assign(targets=current_targets,
+                                            value=ast.BinOp(left=true_value_left, op=current_operator, right=false_value_right))
                 assignment_two.lineno = node.lineno
                 assignment_two.col_offset = node.col_offset
-                assignment_three = ast.Assign(targets=current_targets, value=ast.BinOp(left=false_value_left, op=current_operator, right=true_value_right))
+                assignment_three = ast.Assign(targets=current_targets,
+                                              value=ast.BinOp(left=false_value_left, op=current_operator, right=true_value_right))
                 assignment_three.lineno = node.lineno
                 assignment_three.col_offset = node.col_offset
-                assignment_four = ast.Assign(targets=current_targets, value=ast.BinOp(left=false_value_left, op=current_operator, right=false_value_right))
+                assignment_four = ast.Assign(targets=current_targets,
+                                             value=ast.BinOp(left=false_value_left, op=current_operator, right=false_value_right))
                 assignment_four.lineno = node.lineno
                 assignment_four.col_offset = node.col_offset
 
 
-
-                # Create a new If statement with equivalent semantics
+                # Create a new if-elif statement with equivalent semantics
                 if_statement = ast.If(
                     test=boolean_condition_one,
                     body=[assignment_one],
@@ -355,23 +400,17 @@ class UnravelTernaryModifier(ast.NodeTransformer):
                 )
                 return if_statement
 
-
-
-
-
-
-            return right_node
-
-
+        # Case 3: We do not handle other cases
         else:
             return node
     
    
     def visit_Return(self, node):
         """
-        Visit Return nodes and transform them if the value is an IfExp.
+        Handles situations where the ternary operator is used in a return statement
+
         """
-        # Check if the value of the Return statement is an IfExp
+        # Check if the value of the return statement is a ternary
         if isinstance(node.value, ast.IfExp):
             # Extract parts of the ternary expression
             condition = node.value.test
@@ -389,5 +428,3 @@ class UnravelTernaryModifier(ast.NodeTransformer):
             return if_statement
 
         return node
-    
-    
