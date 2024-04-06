@@ -172,20 +172,25 @@ def test_unravel_ternary_modifier():
     transformer = mutator.UnravelTernaryModifier()
 
     test_cases = [
-        ##["c = a if a > 5 else b", "if a > 5:\n    c = a\nelse:\n    c = b"]
-        ##["def test_function(a):\n    return True if (a > 5) else False",
-        ##"def test_function(a):\n    if (a > 5):\n        return True\n    else:\n        return False"],
-        ##["def test_function(a):\n    a = a + 1\n    return True if (a > 5) else False", ""]
-        #["c = 2 + (a if a > 5 else b)", ""]
-        #["c = (a if a > 5 else b) + 2", ""]
-        ["c = (a if a > 5 else b) + (c if c < 10 else d)", ""]
+        ["c = a if a > 5 else b", "if a > 5:\n    c = a\nelse:\n    c = b"],
+
+        ["def test_function(a):\n    return True if a > 5 else False",
+         "def test_function(a):\n    if a > 5:\n        return True\n    else:\n        return False"],
+
+        ["def test_function(a):\n    a = a + 1\n    return True if a > 5 else False",
+         "def test_function(a):\n    a = a + 1\n    if a > 5:\n        return True\n    else:\n        return False"],
+
+        ["c = 2 + (a if a > 5 else b)", "if a > 5:\n    c = 2 + a\nelse:\n    c = 2 + b"],
+        ["c = (a if a > 5 else b) + 2", "if a > 5:\n    c = a + 2\nelse:\n    c = b + 2"],
+
+        ["c = (a if a > 5 else b) + (c if c < 10 else d)",
+         "if a > 5 and c < 10:\n    c = a + c\nelif a > 5 and (not c < 10):\n    c = a + d\nelif not a > 5 and c < 10:\n    c = b + c\nelif not a > 5 and (not c < 10):\n    c = b + d"]
     ]
 
     for test_case in test_cases:
         node = ast.parse(test_case[0])
         modified_node = transformer.visit(node)
-        print(ast.unparse(modified_node))
-        #assert ast.unparse(modified_node) == test_case[1]
+        assert ast.unparse(modified_node) == test_case[1]
 
 
 if __name__ == "__main__":

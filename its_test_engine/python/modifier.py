@@ -364,30 +364,9 @@ class UnravelTernaryModifier(ast.NodeTransformer):
 
 
         else:
-            #TODO: handle case where ternary is part of an assignment but not the entire
-            #assignment
             return node
     
-    def transform_if_exp(self, if_exp_node):
-        """
-        Transform an IfExp node into an equivalent If statement.
-        """
-        # Extract parts of the ternary expression
-        condition = if_exp_node.test
-        true_value = if_exp_node.body
-        false_value = if_exp_node.orelse
-
-        # Create a new If statement with equivalent semantics
-        if_statement = ast.If(
-            test=condition,
-            body=[true_value],
-            orelse=[false_value]
-        )
-
-        return if_statement
-    
-
-
+   
     def visit_Return(self, node):
         """
         Visit Return nodes and transform them if the value is an IfExp.
