@@ -223,3 +223,22 @@ def test_for_range_to_while_loop_modifier():
         node = ast.parse(test_case[0])
         modified_node = transformer.visit(node)
         assert ast.unparse(modified_node) == test_case[1]
+
+def test_extra_argument_reassignment_modifier():
+
+    transformer = mutator.ExtraArgumentReassignmentModifier()
+
+    test_cases = [
+       
+        ["def func(x):\n    return x",
+         "def func(x):\n    x = x\n    x = x\n    x = x\n    x = x\n    x = x\n    return x"],
+
+        ["def func(x, y):\n    sum = x + y\n    return sum",
+         "def func(x, y):\n    x = x\n    x = x\n    x = x\n    x = x\n    x = x\n    y = y\n    y = y\n    " +\
+            "y = y\n    y = y\n    y = y\n    sum = x + y\n    return sum"],     
+    ]
+
+    for test_case in test_cases:
+        node = ast.parse(test_case[0])
+        modified_node = transformer.visit(node)
+        assert ast.unparse(modified_node) == test_case[1]
