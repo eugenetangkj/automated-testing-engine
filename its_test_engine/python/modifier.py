@@ -555,6 +555,7 @@ class ForRangeToWhileLoopModifier(ast.NodeTransformer):
             # Cases we do not handle
             return node
 
+
 class ExtraArgumentReassignmentModifier(ast.NodeTransformer):
     """
     This class reassigns the arguments of a function to itself multiple
@@ -616,3 +617,75 @@ class ExtraArgumentReassignmentModifier(ast.NodeTransformer):
         return node
 
 
+class SwapArgumentsModifier(ast.NodeTransformer):
+    """
+    This class swaps the arguments internally within a function and
+    replaces the arguments with the function body accordingly.
+
+    Example:
+        Base:
+            def main(a, b, c):
+                output = c - b + a
+                return output
+        Modified:
+            def main(a, b, c):
+                (a, b, c) = (c, b, a)
+                output = a - b + c
+                return output
+    """
+
+    def visit_FunctionDef(self, node):
+        # Get the names of the arguments in the function
+        names_of_arguments = [argument.arg for argument in node.args.args]
+        number_of_arguments = len(names_of_arguments)
+        
+        # Create the tuple assignment statement to swap the values of the arguments
+        tuple_original = ast.Tuple(
+            elts=[ast.Name(id=names_of_arguments[i], ctx=ast.Store()) for i in range(number_of_arguments)],
+            ctx=ast.Store())
+        tuple_reversed = ast.Tuple(
+            elts=[ast.Name(id=names_of_arguments[-i - 1], ctx=ast.Load()) for i in range(number_of_arguments)],
+            ctx=ast.Load())
+        tuple_assignment_statement = ast.Assign(
+            targets=[tuple_original],
+            value=tuple_reversed
+        )
+        tuple_assignment_statement.lineno = node.lineno
+        
+        # Insert the new assignment statement at the beginning of the function body
+        node.body.insert(0, tuple_assignment_statement)
+        
+        # Store the original argument names and their swapped names
+        # Need for retrieval when swapping variables later on
+        self.argument_names_original = names_of_arguments
+        self.argument_names_reversed = [names_of_arguments[- i - 1] for i in range(number_of_arguments)]
+        
+        # Visit the function to replace variables
+        self.generic_visit(node)
+        
+        return node
+
+    def visit_Name(self, node):
+        # Replace arguments with the new mapped arguments
+        if isinstance(node.ctx, ast.Load) and node.id in self.argument_names_original:
+            # The current name is one of the arguments that we have to do swapping
+
+            # Get new argument information
+            index_in_original_tuple = self.argument_names_original.index(node.id)
+            id_of_new_argument = self.argument_names_reversed[index_in_original_tuple]
+
+            # Create new node for the mapped argument
+            new_name_node = ast.Name(id=id_of_new_argument, ctx=node.ctx)
+            return ast.copy_location(new_name_node, node)
+        
+        return node
+
+    def visit_Assign(self, node):
+        # We do not want to replace the variables in the newly inserted tuple statement
+        # If we visit it, we ignore it and not perform any swapping
+        if isinstance(node.targets[0], ast.Tuple):
+            return node
+        
+        # Not the original tuple, visit as per normal
+        else:
+            return self.generic_visit(node)
