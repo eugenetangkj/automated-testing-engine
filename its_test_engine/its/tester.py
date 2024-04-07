@@ -40,13 +40,13 @@ class Tester:
         try:
             # function_signature, base_code = self.program_generator.generate_test_case()
             # base_code = "def generate_random_number():\n    local_var = object()\n    seed = id(local_var)\n    a = 1140671485\n    c = 128201163\n    m = 2 ** 24\n    rand = seed\n    rand = (a * rand + c) % m\n    return rand"
-            base_code = "def main():\n\toriginal_list = [1, 2, 3, 4, 5]\n\tfiltered_list = []\n\tfor number in original_list:\n\t\tif number % 2 == 0:\n\t\t\tfiltered_list.append(number)\n\treturn filtered_list"
+            base_code = "def main(x):\n\tx = x + 5\n\treturn x"
             
             
             function_signature = {
                     "name": "main",
-                    "argument_types": [],
-                    "return_type": "list",
+                    "argument_types": ["int"],
+                    "return_type": "int",
             }
 
 
@@ -63,7 +63,7 @@ class Tester:
         # Step 3: Mutate code
         try:
             #modified_programs = mutate_code(base_code, self.transformers)
-            modified_programs = ["def main():\n\toriginal_list = [1, 2, 3, 4, 5]\n\tfiltered_list = []\n\ti = 0\n\twhile i < len(original_list):\n\t\tif original_list[i] % 2 == 0:\n\t\t\tfiltered_list.append(original_list[i])\n\t\ti = i + 1\n\treturn filtered_list"]
+            modified_programs = ["def main(x):\n\tx = x + 5\n\tfor j in range(2, 5):\n\t\tx += 0\n\treturn x"]
         except SyntaxError as syntax_error:
             # OpenAI might give code that cannot be mutated by the transformers
             # For example, it could have \n and \t in the base program string instead of using newlines and tabs
