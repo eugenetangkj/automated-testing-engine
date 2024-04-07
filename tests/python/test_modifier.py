@@ -241,5 +241,4 @@ def test_extra_argument_reassignment_modifier():
     for test_case in test_cases:
         node = ast.parse(test_case[0])
         modified_node = transformer.visit(node)
-        print(ast.unparse(modified_node))
         assert ast.unparse(modified_node) == test_case[1]
