@@ -554,3 +554,65 @@ class ForRangeToWhileLoopModifier(ast.NodeTransformer):
         else:
             # Cases we do not handle
             return node
+
+class ExtraArgumentReassignmentModifier(ast.NodeTransformer):
+    """
+    This class reassigns the arguments of a function to itself multiple
+    times at the start of the function. The number of times the assignment
+    is done per argument can be set in the __init__ method, with default value
+    of 5 times per argument.
+
+    Example:
+        Base:
+            def main(x, y):
+                sum = x + y
+                return sum
+        Modified:
+            def main(x, y):
+                x = x
+                x = x
+                x = x
+                x = x
+                x = x
+                y = y
+                y = y
+                y = y
+                y = y
+                y = y
+                sum = x + y
+                return sum
+    """
+    def __init__(self, number_of_repeats=5):
+        '''
+        Parameters:
+            number_of_repeats: Number of times each argument is assigned
+        '''
+        super().__init__()
+        self.number_of_repeats = number_of_repeats
+
+
+    def visit_FunctionDef(self, node):
+        # Obtain arguments of function
+        arguments = node.args.args
+
+        # Create assignment statements for arguments
+        argument_assignment_statements = []
+        for argument in arguments:
+            for i in range(self.number_of_repeats):
+                # Create new assignment statement
+                new_assignment_statement = ast.Assign(
+                    targets=[ast.Name(id=argument.arg, ctx = ast.Store())],
+                    value=ast.Name(id=argument.arg, ctx=ast.Load())
+                ) 
+                new_assignment_statement.lineno = node.lineno
+
+                # Add new assignment statement to list
+                argument_assignment_statements.append(
+                    new_assignment_statement
+                )
+        
+        # Add all the assignment statements to the start of the function
+        node.body = argument_assignment_statements + node.body
+        return node
+
+
