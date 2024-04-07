@@ -555,6 +555,7 @@ class ForRangeToWhileLoopModifier(ast.NodeTransformer):
             # Cases we do not handle
             return node
 
+
 class ExtraArgumentReassignmentModifier(ast.NodeTransformer):
     """
     This class reassigns the arguments of a function to itself multiple
@@ -615,4 +616,28 @@ class ExtraArgumentReassignmentModifier(ast.NodeTransformer):
         node.body = argument_assignment_statements + node.body
         return node
 
+class SwapArgumentsModifier(ast.NodeTransformer):
+    """
+    This class swaps the arguments internally within a function and
+    replaces the arguments with the function body accordingly.
 
+    Example:
+        Base:
+            def main(x, y):
+                sum = x + y
+                return sum
+        Modified:
+            def main(x, y):
+                x = x
+                x = x
+                x = x
+                x = x
+                x = x
+                y = y
+                y = y
+                y = y
+                y = y
+                y = y
+                sum = x + y
+                return sum
+    """
