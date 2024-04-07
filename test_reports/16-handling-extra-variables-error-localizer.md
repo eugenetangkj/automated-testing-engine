@@ -4,7 +4,7 @@
 There appears to be an inconsistency regarding how the error localizer handles the introduction of extra variables while preserving program semantics.
 
 ### Program 1
-Consider the following program. Related report ID is 1377d379.
+Consider the following program. Related Test Report ID is 1377d379.
 
 ```py
 base_program_string = "def main(y):\n\ty = y + 5\n\treturn y"
@@ -245,7 +245,7 @@ Actual Output:
 ```
 
 ### Program 2
-We thought what was observed in Program 1 could be because the introduction of a new variable leads to the error localizer detecting a potential error location. Thus, we tried the following program and discovered that the error localizer did not identify any error locations. Related report ID is 8744d29e.
+We thought what was observed in Program 1 could be because the introduction of a new variable leads to the error localizer detecting a potential error location. Thus, we tried the following program and discovered that the error localizer did not identify any error locations. Test Report ID is 8744d29e.
 
 ```py
 base_program_string = "def main(v):\n\tv = v + 5\n\treturn v"
@@ -273,7 +273,7 @@ Actual Output:
 ```
 
 ### Program 3
-However, when we tried another program that involves introduction of a new variable, the error localizer endpoint did not detect any possible error locations. Related report ID is d33344d6.
+However, when we tried another program that involves introduction of a new variable, the error localizer endpoint did not detect any possible error locations. Test Report ID is d33344d6.
 
 ```py
 base_program_string = "def main():\n\treturn 2"
