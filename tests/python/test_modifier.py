@@ -243,6 +243,3 @@ def test_extra_argument_reassignment_modifier():
         modified_node = transformer.visit(node)
         print(ast.unparse(modified_node))
         assert ast.unparse(modified_node) == test_case[1]
-
-if __name__ == "__main__":
-    test_extra_argument_reassignment_modifier()
