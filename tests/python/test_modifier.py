@@ -242,3 +242,25 @@ def test_extra_argument_reassignment_modifier():
         node = ast.parse(test_case[0])
         modified_node = transformer.visit(node)
         assert ast.unparse(modified_node) == test_case[1]
+
+def test_swap_arguments_modifier():
+    transformer = mutator.SwapArgumentsModifier()
+
+    test_cases = [
+        ["def func(a, b):\n    diff = a - b\n    return diff",
+         "def func(a, b):\n    (a, b) = (b, a)\n    diff = b - a\n    return diff"],
+
+        ["def func(x, y, z):\n    diff = x - z + y\n    return diff",
+         "def func(x, y, z):\n    (x, y, z) = (z, y, x)\n    diff = z - x + y\n    return diff"],
+
+        ["def func(w, x, y, z):\n    diff = x - z * w + y\n    return diff",
+         "def func(w, x, y, z):\n    (w, x, y, z) = (z, y, x, w)\n    diff = y - w * z + x\n    return diff"],
+
+        ["def func(x, y):\n    diff = x - y\n    sum = x + y\n    return diff * sum",
+         "def func(x, y):\n    (x, y) = (y, x)\n    diff = y - x\n    sum = y + x\n    return diff * sum"]
+    ]
+
+    for test_case in test_cases:
+        node = ast.parse(test_case[0])
+        modified_node = transformer.visit(node)
+        assert ast.unparse(modified_node) == test_case[1]
