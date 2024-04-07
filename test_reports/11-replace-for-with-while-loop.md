@@ -1,7 +1,7 @@
 # Issue 11: Replacing For Range Loops with While Loops
 
 ## Description
-This issue was caught by one of our metamorphic relations, which is `ForRangeToWhileLoopModifier`. In Python, there is a syntax of `for ... in range(...)`. It is possible to replace it with an equivalent `while` loop that produces the same equivalent program. With our modifier, we managed to show that 2 equivalent programs were deemed as unequivalent by the `error_localizer`, `feedback_error`, `feedback_fix` and `repair` endpoints even though they have the same semantics and return the same outputs.
+This issue was caught by one of our metamorphic relations, which is `ForRangeToWhileLoopModifier`. In Python, there is a syntax of `for ... in range(...)`. It is possible to replace it with an equivalent `while` loop that produces the same equivalent program. With our modifier, we managed to show that 2 equivalent programs were deemed as unequivalent by the `errorlocalizer`, `feedback_error`, `feedback_fix` and `repair` endpoints even though they have the same semantics and return the same outputs.
 
 ### Base Program
 

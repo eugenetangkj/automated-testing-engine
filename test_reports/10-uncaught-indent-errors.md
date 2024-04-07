@@ -1,7 +1,7 @@
 # Issue 10: Uncaught Indent Errors
 
 ## Description
-We believe that the parser removes whitespace. Thus, when the parser intermediates of base and modified programs are put into the `error_localizer`, `feedback_error`, `feedback_fix` and `repair` endpoints, the endpoints detect that both programs are equivalent, despite the modified program having indentation error. In Python, the modified programs should raise an `IndentationError` instead of being deemed as syntatically correct.
+We believe that the parser removes whitespace. Thus, when the parser intermediates of base and modified programs are put into the `errorlocalizer`, `feedback_error`, `feedback_fix` and `repair` endpoints, the endpoints detect that both programs are equivalent, despite the modified program having indentation error. In Python, the modified programs should raise an `IndentationError` instead of being deemed as syntatically correct.
 
 ### Base Program
 

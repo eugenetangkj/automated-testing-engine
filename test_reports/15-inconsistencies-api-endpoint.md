@@ -1,7 +1,7 @@
 # Issue 15: Inconsistencies with API Endpoints
 
 ## Description
-We discovered a weird behaviour with the `error_localizer`, `feedback_error`, `feedback_fix` and `repair` endpoints. We have 2 different programs, let us call them Program A and Program B.
+We discovered a weird behaviour with the `errorlocalizer`, `feedback_error`, `feedback_fix` and `repair` endpoints. We have 2 different programs, let us call them Program A and Program B.
 
 - When we pass Program A as both the base and modified programs to these endpoints, the endpoints return successfully.
 - When we pass Program B as both the base and modified programs to these endpoints, the endpoints return successfully.

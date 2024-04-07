@@ -1,7 +1,7 @@
 # Issue 12: Different String Concatenations
 
 ## Description
-Two different ways of concatenating strings result in programs deemed to be unequivalent by the `error_localizer`, `feedback_error`, `feedback_fix` and `repair` endpoints although they return the same output and thus should be semantically equivalent.
+Two different ways of concatenating strings result in programs deemed to be unequivalent by the `errorlocalizer`, `feedback_error`, `feedback_fix` and `repair` endpoints although they return the same output and thus should be semantically equivalent.
 
 ### Base Program
 

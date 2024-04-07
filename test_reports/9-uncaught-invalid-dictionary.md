@@ -2,7 +2,7 @@
 
 ## Description
 
-When there is a syntax error in the modified program where a dictionary does not have a closing bracket, the ITS API does not detect the error. Instead, the `error_localizer`, `feedback_error`, `feedback_fix` and `repair` endpoints detect that the base and modified programs are equivalent. That is incorrect, where there is clearly a syntax error and thus, repair cost should be non-zero.
+When there is a syntax error in the modified program where a dictionary does not have a closing bracket, the ITS API does not detect the error. Instead, the `errorlocalizer`, `feedback_error`, `feedback_fix` and `repair` endpoints detect that the base and modified programs are equivalent. That is incorrect, where there is clearly a syntax error and thus, repair cost should be non-zero.
 
 We believe the problem arises because **the parser outputs for both the base and modified programs are identical**. Therefore, the other endpoints are unable to detect the syntax error because the parsed programs are identical.
 
