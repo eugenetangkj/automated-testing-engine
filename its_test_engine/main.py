@@ -5,7 +5,21 @@
 from its_test_engine.enums import Language
 from its_test_engine.its.tester import Tester
 from its_test_engine.base.input_generator import RandomInputGenerator
-from its_test_engine.python.modifier import VariableRenamer, BinOpModifier
+from its_test_engine.python.modifier import (
+    VariableRenamer,
+    BinOpModifier,
+    ForRangeToWhileLoopModifier,
+    UnravelTernaryModifier,
+    DeMorganModifier,
+    IdempotentModifier,
+    IdentityModifier,
+    ExtraArgumentReassignmentModifier,
+    SwapArgumentsModifier,
+    WrapInIfTrueModifier,
+    WrapInTryBlockModifier,
+    WrapInExceptBlockModifier,
+    ReverseListModifier,
+    )
 from its_test_engine.python.program_generator import (
     LeetCodePythonProgramGenerator,
     OpenAIPythonProgramGenerator,
