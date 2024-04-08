@@ -823,9 +823,13 @@ class WrapInExceptBlockModifier(ast.NodeTransformer):
 
 class ReverseList(ast.NodeTransformer):
     """
-    This class reverses lists within functions and for list
-    accesses, it retrieves the correct item by using an updated
+    This class reverses lists defined within functions and for list
+    accesses, it retrieves the correct items by using an updated
     index.
+
+    Note that it only works if all the indices of lists found in
+    the function are either integer constants or single variables.
+    For example, lst[2] or lst[x], but not lst[x + 2].
 
     Example:
         Base:
@@ -843,44 +847,91 @@ class ReverseList(ast.NodeTransformer):
 
     def __init__(self):
         '''
-            Creates a list to keep track of list variables
+            Creates a dictionary to keep track of list variables and their
+            associated lengths.
+            
         '''
         super().__init__()
         self.list_lengths = {}
 
 
-    def visit_List(self, node):
-        # Store the length of the list in the dictionary
-        self.list_lengths[self.curr_list_name] = len(node.elts)
-        # Reverse the list
-        node.elts = node.elts[::-1]
-        return node
-    
-
     def visit_Assign(self, node):
-        # Check if the assignment targets a Name node
         if isinstance(node.targets[0], ast.Name):
-            # Get the name of the assigned variable
+            # Retrieve the name of the Name node
             target_name = node.targets[0].id
+
             # Check if the assigned value is a list
             if isinstance(node.value, ast.List):
-                # Assign the name of the list being assigned
-                self.curr_list_name = target_name
+                # Set an attribute to keep track of the current list variable name
+                self.current_list_name = target_name
 
-        # Visit the assignment statement normally
+        # Visit the assignment statement
         self.generic_visit(node)
         return node
 
 
+    def visit_List(self, node):
+        # For list variables, we store the list name and the length of the list
+        # in the dictionary as we need it to update the indices later
+        self.list_lengths[self.current_list_name] = len(node.elts)
 
+        # Reverse the list
+        node.elts = node.elts[::-1]
+
+        # Return reversed list
+        return node
     
+
     def visit_Subscript(self, node):
-        # Obtain parent node
+        # Get the name of the collection that this subscript is associated with
         parent_node = node.value
 
+        # Check that this subscript is associated with a list that has its length
+        # stored in the dictionary
         if (parent_node.id in self.list_lengths):
+            # Update the value of the subscript
             length_of_list = self.list_lengths[parent_node.id]
 
-            node.slice.value = length_of_list - node.slice.value - 1
+            if (isinstance(node.slice, ast.Name)):
+               # Index is a single variable
+
+               # Get new index node
+               constant_node = ast.Constant(value=length_of_list - 1)
+               negated_original_node = ast.UnaryOp(
+                   op=ast.USub(),
+                   operand=node.slice
+                )
+               new_index_node = ast.BinOp(
+                   left=negated_original_node,
+                   op=ast.Add(),
+                   right=constant_node
+               )
+               
+               # Create new subscript node
+               new_subscript_node = ast.Subscript(
+                   value=parent_node,
+                   slice=ast.Index(value=new_index_node),
+                   ctx=node.ctx
+               )
+
+               return new_subscript_node
+               
+            elif (isinstance(node.slice, ast.Constant)):
+                # Index is a constant integer
+
+                # Get new index node
+                constant_node = ast.Constant(
+                    value=length_of_list - node.slice.value - 1
+                )
+
+                # Create new subscript node
+                new_subscript_node = ast.Subscript(
+                   value=parent_node,
+                   slice=constant_node,
+                   ctx=node.ctx
+                )
+
+                return new_subscript_node
         
+        # Return the updated node
         return node
