@@ -722,3 +722,101 @@ class WrapInIfTrueModifier(ast.NodeTransformer):
 
         # Return output
         return node
+
+
+class WrapInTryBlockModifier(ast.NodeTransformer):
+    """
+    This class wraps the body of a function inside a Try
+    block, and includes an Except block that should not run,
+    but returns 1 for the sake of program completeness.
+
+    The condition is that the wrapped function should never
+    throw an exception, for it be semantically equivalent to
+    the base program.
+
+    Example:
+        Base:
+            def main(a, b, c):
+                sum = a + b + c
+                return sum
+        Modified:
+            def main(a, b, c):
+                try:
+                    sum = a + b + c
+                    return sum
+                except:
+                    return 1
+                
+    """
+
+    def visit_FunctionDef(self, node):
+        # Create a placeholder Except block with default return statement returning 1
+        new_return_statement = ast.Return(
+            value=ast.Constant(value=1)
+        )
+
+        # Create an Except block with the return statement
+        new_except_block = ast.ExceptHandler(
+            type=None,
+            name=None,
+            body=[new_return_statement]
+        )
+
+        # Create a Try block with the function wrapped in it
+        new_try_block = ast.Try(
+            body=node.body,
+            handlers=[new_except_block],
+            orelse=[],
+            finalbody=[]
+        )
+
+        # Update the existing function
+        node.body = [new_try_block]
+
+        return node
+
+
+class WrapInExceptBlockModifier(ast.NodeTransformer):
+    """
+    This class wraps the body of a function inside an Except
+    block, and includes a Try block that raises an exception so
+    the control flow goes to the Except block.
+
+    Example:
+        Base:
+            def main(a, b, c):
+                sum = a + b + c
+                return sum
+        Modified:
+            def main(a, b, c):
+                try:
+                    raise Exception
+                except:
+                    sum = a + b + c
+                    return sum       
+    """
+
+    def visit_FunctionDef(self, node):
+       # Create a new Except block with the body of the original function
+       new_except_block = ast.ExceptHandler(
+           type=None,
+           name=None,
+           body=node.body
+       )
+       
+       # Create a new Try block that raises an exception
+       # Add the new Except block as the except handler for this Try block
+       new_raise_exception_statement = ast.Raise(
+           exc=ast.Name(id="Exception", ctx=ast.Load())
+       )
+       new_try_block = ast.Try(
+           body=[new_raise_exception_statement],
+           handlers=[new_except_block],
+           orelse=[],
+           finalbody=[]
+       )
+
+       # Return updated node
+       node.body = [new_try_block]
+       return node
+    
