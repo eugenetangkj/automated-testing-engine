@@ -42,7 +42,7 @@ def run_leetcode_programs():
 def run_open_ai_programs():
     program_generator = OpenAIPythonProgramGenerator()
     input_generator = RandomInputGenerator()
-    transformers = [WrapInTryBlockModifier()]
+    transformers = [WrapInExceptBlockModifier()]
 
     tester = Tester(
         Language.PYTHON, program_generator, transformers, input_generator, writer
