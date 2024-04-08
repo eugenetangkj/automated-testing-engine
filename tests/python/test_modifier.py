@@ -325,3 +325,35 @@ def test_wrap_in_except_block_modifier():
         node = ast.parse(test_case[0])
         modified_node = transformer.visit(node)
         assert ast.unparse(modified_node) == test_case[1]
+
+
+def test_reverse_list_modifier():
+    transformer = mutator.ReverseList()
+
+    test_cases = [
+        ["def func():\n    curr_list = [1, 2, 3, 4, 5]\n    sum = curr_list[0] + curr_list[1] + curr_list[2]\n    return sum",
+         "def func():\n    curr_list = [5, 4, 3, 2, 1]\n    sum = curr_list[4] + curr_list[3] + curr_list[2]\n    return sum"],
+
+        ["def func():\n    list_one = [1, 2, 3, 4, 5]\n    list_two = [6, 7, 8, 9, 10, 11, 12]\n    " +\
+          "sum = list_one[3] + list_one[4] + list_two[2] + list_two[5]\n    return sum",
+         "def func():\n    list_one = [5, 4, 3, 2, 1]\n    list_two = [12, 11, 10, 9, 8, 7, 6]\n    " +\
+            "sum = list_one[1] + list_one[0] + list_two[4] + list_two[1]\n    return sum"],
+
+        ["def func():\n    list_one = [2, 5, 7, 2, 8]\n    dict_one = {'key_one': 1, 'key_two': 2}\n    " +\
+          "sum = list_one[0] + list_one[4] + list_one[3] + dict_one['key_one'] + dict_one['key_two']\n    return sum",
+          "def func():\n    list_one = [8, 2, 7, 5, 2]\n    dict_one = {'key_one': 1, 'key_two': 2}\n    " +\
+            "sum = list_one[4] + list_one[0] + list_one[1] + dict_one['key_one'] + dict_one['key_two']\n    return sum"],
+
+        ["def func():\n    x = 2\n    curr_list = [1, 2, 3, 4, 5]\n    sum = curr_list[0] + curr_list[x]\n    return sum",
+         "def func():\n    x = 2\n    curr_list = [5, 4, 3, 2, 1]\n    sum = curr_list[4] + curr_list[-x + 4]\n    return sum"],
+
+        ["def func():\n    x = 4\n    list_one = [0, 1, 2, 3, 4, 5]\n    list_two = [6, 7, 8, 9, 10, 11, 12]\n    " +\
+          "sum = list_two[3] + list_one[x] + list_two[2] + list_one[5]\n    return sum",
+         "def func():\n    x = 4\n    list_one = [5, 4, 3, 2, 1, 0]\n    list_two = [12, 11, 10, 9, 8, 7, 6]\n    " +\
+            "sum = list_two[3] + list_one[-x + 5] + list_two[4] + list_one[0]\n    return sum"],
+    ]
+
+    for test_case in test_cases:
+        node = ast.parse(test_case[0])
+        modified_node = transformer.visit(node)
+        assert ast.unparse(modified_node) == test_case[1]
