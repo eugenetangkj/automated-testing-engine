@@ -722,3 +722,54 @@ class WrapInIfTrueModifier(ast.NodeTransformer):
 
         # Return output
         return node
+    
+class WrapInTryBlockModifier(ast.NodeTransformer):
+    """
+    This class wraps the body of a function inside a Try
+    block, and includes an Except block that should not run,
+    but returns 1 for the sake of program completeness.
+
+    The condition is that the wrapped function should never
+    throw an exception, for it be semantically equivalent to
+    the base program.
+
+    Example:
+        Base:
+            def main(a, b, c):
+                sum = a + b + c
+                return sum
+        Modified:
+            def main(a, b, c):
+                try:
+                    sum = a + b + c
+                    return sum
+                except:
+                    return 1
+                
+    """
+
+    def visit_FunctionDef(self, node):
+        # Create a placeholder Except block with default return
+        # statement returning 1
+        new_return_statement = ast.Return(
+            value=ast.Constant(value=1)
+        )
+        new_except_block = ast.ExceptHandler(
+            type=None,
+            name=None,
+            body=[new_return_statement]
+        )
+
+        # Create a Try block with the function wrapped in it
+        new_try_block = ast.Try(
+            body=node.body,
+            handlers=[new_except_block],
+            orelse=[],
+            finalbody=[]
+        )
+
+        # Update the existing function
+        node.body = [new_try_block]
+
+        return node
+    
