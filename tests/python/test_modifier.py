@@ -305,3 +305,23 @@ def test_wrap_in_try_block_modifier():
         node = ast.parse(test_case[0])
         modified_node = transformer.visit(node)
         assert ast.unparse(modified_node) == test_case[1]
+
+
+def test_wrap_in_except_block_modifier():
+    transformer = mutator.WrapInExceptBlockModifier()
+
+    test_cases = [
+        ["def func():\n    return True",
+         "def func():\n    try:\n        raise Exception\n    except:\n        return True"],
+
+        ["def func(x, y):\n    sum = x + y\n    diff = x - y\n    return sum + diff",
+         "def func(x, y):\n    try:\n        raise Exception\n    except:\n        sum = x + y\n        diff = x - y\n        return sum + diff"],
+
+        ["def func(x, y):\n    if True:\n        sum = x + y\n        return sum\n    else:\n        diff = x - y\n        return diff",
+         "def func(x, y):\n    try:\n        raise Exception\n    except:\n        if True:\n            sum = x + y\n            return sum\n        else:\n            diff = x - y\n            return diff"],
+    ]
+
+    for test_case in test_cases:
+        node = ast.parse(test_case[0])
+        modified_node = transformer.visit(node)
+        assert ast.unparse(modified_node) == test_case[1]
