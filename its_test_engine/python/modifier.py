@@ -689,3 +689,36 @@ class SwapArgumentsModifier(ast.NodeTransformer):
         # Not the original tuple, visit as per normal
         else:
             return self.generic_visit(node)
+
+
+class WrapInIfTrueModifier(ast.NodeTransformer):
+    """
+    This class wraps the body of a function inside an If: True
+    block.
+
+    Example:
+        Base:
+            def main(a, b, c):
+                sum = a + b + c
+                return sum
+        Modified:
+            def main(a, b, c):
+                if True:
+                    sum = a + b + c
+                    return sum
+                
+    """
+
+    def visit_FunctionDef(self, node):
+        # Create the new if block
+        new_if_block = ast.If(
+            test=ast.Constant(value=True),
+            body=node.body,
+            orelse=[]
+        )
+
+        # Assign this new if block as body of function
+        node.body = [new_if_block]
+
+        # Return output
+        return node

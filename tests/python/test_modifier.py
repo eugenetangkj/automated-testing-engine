@@ -196,6 +196,7 @@ def test_unravel_ternary_modifier():
         modified_node = transformer.visit(node)
         assert ast.unparse(modified_node) == test_case[1]
 
+
 def test_for_range_to_while_loop_modifier():
     transformer = mutator.ForRangeToWhileLoopModifier()
 
@@ -224,6 +225,7 @@ def test_for_range_to_while_loop_modifier():
         modified_node = transformer.visit(node)
         assert ast.unparse(modified_node) == test_case[1]
 
+
 def test_extra_argument_reassignment_modifier():
 
     transformer = mutator.ExtraArgumentReassignmentModifier()
@@ -242,6 +244,7 @@ def test_extra_argument_reassignment_modifier():
         node = ast.parse(test_case[0])
         modified_node = transformer.visit(node)
         assert ast.unparse(modified_node) == test_case[1]
+
 
 def test_swap_arguments_modifier():
     transformer = mutator.SwapArgumentsModifier()
@@ -263,4 +266,22 @@ def test_swap_arguments_modifier():
     for test_case in test_cases:
         node = ast.parse(test_case[0])
         modified_node = transformer.visit(node)
+        assert ast.unparse(modified_node) == test_case[1]
+
+
+def test_wrap_in_if_true_modifier():
+    transformer = mutator.WrapInIfTrueModifier()
+
+    test_cases = [
+        ["def func(x, y, z):\n    return True",
+         "def func(x, y, z):\n    if True:\n        return True"],
+
+        ["def func(x, y):\n    sum = x + y\n    diff = x - y\n    return sum + diff",
+         "def func(x, y):\n    if True:\n        sum = x + y\n        diff = x - y\n        return sum + diff"],
+    ]
+
+    for test_case in test_cases:
+        node = ast.parse(test_case[0])
+        modified_node = transformer.visit(node)
+        print(ast.unparse(modified_node))
         assert ast.unparse(modified_node) == test_case[1]
