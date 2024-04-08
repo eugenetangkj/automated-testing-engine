@@ -62,8 +62,8 @@ class Tester:
 
         # Step 3: Mutate code
         try:
-            # modified_programs = mutate_code(base_code, self.transformers)
-            modified_programs = ["def main():\n\tinner_list = [5, 4, 3, 2, 1]\n\tsum = inner_list[3] + inner_list[2] + inner_list[1]\n\treturn sum"]
+            modified_programs = mutate_code(base_code, self.transformers)
+            # modified_programs = ["def main():\n\tinner_list = [5, 4, 3, 2, 1]\n\tsum = inner_list[3] + inner_list[2] + inner_list[1]\n\treturn sum"]
         except SyntaxError as syntax_error:
             # OpenAI might give code that cannot be mutated by the transformers
             # For example, it could have \n and \t in the base program string instead of using newlines and tabs
