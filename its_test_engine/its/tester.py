@@ -38,20 +38,7 @@ class Tester:
 
         # Step 1: Generate test case
         try:
-            # function_signature, base_code = self.program_generator.generate_test_case()
-            # base_code = "def generate_random_number():\n    local_var = object()\n    seed = id(local_var)\n    a = 1140671485\n    c = 128201163\n    m = 2 ** 24\n    rand = seed\n    rand = (a * rand + c) % m\n    return rand"
-            base_code = "def main():\n\tinner_list = [1, 2, 3, 4, 5]\n\tsum = inner_list[1] + inner_list[2] + inner_list[3]\n\treturn sum"
-            
-            
-            function_signature = {
-                    "name": "main",
-                    "argument_types": [],
-                    "return_type": "int",
-            }
-
-
-
-
+            function_signature, base_code = self.program_generator.generate_test_case()
         except SyntaxError as syntax_error:
             # Some LeetCode programs cannot be successfully parsed via their AST
             print(syntax_error)
@@ -63,7 +50,6 @@ class Tester:
         # Step 3: Mutate code
         try:
             modified_programs = mutate_code(base_code, self.transformers)
-            # modified_programs = ["def main():\n\tinner_list = [5, 4, 3, 2, 1]\n\tsum = inner_list[3] + inner_list[2] + inner_list[1]\n\treturn sum"]
         except SyntaxError as syntax_error:
             # OpenAI might give code that cannot be mutated by the transformers
             # For example, it could have \n and \t in the base program string instead of using newlines and tabs
@@ -128,7 +114,6 @@ class Tester:
             if interpreter_result.success:
                 new_inputs.append(program_input)
 
-        
         self.writer.write(test_suite)
 
         inputs = new_inputs
@@ -143,8 +128,8 @@ class Tester:
             "repair": repair_endpoint_tester,
         }
 
-        # if len(inputs) == 0:
-        #     return test_suites
+        if len(inputs) == 0:
+            return test_suites
 
         for endpoint, endpoint_tester in endpoint_testers.items():
             test_suite = ItsTestSuite(Language.PYTHON, endpoint, base_code)
