@@ -820,3 +820,67 @@ class WrapInExceptBlockModifier(ast.NodeTransformer):
        node.body = [new_try_block]
        return node
     
+
+class ReverseList(ast.NodeTransformer):
+    """
+    This class reverses lists within functions and for list
+    accesses, it retrieves the correct item by using an updated
+    index.
+
+    Example:
+        Base:
+            def func():
+                curr_list = [1, 2, 3, 4, 5]
+                result = curr_list[0] + curr_list[1] + curr_list[2]
+                return result
+
+        Modified:
+            def func():
+                curr_list = [5, 4, 3, 2, 1]
+                result = curr_list[4] + curr_list[3] + curr_list[2]
+                return result
+    """
+
+    def __init__(self):
+        '''
+            Creates a list to keep track of list variables
+        '''
+        super().__init__()
+        self.list_lengths = {}
+
+
+    def visit_List(self, node):
+        # Store the length of the list in the dictionary
+        self.list_lengths[self.curr_list_name] = len(node.elts)
+        # Reverse the list
+        node.elts = node.elts[::-1]
+        return node
+    
+
+    def visit_Assign(self, node):
+        # Check if the assignment targets a Name node
+        if isinstance(node.targets[0], ast.Name):
+            # Get the name of the assigned variable
+            target_name = node.targets[0].id
+            # Check if the assigned value is a list
+            if isinstance(node.value, ast.List):
+                # Assign the name of the list being assigned
+                self.curr_list_name = target_name
+
+        # Visit the assignment statement normally
+        self.generic_visit(node)
+        return node
+
+
+
+    
+    def visit_Subscript(self, node):
+        # Obtain parent node
+        parent_node = node.value
+
+        if (parent_node.id in self.list_lengths):
+            length_of_list = self.list_lengths[parent_node.id]
+
+            node.slice.value = length_of_list - node.slice.value - 1
+        
+        return node
