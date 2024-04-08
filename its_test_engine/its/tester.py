@@ -40,7 +40,7 @@ class Tester:
         try:
             # function_signature, base_code = self.program_generator.generate_test_case()
             # base_code = "def generate_random_number():\n    local_var = object()\n    seed = id(local_var)\n    a = 1140671485\n    c = 128201163\n    m = 2 ** 24\n    rand = seed\n    rand = (a * rand + c) % m\n    return rand"
-            base_code = "def main():\n\tinner_string = 'Hello'\n\tnew_string = ''\n\tfor char in inner_string:\n\t\tnew_string = char + new_string\n\treturn new_string"
+            base_code = "def main():\n\tinner_list = [1, 2, 3, 4, 5]\n\tsum = inner_list[1] + inner_list[2] + inner_list[3]\n\treturn sum"
             
             
             function_signature = {
@@ -63,7 +63,7 @@ class Tester:
         # Step 3: Mutate code
         try:
             # modified_programs = mutate_code(base_code, self.transformers)
-            modified_programs = ["def main():\n\tinner_string = 'Hello'\n\tnew_string = ''\n\tfor char in inner_string:\n\t\tnew_string = char + new_string\n\treturn new_string"]
+            modified_programs = ["def main():\n\tinner_list = [5, 4, 3, 2, 1]\n\tsum = inner_list[3] + inner_list[2] + inner_list[1]\n\treturn sum"]
         except SyntaxError as syntax_error:
             # OpenAI might give code that cannot be mutated by the transformers
             # For example, it could have \n and \t in the base program string instead of using newlines and tabs
