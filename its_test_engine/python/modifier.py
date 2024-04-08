@@ -821,7 +821,7 @@ class WrapInExceptBlockModifier(ast.NodeTransformer):
        return node
     
 
-class ReverseList(ast.NodeTransformer):
+class ReverseListModifier(ast.NodeTransformer):
     """
     This class reverses lists defined within functions and for list
     accesses, it retrieves the correct items by using an updated

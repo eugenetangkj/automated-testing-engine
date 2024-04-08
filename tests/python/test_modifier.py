@@ -328,7 +328,7 @@ def test_wrap_in_except_block_modifier():
 
 
 def test_reverse_list_modifier():
-    transformer = mutator.ReverseList()
+    transformer = mutator.ReverseListModifier()
 
     test_cases = [
         ["def func():\n    curr_list = [1, 2, 3, 4, 5]\n    sum = curr_list[0] + curr_list[1] + curr_list[2]\n    return sum",
