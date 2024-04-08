@@ -40,12 +40,12 @@ class Tester:
         try:
             # function_signature, base_code = self.program_generator.generate_test_case()
             # base_code = "def generate_random_number():\n    local_var = object()\n    seed = id(local_var)\n    a = 1140671485\n    c = 128201163\n    m = 2 ** 24\n    rand = seed\n    rand = (a * rand + c) % m\n    return rand"
-            base_code = "def main():\n\ttotal = 1 + 2 + 3 + 4 + 5\n\treturn total"
+            base_code = "def is_prime(n):\n\tif n <= 1:\n\t\treturn False\n\telif n <= 3:\n\t\treturn True\n\telif n % 2 == 0 or n % 3 == 0:\n\t\treturn False\n\ti = 5\n\twhile i * i <= n:\n\t\tif n % i == 0 or n % (i + 2) == 0:\n\t\t\treturn False\n\t\ti += 6\n\treturn True"
             
             
             function_signature = {
-                    "name": "main",
-                    "argument_types": [],
+                    "name": "is_prime",
+                    "argument_types": ["int"],
                     "return_type": "int",
             }
 
@@ -63,7 +63,7 @@ class Tester:
         # Step 3: Mutate code
         try:
             # modified_programs = mutate_code(base_code, self.transformers)
-            modified_programs = ["def main():\n\tmy_list = [1, 2, 3, 4, 5]\n\ttotal = 0\n\ttotal = my_list[0]\n\ttotal += my_list[1]\n\ttotal += my_list[2]\n\ttotal += my_list[3]\n\ttotal += my_list[4]\n\treturn total"]
+            modified_programs = ["def is_prime(n):\n\tif n <= 1:\n\t\treturn False\n\telif n <= 3:\n\t\treturn True\n\telif n % 2 == 0 or n % 3 == 0:\n\t\treturn False\n\ti = 5\n\twhile i * i <= n:\n\t\tif n % i == 0 or n % (i + 2) == 0:\n\t\t\treturn False\n\t\ti += 6\n\treturn True"]
         except SyntaxError as syntax_error:
             # OpenAI might give code that cannot be mutated by the transformers
             # For example, it could have \n and \t in the base program string instead of using newlines and tabs
@@ -128,6 +128,7 @@ class Tester:
             if interpreter_result.success:
                 new_inputs.append(program_input)
 
+        
         self.writer.write(test_suite)
 
         inputs = new_inputs
