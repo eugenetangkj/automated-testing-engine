@@ -1,22 +1,22 @@
-# Issue 25: Try-Except Equivalent Programs
+# Issue 24: Wrap in Try Block
 
 ## Description
-We can wrap a program that does not throw an exception in a try-except block. Then, the program is equivalent to not having the try-except block. However, the `errorlocalizer`, `feedback_error`, `feedback_fix` and `repair` endpoints do not detect this, and deem such programs to be unequivalent.
+We can wrap a program that does not throw an exception in a try block. Then, the program is equivalent to not having the try block. However, the `errorlocalizer`, `feedback_error`, `feedback_fix` and `repair` endpoints do not detect this, and deem such programs to be unequivalent.
 
 ### Base Program
 
 ```py
-def main():
-	return 1
+def func():
+	return 100
 ```
 
 ### Modified Program
 ```py
-def main():
-	try:
-		return 1
-	except:
-		return 0
+def func():
+    try:
+        return 100
+    except:
+        return 1
 ```
 
 
@@ -24,19 +24,19 @@ def main():
 ```json
 {
     "language": "py",
-    "reference_solution": "{\"importStatements\": [], \"fncs\": {\"main\": {\"name\": \"main\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [], \"locexprs\": {\"1\": [{\"val0\": \"$ret\", \"val1\": {\"value\": \"1\", \"line\": 2, \"tokentype\": \"Constant\"}, \"valueArray\": [\"$ret\", {\"value\": \"1\", \"line\": 2}], \"valueList\": [\"$ret\", {\"value\": \"1\", \"line\": 2}]}]}, \"loctrans\": {\"1\": {}}, \"locdescs\": {\"1\": \"around the beginning of function 'main'\"}, \"types\": {}}}}",
-    "student_solution": "{\"importStatements\": [], \"fncs\": {\"main\": {\"name\": \"main\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [], \"locexprs\": {\"1\": [{\"val0\": \"$ret\", \"val1\": {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}, \"valueArray\": [\"$ret\", {\"value\": \"0\", \"line\": 5}], \"valueList\": [\"$ret\", {\"value\": \"0\", \"line\": 5}]}]}, \"loctrans\": {\"1\": {}}, \"locdescs\": {\"1\": \"around the beginning of function 'main'\"}, \"types\": {}}}}",
-    "function": "main",
+    "reference_solution": "{\"importStatements\": [], \"fncs\": {\"func\": {\"name\": \"func\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [], \"locexprs\": {\"1\": [{\"val0\": \"$ret\", \"val1\": {\"value\": \"100\", \"line\": 2, \"tokentype\": \"Constant\"}, \"valueArray\": [\"$ret\", {\"value\": \"100\", \"line\": 2}], \"valueList\": [\"$ret\", {\"value\": \"100\", \"line\": 2}]}]}, \"loctrans\": {\"1\": {}}, \"locdescs\": {\"1\": \"around the beginning of function 'func'\"}, \"types\": {}}}}",
+    "student_solution": "{\"importStatements\": [], \"fncs\": {\"func\": {\"name\": \"func\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [], \"locexprs\": {\"1\": [{\"val0\": \"$ret\", \"val1\": {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}, \"valueArray\": [\"$ret\", {\"value\": \"1\", \"line\": 5}], \"valueList\": [\"$ret\", {\"value\": \"1\", \"line\": 5}]}]}, \"loctrans\": {\"1\": {}}, \"locdescs\": {\"1\": \"around the beginning of function 'func'\"}, \"types\": {}}}}",
+    "function": "func",
     "inputs": "[]",
     "args": "[[], [], [], [], [], [], [], [], [], []]"
 }
 ```
 
-### Interpreter Output
+### Error Localizer Output
 ```json
 {
     "errorLocations": {
-        "main": [
+        "func": [
             [
                 [
                     [
@@ -238,10 +238,10 @@ Notice how it suggests that the return value is incorrect.
 [
     {
         "lineNumber": 5,
-        "oldExpr": "0",
-        "newExpr": "1",
+        "oldExpr": "1",
+        "newExpr": "100",
         "repairStrings": [
-            "Wrong assignment. Change return 0 to return 1"
+            "Wrong assignment. Change return 1 to return 100"
         ]
     }
 ]
@@ -251,7 +251,7 @@ Notice how it suggests that the return value is incorrect.
 ```json
 [
     {
-        "totalCost": 1.0,
+        "totalCost": 2.0,
         "localRepairs": [
             {
                 "mapping": [
@@ -298,7 +298,7 @@ Notice how it suggests that the return value is incorrect.
                         }
                     ]
                 ],
-                "cost": 1.0,
+                "cost": 2.0,
                 "repairedVariable": {
                     "val0": {
                         "tokentype": "Variable",
@@ -308,12 +308,12 @@ Notice how it suggests that the return value is incorrect.
                     },
                     "val1": {
                         "tokentype": "Constant",
-                        "value": "0",
+                        "value": "1",
                         "line": 5
                     },
                     "val2": {
                         "tokentype": "Constant",
-                        "value": "1",
+                        "value": "100",
                         "line": 2
                     },
                     "valueArray": [
@@ -325,12 +325,12 @@ Notice how it suggests that the return value is incorrect.
                         },
                         {
                             "tokentype": "Constant",
-                            "value": "0",
+                            "value": "1",
                             "line": 5
                         },
                         {
                             "tokentype": "Constant",
-                            "value": "1",
+                            "value": "100",
                             "line": 2
                         }
                     ],
@@ -343,12 +343,12 @@ Notice how it suggests that the return value is incorrect.
                         },
                         {
                             "tokentype": "Constant",
-                            "value": "0",
+                            "value": "1",
                             "line": 5
                         },
                         {
                             "tokentype": "Constant",
-                            "value": "1",
+                            "value": "100",
                             "line": 2
                         }
                     ]
@@ -365,7 +365,7 @@ Notice how it suggests that the return value is incorrect.
                         1
                     ]
                 },
-                "funcName": "main"
+                "funcName": "func"
             }
         ]
     }
@@ -373,4 +373,4 @@ Notice how it suggests that the return value is incorrect.
 ```
 
 ## Related Test Reports
-Refer to Test Report ID 01f036ff and 7e328c1b.
+Refer to Test Report ID 3451e830.

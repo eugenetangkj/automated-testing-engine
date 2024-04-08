@@ -14,7 +14,10 @@ from its_test_engine.python.modifier import (
     IdempotentModifier,
     IdentityModifier,
     ExtraArgumentReassignmentModifier,
-    SwapArgumentsModifier
+    SwapArgumentsModifier,
+    WrapInIfTrueModifier,
+    WrapInTryBlockModifier,
+    WrapInExceptBlockModifier,
     )
 from its_test_engine.python.program_generator import (
     LeetCodePythonProgramGenerator,
@@ -39,7 +42,7 @@ def run_leetcode_programs():
 def run_open_ai_programs():
     program_generator = OpenAIPythonProgramGenerator()
     input_generator = RandomInputGenerator()
-    transformers = [SwapArgumentsModifier()]
+    transformers = [WrapInTryBlockModifier()]
 
     tester = Tester(
         Language.PYTHON, program_generator, transformers, input_generator, writer
