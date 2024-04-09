@@ -24,7 +24,7 @@ def evaluate_function(func_node, *args):
 
 
 def test_variable_renamer():
-    transformer = mutator.VariableRenamer()
+    transformer = mutator.VariableRenamerModifier()
 
     node = ast.parse(CODE)
     modified_node = transformer.visit(node)
