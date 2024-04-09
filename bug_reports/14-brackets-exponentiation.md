@@ -1,4 +1,4 @@
-# Issue 12: Brackets with Exponentiation
+# Issue 14: Brackets with Exponentiation
 
 ## Description
 There was a bug with the interpreter that resulted in the error localizer throwing an error for a program that should have been accepted.

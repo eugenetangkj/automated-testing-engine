@@ -1,5 +1,5 @@
 from its_test_engine.utils import powerset, mutate_code
-from its_test_engine.python.modifier import VariableRenamer, BinOpModifier
+from its_test_engine.python.modifier import VariableRenamerModifier, BinOpModifier
 
 CODE = """
 def add(a, b):
@@ -22,10 +22,10 @@ def test_powerset():
 
 
 def test_mutate_code():
-    transformers = [VariableRenamer()]
+    transformers = [VariableRenamerModifier()]
     mutated_codes = mutate_code(CODE, transformers)
     assert len(mutated_codes) == 2
 
-    transformers = [VariableRenamer(), BinOpModifier()]
+    transformers = [VariableRenamerModifier(), BinOpModifier()]
     mutated_codes = mutate_code(CODE, transformers)
     assert len(mutated_codes) == 4

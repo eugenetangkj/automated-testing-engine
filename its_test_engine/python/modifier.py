@@ -1,6 +1,6 @@
 import ast
 
-class VariableRenamer(ast.NodeTransformer):
+class VariableRenamerModifier(ast.NodeTransformer):
     def __init__(self):
         super().__init__()
         self.var_count = 0
