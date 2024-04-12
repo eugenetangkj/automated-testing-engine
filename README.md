@@ -24,7 +24,7 @@ Therefore, our team has developed an automated testing engine that aims to ident
 
 ```mermaid
 flowchart LR
-	generate_program --> generate_inputs
-    generate_inputs --> mutation
+	generate_program --> generate_arguments
+    generate_arguments --> mutation
     mutation --> testing
 ```

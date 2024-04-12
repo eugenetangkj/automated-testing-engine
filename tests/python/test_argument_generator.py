@@ -1,7 +1,7 @@
 import subprocess
 from unittest.mock import patch
 import pytest
-import its_test_engine.python.input_generator as generator
+import its_test_engine.python.argument_generator as generator
 
 CODE = """
 def add(a, b):
@@ -23,28 +23,28 @@ def generate_random(seed, n):
 
 
 @pytest.mark.timeout(60)
-def test_generate_inputs():
-    input_generator = generator.PynGuinInputGenerator(CODE)
-    inputs = input_generator.generate_inputs()
+def test_generate_arguments():
+    argument_generator = generator.PynGuinArgumentGenerator(CODE)
+    inputs = argument_generator.generate_arguments()
 
     assert len(inputs) > 0
 
-    input_generator = generator.PynGuinInputGenerator(COMPLICATED_CODE)
-    inputs = input_generator.generate_inputs()
+    argument_generator = generator.PynGuinArgumentGenerator(COMPLICATED_CODE)
+    inputs = argument_generator.generate_arguments()
 
     assert len(inputs) > 0
 
 
 @patch("subprocess.check_output")
-def test_generate_inputs_exception(mocker):
+def test_generate_arguments_exception(mocker):
     mocker.side_effect = subprocess.CalledProcessError(1, "cmd")
-    input_generator = generator.PynGuinInputGenerator(CODE)
-    inputs = input_generator.generate_inputs()
+    argument_generator = generator.PynGuinArgumentGenerator(CODE)
+    inputs = argument_generator.generate_arguments()
 
     assert len(inputs) == 0
 
     mocker.side_effect = subprocess.TimeoutExpired("cmd", 1)
-    input_generator = generator.PynGuinInputGenerator(CODE)
-    inputs = input_generator.generate_inputs()
+    argument_generator = generator.PynGuinArgumentGenerator(CODE)
+    inputs = argument_generator.generate_arguments()
 
     assert len(inputs) == 0

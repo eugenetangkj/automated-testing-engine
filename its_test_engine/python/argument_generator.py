@@ -49,7 +49,7 @@ def add_print_to_functions(code):
     return modified_code
 
 
-class PynGuinInputGenerator:
+class PynGuinArgumentGenerator:
     def __init__(self, code: str):
         self.code = code
         folder_path = os.path.join("/tmp", str(random.randint(0, 1000000)))
@@ -62,7 +62,7 @@ class PynGuinInputGenerator:
         self.code_path = code_path
         self.folder_path = folder_path
 
-    def generate_inputs(self):
+    def generate_arguments(self):
 
         try:
             result = subprocess.check_output(

@@ -1,4 +1,4 @@
-from its_test_engine.base.input_generator import RandomInputGenerator
+from its_test_engine.base.argument_generator import RandomArgumentGenerator
 
 
 CODE = """
@@ -20,10 +20,10 @@ def generate_random(seed, n):
 """
 
 
-def test_random_input_generator():
-    input_generator = RandomInputGenerator()
+def test_random_argument_generator():
+    argument_generator = RandomArgumentGenerator()
 
-    inputs = input_generator.generate_inputs(
+    inputs = argument_generator.generate_arguments(
         {"name": "add", "argument_types": ["int", "int"]}, CODE, 20
     )
 
@@ -32,7 +32,7 @@ def test_random_input_generator():
     assert all(isinstance(i[0], int) for i in inputs)
     assert all(isinstance(i[1], int) for i in inputs)
 
-    inputs = input_generator.generate_inputs(
+    inputs = argument_generator.generate_arguments(
         {"name": "add", "argument_types": ["int", "int"]}, COMPLICATED_CODE, 20
     )
 
@@ -41,7 +41,7 @@ def test_random_input_generator():
     assert all(isinstance(i[0], int) for i in inputs)
     assert all(isinstance(i[1], int) for i in inputs)
 
-    inputs = input_generator.generate_inputs(
+    inputs = argument_generator.generate_arguments(
         {"name": "add", "argument_types": ["float", "bool"]}, CODE, 20
     )
 
@@ -50,7 +50,7 @@ def test_random_input_generator():
     assert all(isinstance(i[0], float) for i in inputs)
     assert all(isinstance(i[1], bool) for i in inputs)
 
-    inputs = input_generator.generate_inputs(
+    inputs = argument_generator.generate_arguments(
         {"name": "add", "argument_types": ["str", "List[int]"]}, CODE, 20
     )
 
@@ -60,7 +60,7 @@ def test_random_input_generator():
     assert all(isinstance(i[1], list) for i in inputs)
     assert all(all(isinstance(j, int) for j in i[1]) for i in inputs)
 
-    inputs = input_generator.generate_inputs(
+    inputs = argument_generator.generate_arguments(
         {"name": "add", "argument_types": ["List[float]", "List[str]"]}, CODE, 20
     )
 
@@ -71,7 +71,7 @@ def test_random_input_generator():
     assert all(all(isinstance(j, float) for j in i[0]) for i in inputs)
     assert all(all(isinstance(j, str) for j in i[1]) for i in inputs)
 
-    inputs = input_generator.generate_inputs(
+    inputs = argument_generator.generate_arguments(
         {"name": "add", "argument_types": ["List[bool]", "List[bool]"]}, CODE, 20
     )
 
