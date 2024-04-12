@@ -1,9 +1,9 @@
 import random
 import string
-from .base_input_generator import BaseInputGenerator
+from .base_argument_generator import BaseArgumentGenerator
 
 
-class RandomInputGenerator(BaseInputGenerator):
+class RandomArgumentGenerator(BaseArgumentGenerator):
     def _generate_random_integer(self, min_value=0, max_value=1e2):
         return random.randint(min_value, max_value)
 
@@ -17,7 +17,9 @@ class RandomInputGenerator(BaseInputGenerator):
     def _generate_random_boolean(self):
         return random.choice([True, False])
 
-    def generate_inputs(self, function_signature: dict, code: str, no_of_inputs: int):
+    def generate_arguments(
+        self, function_signature: dict, code: str, no_of_inputs: int
+    ):
         results = []
         for _ in range(no_of_inputs):
             inputs = []

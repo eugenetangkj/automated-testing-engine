@@ -1,6 +1,6 @@
 from its_test_engine.enums import Language
 from its_test_engine.utils import mutate_code
-from its_test_engine.base.input_generator import BaseInputGenerator
+from its_test_engine.base.argument_generator import BaseArgumentGenerator
 from its_test_engine.base.program_generator import BaseProgramGenerator
 
 from its_test_engine.its.its_api_connection import ItsApiConnection
@@ -24,13 +24,13 @@ class Tester:
         language: Language,
         program_generator: BaseProgramGenerator,
         transformers: list[any],
-        input_generator: BaseInputGenerator,
+        argument_generator: BaseArgumentGenerator,
         writer,
     ):
         self.language = language
         self.program_generator = program_generator
         self.transformers = transformers
-        self.input_generator = input_generator
+        self.argument_generator = argument_generator
         self.writer = writer
 
     def run_tests(self) -> list[ItsTestSuite]:
@@ -45,7 +45,9 @@ class Tester:
             return None
 
         # Step 2: Generate inputs
-        inputs = self.input_generator.generate_inputs(function_signature, base_code, 10)
+        inputs = self.argument_generator.generate_arguments(
+            function_signature, base_code, 10
+        )
 
         # Step 3: Mutate code
         try:
