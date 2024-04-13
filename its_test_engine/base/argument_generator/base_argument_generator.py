@@ -17,7 +17,7 @@ class BaseArgumentGenerator(ABC):
 
     @abstractmethod
     def generate_arguments(
-        self, function_signature: dict, code: str, no_of_inputs: int
+        self, function_signature: dict, code: str, no_of_arguments: int
     ):
         """
         Abstract method to be overridden by concrete program generator classes.
@@ -27,6 +27,6 @@ class BaseArgumentGenerator(ABC):
         Parameters:
             function_signature: A dictionary containing the function signature
             code: The code snippet to be tested
-            no_of_inputs: Number of inputs to be generated
+            no_of_arguments: Number of sets of arguments to be generated
 
         """

@@ -18,10 +18,10 @@ class RandomArgumentGenerator(BaseArgumentGenerator):
         return random.choice([True, False])
 
     def generate_arguments(
-        self, function_signature: dict, code: str, no_of_inputs: int
+        self, function_signature: dict, code: str, no_of_arguments: int
     ):
         results = []
-        for _ in range(no_of_inputs):
+        for _ in range(no_of_arguments):
             inputs = []
             for t in function_signature["argument_types"]:
                 if t == "int":
