@@ -29,3 +29,7 @@ def test_mutate_code():
     transformers = [VariableRenamerModifier(), BinOpModifier()]
     mutated_codes = mutate_code(CODE, transformers)
     assert len(mutated_codes) == 4
+
+    transformers = [VariableRenamerModifier(), VariableRenamerModifier()]
+    mutated_codes = mutate_code(CODE, transformers)
+    assert len(mutated_codes) == 3

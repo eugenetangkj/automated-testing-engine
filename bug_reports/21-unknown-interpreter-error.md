@@ -1,4 +1,4 @@
-# Issue 21: Unknown Interpeter
+# Issue 21: Unknown Interpreter Error
 
 ## Description
 In randomly generating programs, we found a program that led to errors in the `interpreter`, `errorlocalizer`, `feedback_error`, `feedback_fix` and `repair` endpoints. We use the **same** program for both the base and modified programs, and when we tested the program on Python IDE (Version `3.9`), the program is deemed to be valid.

@@ -29,7 +29,7 @@ class BinOpModifier(ast.NodeTransformer):
     def visit_BinOp(self, node):
         # Commutative Operations
         if isinstance(node.op, (ast.Add, ast.Mult)):
-            node.left, node.right = node.right, node.left
+            node.left, node.right = node.right, node.left  
 
         # Associative Operations
         if isinstance(node.op, (ast.Add, ast.Mult)) and isinstance(
@@ -91,10 +91,10 @@ class DeMorganModifier(ast.NodeTransformer):
     '''
 
     def visit_BoolOp(self, node):
-        if isinstance(node.op, (ast.And, ast.Or)):
-            # Rewrite Boolean expressions
-            return self._rewrite_boolean_expression(node)
-        return node
+        # if isinstance(node.op, (ast.And, ast.Or)):
+        # Rewrite Boolean expressions
+        return self._rewrite_boolean_expression(node)
+        
 
     def _rewrite_boolean_expression(self, node):
         # Get new boolean operator
@@ -154,7 +154,7 @@ class IdempotentModifier(ast.NodeTransformer):
         if isinstance(node, ast.Name):
             if self.type_of_transformation == 1:
                 return ast.BoolOp(op=ast.And(), values=[node, node])
-            elif self.type_of_transformation == 2:
+            else:
                 return ast.BoolOp(op=ast.Or(), values=[node, node])
         
         # Not a case to handle
@@ -195,7 +195,7 @@ class IdentityModifier(ast.NodeTransformer):
             if self.type_of_transformation == 1:
                 # Apply a -> a and True transformation
                 return ast.BoolOp(op=ast.And(), values=[node, ast.Constant(value=True)])
-            elif self.type_of_transformation == 2:
+            else:
                 # Apply a -> a or False transformation
                 return ast.BoolOp(op=ast.Or(), values=[node, ast.Constant(value=False)])
         
@@ -298,7 +298,7 @@ class UnravelTernaryModifier(ast.NodeTransformer):
                 return node
             
             # Case 2b: Left operand is ternary, right operand is not
-            if (is_left_ternary and not is_right_ternary):
+            elif (is_left_ternary and not is_right_ternary):
                 # Transform left
                 condition = left_node.test
                 true_value = left_node.body
@@ -324,7 +324,7 @@ class UnravelTernaryModifier(ast.NodeTransformer):
                 return if_statement
 
             # Case 2c: Left operand is not ternary, right operand is
-            if (not is_left_ternary and is_right_ternary):
+            elif (not is_left_ternary and is_right_ternary):
                 # Transform right
                 condition = right_node.test
                 true_value = right_node.body
@@ -350,7 +350,7 @@ class UnravelTernaryModifier(ast.NodeTransformer):
                 return if_statement
 
             # Case 2d: Both nodes are ternary
-            if (is_left_ternary and is_right_ternary):
+            else:
                 # Transform left
                 condition_left = left_node.test
                 true_value_left = left_node.body
@@ -455,6 +455,8 @@ class ForRangeToWhileLoopModifier(ast.NodeTransformer):
     the same semantics. It uses the documentation of the range(...) in Python to
     determine how to break down the start, stop and step values.
 
+    The start, stop and step values should be a number and not a variable.
+
     Example: Both programs equivalently increment i by 3 every iteration
         Base:
             for i in range(0, 6, 2):
@@ -470,8 +472,8 @@ class ForRangeToWhileLoopModifier(ast.NodeTransformer):
     def visit_For(self, node):
         # We want to detect if the range() function is used as the iterator in a for loop
         is_iterator_a_function_call = isinstance(node.iter, ast.Call)
-        is_iterator_a_simple_function = isinstance(node.iter.func, ast.Name)
-        is_iterator_range_function = node.iter.func.id == "range"
+        is_iterator_a_simple_function = hasattr(node.iter, 'func') and isinstance(node.iter.func, ast.Name)
+        is_iterator_range_function = hasattr(node.iter, 'func') and node.iter.func.id == "range"
 
         if (is_iterator_a_function_call and
             is_iterator_a_simple_function and
@@ -494,11 +496,20 @@ class ForRangeToWhileLoopModifier(ast.NodeTransformer):
                 stop_value = arguments_of_range_function[1]
                 step_value = ast.Constant(n = 1) # Default step = 1
             # Case 3: 3 arguments
-            elif (len(arguments_of_range_function) == 3):
+            else:
                 start_value = arguments_of_range_function[0]
                 stop_value = arguments_of_range_function[1]
                 step_value = arguments_of_range_function[2]
             
+
+            # Check if start, step and stop are numbers
+            if (
+                not (isinstance(start_value, ast.UnaryOp) or isinstance(start_value, ast.Constant)) or
+                not (isinstance(step_value, ast.UnaryOp) or isinstance(step_value, ast.Constant)) or
+                not (isinstance(stop_value, ast.UnaryOp) or isinstance(stop_value, ast.Constant))
+            ):
+                return node
+
 
             # We need to create an initialisation statement to initialise the
             # variable in the while loop, since the initialisation statement
@@ -514,7 +525,8 @@ class ForRangeToWhileLoopModifier(ast.NodeTransformer):
             # Determine operator to use in the while loop, depending on arguments in range()
             if isinstance(step_value, ast.UnaryOp):
                 while_loop_operator = ast.Gt() if isinstance(step_value.op, ast.USub) else ast.Lt()
-            elif isinstance(step_value, ast.Constant):
+            else:
+                # This means step_value is ast.Constant
                 while_loop_operator = ast.Gt() if step_value.value < 0 else ast.Lt()
 
             

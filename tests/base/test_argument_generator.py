@@ -81,3 +81,9 @@ def test_random_argument_generator():
     assert all(isinstance(i[1], list) for i in inputs)
     assert all(all(isinstance(j, bool) for j in i[0]) for i in inputs)
     assert all(all(isinstance(j, bool) for j in i[1]) for i in inputs)
+
+    inputs = argument_generator.generate_arguments(
+        {"name": "add", "argument_types": ["invalid", "invalid"]}, CODE, 20
+    )
+    assert all(len(i) == 0 for i in inputs)
+
