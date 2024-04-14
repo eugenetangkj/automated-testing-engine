@@ -114,4 +114,4 @@ coverage run --branch --source=its_test_engine -m pytest && coverage report --sh
 ## Acknowledgements
 Our team consulted a variety of resources (papers and documentation) to implement the automated testing engine. The attributions can be found in [`Attributions.md`](ATTRIBUTIONS.md).
 
-We would like to extend our appreciation to our project mentor, JIANG Yuan Cheng, for his invaluable guidance throughout the project. We would also like to thank the ITS API team for assisting us in reviewing the issues and bug reports raised. 😃
+We would like to extend our appreciation to our project mentor, JIANG Yuancheng, for his invaluable guidance throughout the project. We would also like to thank the ITS API team for assisting us in reviewing the issues and bug reports raised. 😃
