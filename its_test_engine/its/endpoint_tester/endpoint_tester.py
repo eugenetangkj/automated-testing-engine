@@ -22,6 +22,11 @@ class EndpointTester(ABC):
     ):
         """
         Initialisation method for a EndpointTester instance
+
+        Parameters:
+            its_api_connection: Used to connect to the ITS API endpoints
+            type_of_metamorphic_relation: Determines the criteria of success for a test case,
+            whether they should be deemed equivalent or unequivalent for success.
         """
         self.its_api_connection = its_api_connection
         self.type_of_metamorphic_relation = type_of_metamorphic_relation
@@ -38,7 +43,7 @@ class EndpointTester(ABC):
     ):
         """
         Abstract method to be overridden by concrete endpoint tester classes.
-        This method aims to generate an test result instance that represents the
+        This method aims to generate a test result instance that represents the
         outcome of testing a test case with the endpoint.
 
         Returns:

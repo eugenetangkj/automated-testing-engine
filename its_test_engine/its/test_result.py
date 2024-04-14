@@ -1,15 +1,20 @@
 """
-    This class represents a test result object obtained from the tester class
+    This contains the classes responsible for encapsulating information about
+    test cases and for writing test cases to Markdown files.
 """
 
 import os
 import json
 import hashlib
+import pytz
 from datetime import datetime
 from its_test_engine.enums import Language
 
 
 class ItsTestSuite:
+    """
+    Represents a set of test cases
+    """
     steps = {
         "parser": 1,
         "interpreter": 2,
@@ -25,19 +30,38 @@ class ItsTestSuite:
         endpoint: str,
         base_program_string: str,
     ):
+        """
+        Initialises a ItsTestSuite instance.
+
+        Parameters:
+            language: Language of program that we are testing
+            endpoint: Which endpoint is the test case for
+            base_program_string: Program string of base program
+        """
         assert endpoint in self.steps, f"Invalid endpoint: {endpoint}"
         self.step = self.steps[endpoint]
         self.endpoint = endpoint
         self.language = language
         self.base_program_string = base_program_string.strip("\n")
-        self.time = datetime.now()
+        self.time = datetime.now(pytz.timezone('Asia/Singapore')).strftime("%Y-%m-%d %I:%M %p")
 
         self.test_cases = []
 
     def add_test_case(self, test_case):
+        """
+        Adds a test case to this test suite.
+
+        Parameters:
+            test_case: Test case to add
+        """
         self.test_cases.append(test_case)
 
     def is_success(self):
+        """
+        Determines if the entire test suite is successful or not. Not successful
+        if any 1 of the test cases in the test suite is not successful.
+
+        """
         for test_case in self.test_cases:
             if not test_case.is_success():
                 return False
@@ -46,14 +70,34 @@ class ItsTestSuite:
 
 
 class ItsTestCase:
+    """
+    Represents 1 test case
+    """
     def __init__(self, modified_program):
+        """
+        Initialises an ItsTestCase instance.
+
+        Parameters:
+            modified_program: Program string of modified program
+        """
         self.modified_program = modified_program
         self.results = []
 
     def add_result(self, result):
+        """
+        Add a result to this test case
+
+        Parameters:
+            result: Result to be added
+        """
         self.results.append(result)
 
     def is_success(self):
+        """
+        Determines if the test case is successful or not. If any 1
+        of the results within the test case is not successful,
+        the test case is considered not successful.
+        """
         for result in self.results:
             if not result.success:
                 return False
@@ -62,6 +106,9 @@ class ItsTestCase:
 
 
 class ItsTestResult:
+    """
+    Represents a test result when testing against one specific endpoint.
+    """
     def __init__(
         self,
         success,
@@ -70,6 +117,15 @@ class ItsTestResult:
         request_payload=None,
         actual_output=None,
     ):
+        """
+        Initialises an ItsTestResult instance.
+
+        success: Status of test result, whether pass or not
+        endpoint: Which endpoint we are testing against
+        message: Message from endpoint tester
+        request_payload: Input to the API endpoint
+        actual_output: Output from the API endpoint
+        """
         self.success = success
         self.endpoint = endpoint
         self.message = message
@@ -82,8 +138,18 @@ class ItsTestResult:
 
 
 class ItsTestSuitesMarkdownWriter:
+    """
+    This class is responsible for writing the results of a test suite
+    to Markdown files.
+    """
 
     def __init__(self, test_result_dir):
+        """
+        Initialises an ItsTestSuitesMarkdownWriter.
+
+        Parameters:
+            test_result_dir: The location to write the results to
+        """
         self._test_result_dir = test_result_dir
         self._test_results = []
 
@@ -93,6 +159,12 @@ class ItsTestSuitesMarkdownWriter:
             os.makedirs(folder_path)
 
     def write(self, test_suite: ItsTestSuite):
+        """
+        Writes an ITS test suite to a Markdown file.
+
+        Parameters:
+            test_suite: The test suite to be written
+        """
         folder_path = os.path.join(self._test_result_dir)
 
         h = hashlib.new("sha256")
@@ -148,5 +220,11 @@ class ItsTestSuitesMarkdownWriter:
             file.write(markdown)
 
     def bulk_write(self, test_suites: list[ItsTestSuite]):
+        """
+        Helper function that can write multiple test suites to different files
+
+        Parameters:
+            test_suites: List of test suites to be written to files
+        """
         for test_suite in test_suites:
             self.write(test_suite)

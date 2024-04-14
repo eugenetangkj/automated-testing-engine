@@ -1,5 +1,6 @@
 """
-    This class is responsible for connecting to the ITS API
+    This class is responsible for connecting to the ITS API.
+    Referenced documentation of requests library at https://requests.readthedocs.io/en/latest/.
 """
 
 import json
@@ -22,10 +23,21 @@ class ItsApiConnection:
     def __init__(self, language: Language):
         """
         Initialisation method for an ItsApiConnection instance
+
+        Parameters:
+            language: Language of programs that will be passed to the ITS API endpoints
+            via this ItsApiConnection instance.
         """
         self.language = language
 
     def __make_api_call(self, url, params):
+        """
+        Helper function that makes the POST request.
+
+        Parameters:
+            url: Endpoint to make a POST request to
+            params: Dictionary that contains the request data to be posted
+        """
         retry = 0
         response = None
         while retry < 3:
@@ -51,12 +63,18 @@ class ItsApiConnection:
     def create_parser_request_payload(self, source_code):
         """
         Returns the payload for the parser service endpoint of the ITS API
+
+        Parameters:
+            source_code: Program string to be parsed
         """
         return {"language": self.language.value, "source_code": source_code}
 
     def call_parser_endpoint(self, payload):
         """
         Returns the response of the call to the parser service endpoint of the ITS API
+
+        Parameters:
+            payload: Dictionary that contains the parser request input
         """
         parser_url = self.BASE_API_URL + "parser"
         response = self.__make_api_call(parser_url, payload)
@@ -67,6 +85,12 @@ class ItsApiConnection:
     ):
         """
         Returns the payload for the interpreter service endpoint of the ITS API
+
+        Parameters:
+            program_model: Parsed program intermediate
+            function: Name of function
+            inputs: Inputs of function
+            args: Arguments of function, to be passed to interpreter endpoint
         """
         return {
             "language": self.language.value,
@@ -79,6 +103,9 @@ class ItsApiConnection:
     def call_interpreter_endpoint(self, payload):
         """
         Returns the response of the call to the interpreter service endpoint of the ITS API
+
+        Parameters:
+            payload: Interpreter request input
         """
         interpreter_url = self.BASE_API_URL + "interpreter"
         response = self.__make_api_call(interpreter_url, payload)
@@ -109,6 +136,19 @@ class ItsApiConnection:
     def create_request_payload(
         self, reference_solution, student_solution, function, inputs, args
     ):
+        """
+        Helper method that packs the request information into a nicely formatted
+        dictionary for the error localizer, feedback fix, feedback error and repair
+        endpoints.
+
+        Parameters:
+            reference_solution: Parsed base program
+            student_solution: Parsed modified program
+            function: Function name
+            inputs: Inputs
+            args: Arguments of function, to be passed to the endpoints
+            
+        """
         return {
             "language": self.language.value,
             "reference_solution": json.dumps(reference_solution),
@@ -121,6 +161,9 @@ class ItsApiConnection:
     def call_errorlocalizer_endpoint(self, request_payload):
         """
         Returns the response of the call to the error localizer service endpoint of the ITS API
+
+        Parameters:
+            request_payload: Input dictionary for error localizer endpoint
         """
         errorlocalizer_url = self.BASE_API_URL + "errorlocalizer"
         response = self.__make_api_call(errorlocalizer_url, request_payload)
@@ -130,6 +173,9 @@ class ItsApiConnection:
         """
         Returns the response of the call to the feedback fix endpoint of the
         feedback service in the ITS API
+
+        Parameters:
+            request_payload: Input dictionary for feedback fix endpoint
         """
         feedback_fix_url = self.BASE_API_URL + "feedback_fix"
         response = self.__make_api_call(feedback_fix_url, request_payload)
@@ -140,6 +186,9 @@ class ItsApiConnection:
         """
         Returns the response of the call to the feedback error endpoint of the feedback service
         in the ITS API
+
+        Parameters:
+            request_payload: Input dictionary for feedback error endpoint
         """
         feedback_error_url = self.BASE_API_URL + "feedback_error"
         response = self.__make_api_call(feedback_error_url, request_payload)
@@ -148,6 +197,9 @@ class ItsApiConnection:
     def call_repair_endpoint(self, request_payload):
         """
         Returns the response of the call to the repair service endpoint of the ITS API
+
+        Parameters:
+            request_payload: Input dictionary for repair endpoint
         """
         repair_url = self.BASE_API_URL + "repair"
         response = self.__make_api_call(repair_url, request_payload)

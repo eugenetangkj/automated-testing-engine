@@ -1,10 +1,13 @@
+"""
+Analyses the output obtained from the feedback error endpoint.
+"""
 from its_test_engine.enums import TypeOfMetamorphicRelation
 from its_test_engine.its.test_result import ItsTestResult
 from .endpoint_tester import EndpointTester
 
 
 class FeedbackErrorEndpointTester(EndpointTester):
-    endpoint = "feedback_error"
+    ENDPOINT = "feedback_error"
 
     def run_test(
         self,
@@ -15,6 +18,20 @@ class FeedbackErrorEndpointTester(EndpointTester):
         parsed_modified_program: str,
         arguments: list[any],
     ) -> ItsTestResult:
+        """
+        Takes in input and pass it to the feedback error endpoint.
+        Determines if the output is successful or not.
+
+        Parameters:
+            function_signature: Function signature for base program
+            base_program_string: Program string for base program
+            modified_program_string: Program string for modified program
+            parsed_base_program: Parsed intermediate for base program
+            parsed_modified_program: Parsed intermediate for modified program
+            arguments: Arguments for the base and modified programs, to be
+            entered into the feedback error endpoint.
+        
+        """
         function_name = function_signature["name"]
         request_payload = self.its_api_connection.create_request_payload(
             parsed_base_program,
@@ -40,11 +57,11 @@ class FeedbackErrorEndpointTester(EndpointTester):
 
             return ItsTestResult(
                 passed,
-                self.endpoint,
+                self.ENDPOINT,
                 "Success" if passed else "Feedback error endpoint failed",
                 request_payload,
                 feedback_error_output,
             )
         except Exception as e:
             message = e.__class__.__name__ + "\n" + str(e)
-            return ItsTestResult(False, self.endpoint, message, request_payload)
+            return ItsTestResult(False, self.ENDPOINT, message, request_payload)

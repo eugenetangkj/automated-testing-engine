@@ -1,5 +1,5 @@
 """
-    This indicates the type of relation.
+    Helpful enumerations
 """
 
 from enum import Enum

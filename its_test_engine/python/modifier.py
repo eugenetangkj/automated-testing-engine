@@ -1,6 +1,23 @@
+"""
+All the modifiers that can mutate base Python programs into semantically equivalent ones
+using different metamorphic relations.
+
+Referenced Python AST documentation at https://docs.python.org/3/library/ast.html and also used
+ChatGPT to help improve and debug methods, especially for harder modifiers.
+
+"""
+
 import ast
 
 class VariableRenamerModifier(ast.NodeTransformer):
+    '''
+    This class renames the arguments of a function and updates the names in the
+    function body respectively.
+
+    Example:
+    def func(a, b): return a + b -> func(var_0, var_1): return var_0 + var_1
+
+    '''
     def __init__(self):
         super().__init__()
         self.var_count = 0
@@ -25,6 +42,15 @@ class VariableRenamerModifier(ast.NodeTransformer):
 
 
 class BinOpModifier(ast.NodeTransformer):
+    """
+    This class transforms binary operations. For + and *, the left and right operands have their orders swapped.
+    - is converted into a + op.
+
+    Example:
+    a + 1 -> -1 + a
+    a * b -> b * a
+
+    """
     # pylint: disable=invalid-name
     def visit_BinOp(self, node):
         # Commutative Operations
@@ -97,6 +123,11 @@ class DeMorganModifier(ast.NodeTransformer):
         
 
     def _rewrite_boolean_expression(self, node):
+        """
+        Helper function that helps rewrite Boolean expressions
+        according to De Morgan's Law
+
+        """
         # Get new boolean operator
         new_boolean_operator = ast.Or() if (isinstance(node.op, ast.And)) else ast.And()
 
@@ -150,6 +181,9 @@ class IdempotentModifier(ast.NodeTransformer):
         return ast.BoolOp(op=node.op, values=transformed_operands)
 
     def _apply_idempotent_law(self, node):
+        """
+        Helper function that applies idempotent transformation
+        """
         # Apply the idempotent transformation to a single node
         if isinstance(node, ast.Name):
             if self.type_of_transformation == 1:
@@ -190,6 +224,9 @@ class IdentityModifier(ast.NodeTransformer):
         return ast.BoolOp(op=node.op, values=transformed_operands)
 
     def _apply_idempotent_law(self, node):
+        """
+        Helper function that applies idempotent law
+        """
         # Apply the idempotent transformation to a single node
         if isinstance(node, ast.Name):
             if self.type_of_transformation == 1:

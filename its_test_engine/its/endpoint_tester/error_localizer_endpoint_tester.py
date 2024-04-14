@@ -1,10 +1,13 @@
+"""
+Analyses the output obtained from the errorlocalizer endpoint.
+"""
 from its_test_engine.enums import TypeOfMetamorphicRelation
 from its_test_engine.its.test_result import ItsTestResult
 from .endpoint_tester import EndpointTester
 
 
 class ErrorLocalizerEndpointTester(EndpointTester):
-    endpoint = "error_localizer"
+    ENDPOINT = "error_localizer"
 
     def run_test(
         self,
@@ -15,6 +18,20 @@ class ErrorLocalizerEndpointTester(EndpointTester):
         parsed_modified_program: str,
         arguments: list[any],
     ) -> ItsTestResult:
+        """
+        Takes in input and pass it to the error localizer endpoint.
+        Determines if the output is successful or not.
+
+        Parameters:
+            function_signature: Function signature for base program
+            base_program_string: Program string for base program
+            modified_program_string: Program string for modified program
+            parsed_base_program: Parsed intermediate for base program
+            parsed_modified_program: Parsed intermediate for modified program
+            arguments: Arguments for the base and modified programs, to be
+            entered into the error localizer endpoint.
+        
+        """
         function_name = function_signature["name"]
         request_payload = self.its_api_connection.create_request_payload(
             parsed_base_program,
@@ -40,11 +57,11 @@ class ErrorLocalizerEndpointTester(EndpointTester):
 
             return ItsTestResult(
                 passed,
-                self.endpoint,
+                self.ENDPOINT,
                 "Success" if passed else "Error localizer endpoint failed",
                 request_payload,
                 error_localizer_output,
             )
         except Exception as e:
             message = e.__class__.__name__ + "\n" + str(e)
-            return ItsTestResult(False, self.endpoint, message, request_payload)
+            return ItsTestResult(False, self.ENDPOINT, message, request_payload)

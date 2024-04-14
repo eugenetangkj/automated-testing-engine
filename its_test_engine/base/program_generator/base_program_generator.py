@@ -24,8 +24,7 @@ class BaseProgramGenerator(ABC):
     def generate_test_case(self) -> Tuple[any, str]:
         """
         Abstract method to be overridden by concrete program generator classes.
-        This method aims to generate a random base program written in a given language with
-        specific constraints to guide the creation of the base program.
+        This method aims to generate a random base program written in a given language.
 
         Returns:
             A tuple containing the function signature and the code of the base program.

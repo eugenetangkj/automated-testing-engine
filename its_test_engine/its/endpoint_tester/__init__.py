@@ -1,3 +1,8 @@
+"""
+This module is responsible for analysing the outputs from the ITS API endpoints to determine
+if the test case passed or not.
+
+"""
 from .parser_tester import ParserTester
 from .interpreter_tester import InterpreterTester
 

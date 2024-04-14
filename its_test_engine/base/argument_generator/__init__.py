@@ -1,5 +1,5 @@
 """
-    Input generators for functions
+    Argument generators for functions
 """
 
 from .base_argument_generator import BaseArgumentGenerator

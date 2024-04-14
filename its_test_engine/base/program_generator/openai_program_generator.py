@@ -1,8 +1,8 @@
 # pylint: disable=line-too-long
 """
-    Generates a random program using OpenAI LLM, gpt-3.5-turbo
+    Generates a random program using OpenAI LLM, gpt-3.5-turbo.
+    Referenced OpenAI Chat Completions API at https://platform.openai.com/docs/guides/text-generation/chat-completions-api
 """
-
 
 import json
 import os
@@ -39,7 +39,7 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         + """{"function": "def sum_of_two_digits(x, y):\n\treturn x + y", "name": "sum_of_two_digits", "arguments": ["int", "int"], "return_type": "int"}"""
     )
 
-    def __init__(self, language: str, constraints: str):
+    def __init__(self, language: str, constraints: None):
         """
         Initialisation method for a OpenAiProgramGenerator instance
 
@@ -73,8 +73,6 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
 
             # Prepare system prompt
             system_prompt = self.SYSTEM_PROMPT_PY + self.SAMPLE_PY_PROGRAMS
-
-            # TODO: Update system prompt for C programs
 
             # Call OpenAI API
             response = self._get_answer_from_openai_api(system_prompt, user_prompt)
@@ -127,6 +125,13 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         return f"###Constraints: { constraints }"
 
     def _get_answer_from_openai_api(self, system_prompt, user_prompt):
+        """
+        Helper function that obtains the ChatCompletions object from OpenAI API
+
+        Parameters:
+            system_prompt: Prompt for the system, contains instructions
+            user_prompt: Constraints that the user supplies to guide base program generation
+        """
         return self.openai_client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[

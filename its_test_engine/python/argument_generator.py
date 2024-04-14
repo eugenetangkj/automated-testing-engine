@@ -1,3 +1,8 @@
+"""
+Randomly generate arguments using PyGuin for maximum branch coverage.
+Referenced https://pynguin.readthedocs.io/en/latest/user/intro.html for documentation.
+"""
+
 import random
 import os
 import ast
@@ -5,6 +10,12 @@ import subprocess
 
 
 def add_print_to_functions(code):
+    """
+    Tester function to check if PyGuin is working as expected.
+
+    Parameters:
+        code: Base program string
+    """
     # Parse the code into an AST
     tree = ast.parse(code)
 
@@ -50,7 +61,14 @@ def add_print_to_functions(code):
 
 
 class PynGuinArgumentGenerator:
+    
     def __init__(self, code: str):
+        """
+        Initialises a PynGuinArgumentGenerator instance.
+
+        Parameters:
+            code: Base program string to generate arguments for
+        """
         self.code = code
         folder_path = os.path.join("/tmp", str(random.randint(0, 1000000)))
         os.makedirs(folder_path)
@@ -63,6 +81,9 @@ class PynGuinArgumentGenerator:
         self.folder_path = folder_path
 
     def generate_arguments(self):
+        """
+        Generates arguments to maximise coverage.
+        """
 
         try:
             result = subprocess.check_output(
