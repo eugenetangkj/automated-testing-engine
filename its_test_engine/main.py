@@ -67,13 +67,13 @@ def run_open_ai_programs(number_of_test_cases):
 
     # You can specify constraints for OpenAI to generate programs for
     # If you do not want constraints, can just use OpenAIPythonProgramGenerator()
-    program_generator = OpenAIPythonProgramGenerator("Use 1 ternary operator")
+    program_generator = OpenAIPythonProgramGenerator("Have 2 arguments")
 
     # Choose the argument generator
     argument_generator = RandomArgumentGenerator()
 
     # Put in modifiers that you want to use
-    transformers = [UnravelTernaryModifier()]
+    transformers = [VariableRenamerModifier(), BinOpModifier()]
 
     tester = Tester(
         Language.PYTHON, program_generator, transformers, argument_generator, writer
@@ -85,5 +85,5 @@ def run_open_ai_programs(number_of_test_cases):
 
 
 if __name__ == "__main__":
-    # run_leetcode_programs(10)
-    run_open_ai_programs(1)
+    run_leetcode_programs(10)
+    run_open_ai_programs(10)
