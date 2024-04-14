@@ -8,7 +8,6 @@ import json
 import hashlib
 from datetime import datetime
 from its_test_engine.enums import Language
-import pytz
 
 
 class ItsTestSuite:
@@ -43,13 +42,7 @@ class ItsTestSuite:
         self.endpoint = endpoint
         self.language = language
         self.base_program_string = base_program_string.strip("\n")
-
-        # Convert time to Singapore timezone
-        utc_time = datetime.now(datetime.UTC)
-        singapore_timezone = pytz.timezone('Asia/Singapore')
-        now_sgt = utc_time.replace(tzinfo=pytz.utc).astimezone(singapore_timezone)
-
-        self.time = now_sgt
+        self.time = datetime.now()
 
         self.test_cases = []
 
