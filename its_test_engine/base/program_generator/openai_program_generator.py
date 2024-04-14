@@ -39,7 +39,7 @@ class OpenAiProgramGenerator(BaseProgramGenerator):
         + """{"function": "def sum_of_two_digits(x, y):\n\treturn x + y", "name": "sum_of_two_digits", "arguments": ["int", "int"], "return_type": "int"}"""
     )
 
-    def __init__(self, language: str, constraints: str):
+    def __init__(self, language: str, constraints: None):
         """
         Initialisation method for a OpenAiProgramGenerator instance
 

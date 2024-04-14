@@ -29,7 +29,7 @@ from its_test_engine.its.test_result import ItsTestSuitesMarkdownWriter
 writer = ItsTestSuitesMarkdownWriter("test_results")
 
 
-def run_leetcode_programs():
+def run_leetcode_programs(number_of_test_cases: int):
     program_generator = LeetCodePythonProgramGenerator()
     argument_generator = RandomArgumentGenerator()
     transformers = [VariableRenamerModifier(), BinOpModifier()]
@@ -37,20 +37,26 @@ def run_leetcode_programs():
     tester = Tester(
         Language.PYTHON, program_generator, transformers, argument_generator, writer
     )
-    tester.run_tests()
+
+    # Run for a specified number of test cases
+    for _ in range(number_of_test_cases):
+        tester.run_tests()
 
 
-def run_open_ai_programs():
+def run_open_ai_programs(number_of_test_cases):
     program_generator = OpenAIPythonProgramGenerator()
     argument_generator = RandomArgumentGenerator()
-    transformers = [VariableRenamerModifier(), BinOpModifier()]
+    transformers = [WrapInIfTrueModifier()]
 
     tester = Tester(
         Language.PYTHON, program_generator, transformers, argument_generator, writer
     )
-    tester.run_tests()
+
+    # Run for a specified number of test cases
+    for _ in range(number_of_test_cases):
+        tester.run_tests()
 
 
 if __name__ == "__main__":
-    run_leetcode_programs()
-    run_open_ai_programs()
+    run_leetcode_programs(10)
+    run_open_ai_programs(10)

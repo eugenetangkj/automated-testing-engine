@@ -19,5 +19,5 @@ class LeetCodePythonProgramGenerator(LeetCodeProgramGenerator):
 
 
 class OpenAIPythonProgramGenerator(OpenAiProgramGenerator):
-    def __init__(self):
-        super().__init__(language="python", constraints="None")
+    def __init__(self, constraints=None):
+        super().__init__(language="python", constraints=constraints)
