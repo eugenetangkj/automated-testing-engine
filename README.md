@@ -14,7 +14,7 @@ Therefore, our team has developed an automated testing engine that aims to ident
 4. Run `poetry install` to install the required dependencies in the docker container.
 5. Run `poetry shell` to activate the virtual environment.
 6. Run `pytest` to run the test cases.
-7. Run `coverage run --source=its_test_engine -m pytest && coverage report` to generate a coverage report.
+7. Run `coverage run --source=its_test_engine -m pytest && coverage report` to generate a coverage report. If you wish for a more detailed report with branch coverage and lines not covered by tests, run `coverage run --branch --source=its_test_engine -m pytest && coverage report --show-missing`.
 
 > Note: Replace `<current_working_directory>` with the path to the current working directory.
 

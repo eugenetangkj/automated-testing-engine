@@ -1,4 +1,4 @@
-# Issue 23: Incomplete List Slicing Support in the Parser
+# Issue 23: Incomplete List Slicing Support in Parser
 
 ## Description
 

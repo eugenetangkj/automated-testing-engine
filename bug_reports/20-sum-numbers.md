@@ -67,7 +67,7 @@ def main():
 ```
 
 #### Feedback Fix
-Notice how the repair strings start to contain technical terms like `AssAdd` instead of being in natural language.
+Notice how the repair strings start to contain technical terms like `AssAdd` instead of being in natural language. Also, the value of newExpr does not seem to be correct for Line Number 8, where it suggests assigning the list to the `total` variable instead.
 
 ```json
 [

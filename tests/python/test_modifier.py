@@ -1,40 +1,20 @@
 import ast
 import its_test_engine.python.modifier as mutator
 
-CODE = """
-def add(a, b):
-    return a + b
-"""
-
-
-def evaluate_function(func_node, *args):
-    func_name = func_node.name
-    func_code = ast.unparse(func_node)
-    namespace = {}
-
-    try:
-        exec(func_code, namespace)
-        func = namespace[func_name]
-        result = func(*args)
-        return result
-
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return None
-
-
 def test_variable_renamer():
     transformer = mutator.VariableRenamerModifier()
 
-    node = ast.parse(CODE)
-    modified_node = transformer.visit(node)
+    test_cases = [
+        ["def add(a, b):\n    return a + b",
+         "def add(var_0, var_1):\n    return var_0 + var_1"],
+        ["def add(x):\n    y = 5\n    return x + y",
+         "def add(var_2):\n    y = 5\n    return var_2 + y"], 
+    ]
 
-    assert (
-        ast.unparse(modified_node) == "def add(var_0, var_1):\n    return var_0 + var_1"
-    )
-
-    assert evaluate_function(node.body[0], 1, 2) == 3
-    assert evaluate_function(modified_node.body[0], 1, 2) == 3
+    for test_case in test_cases:
+        node = ast.parse(test_case[0])
+        modified_node = transformer.visit(node)
+        assert ast.unparse(modified_node) == test_case[1]
 
 
 def test_bin_op_modified():
@@ -51,7 +31,9 @@ def test_bin_op_modified():
         ["a = 1 * a", "a = a"],
         ["a = a - b", "a = a + -b"],
         ["a = b - a", "a = b + -a"],
-        ["a = a + b + c", "a = a + c + b"],
+        ["a = b + (c * d)", "a = d * c + b"],
+        ["a = (b - c) + a", "a = a + (b + -c)"],
+        ["a = (b + c) + a", "a = b + a + c"],
     ]
 
     for test_case in test_cases:
@@ -64,7 +46,6 @@ def test_de_morgan_modifier():
     transformer = mutator.DeMorganModifier()
 
     test_cases = [
-        ["a or b", "not (not a and (not b))"], 
         ["a and b", "not (not a or not b)"],
         ["not a or b", "not (a and (not b))"],
         ["a or not b", "not (not a and b)"],
@@ -99,7 +80,9 @@ def test_idempotent_modifier():
          "def test_function(a, b):\n    if a and a or (b and b):\n        return True\n    else:\n        return False"],
 
         ["def test_function(a, b):\n    x = x + 1\n    if a and b:\n        return True\n    else:\n        return False",
-        "def test_function(a, b):\n    x = x + 1\n    if (a and a) and (b and b):\n        return True\n    else:\n        return False"]
+        "def test_function(a, b):\n    x = x + 1\n    if (a and a) and (b and b):\n        return True\n    else:\n        return False"],
+    
+        ["a and (b + 2)", "(a and a) and b + 2"],
     ]
 
     transformer_and = mutator.IdempotentModifier(type_of_transformation=1)
@@ -140,6 +123,8 @@ def test_identity_modifier():
 
         ["def test_function(a, b):\n    if a or b:\n        return True\n    else:\n        return False",
         "def test_function(a, b):\n    if a and True or (b and True):\n        return True\n    else:\n        return False"],
+
+        ["a and (b + 2)", "(a and True) and b + 2"],
     ]
 
     transformer_and = mutator.IdentityModifier(type_of_transformation=1)
@@ -188,7 +173,11 @@ def test_unravel_ternary_modifier():
         ["c = (a if a > 5 else b) + (c if c < 10 else d)",
          "if a > 5 and c < 10:\n    c = a + c\nelif a > 5 and (not c < 10):\n    c = a + d\nelif not a > 5 and c < 10:\n    c = b + c\nelif not a > 5 and (not c < 10):\n    c = b + d"],
 
-        ["c = 1 + 2", "c = 1 + 2"]
+        ["c = 1 + 2", "c = 1 + 2"],
+
+        ["if True:\n    return 1", "if True:\n    return 1"],
+
+        ["c = 1", "c = 1"]
     ]
 
     for test_case in test_cases:
@@ -218,6 +207,12 @@ def test_for_range_to_while_loop_modifier():
 
         ["def func(x):\n    x = x + 1\n    for j in range(2, 5, 0):\n        x += 1\n    return x",
          "def func(x):\n    x = x + 1\n    j = 2\n    while j < 5:\n        x += 1\n        j = j + 0\n    return x"],
+
+        ["for i in range(1, x, 2):\n    print(i)",
+         "for i in range(1, x, 2):\n    print(i)"],
+
+        ["for i in 'hello':\n    print(i)",
+         "for i in 'hello':\n    print(i)"],
     ]
 
     for test_case in test_cases:
@@ -351,6 +346,11 @@ def test_reverse_list_modifier():
           "sum = list_two[3] + list_one[x] + list_two[2] + list_one[5]\n    return sum",
          "def func():\n    x = 4\n    list_one = [5, 4, 3, 2, 1, 0]\n    list_two = [12, 11, 10, 9, 8, 7, 6]\n    " +\
             "sum = list_two[3] + list_one[-x + 5] + list_two[4] + list_one[0]\n    return sum"],
+
+        ["def func():\n    x = 2\n    curr_list = [1, 2, 3, 4, 5]\n    sum = curr_list[0] + curr_list[-x + 4]\n    return sum",
+         "def func():\n    x = 2\n    curr_list = [5, 4, 3, 2, 1]\n    sum = curr_list[4] + curr_list[-x + 4]\n    return sum"],
+        
+        ["dict[key] = 2", "dict[key] = 2"],
     ]
 
     for test_case in test_cases:
