@@ -31,7 +31,11 @@ writer = ItsTestSuitesMarkdownWriter("test_results")
 
 def run_leetcode_programs(number_of_test_cases: int):
     program_generator = LeetCodePythonProgramGenerator()
+
+    # Choose the argument generator
     argument_generator = RandomArgumentGenerator()
+
+    # Put in modifiers that you want to use
     transformers = [VariableRenamerModifier(), BinOpModifier()]
 
     tester = Tester(
@@ -44,9 +48,15 @@ def run_leetcode_programs(number_of_test_cases: int):
 
 
 def run_open_ai_programs(number_of_test_cases):
-    program_generator = OpenAIPythonProgramGenerator()
+    # You can specify constraints for OpenAI to generate programs for
+    # If you do not wnat constraints, can just use OpenAIPythonProgramGenerator()
+    program_generator = OpenAIPythonProgramGenerator("At least 1 argument")
+
+    # Choose the argument generator
     argument_generator = RandomArgumentGenerator()
-    transformers = [WrapInIfTrueModifier()]
+
+    # Put in modifiers that you want to use
+    transformers = [VariableRenamerModifier(), BinOpModifier()]
 
     tester = Tester(
         Language.PYTHON, program_generator, transformers, argument_generator, writer
