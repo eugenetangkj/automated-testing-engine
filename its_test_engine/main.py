@@ -30,6 +30,14 @@ writer = ItsTestSuitesMarkdownWriter("test_results")
 
 
 def run_leetcode_programs(number_of_test_cases: int):
+    """
+        Generate and run test cases using LeetCodeProgramGenerator
+        to generate base Python programs.
+
+        Parameters:
+            number_of_test_cases: Number of test cases to generate using
+            the LeetCodeProgramGenerator
+    """
     program_generator = LeetCodePythonProgramGenerator()
 
     # Choose the argument generator
@@ -48,8 +56,17 @@ def run_leetcode_programs(number_of_test_cases: int):
 
 
 def run_open_ai_programs(number_of_test_cases):
+    """
+        Generate and run test cases using OpenAiProgramGenerator
+        to generate base Python programs.
+
+        Parameters:
+            number_of_test_cases: Number of test cases to generate using
+            the OpenAiProgramGenerator
+    """
+
     # You can specify constraints for OpenAI to generate programs for
-    # If you do not wnat constraints, can just use OpenAIPythonProgramGenerator()
+    # If you do not want constraints, can just use OpenAIPythonProgramGenerator()
     program_generator = OpenAIPythonProgramGenerator("At least 1 argument")
 
     # Choose the argument generator

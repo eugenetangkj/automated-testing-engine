@@ -1,3 +1,10 @@
+'''
+Generates a base program by randomly picking from a set of LeetCode solutions.
+
+It uses the leetcode dataset by Eric Hartford and RobyBerty on https://www.kaggle.com/datasets/erichartford/leetcode-solutions.
+The license for the dataset is GNU Lesser General Public License.
+'''
+
 import os
 import re
 import json
@@ -26,6 +33,13 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
     }
 
     def __init__(self, language: str):
+        """
+        Initialises a LeetCodeProgramGenerator instance.
+
+        Parameters:
+            language: Language of the base program that we wish to generate for
+        
+        """
         super().__init__()
         self.language = language
         self.file = open(
@@ -42,6 +56,15 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
         self.question_ids = set()
 
     def get_function_signatures(self, question):
+        """
+        Helper function that retrieves the function signature of a function. It works by accessing
+        the Java version of the same function, which is available in the dataset.
+
+        Parameters:
+            question: The question that contains the Java and Python solution that we wish
+            to obtain the function signature of.
+
+        """
         java_solution = question["answer"]["java"]
 
         function_signature_regex = r"public\s+([^\s]+)\s+([^\(]+)\(([^)]+)\)"
@@ -73,7 +96,15 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
             return fs
         return None
 
+
     def _get_function_name(self, code: str):
+        """
+        Helper function that retrieves the name of a function given a string containing
+        a Python function.
+
+        Parameters:
+            code: String containing the Python function
+        """
         # Assumes Python for now
         start_index = code.index("def") + 3
         end_index = code.index("(")
@@ -82,7 +113,13 @@ class LeetCodeProgramGenerator(BaseProgramGenerator):
         function_name = code[start_index:end_index].strip()
         return function_name
 
+
     def generate_test_case(self):
+        """
+        Randomly selects a Python function from the Leetcode dataset, returning
+        its function signature and program string
+        
+        """
         # open leetcode-solutions.jsonl file and read random line
         line = random.randint(0, len(self.lines) - 1)
         while line in self.question_ids:

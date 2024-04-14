@@ -1,3 +1,7 @@
+"""
+Tester class that contains the logical steps taken in testing
+"""
+
 from its_test_engine.enums import Language
 from its_test_engine.utils import mutate_code
 from its_test_engine.base.argument_generator import BaseArgumentGenerator
@@ -19,7 +23,10 @@ from its_test_engine.its.test_result import (
 
 
 class Tester:
+    # Number of sets of arguments to generate for each test case
     NO_OF_ARGUMENTS = 10
+
+
     def __init__(
         self,
         language: Language,
@@ -28,6 +35,18 @@ class Tester:
         argument_generator: BaseArgumentGenerator,
         writer,
     ):
+        """
+        Initialises a Tester instance
+
+        Parameters:
+            language: Language of programs that this Tester instance tests
+            program_generator: Base program generator that will be used to generate
+            base programs during testing
+            transformers: List of modifiers that will modify the base programs
+            argument_generator: Argument generator that will be used to generate
+            arguments for the functions given their function signature
+            writer: Instance that writes the test results to files
+        """
         self.language = language
         self.program_generator = program_generator
         self.transformers = transformers
@@ -35,6 +54,15 @@ class Tester:
         self.writer = writer
 
     def run_tests(self) -> list[ItsTestSuite]:
+        """
+        Runs the testing logic.
+
+        1. Base program generation
+        2. Generate arguments
+        3. Modify base programs
+        4. Test against ITS API
+
+        """
         its_api_connection = ItsApiConnection(self.language)
 
         # Step 1: Generate test case

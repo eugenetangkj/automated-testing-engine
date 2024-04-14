@@ -11,7 +11,8 @@ We referenced these online documentation and resources to build the automated te
 4. [Python requests Documentation](https://requests.readthedocs.io/en/latest/) to implement API calls to the ITS API.
 5. [PynGuin Documentation](https://pynguin.readthedocs.io/en/latest/user/intro.html) to create `PynGuinArgumentGenerator` for greater branch coverage during argument generation.
 6. [LeetCode Dataset by Eric Hartford and RobyBerty](https://www.kaggle.com/datasets/erichartford/leetcode-solutions) for the Kaggle dataset [`leetcode-solutions.jsonl`](datasets/leetcode-solutions.jsonl) used in `LeetCodeProgramGenerator`. The license for the dataset is [GNU Lesser General Public License](https://www.gnu.org/licenses/lgpl-3.0.html).
-7. ChatGPT to help in improving and debugging methods
+7. [StackOverflow Post](https://stackoverflow.com/questions/374626/how-can-i-find-all-the-subsets-of-a-set-with-exactly-n-elements) for learning how to find a powerset, used in `powerset()` of `utils.py`.
+8. ChatGPT to help in improving and debugging methods
 - For @eugenetangkj, ChatGPT was mainly used for the modifiers he implemented (MR03 - MR13). Eugene used it to help generate simple test cases to test against his modifiers. Also, he used it to get an overview of how to implement the more difficult modifiers. For example, in the `ReverseListModifier`, he used ChatGPT to learn how to track lists that have been visited. Then, he combined it with his own code (with help from the Python AST documentation) that transforms list subscripts, so only subscripts of visited lists get modified.
 
 
