@@ -6,7 +6,7 @@ WORKDIR /app
 
 RUN apk add --no-cache gcc musl-dev linux-headers libffi-dev openssl-dev curl rust cargo
 
-RUN pip install poetry pytest coverage pytest-cov pylint
+RUN pip install poetry pytest coverage pytest-cov pylint pytz
 
 RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi

@@ -6,6 +6,7 @@
 import os
 import json
 import hashlib
+import pytz
 from datetime import datetime
 from its_test_engine.enums import Language
 
@@ -42,7 +43,7 @@ class ItsTestSuite:
         self.endpoint = endpoint
         self.language = language
         self.base_program_string = base_program_string.strip("\n")
-        self.time = datetime.now()
+        self.time = datetime.now(pytz.timezone('Asia/Singapore')).strftime("%Y-%m-%d %I:%M %p")
 
         self.test_cases = []
 
