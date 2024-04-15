@@ -23,10 +23,17 @@ def mutate_code(code, transformers):
 
     for subset_of_transformers in powerset(transformers):
         mutated_code = ast.parse(deepcopy(code))
+
+        transformers_name_list = ", ".join(
+            [type(transformer).__name__ for transformer in subset_of_transformers]
+        )
+
         for transformer in subset_of_transformers:
             mutated_code = transformer.visit(mutated_code)
 
         mutated_code = ast.unparse(mutated_code)
+        mutated_code = f"# Mutated by: {transformers_name_list}\n{mutated_code}"
+
         if hash(mutated_code) not in mutated_codes_exists:
             mutated_codes.append(mutated_code)
             mutated_codes_exists.add(hash(mutated_code))
