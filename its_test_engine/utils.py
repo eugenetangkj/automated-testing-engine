@@ -32,7 +32,9 @@ def mutate_code(code, transformers):
             mutated_code = transformer.visit(mutated_code)
 
         mutated_code = ast.unparse(mutated_code)
-        mutated_code = f"# Mutated by: {transformers_name_list}\n{mutated_code}"
+
+        if len(subset_of_transformers) > 0:
+            mutated_code = f"# Mutated by: {transformers_name_list}\n{mutated_code}"
 
         if hash(mutated_code) not in mutated_codes_exists:
             mutated_codes.append(mutated_code)
