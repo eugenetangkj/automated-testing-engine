@@ -1,6 +1,6 @@
 # Test Report
 
-Time: 2024-03-30 07:24:27.771584
+Time: 2024-04-17 10:17 PM
 
 ### Base Program
 
@@ -39,7 +39,7 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"broken_calc\": {\"name\": \"broken_calc\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"startValue\", \"val1\": \"*\", \"valueArray\": [\"startValue\", \"*\"], \"valueList\": [\"startValue\", \"*\"]}, {\"val0\": \"target\", \"val1\": \"*\", \"valueArray\": [\"target\", \"*\"], \"valueList\": [\"target\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"operations\", \"val1\": {\"value\": \"0\", \"line\": 3, \"tokentype\": \"Constant\"}, \"valueArray\": [\"operations\", {\"value\": \"0\", \"line\": 3}], \"valueList\": [\"operations\", {\"value\": \"0\", \"line\": 3}]}], \"2\": [{\"val0\": \"$cond\", \"val1\": {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}], \"valueList\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}]}], \"3\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}]}], \"4\": [{\"val0\": \"target\", \"val1\": {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5, \"tokentype\": \"Operation\"}, \"valueArray\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}], \"valueList\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}]}, {\"val0\": \"operations\", \"val1\": {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6, \"tokentype\": \"Operation\"}, \"valueArray\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}], \"valueList\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}]}]}, \"loctrans\": {\"1\": {\"true\": 2}, \"2\": {\"false\": 3, \"true\": 4}, \"3\": {}, \"4\": {\"true\": 2}}, \"locdescs\": {\"1\": \"around the beginning of function 'broken_calc'\", \"2\": \"the condition of the 'while' loop at line 4\", \"3\": \"*after* the 'while' loop starting at line 4\", \"4\": \"inside the body of the 'while' loop beginning at line 5\"}, \"types\": {\"operations\": \"*\", \"target\": \"*\"}}}}",
     "function": "broken_calc",
     "inputs": "[]",
-    "args": "[44, 31]"
+    "args": "[45, 39]"
 }
 ```
 
@@ -58,8 +58,8 @@ Actual Output:
             "mem": {
                 "operations'": 0,
                 "operations": "<undef>",
-                "startValue": 44,
-                "target": 31
+                "startValue": 45,
+                "target": 39
             },
             "isChecked": false
         },
@@ -70,8 +70,8 @@ Actual Output:
                 "operations'": 0,
                 "operations": 0,
                 "$cond'": false,
-                "startValue": 44,
-                "target": 31,
+                "startValue": 45,
+                "target": 39,
                 "$cond": "<undef>"
             },
             "isChecked": false
@@ -83,9 +83,9 @@ Actual Output:
                 "operations'": 0,
                 "operations": 0,
                 "$cond'": false,
-                "$ret'": 13,
-                "startValue": 44,
-                "target": 31,
+                "$ret'": 6,
+                "startValue": 45,
+                "target": 39,
                 "$cond": false,
                 "$ret": "<undef>"
             },
@@ -123,7 +123,7 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"broken_calc\": {\"name\": \"broken_calc\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"startValue\", \"val1\": \"*\", \"valueArray\": [\"startValue\", \"*\"], \"valueList\": [\"startValue\", \"*\"]}, {\"val0\": \"target\", \"val1\": \"*\", \"valueArray\": [\"target\", \"*\"], \"valueList\": [\"target\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"operations\", \"val1\": {\"value\": \"0\", \"line\": 3, \"tokentype\": \"Constant\"}, \"valueArray\": [\"operations\", {\"value\": \"0\", \"line\": 3}], \"valueList\": [\"operations\", {\"value\": \"0\", \"line\": 3}]}], \"2\": [{\"val0\": \"$cond\", \"val1\": {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}], \"valueList\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}]}], \"3\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}]}], \"4\": [{\"val0\": \"target\", \"val1\": {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5, \"tokentype\": \"Operation\"}, \"valueArray\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}], \"valueList\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}]}, {\"val0\": \"operations\", \"val1\": {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6, \"tokentype\": \"Operation\"}, \"valueArray\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}], \"valueList\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}]}]}, \"loctrans\": {\"1\": {\"true\": 2}, \"2\": {\"false\": 3, \"true\": 4}, \"3\": {}, \"4\": {\"true\": 2}}, \"locdescs\": {\"1\": \"around the beginning of function 'broken_calc'\", \"2\": \"the condition of the 'while' loop at line 4\", \"3\": \"*after* the 'while' loop starting at line 4\", \"4\": \"inside the body of the 'while' loop beginning at line 5\"}, \"types\": {\"operations\": \"*\", \"target\": \"*\"}}}}",
     "function": "broken_calc",
     "inputs": "[]",
-    "args": "[89, 15]"
+    "args": "[78, 32]"
 }
 ```
 
@@ -142,8 +142,8 @@ Actual Output:
             "mem": {
                 "operations'": 0,
                 "operations": "<undef>",
-                "startValue": 89,
-                "target": 15
+                "startValue": 78,
+                "target": 32
             },
             "isChecked": false
         },
@@ -154,8 +154,8 @@ Actual Output:
                 "operations'": 0,
                 "operations": 0,
                 "$cond'": false,
-                "startValue": 89,
-                "target": 15,
+                "startValue": 78,
+                "target": 32,
                 "$cond": "<undef>"
             },
             "isChecked": false
@@ -167,9 +167,9 @@ Actual Output:
                 "operations'": 0,
                 "operations": 0,
                 "$cond'": false,
-                "$ret'": 74,
-                "startValue": 89,
-                "target": 15,
+                "$ret'": 46,
+                "startValue": 78,
+                "target": 32,
                 "$cond": false,
                 "$ret": "<undef>"
             },
@@ -207,7 +207,7 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"broken_calc\": {\"name\": \"broken_calc\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"startValue\", \"val1\": \"*\", \"valueArray\": [\"startValue\", \"*\"], \"valueList\": [\"startValue\", \"*\"]}, {\"val0\": \"target\", \"val1\": \"*\", \"valueArray\": [\"target\", \"*\"], \"valueList\": [\"target\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"operations\", \"val1\": {\"value\": \"0\", \"line\": 3, \"tokentype\": \"Constant\"}, \"valueArray\": [\"operations\", {\"value\": \"0\", \"line\": 3}], \"valueList\": [\"operations\", {\"value\": \"0\", \"line\": 3}]}], \"2\": [{\"val0\": \"$cond\", \"val1\": {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}], \"valueList\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}]}], \"3\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}]}], \"4\": [{\"val0\": \"target\", \"val1\": {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5, \"tokentype\": \"Operation\"}, \"valueArray\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}], \"valueList\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}]}, {\"val0\": \"operations\", \"val1\": {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6, \"tokentype\": \"Operation\"}, \"valueArray\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}], \"valueList\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}]}]}, \"loctrans\": {\"1\": {\"true\": 2}, \"2\": {\"false\": 3, \"true\": 4}, \"3\": {}, \"4\": {\"true\": 2}}, \"locdescs\": {\"1\": \"around the beginning of function 'broken_calc'\", \"2\": \"the condition of the 'while' loop at line 4\", \"3\": \"*after* the 'while' loop starting at line 4\", \"4\": \"inside the body of the 'while' loop beginning at line 5\"}, \"types\": {\"operations\": \"*\", \"target\": \"*\"}}}}",
     "function": "broken_calc",
     "inputs": "[]",
-    "args": "[52, 8]"
+    "args": "[22, 65]"
 }
 ```
 
@@ -226,8 +226,8 @@ Actual Output:
             "mem": {
                 "operations'": 0,
                 "operations": "<undef>",
-                "startValue": 52,
-                "target": 8
+                "startValue": 22,
+                "target": 65
             },
             "isChecked": false
         },
@@ -237,10 +237,122 @@ Actual Output:
             "mem": {
                 "operations'": 0,
                 "operations": 0,
-                "$cond'": false,
-                "startValue": 52,
-                "target": 8,
+                "$cond'": true,
+                "startValue": 22,
+                "target": 65,
                 "$cond": "<undef>"
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 4,
+            "mem": {
+                "operations'": 1,
+                "operations": 0,
+                "$cond'": true,
+                "target'": 66,
+                "startValue": 22,
+                "target": 65,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 2,
+            "mem": {
+                "operations'": 1,
+                "operations": 1,
+                "$cond'": true,
+                "target'": 66,
+                "startValue": 22,
+                "target": 66,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 4,
+            "mem": {
+                "operations'": 2,
+                "operations": 1,
+                "$cond'": true,
+                "target'": 33,
+                "startValue": 22,
+                "target": 66,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 2,
+            "mem": {
+                "operations'": 2,
+                "operations": 2,
+                "$cond'": true,
+                "target'": 33,
+                "startValue": 22,
+                "target": 33,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 4,
+            "mem": {
+                "operations'": 3,
+                "operations": 2,
+                "$cond'": true,
+                "target'": 34,
+                "startValue": 22,
+                "target": 33,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 2,
+            "mem": {
+                "operations'": 3,
+                "operations": 3,
+                "$cond'": true,
+                "target'": 34,
+                "startValue": 22,
+                "target": 34,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 4,
+            "mem": {
+                "operations'": 4,
+                "operations": 3,
+                "$cond'": true,
+                "target'": 17,
+                "startValue": 22,
+                "target": 34,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 2,
+            "mem": {
+                "operations'": 4,
+                "operations": 4,
+                "$cond'": false,
+                "target'": 17,
+                "startValue": 22,
+                "target": 17,
+                "$cond": true
             },
             "isChecked": false
         },
@@ -248,12 +360,13 @@ Actual Output:
             "functionName": "broken_calc",
             "location": 3,
             "mem": {
-                "operations'": 0,
-                "operations": 0,
+                "operations'": 4,
+                "operations": 4,
                 "$cond'": false,
-                "$ret'": 44,
-                "startValue": 52,
-                "target": 8,
+                "target'": 17,
+                "$ret'": 9,
+                "startValue": 22,
+                "target": 17,
                 "$cond": false,
                 "$ret": "<undef>"
             },
@@ -291,7 +404,7 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"broken_calc\": {\"name\": \"broken_calc\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"startValue\", \"val1\": \"*\", \"valueArray\": [\"startValue\", \"*\"], \"valueList\": [\"startValue\", \"*\"]}, {\"val0\": \"target\", \"val1\": \"*\", \"valueArray\": [\"target\", \"*\"], \"valueList\": [\"target\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"operations\", \"val1\": {\"value\": \"0\", \"line\": 3, \"tokentype\": \"Constant\"}, \"valueArray\": [\"operations\", {\"value\": \"0\", \"line\": 3}], \"valueList\": [\"operations\", {\"value\": \"0\", \"line\": 3}]}], \"2\": [{\"val0\": \"$cond\", \"val1\": {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}], \"valueList\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}]}], \"3\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}]}], \"4\": [{\"val0\": \"target\", \"val1\": {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5, \"tokentype\": \"Operation\"}, \"valueArray\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}], \"valueList\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}]}, {\"val0\": \"operations\", \"val1\": {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6, \"tokentype\": \"Operation\"}, \"valueArray\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}], \"valueList\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}]}]}, \"loctrans\": {\"1\": {\"true\": 2}, \"2\": {\"false\": 3, \"true\": 4}, \"3\": {}, \"4\": {\"true\": 2}}, \"locdescs\": {\"1\": \"around the beginning of function 'broken_calc'\", \"2\": \"the condition of the 'while' loop at line 4\", \"3\": \"*after* the 'while' loop starting at line 4\", \"4\": \"inside the body of the 'while' loop beginning at line 5\"}, \"types\": {\"operations\": \"*\", \"target\": \"*\"}}}}",
     "function": "broken_calc",
     "inputs": "[]",
-    "args": "[56, 67]"
+    "args": "[46, 29]"
 }
 ```
 
@@ -310,8 +423,8 @@ Actual Output:
             "mem": {
                 "operations'": 0,
                 "operations": "<undef>",
-                "startValue": 56,
-                "target": 67
+                "startValue": 46,
+                "target": 29
             },
             "isChecked": false
         },
@@ -321,66 +434,10 @@ Actual Output:
             "mem": {
                 "operations'": 0,
                 "operations": 0,
-                "$cond'": true,
-                "startValue": 56,
-                "target": 67,
-                "$cond": "<undef>"
-            },
-            "isChecked": false
-        },
-        {
-            "functionName": "broken_calc",
-            "location": 4,
-            "mem": {
-                "operations'": 1,
-                "operations": 0,
-                "$cond'": true,
-                "target'": 68,
-                "startValue": 56,
-                "target": 67,
-                "$cond": true
-            },
-            "isChecked": false
-        },
-        {
-            "functionName": "broken_calc",
-            "location": 2,
-            "mem": {
-                "operations'": 1,
-                "operations": 1,
-                "$cond'": true,
-                "target'": 68,
-                "startValue": 56,
-                "target": 68,
-                "$cond": true
-            },
-            "isChecked": false
-        },
-        {
-            "functionName": "broken_calc",
-            "location": 4,
-            "mem": {
-                "operations'": 2,
-                "operations": 1,
-                "$cond'": true,
-                "target'": 34,
-                "startValue": 56,
-                "target": 68,
-                "$cond": true
-            },
-            "isChecked": false
-        },
-        {
-            "functionName": "broken_calc",
-            "location": 2,
-            "mem": {
-                "operations'": 2,
-                "operations": 2,
                 "$cond'": false,
-                "target'": 34,
-                "startValue": 56,
-                "target": 34,
-                "$cond": true
+                "startValue": 46,
+                "target": 29,
+                "$cond": "<undef>"
             },
             "isChecked": false
         },
@@ -388,13 +445,12 @@ Actual Output:
             "functionName": "broken_calc",
             "location": 3,
             "mem": {
-                "operations'": 2,
-                "operations": 2,
+                "operations'": 0,
+                "operations": 0,
                 "$cond'": false,
-                "target'": 34,
-                "$ret'": 24,
-                "startValue": 56,
-                "target": 34,
+                "$ret'": 17,
+                "startValue": 46,
+                "target": 29,
                 "$cond": false,
                 "$ret": "<undef>"
             },
@@ -432,7 +488,7 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"broken_calc\": {\"name\": \"broken_calc\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"startValue\", \"val1\": \"*\", \"valueArray\": [\"startValue\", \"*\"], \"valueList\": [\"startValue\", \"*\"]}, {\"val0\": \"target\", \"val1\": \"*\", \"valueArray\": [\"target\", \"*\"], \"valueList\": [\"target\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"operations\", \"val1\": {\"value\": \"0\", \"line\": 3, \"tokentype\": \"Constant\"}, \"valueArray\": [\"operations\", {\"value\": \"0\", \"line\": 3}], \"valueList\": [\"operations\", {\"value\": \"0\", \"line\": 3}]}], \"2\": [{\"val0\": \"$cond\", \"val1\": {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}], \"valueList\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}]}], \"3\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}]}], \"4\": [{\"val0\": \"target\", \"val1\": {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5, \"tokentype\": \"Operation\"}, \"valueArray\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}], \"valueList\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}]}, {\"val0\": \"operations\", \"val1\": {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6, \"tokentype\": \"Operation\"}, \"valueArray\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}], \"valueList\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}]}]}, \"loctrans\": {\"1\": {\"true\": 2}, \"2\": {\"false\": 3, \"true\": 4}, \"3\": {}, \"4\": {\"true\": 2}}, \"locdescs\": {\"1\": \"around the beginning of function 'broken_calc'\", \"2\": \"the condition of the 'while' loop at line 4\", \"3\": \"*after* the 'while' loop starting at line 4\", \"4\": \"inside the body of the 'while' loop beginning at line 5\"}, \"types\": {\"operations\": \"*\", \"target\": \"*\"}}}}",
     "function": "broken_calc",
     "inputs": "[]",
-    "args": "[80, 13]"
+    "args": "[54, 85]"
 }
 ```
 
@@ -451,8 +507,8 @@ Actual Output:
             "mem": {
                 "operations'": 0,
                 "operations": "<undef>",
-                "startValue": 80,
-                "target": 13
+                "startValue": 54,
+                "target": 85
             },
             "isChecked": false
         },
@@ -462,10 +518,66 @@ Actual Output:
             "mem": {
                 "operations'": 0,
                 "operations": 0,
-                "$cond'": false,
-                "startValue": 80,
-                "target": 13,
+                "$cond'": true,
+                "startValue": 54,
+                "target": 85,
                 "$cond": "<undef>"
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 4,
+            "mem": {
+                "operations'": 1,
+                "operations": 0,
+                "$cond'": true,
+                "target'": 86,
+                "startValue": 54,
+                "target": 85,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 2,
+            "mem": {
+                "operations'": 1,
+                "operations": 1,
+                "$cond'": true,
+                "target'": 86,
+                "startValue": 54,
+                "target": 86,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 4,
+            "mem": {
+                "operations'": 2,
+                "operations": 1,
+                "$cond'": true,
+                "target'": 43,
+                "startValue": 54,
+                "target": 86,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 2,
+            "mem": {
+                "operations'": 2,
+                "operations": 2,
+                "$cond'": false,
+                "target'": 43,
+                "startValue": 54,
+                "target": 43,
+                "$cond": true
             },
             "isChecked": false
         },
@@ -473,12 +585,13 @@ Actual Output:
             "functionName": "broken_calc",
             "location": 3,
             "mem": {
-                "operations'": 0,
-                "operations": 0,
+                "operations'": 2,
+                "operations": 2,
                 "$cond'": false,
-                "$ret'": 67,
-                "startValue": 80,
-                "target": 13,
+                "target'": 43,
+                "$ret'": 13,
+                "startValue": 54,
+                "target": 43,
                 "$cond": false,
                 "$ret": "<undef>"
             },
@@ -516,7 +629,7 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"broken_calc\": {\"name\": \"broken_calc\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"startValue\", \"val1\": \"*\", \"valueArray\": [\"startValue\", \"*\"], \"valueList\": [\"startValue\", \"*\"]}, {\"val0\": \"target\", \"val1\": \"*\", \"valueArray\": [\"target\", \"*\"], \"valueList\": [\"target\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"operations\", \"val1\": {\"value\": \"0\", \"line\": 3, \"tokentype\": \"Constant\"}, \"valueArray\": [\"operations\", {\"value\": \"0\", \"line\": 3}], \"valueList\": [\"operations\", {\"value\": \"0\", \"line\": 3}]}], \"2\": [{\"val0\": \"$cond\", \"val1\": {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}], \"valueList\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}]}], \"3\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}]}], \"4\": [{\"val0\": \"target\", \"val1\": {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5, \"tokentype\": \"Operation\"}, \"valueArray\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}], \"valueList\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}]}, {\"val0\": \"operations\", \"val1\": {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6, \"tokentype\": \"Operation\"}, \"valueArray\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}], \"valueList\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}]}]}, \"loctrans\": {\"1\": {\"true\": 2}, \"2\": {\"false\": 3, \"true\": 4}, \"3\": {}, \"4\": {\"true\": 2}}, \"locdescs\": {\"1\": \"around the beginning of function 'broken_calc'\", \"2\": \"the condition of the 'while' loop at line 4\", \"3\": \"*after* the 'while' loop starting at line 4\", \"4\": \"inside the body of the 'while' loop beginning at line 5\"}, \"types\": {\"operations\": \"*\", \"target\": \"*\"}}}}",
     "function": "broken_calc",
     "inputs": "[]",
-    "args": "[99, 43]"
+    "args": "[26, 29]"
 }
 ```
 
@@ -535,8 +648,8 @@ Actual Output:
             "mem": {
                 "operations'": 0,
                 "operations": "<undef>",
-                "startValue": 99,
-                "target": 43
+                "startValue": 26,
+                "target": 29
             },
             "isChecked": false
         },
@@ -546,10 +659,66 @@ Actual Output:
             "mem": {
                 "operations'": 0,
                 "operations": 0,
-                "$cond'": false,
-                "startValue": 99,
-                "target": 43,
+                "$cond'": true,
+                "startValue": 26,
+                "target": 29,
                 "$cond": "<undef>"
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 4,
+            "mem": {
+                "operations'": 1,
+                "operations": 0,
+                "$cond'": true,
+                "target'": 30,
+                "startValue": 26,
+                "target": 29,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 2,
+            "mem": {
+                "operations'": 1,
+                "operations": 1,
+                "$cond'": true,
+                "target'": 30,
+                "startValue": 26,
+                "target": 30,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 4,
+            "mem": {
+                "operations'": 2,
+                "operations": 1,
+                "$cond'": true,
+                "target'": 15,
+                "startValue": 26,
+                "target": 30,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 2,
+            "mem": {
+                "operations'": 2,
+                "operations": 2,
+                "$cond'": false,
+                "target'": 15,
+                "startValue": 26,
+                "target": 15,
+                "$cond": true
             },
             "isChecked": false
         },
@@ -557,12 +726,13 @@ Actual Output:
             "functionName": "broken_calc",
             "location": 3,
             "mem": {
-                "operations'": 0,
-                "operations": 0,
+                "operations'": 2,
+                "operations": 2,
                 "$cond'": false,
-                "$ret'": 56,
-                "startValue": 99,
-                "target": 43,
+                "target'": 15,
+                "$ret'": 13,
+                "startValue": 26,
+                "target": 15,
                 "$cond": false,
                 "$ret": "<undef>"
             },
@@ -600,7 +770,7 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"broken_calc\": {\"name\": \"broken_calc\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"startValue\", \"val1\": \"*\", \"valueArray\": [\"startValue\", \"*\"], \"valueList\": [\"startValue\", \"*\"]}, {\"val0\": \"target\", \"val1\": \"*\", \"valueArray\": [\"target\", \"*\"], \"valueList\": [\"target\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"operations\", \"val1\": {\"value\": \"0\", \"line\": 3, \"tokentype\": \"Constant\"}, \"valueArray\": [\"operations\", {\"value\": \"0\", \"line\": 3}], \"valueList\": [\"operations\", {\"value\": \"0\", \"line\": 3}]}], \"2\": [{\"val0\": \"$cond\", \"val1\": {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}], \"valueList\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}]}], \"3\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}]}], \"4\": [{\"val0\": \"target\", \"val1\": {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5, \"tokentype\": \"Operation\"}, \"valueArray\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}], \"valueList\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}]}, {\"val0\": \"operations\", \"val1\": {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6, \"tokentype\": \"Operation\"}, \"valueArray\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}], \"valueList\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}]}]}, \"loctrans\": {\"1\": {\"true\": 2}, \"2\": {\"false\": 3, \"true\": 4}, \"3\": {}, \"4\": {\"true\": 2}}, \"locdescs\": {\"1\": \"around the beginning of function 'broken_calc'\", \"2\": \"the condition of the 'while' loop at line 4\", \"3\": \"*after* the 'while' loop starting at line 4\", \"4\": \"inside the body of the 'while' loop beginning at line 5\"}, \"types\": {\"operations\": \"*\", \"target\": \"*\"}}}}",
     "function": "broken_calc",
     "inputs": "[]",
-    "args": "[55, 88]"
+    "args": "[72, 20]"
 }
 ```
 
@@ -619,8 +789,8 @@ Actual Output:
             "mem": {
                 "operations'": 0,
                 "operations": "<undef>",
-                "startValue": 55,
-                "target": 88
+                "startValue": 72,
+                "target": 20
             },
             "isChecked": false
         },
@@ -630,38 +800,10 @@ Actual Output:
             "mem": {
                 "operations'": 0,
                 "operations": 0,
-                "$cond'": true,
-                "startValue": 55,
-                "target": 88,
-                "$cond": "<undef>"
-            },
-            "isChecked": false
-        },
-        {
-            "functionName": "broken_calc",
-            "location": 4,
-            "mem": {
-                "operations'": 1,
-                "operations": 0,
-                "$cond'": true,
-                "target'": 44,
-                "startValue": 55,
-                "target": 88,
-                "$cond": true
-            },
-            "isChecked": false
-        },
-        {
-            "functionName": "broken_calc",
-            "location": 2,
-            "mem": {
-                "operations'": 1,
-                "operations": 1,
                 "$cond'": false,
-                "target'": 44,
-                "startValue": 55,
-                "target": 44,
-                "$cond": true
+                "startValue": 72,
+                "target": 20,
+                "$cond": "<undef>"
             },
             "isChecked": false
         },
@@ -669,13 +811,12 @@ Actual Output:
             "functionName": "broken_calc",
             "location": 3,
             "mem": {
-                "operations'": 1,
-                "operations": 1,
+                "operations'": 0,
+                "operations": 0,
                 "$cond'": false,
-                "target'": 44,
-                "$ret'": 12,
-                "startValue": 55,
-                "target": 44,
+                "$ret'": 52,
+                "startValue": 72,
+                "target": 20,
                 "$cond": false,
                 "$ret": "<undef>"
             },
@@ -713,7 +854,7 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"broken_calc\": {\"name\": \"broken_calc\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"startValue\", \"val1\": \"*\", \"valueArray\": [\"startValue\", \"*\"], \"valueList\": [\"startValue\", \"*\"]}, {\"val0\": \"target\", \"val1\": \"*\", \"valueArray\": [\"target\", \"*\"], \"valueList\": [\"target\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"operations\", \"val1\": {\"value\": \"0\", \"line\": 3, \"tokentype\": \"Constant\"}, \"valueArray\": [\"operations\", {\"value\": \"0\", \"line\": 3}], \"valueList\": [\"operations\", {\"value\": \"0\", \"line\": 3}]}], \"2\": [{\"val0\": \"$cond\", \"val1\": {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}], \"valueList\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}]}], \"3\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}]}], \"4\": [{\"val0\": \"target\", \"val1\": {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5, \"tokentype\": \"Operation\"}, \"valueArray\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}], \"valueList\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}]}, {\"val0\": \"operations\", \"val1\": {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6, \"tokentype\": \"Operation\"}, \"valueArray\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}], \"valueList\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}]}]}, \"loctrans\": {\"1\": {\"true\": 2}, \"2\": {\"false\": 3, \"true\": 4}, \"3\": {}, \"4\": {\"true\": 2}}, \"locdescs\": {\"1\": \"around the beginning of function 'broken_calc'\", \"2\": \"the condition of the 'while' loop at line 4\", \"3\": \"*after* the 'while' loop starting at line 4\", \"4\": \"inside the body of the 'while' loop beginning at line 5\"}, \"types\": {\"operations\": \"*\", \"target\": \"*\"}}}}",
     "function": "broken_calc",
     "inputs": "[]",
-    "args": "[87, 0]"
+    "args": "[35, 71]"
 }
 ```
 
@@ -732,8 +873,8 @@ Actual Output:
             "mem": {
                 "operations'": 0,
                 "operations": "<undef>",
-                "startValue": 87,
-                "target": 0
+                "startValue": 35,
+                "target": 71
             },
             "isChecked": false
         },
@@ -743,10 +884,94 @@ Actual Output:
             "mem": {
                 "operations'": 0,
                 "operations": 0,
-                "$cond'": false,
-                "startValue": 87,
-                "target": 0,
+                "$cond'": true,
+                "startValue": 35,
+                "target": 71,
                 "$cond": "<undef>"
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 4,
+            "mem": {
+                "operations'": 1,
+                "operations": 0,
+                "$cond'": true,
+                "target'": 72,
+                "startValue": 35,
+                "target": 71,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 2,
+            "mem": {
+                "operations'": 1,
+                "operations": 1,
+                "$cond'": true,
+                "target'": 72,
+                "startValue": 35,
+                "target": 72,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 4,
+            "mem": {
+                "operations'": 2,
+                "operations": 1,
+                "$cond'": true,
+                "target'": 36,
+                "startValue": 35,
+                "target": 72,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 2,
+            "mem": {
+                "operations'": 2,
+                "operations": 2,
+                "$cond'": true,
+                "target'": 36,
+                "startValue": 35,
+                "target": 36,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 4,
+            "mem": {
+                "operations'": 3,
+                "operations": 2,
+                "$cond'": true,
+                "target'": 18,
+                "startValue": 35,
+                "target": 36,
+                "$cond": true
+            },
+            "isChecked": false
+        },
+        {
+            "functionName": "broken_calc",
+            "location": 2,
+            "mem": {
+                "operations'": 3,
+                "operations": 3,
+                "$cond'": false,
+                "target'": 18,
+                "startValue": 35,
+                "target": 18,
+                "$cond": true
             },
             "isChecked": false
         },
@@ -754,12 +979,13 @@ Actual Output:
             "functionName": "broken_calc",
             "location": 3,
             "mem": {
-                "operations'": 0,
-                "operations": 0,
+                "operations'": 3,
+                "operations": 3,
                 "$cond'": false,
-                "$ret'": 87,
-                "startValue": 87,
-                "target": 0,
+                "target'": 18,
+                "$ret'": 20,
+                "startValue": 35,
+                "target": 18,
                 "$cond": false,
                 "$ret": "<undef>"
             },
@@ -797,7 +1023,7 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"broken_calc\": {\"name\": \"broken_calc\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"startValue\", \"val1\": \"*\", \"valueArray\": [\"startValue\", \"*\"], \"valueList\": [\"startValue\", \"*\"]}, {\"val0\": \"target\", \"val1\": \"*\", \"valueArray\": [\"target\", \"*\"], \"valueList\": [\"target\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"operations\", \"val1\": {\"value\": \"0\", \"line\": 3, \"tokentype\": \"Constant\"}, \"valueArray\": [\"operations\", {\"value\": \"0\", \"line\": 3}], \"valueList\": [\"operations\", {\"value\": \"0\", \"line\": 3}]}], \"2\": [{\"val0\": \"$cond\", \"val1\": {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}], \"valueList\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}]}], \"3\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}]}], \"4\": [{\"val0\": \"target\", \"val1\": {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5, \"tokentype\": \"Operation\"}, \"valueArray\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}], \"valueList\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}]}, {\"val0\": \"operations\", \"val1\": {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6, \"tokentype\": \"Operation\"}, \"valueArray\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}], \"valueList\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}]}]}, \"loctrans\": {\"1\": {\"true\": 2}, \"2\": {\"false\": 3, \"true\": 4}, \"3\": {}, \"4\": {\"true\": 2}}, \"locdescs\": {\"1\": \"around the beginning of function 'broken_calc'\", \"2\": \"the condition of the 'while' loop at line 4\", \"3\": \"*after* the 'while' loop starting at line 4\", \"4\": \"inside the body of the 'while' loop beginning at line 5\"}, \"types\": {\"operations\": \"*\", \"target\": \"*\"}}}}",
     "function": "broken_calc",
     "inputs": "[]",
-    "args": "[47, 83]"
+    "args": "[69, 73]"
 }
 ```
 
@@ -816,8 +1042,8 @@ Actual Output:
             "mem": {
                 "operations'": 0,
                 "operations": "<undef>",
-                "startValue": 47,
-                "target": 83
+                "startValue": 69,
+                "target": 73
             },
             "isChecked": false
         },
@@ -828,8 +1054,8 @@ Actual Output:
                 "operations'": 0,
                 "operations": 0,
                 "$cond'": true,
-                "startValue": 47,
-                "target": 83,
+                "startValue": 69,
+                "target": 73,
                 "$cond": "<undef>"
             },
             "isChecked": false
@@ -841,9 +1067,9 @@ Actual Output:
                 "operations'": 1,
                 "operations": 0,
                 "$cond'": true,
-                "target'": 84,
-                "startValue": 47,
-                "target": 83,
+                "target'": 74,
+                "startValue": 69,
+                "target": 73,
                 "$cond": true
             },
             "isChecked": false
@@ -855,9 +1081,9 @@ Actual Output:
                 "operations'": 1,
                 "operations": 1,
                 "$cond'": true,
-                "target'": 84,
-                "startValue": 47,
-                "target": 84,
+                "target'": 74,
+                "startValue": 69,
+                "target": 74,
                 "$cond": true
             },
             "isChecked": false
@@ -869,9 +1095,9 @@ Actual Output:
                 "operations'": 2,
                 "operations": 1,
                 "$cond'": true,
-                "target'": 42,
-                "startValue": 47,
-                "target": 84,
+                "target'": 37,
+                "startValue": 69,
+                "target": 74,
                 "$cond": true
             },
             "isChecked": false
@@ -883,9 +1109,9 @@ Actual Output:
                 "operations'": 2,
                 "operations": 2,
                 "$cond'": false,
-                "target'": 42,
-                "startValue": 47,
-                "target": 42,
+                "target'": 37,
+                "startValue": 69,
+                "target": 37,
                 "$cond": true
             },
             "isChecked": false
@@ -897,10 +1123,10 @@ Actual Output:
                 "operations'": 2,
                 "operations": 2,
                 "$cond'": false,
-                "target'": 42,
-                "$ret'": 7,
-                "startValue": 47,
-                "target": 42,
+                "target'": 37,
+                "$ret'": 34,
+                "startValue": 69,
+                "target": 37,
                 "$cond": false,
                 "$ret": "<undef>"
             },
@@ -938,7 +1164,7 @@ Request Body:
     "program_model": "{\"importStatements\": [], \"fncs\": {\"broken_calc\": {\"name\": \"broken_calc\", \"rettype\": \"*\", \"initloc\": 1, \"endloc\": 0, \"params\": [{\"val0\": \"startValue\", \"val1\": \"*\", \"valueArray\": [\"startValue\", \"*\"], \"valueList\": [\"startValue\", \"*\"]}, {\"val0\": \"target\", \"val1\": \"*\", \"valueArray\": [\"target\", \"*\"], \"valueList\": [\"target\", \"*\"]}], \"locexprs\": {\"1\": [{\"val0\": \"operations\", \"val1\": {\"value\": \"0\", \"line\": 3, \"tokentype\": \"Constant\"}, \"valueArray\": [\"operations\", {\"value\": \"0\", \"line\": 3}], \"valueList\": [\"operations\", {\"value\": \"0\", \"line\": 3}]}], \"2\": [{\"val0\": \"$cond\", \"val1\": {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}], \"valueList\": [\"$cond\", {\"name\": \"Gt\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 4, \"tokentype\": \"Variable\"}], \"line\": 4}]}], \"3\": [{\"val0\": \"$ret\", \"val1\": {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, \"valueArray\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}], \"valueList\": [\"$ret\", {\"name\": \"Sub\", \"args\": [{\"name\": \"Add\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}, {\"name\": \"startValue\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7, \"tokentype\": \"Operation\"}, {\"name\": \"target\", \"primed\": false, \"line\": 7, \"tokentype\": \"Variable\"}], \"line\": 7}]}], \"4\": [{\"val0\": \"target\", \"val1\": {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5, \"tokentype\": \"Operation\"}, \"valueArray\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}], \"valueList\": [\"target\", {\"name\": \"ite\", \"args\": [{\"name\": \"Eq\", \"args\": [{\"name\": \"Mod\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"value\": \"0\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"FloorDiv\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"2\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}, {\"name\": \"Add\", \"args\": [{\"name\": \"target\", \"primed\": false, \"line\": 5, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 5, \"tokentype\": \"Constant\"}], \"line\": 5, \"tokentype\": \"Operation\"}], \"line\": 5}]}, {\"val0\": \"operations\", \"val1\": {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6, \"tokentype\": \"Operation\"}, \"valueArray\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}], \"valueList\": [\"operations\", {\"name\": \"AssAdd\", \"args\": [{\"name\": \"operations\", \"primed\": false, \"line\": 6, \"tokentype\": \"Variable\"}, {\"value\": \"1\", \"line\": 6, \"tokentype\": \"Constant\"}], \"line\": 6}]}]}, \"loctrans\": {\"1\": {\"true\": 2}, \"2\": {\"false\": 3, \"true\": 4}, \"3\": {}, \"4\": {\"true\": 2}}, \"locdescs\": {\"1\": \"around the beginning of function 'broken_calc'\", \"2\": \"the condition of the 'while' loop at line 4\", \"3\": \"*after* the 'while' loop starting at line 4\", \"4\": \"inside the body of the 'while' loop beginning at line 5\"}, \"types\": {\"operations\": \"*\", \"target\": \"*\"}}}}",
     "function": "broken_calc",
     "inputs": "[]",
-    "args": "[92, 16]"
+    "args": "[34, 5]"
 }
 ```
 
@@ -957,8 +1183,8 @@ Actual Output:
             "mem": {
                 "operations'": 0,
                 "operations": "<undef>",
-                "startValue": 92,
-                "target": 16
+                "startValue": 34,
+                "target": 5
             },
             "isChecked": false
         },
@@ -969,8 +1195,8 @@ Actual Output:
                 "operations'": 0,
                 "operations": 0,
                 "$cond'": false,
-                "startValue": 92,
-                "target": 16,
+                "startValue": 34,
+                "target": 5,
                 "$cond": "<undef>"
             },
             "isChecked": false
@@ -982,9 +1208,9 @@ Actual Output:
                 "operations'": 0,
                 "operations": 0,
                 "$cond'": false,
-                "$ret'": 76,
-                "startValue": 92,
-                "target": 16,
+                "$ret'": 29,
+                "startValue": 34,
+                "target": 5,
                 "$cond": false,
                 "$ret": "<undef>"
             },

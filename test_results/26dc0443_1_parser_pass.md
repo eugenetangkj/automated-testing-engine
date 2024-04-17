@@ -1,0 +1,2713 @@
+# Test Report
+
+Time: 2024-04-17 10:16 PM
+
+### Base Program
+
+```py
+def operations(num1, num2):
+    count = 0
+    while num1 != 0 and num2 != 0:
+        if num1 >= num2:
+            num1 -= num2
+        else:
+            num2 -= num1
+        count += 1
+    return count
+```
+
+## Test Case 1
+
+### Modified Program
+
+```py
+def operations(num1, num2):
+    count = 0
+    while num1 != 0 and num2 != 0:
+        if num1 >= num2:
+            num1 -= num2
+        else:
+            num2 -= num1
+        count += 1
+    return count
+```
+
+<details>
+<summary>parser endpoint: passed ✅</summary>
+
+Request Body: 
+```json
+{
+    "language": "py",
+    "source_code": "def operations(num1, num2):\n    count = 0\n    while num1 != 0 and num2 != 0:\n        if num1 >= num2:\n            num1 -= num2\n        else:\n            num2 -= num1\n        count += 1\n    return count"
+}
+```
+
+Message: 
+```
+Success
+```
+
+Actual Output: 
+```json
+{
+    "importStatements": [],
+    "fncs": {
+        "operations": {
+            "name": "operations",
+            "rettype": "*",
+            "initloc": 1,
+            "endloc": 0,
+            "params": [
+                {
+                    "val0": "num1",
+                    "val1": "*",
+                    "valueArray": [
+                        "num1",
+                        "*"
+                    ],
+                    "valueList": [
+                        "num1",
+                        "*"
+                    ]
+                },
+                {
+                    "val0": "num2",
+                    "val1": "*",
+                    "valueArray": [
+                        "num2",
+                        "*"
+                    ],
+                    "valueList": [
+                        "num2",
+                        "*"
+                    ]
+                }
+            ],
+            "locexprs": {
+                "1": [
+                    {
+                        "val0": "count",
+                        "val1": {
+                            "value": "0",
+                            "line": 2,
+                            "tokentype": "Constant"
+                        },
+                        "valueArray": [
+                            "count",
+                            {
+                                "value": "0",
+                                "line": 2
+                            }
+                        ],
+                        "valueList": [
+                            "count",
+                            {
+                                "value": "0",
+                                "line": 2
+                            }
+                        ]
+                    }
+                ],
+                "2": [
+                    {
+                        "val0": "$cond",
+                        "val1": {
+                            "name": "And",
+                            "args": [
+                                {
+                                    "name": "NotEq",
+                                    "args": [
+                                        {
+                                            "name": "num1",
+                                            "primed": false,
+                                            "line": 3,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "value": "0",
+                                            "line": 3,
+                                            "tokentype": "Constant"
+                                        }
+                                    ],
+                                    "line": 3,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "NotEq",
+                                    "args": [
+                                        {
+                                            "name": "num2",
+                                            "primed": false,
+                                            "line": 3,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "value": "0",
+                                            "line": 3,
+                                            "tokentype": "Constant"
+                                        }
+                                    ],
+                                    "line": 3,
+                                    "tokentype": "Operation"
+                                }
+                            ],
+                            "line": 3,
+                            "tokentype": "Operation"
+                        },
+                        "valueArray": [
+                            "$cond",
+                            {
+                                "name": "And",
+                                "args": [
+                                    {
+                                        "name": "NotEq",
+                                        "args": [
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 3,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 3,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 3,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "NotEq",
+                                        "args": [
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 3,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 3,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 3,
+                                        "tokentype": "Operation"
+                                    }
+                                ],
+                                "line": 3
+                            }
+                        ],
+                        "valueList": [
+                            "$cond",
+                            {
+                                "name": "And",
+                                "args": [
+                                    {
+                                        "name": "NotEq",
+                                        "args": [
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 3,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 3,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 3,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "NotEq",
+                                        "args": [
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 3,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 3,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 3,
+                                        "tokentype": "Operation"
+                                    }
+                                ],
+                                "line": 3
+                            }
+                        ]
+                    }
+                ],
+                "3": [
+                    {
+                        "val0": "$ret",
+                        "val1": {
+                            "name": "count",
+                            "primed": false,
+                            "line": 9,
+                            "tokentype": "Variable"
+                        },
+                        "valueArray": [
+                            "$ret",
+                            {
+                                "name": "count",
+                                "primed": false,
+                                "line": 9
+                            }
+                        ],
+                        "valueList": [
+                            "$ret",
+                            {
+                                "name": "count",
+                                "primed": false,
+                                "line": 9
+                            }
+                        ]
+                    }
+                ],
+                "4": [
+                    {
+                        "val0": "num1",
+                        "val1": {
+                            "name": "ite",
+                            "args": [
+                                {
+                                    "name": "GtE",
+                                    "args": [
+                                        {
+                                            "name": "num1",
+                                            "primed": false,
+                                            "line": 4,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "name": "num2",
+                                            "primed": false,
+                                            "line": 4,
+                                            "tokentype": "Variable"
+                                        }
+                                    ],
+                                    "line": 4,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "Sub",
+                                    "args": [
+                                        {
+                                            "name": "num1",
+                                            "primed": false,
+                                            "line": 5,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "name": "num2",
+                                            "primed": false,
+                                            "line": 5,
+                                            "tokentype": "Variable"
+                                        }
+                                    ],
+                                    "line": 5,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "num1",
+                                    "primed": false,
+                                    "line": 0,
+                                    "tokentype": "Variable"
+                                }
+                            ],
+                            "line": 4,
+                            "tokentype": "Operation"
+                        },
+                        "valueArray": [
+                            "num1",
+                            {
+                                "name": "ite",
+                                "args": [
+                                    {
+                                        "name": "GtE",
+                                        "args": [
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 4,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "Sub",
+                                        "args": [
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 5,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "num1",
+                                        "primed": false,
+                                        "line": 0,
+                                        "tokentype": "Variable"
+                                    }
+                                ],
+                                "line": 4
+                            }
+                        ],
+                        "valueList": [
+                            "num1",
+                            {
+                                "name": "ite",
+                                "args": [
+                                    {
+                                        "name": "GtE",
+                                        "args": [
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 4,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "Sub",
+                                        "args": [
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 5,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "num1",
+                                        "primed": false,
+                                        "line": 0,
+                                        "tokentype": "Variable"
+                                    }
+                                ],
+                                "line": 4
+                            }
+                        ]
+                    },
+                    {
+                        "val0": "num2",
+                        "val1": {
+                            "name": "ite",
+                            "args": [
+                                {
+                                    "name": "GtE",
+                                    "args": [
+                                        {
+                                            "name": "num1",
+                                            "primed": false,
+                                            "line": 4,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "name": "num2",
+                                            "primed": false,
+                                            "line": 4,
+                                            "tokentype": "Variable"
+                                        }
+                                    ],
+                                    "line": 4,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "num2",
+                                    "primed": false,
+                                    "line": 0,
+                                    "tokentype": "Variable"
+                                },
+                                {
+                                    "name": "Sub",
+                                    "args": [
+                                        {
+                                            "name": "num2",
+                                            "primed": false,
+                                            "line": 7,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "name": "num1",
+                                            "primed": false,
+                                            "line": 7,
+                                            "tokentype": "Variable"
+                                        }
+                                    ],
+                                    "line": 7,
+                                    "tokentype": "Operation"
+                                }
+                            ],
+                            "line": 4,
+                            "tokentype": "Operation"
+                        },
+                        "valueArray": [
+                            "num2",
+                            {
+                                "name": "ite",
+                                "args": [
+                                    {
+                                        "name": "GtE",
+                                        "args": [
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 4,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "num2",
+                                        "primed": false,
+                                        "line": 0,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "name": "Sub",
+                                        "args": [
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 7,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 7,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 7,
+                                        "tokentype": "Operation"
+                                    }
+                                ],
+                                "line": 4
+                            }
+                        ],
+                        "valueList": [
+                            "num2",
+                            {
+                                "name": "ite",
+                                "args": [
+                                    {
+                                        "name": "GtE",
+                                        "args": [
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 4,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "num2",
+                                        "primed": false,
+                                        "line": 0,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "name": "Sub",
+                                        "args": [
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 7,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 7,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 7,
+                                        "tokentype": "Operation"
+                                    }
+                                ],
+                                "line": 4
+                            }
+                        ]
+                    },
+                    {
+                        "val0": "count",
+                        "val1": {
+                            "name": "AssAdd",
+                            "args": [
+                                {
+                                    "name": "count",
+                                    "primed": false,
+                                    "line": 8,
+                                    "tokentype": "Variable"
+                                },
+                                {
+                                    "value": "1",
+                                    "line": 8,
+                                    "tokentype": "Constant"
+                                }
+                            ],
+                            "line": 8,
+                            "tokentype": "Operation"
+                        },
+                        "valueArray": [
+                            "count",
+                            {
+                                "name": "AssAdd",
+                                "args": [
+                                    {
+                                        "name": "count",
+                                        "primed": false,
+                                        "line": 8,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "value": "1",
+                                        "line": 8,
+                                        "tokentype": "Constant"
+                                    }
+                                ],
+                                "line": 8
+                            }
+                        ],
+                        "valueList": [
+                            "count",
+                            {
+                                "name": "AssAdd",
+                                "args": [
+                                    {
+                                        "name": "count",
+                                        "primed": false,
+                                        "line": 8,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "value": "1",
+                                        "line": 8,
+                                        "tokentype": "Constant"
+                                    }
+                                ],
+                                "line": 8
+                            }
+                        ]
+                    }
+                ]
+            },
+            "loctrans": {
+                "1": {
+                    "true": 2
+                },
+                "2": {
+                    "false": 3,
+                    "true": 4
+                },
+                "3": {},
+                "4": {
+                    "true": 2
+                }
+            },
+            "locdescs": {
+                "1": "around the beginning of function 'operations'",
+                "2": "the condition of the 'while' loop at line 3",
+                "3": "*after* the 'while' loop starting at line 3",
+                "4": "inside the body of the 'while' loop beginning at line 4"
+            },
+            "types": {
+                "count": "*",
+                "num1": "*",
+                "num2": "*"
+            }
+        }
+    }
+}
+```
+
+</details>
+
+## Test Case 2
+
+### Modified Program
+
+```py
+# Mutated by: VariableRenamerModifier
+def operations(var_0, var_1):
+    count = 0
+    while var_0 != 0 and var_1 != 0:
+        if var_0 >= var_1:
+            var_0 -= var_1
+        else:
+            var_1 -= var_0
+        count += 1
+    return count
+```
+
+<details>
+<summary>parser endpoint: passed ✅</summary>
+
+Request Body: 
+```json
+{
+    "language": "py",
+    "source_code": "# Mutated by: VariableRenamerModifier\ndef operations(var_0, var_1):\n    count = 0\n    while var_0 != 0 and var_1 != 0:\n        if var_0 >= var_1:\n            var_0 -= var_1\n        else:\n            var_1 -= var_0\n        count += 1\n    return count"
+}
+```
+
+Message: 
+```
+Success
+```
+
+Actual Output: 
+```json
+{
+    "importStatements": [],
+    "fncs": {
+        "operations": {
+            "name": "operations",
+            "rettype": "*",
+            "initloc": 1,
+            "endloc": 0,
+            "params": [
+                {
+                    "val0": "var_0",
+                    "val1": "*",
+                    "valueArray": [
+                        "var_0",
+                        "*"
+                    ],
+                    "valueList": [
+                        "var_0",
+                        "*"
+                    ]
+                },
+                {
+                    "val0": "var_1",
+                    "val1": "*",
+                    "valueArray": [
+                        "var_1",
+                        "*"
+                    ],
+                    "valueList": [
+                        "var_1",
+                        "*"
+                    ]
+                }
+            ],
+            "locexprs": {
+                "1": [
+                    {
+                        "val0": "count",
+                        "val1": {
+                            "value": "0",
+                            "line": 3,
+                            "tokentype": "Constant"
+                        },
+                        "valueArray": [
+                            "count",
+                            {
+                                "value": "0",
+                                "line": 3
+                            }
+                        ],
+                        "valueList": [
+                            "count",
+                            {
+                                "value": "0",
+                                "line": 3
+                            }
+                        ]
+                    }
+                ],
+                "2": [
+                    {
+                        "val0": "$cond",
+                        "val1": {
+                            "name": "And",
+                            "args": [
+                                {
+                                    "name": "NotEq",
+                                    "args": [
+                                        {
+                                            "name": "var_0",
+                                            "primed": false,
+                                            "line": 4,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "value": "0",
+                                            "line": 4,
+                                            "tokentype": "Constant"
+                                        }
+                                    ],
+                                    "line": 4,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "NotEq",
+                                    "args": [
+                                        {
+                                            "name": "var_1",
+                                            "primed": false,
+                                            "line": 4,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "value": "0",
+                                            "line": 4,
+                                            "tokentype": "Constant"
+                                        }
+                                    ],
+                                    "line": 4,
+                                    "tokentype": "Operation"
+                                }
+                            ],
+                            "line": 4,
+                            "tokentype": "Operation"
+                        },
+                        "valueArray": [
+                            "$cond",
+                            {
+                                "name": "And",
+                                "args": [
+                                    {
+                                        "name": "NotEq",
+                                        "args": [
+                                            {
+                                                "name": "var_0",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 4,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 4,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "NotEq",
+                                        "args": [
+                                            {
+                                                "name": "var_1",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 4,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 4,
+                                        "tokentype": "Operation"
+                                    }
+                                ],
+                                "line": 4
+                            }
+                        ],
+                        "valueList": [
+                            "$cond",
+                            {
+                                "name": "And",
+                                "args": [
+                                    {
+                                        "name": "NotEq",
+                                        "args": [
+                                            {
+                                                "name": "var_0",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 4,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 4,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "NotEq",
+                                        "args": [
+                                            {
+                                                "name": "var_1",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 4,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 4,
+                                        "tokentype": "Operation"
+                                    }
+                                ],
+                                "line": 4
+                            }
+                        ]
+                    }
+                ],
+                "3": [
+                    {
+                        "val0": "$ret",
+                        "val1": {
+                            "name": "count",
+                            "primed": false,
+                            "line": 10,
+                            "tokentype": "Variable"
+                        },
+                        "valueArray": [
+                            "$ret",
+                            {
+                                "name": "count",
+                                "primed": false,
+                                "line": 10
+                            }
+                        ],
+                        "valueList": [
+                            "$ret",
+                            {
+                                "name": "count",
+                                "primed": false,
+                                "line": 10
+                            }
+                        ]
+                    }
+                ],
+                "4": [
+                    {
+                        "val0": "var_0",
+                        "val1": {
+                            "name": "ite",
+                            "args": [
+                                {
+                                    "name": "GtE",
+                                    "args": [
+                                        {
+                                            "name": "var_0",
+                                            "primed": false,
+                                            "line": 5,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "name": "var_1",
+                                            "primed": false,
+                                            "line": 5,
+                                            "tokentype": "Variable"
+                                        }
+                                    ],
+                                    "line": 5,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "Sub",
+                                    "args": [
+                                        {
+                                            "name": "var_0",
+                                            "primed": false,
+                                            "line": 6,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "name": "var_1",
+                                            "primed": false,
+                                            "line": 6,
+                                            "tokentype": "Variable"
+                                        }
+                                    ],
+                                    "line": 6,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "var_0",
+                                    "primed": false,
+                                    "line": 0,
+                                    "tokentype": "Variable"
+                                }
+                            ],
+                            "line": 5,
+                            "tokentype": "Operation"
+                        },
+                        "valueArray": [
+                            "var_0",
+                            {
+                                "name": "ite",
+                                "args": [
+                                    {
+                                        "name": "GtE",
+                                        "args": [
+                                            {
+                                                "name": "var_0",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "var_1",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 5,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "Sub",
+                                        "args": [
+                                            {
+                                                "name": "var_0",
+                                                "primed": false,
+                                                "line": 6,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "var_1",
+                                                "primed": false,
+                                                "line": 6,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 6,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "var_0",
+                                        "primed": false,
+                                        "line": 0,
+                                        "tokentype": "Variable"
+                                    }
+                                ],
+                                "line": 5
+                            }
+                        ],
+                        "valueList": [
+                            "var_0",
+                            {
+                                "name": "ite",
+                                "args": [
+                                    {
+                                        "name": "GtE",
+                                        "args": [
+                                            {
+                                                "name": "var_0",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "var_1",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 5,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "Sub",
+                                        "args": [
+                                            {
+                                                "name": "var_0",
+                                                "primed": false,
+                                                "line": 6,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "var_1",
+                                                "primed": false,
+                                                "line": 6,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 6,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "var_0",
+                                        "primed": false,
+                                        "line": 0,
+                                        "tokentype": "Variable"
+                                    }
+                                ],
+                                "line": 5
+                            }
+                        ]
+                    },
+                    {
+                        "val0": "var_1",
+                        "val1": {
+                            "name": "ite",
+                            "args": [
+                                {
+                                    "name": "GtE",
+                                    "args": [
+                                        {
+                                            "name": "var_0",
+                                            "primed": false,
+                                            "line": 5,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "name": "var_1",
+                                            "primed": false,
+                                            "line": 5,
+                                            "tokentype": "Variable"
+                                        }
+                                    ],
+                                    "line": 5,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "var_1",
+                                    "primed": false,
+                                    "line": 0,
+                                    "tokentype": "Variable"
+                                },
+                                {
+                                    "name": "Sub",
+                                    "args": [
+                                        {
+                                            "name": "var_1",
+                                            "primed": false,
+                                            "line": 8,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "name": "var_0",
+                                            "primed": false,
+                                            "line": 8,
+                                            "tokentype": "Variable"
+                                        }
+                                    ],
+                                    "line": 8,
+                                    "tokentype": "Operation"
+                                }
+                            ],
+                            "line": 5,
+                            "tokentype": "Operation"
+                        },
+                        "valueArray": [
+                            "var_1",
+                            {
+                                "name": "ite",
+                                "args": [
+                                    {
+                                        "name": "GtE",
+                                        "args": [
+                                            {
+                                                "name": "var_0",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "var_1",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 5,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "var_1",
+                                        "primed": false,
+                                        "line": 0,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "name": "Sub",
+                                        "args": [
+                                            {
+                                                "name": "var_1",
+                                                "primed": false,
+                                                "line": 8,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "var_0",
+                                                "primed": false,
+                                                "line": 8,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 8,
+                                        "tokentype": "Operation"
+                                    }
+                                ],
+                                "line": 5
+                            }
+                        ],
+                        "valueList": [
+                            "var_1",
+                            {
+                                "name": "ite",
+                                "args": [
+                                    {
+                                        "name": "GtE",
+                                        "args": [
+                                            {
+                                                "name": "var_0",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "var_1",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 5,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "var_1",
+                                        "primed": false,
+                                        "line": 0,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "name": "Sub",
+                                        "args": [
+                                            {
+                                                "name": "var_1",
+                                                "primed": false,
+                                                "line": 8,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "var_0",
+                                                "primed": false,
+                                                "line": 8,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 8,
+                                        "tokentype": "Operation"
+                                    }
+                                ],
+                                "line": 5
+                            }
+                        ]
+                    },
+                    {
+                        "val0": "count",
+                        "val1": {
+                            "name": "AssAdd",
+                            "args": [
+                                {
+                                    "name": "count",
+                                    "primed": false,
+                                    "line": 9,
+                                    "tokentype": "Variable"
+                                },
+                                {
+                                    "value": "1",
+                                    "line": 9,
+                                    "tokentype": "Constant"
+                                }
+                            ],
+                            "line": 9,
+                            "tokentype": "Operation"
+                        },
+                        "valueArray": [
+                            "count",
+                            {
+                                "name": "AssAdd",
+                                "args": [
+                                    {
+                                        "name": "count",
+                                        "primed": false,
+                                        "line": 9,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "value": "1",
+                                        "line": 9,
+                                        "tokentype": "Constant"
+                                    }
+                                ],
+                                "line": 9
+                            }
+                        ],
+                        "valueList": [
+                            "count",
+                            {
+                                "name": "AssAdd",
+                                "args": [
+                                    {
+                                        "name": "count",
+                                        "primed": false,
+                                        "line": 9,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "value": "1",
+                                        "line": 9,
+                                        "tokentype": "Constant"
+                                    }
+                                ],
+                                "line": 9
+                            }
+                        ]
+                    }
+                ]
+            },
+            "loctrans": {
+                "1": {
+                    "true": 2
+                },
+                "2": {
+                    "false": 3,
+                    "true": 4
+                },
+                "3": {},
+                "4": {
+                    "true": 2
+                }
+            },
+            "locdescs": {
+                "1": "around the beginning of function 'operations'",
+                "2": "the condition of the 'while' loop at line 4",
+                "3": "*after* the 'while' loop starting at line 4",
+                "4": "inside the body of the 'while' loop beginning at line 5"
+            },
+            "types": {
+                "var_0": "*",
+                "var_1": "*",
+                "count": "*"
+            }
+        }
+    }
+}
+```
+
+</details>
+
+## Test Case 3
+
+### Modified Program
+
+```py
+# Mutated by: BinOpModifier
+def operations(num1, num2):
+    count = 0
+    while num1 != 0 and num2 != 0:
+        if num1 >= num2:
+            num1 -= num2
+        else:
+            num2 -= num1
+        count += 1
+    return count
+```
+
+<details>
+<summary>parser endpoint: passed ✅</summary>
+
+Request Body: 
+```json
+{
+    "language": "py",
+    "source_code": "# Mutated by: BinOpModifier\ndef operations(num1, num2):\n    count = 0\n    while num1 != 0 and num2 != 0:\n        if num1 >= num2:\n            num1 -= num2\n        else:\n            num2 -= num1\n        count += 1\n    return count"
+}
+```
+
+Message: 
+```
+Success
+```
+
+Actual Output: 
+```json
+{
+    "importStatements": [],
+    "fncs": {
+        "operations": {
+            "name": "operations",
+            "rettype": "*",
+            "initloc": 1,
+            "endloc": 0,
+            "params": [
+                {
+                    "val0": "num1",
+                    "val1": "*",
+                    "valueArray": [
+                        "num1",
+                        "*"
+                    ],
+                    "valueList": [
+                        "num1",
+                        "*"
+                    ]
+                },
+                {
+                    "val0": "num2",
+                    "val1": "*",
+                    "valueArray": [
+                        "num2",
+                        "*"
+                    ],
+                    "valueList": [
+                        "num2",
+                        "*"
+                    ]
+                }
+            ],
+            "locexprs": {
+                "1": [
+                    {
+                        "val0": "count",
+                        "val1": {
+                            "value": "0",
+                            "line": 3,
+                            "tokentype": "Constant"
+                        },
+                        "valueArray": [
+                            "count",
+                            {
+                                "value": "0",
+                                "line": 3
+                            }
+                        ],
+                        "valueList": [
+                            "count",
+                            {
+                                "value": "0",
+                                "line": 3
+                            }
+                        ]
+                    }
+                ],
+                "2": [
+                    {
+                        "val0": "$cond",
+                        "val1": {
+                            "name": "And",
+                            "args": [
+                                {
+                                    "name": "NotEq",
+                                    "args": [
+                                        {
+                                            "name": "num1",
+                                            "primed": false,
+                                            "line": 4,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "value": "0",
+                                            "line": 4,
+                                            "tokentype": "Constant"
+                                        }
+                                    ],
+                                    "line": 4,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "NotEq",
+                                    "args": [
+                                        {
+                                            "name": "num2",
+                                            "primed": false,
+                                            "line": 4,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "value": "0",
+                                            "line": 4,
+                                            "tokentype": "Constant"
+                                        }
+                                    ],
+                                    "line": 4,
+                                    "tokentype": "Operation"
+                                }
+                            ],
+                            "line": 4,
+                            "tokentype": "Operation"
+                        },
+                        "valueArray": [
+                            "$cond",
+                            {
+                                "name": "And",
+                                "args": [
+                                    {
+                                        "name": "NotEq",
+                                        "args": [
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 4,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 4,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "NotEq",
+                                        "args": [
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 4,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 4,
+                                        "tokentype": "Operation"
+                                    }
+                                ],
+                                "line": 4
+                            }
+                        ],
+                        "valueList": [
+                            "$cond",
+                            {
+                                "name": "And",
+                                "args": [
+                                    {
+                                        "name": "NotEq",
+                                        "args": [
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 4,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 4,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "NotEq",
+                                        "args": [
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 4,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 4,
+                                        "tokentype": "Operation"
+                                    }
+                                ],
+                                "line": 4
+                            }
+                        ]
+                    }
+                ],
+                "3": [
+                    {
+                        "val0": "$ret",
+                        "val1": {
+                            "name": "count",
+                            "primed": false,
+                            "line": 10,
+                            "tokentype": "Variable"
+                        },
+                        "valueArray": [
+                            "$ret",
+                            {
+                                "name": "count",
+                                "primed": false,
+                                "line": 10
+                            }
+                        ],
+                        "valueList": [
+                            "$ret",
+                            {
+                                "name": "count",
+                                "primed": false,
+                                "line": 10
+                            }
+                        ]
+                    }
+                ],
+                "4": [
+                    {
+                        "val0": "num1",
+                        "val1": {
+                            "name": "ite",
+                            "args": [
+                                {
+                                    "name": "GtE",
+                                    "args": [
+                                        {
+                                            "name": "num1",
+                                            "primed": false,
+                                            "line": 5,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "name": "num2",
+                                            "primed": false,
+                                            "line": 5,
+                                            "tokentype": "Variable"
+                                        }
+                                    ],
+                                    "line": 5,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "Sub",
+                                    "args": [
+                                        {
+                                            "name": "num1",
+                                            "primed": false,
+                                            "line": 6,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "name": "num2",
+                                            "primed": false,
+                                            "line": 6,
+                                            "tokentype": "Variable"
+                                        }
+                                    ],
+                                    "line": 6,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "num1",
+                                    "primed": false,
+                                    "line": 0,
+                                    "tokentype": "Variable"
+                                }
+                            ],
+                            "line": 5,
+                            "tokentype": "Operation"
+                        },
+                        "valueArray": [
+                            "num1",
+                            {
+                                "name": "ite",
+                                "args": [
+                                    {
+                                        "name": "GtE",
+                                        "args": [
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 5,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "Sub",
+                                        "args": [
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 6,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 6,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 6,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "num1",
+                                        "primed": false,
+                                        "line": 0,
+                                        "tokentype": "Variable"
+                                    }
+                                ],
+                                "line": 5
+                            }
+                        ],
+                        "valueList": [
+                            "num1",
+                            {
+                                "name": "ite",
+                                "args": [
+                                    {
+                                        "name": "GtE",
+                                        "args": [
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 5,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "Sub",
+                                        "args": [
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 6,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 6,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 6,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "num1",
+                                        "primed": false,
+                                        "line": 0,
+                                        "tokentype": "Variable"
+                                    }
+                                ],
+                                "line": 5
+                            }
+                        ]
+                    },
+                    {
+                        "val0": "num2",
+                        "val1": {
+                            "name": "ite",
+                            "args": [
+                                {
+                                    "name": "GtE",
+                                    "args": [
+                                        {
+                                            "name": "num1",
+                                            "primed": false,
+                                            "line": 5,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "name": "num2",
+                                            "primed": false,
+                                            "line": 5,
+                                            "tokentype": "Variable"
+                                        }
+                                    ],
+                                    "line": 5,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "num2",
+                                    "primed": false,
+                                    "line": 0,
+                                    "tokentype": "Variable"
+                                },
+                                {
+                                    "name": "Sub",
+                                    "args": [
+                                        {
+                                            "name": "num2",
+                                            "primed": false,
+                                            "line": 8,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "name": "num1",
+                                            "primed": false,
+                                            "line": 8,
+                                            "tokentype": "Variable"
+                                        }
+                                    ],
+                                    "line": 8,
+                                    "tokentype": "Operation"
+                                }
+                            ],
+                            "line": 5,
+                            "tokentype": "Operation"
+                        },
+                        "valueArray": [
+                            "num2",
+                            {
+                                "name": "ite",
+                                "args": [
+                                    {
+                                        "name": "GtE",
+                                        "args": [
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 5,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "num2",
+                                        "primed": false,
+                                        "line": 0,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "name": "Sub",
+                                        "args": [
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 8,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 8,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 8,
+                                        "tokentype": "Operation"
+                                    }
+                                ],
+                                "line": 5
+                            }
+                        ],
+                        "valueList": [
+                            "num2",
+                            {
+                                "name": "ite",
+                                "args": [
+                                    {
+                                        "name": "GtE",
+                                        "args": [
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 5,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "num2",
+                                        "primed": false,
+                                        "line": 0,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "name": "Sub",
+                                        "args": [
+                                            {
+                                                "name": "num2",
+                                                "primed": false,
+                                                "line": 8,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "num1",
+                                                "primed": false,
+                                                "line": 8,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 8,
+                                        "tokentype": "Operation"
+                                    }
+                                ],
+                                "line": 5
+                            }
+                        ]
+                    },
+                    {
+                        "val0": "count",
+                        "val1": {
+                            "name": "AssAdd",
+                            "args": [
+                                {
+                                    "name": "count",
+                                    "primed": false,
+                                    "line": 9,
+                                    "tokentype": "Variable"
+                                },
+                                {
+                                    "value": "1",
+                                    "line": 9,
+                                    "tokentype": "Constant"
+                                }
+                            ],
+                            "line": 9,
+                            "tokentype": "Operation"
+                        },
+                        "valueArray": [
+                            "count",
+                            {
+                                "name": "AssAdd",
+                                "args": [
+                                    {
+                                        "name": "count",
+                                        "primed": false,
+                                        "line": 9,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "value": "1",
+                                        "line": 9,
+                                        "tokentype": "Constant"
+                                    }
+                                ],
+                                "line": 9
+                            }
+                        ],
+                        "valueList": [
+                            "count",
+                            {
+                                "name": "AssAdd",
+                                "args": [
+                                    {
+                                        "name": "count",
+                                        "primed": false,
+                                        "line": 9,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "value": "1",
+                                        "line": 9,
+                                        "tokentype": "Constant"
+                                    }
+                                ],
+                                "line": 9
+                            }
+                        ]
+                    }
+                ]
+            },
+            "loctrans": {
+                "1": {
+                    "true": 2
+                },
+                "2": {
+                    "false": 3,
+                    "true": 4
+                },
+                "3": {},
+                "4": {
+                    "true": 2
+                }
+            },
+            "locdescs": {
+                "1": "around the beginning of function 'operations'",
+                "2": "the condition of the 'while' loop at line 4",
+                "3": "*after* the 'while' loop starting at line 4",
+                "4": "inside the body of the 'while' loop beginning at line 5"
+            },
+            "types": {
+                "count": "*",
+                "num1": "*",
+                "num2": "*"
+            }
+        }
+    }
+}
+```
+
+</details>
+
+## Test Case 4
+
+### Modified Program
+
+```py
+# Mutated by: VariableRenamerModifier, BinOpModifier
+def operations(var_2, var_3):
+    count = 0
+    while var_2 != 0 and var_3 != 0:
+        if var_2 >= var_3:
+            var_2 -= var_3
+        else:
+            var_3 -= var_2
+        count += 1
+    return count
+```
+
+<details>
+<summary>parser endpoint: passed ✅</summary>
+
+Request Body: 
+```json
+{
+    "language": "py",
+    "source_code": "# Mutated by: VariableRenamerModifier, BinOpModifier\ndef operations(var_2, var_3):\n    count = 0\n    while var_2 != 0 and var_3 != 0:\n        if var_2 >= var_3:\n            var_2 -= var_3\n        else:\n            var_3 -= var_2\n        count += 1\n    return count"
+}
+```
+
+Message: 
+```
+Success
+```
+
+Actual Output: 
+```json
+{
+    "importStatements": [],
+    "fncs": {
+        "operations": {
+            "name": "operations",
+            "rettype": "*",
+            "initloc": 1,
+            "endloc": 0,
+            "params": [
+                {
+                    "val0": "var_2",
+                    "val1": "*",
+                    "valueArray": [
+                        "var_2",
+                        "*"
+                    ],
+                    "valueList": [
+                        "var_2",
+                        "*"
+                    ]
+                },
+                {
+                    "val0": "var_3",
+                    "val1": "*",
+                    "valueArray": [
+                        "var_3",
+                        "*"
+                    ],
+                    "valueList": [
+                        "var_3",
+                        "*"
+                    ]
+                }
+            ],
+            "locexprs": {
+                "1": [
+                    {
+                        "val0": "count",
+                        "val1": {
+                            "value": "0",
+                            "line": 3,
+                            "tokentype": "Constant"
+                        },
+                        "valueArray": [
+                            "count",
+                            {
+                                "value": "0",
+                                "line": 3
+                            }
+                        ],
+                        "valueList": [
+                            "count",
+                            {
+                                "value": "0",
+                                "line": 3
+                            }
+                        ]
+                    }
+                ],
+                "2": [
+                    {
+                        "val0": "$cond",
+                        "val1": {
+                            "name": "And",
+                            "args": [
+                                {
+                                    "name": "NotEq",
+                                    "args": [
+                                        {
+                                            "name": "var_2",
+                                            "primed": false,
+                                            "line": 4,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "value": "0",
+                                            "line": 4,
+                                            "tokentype": "Constant"
+                                        }
+                                    ],
+                                    "line": 4,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "NotEq",
+                                    "args": [
+                                        {
+                                            "name": "var_3",
+                                            "primed": false,
+                                            "line": 4,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "value": "0",
+                                            "line": 4,
+                                            "tokentype": "Constant"
+                                        }
+                                    ],
+                                    "line": 4,
+                                    "tokentype": "Operation"
+                                }
+                            ],
+                            "line": 4,
+                            "tokentype": "Operation"
+                        },
+                        "valueArray": [
+                            "$cond",
+                            {
+                                "name": "And",
+                                "args": [
+                                    {
+                                        "name": "NotEq",
+                                        "args": [
+                                            {
+                                                "name": "var_2",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 4,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 4,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "NotEq",
+                                        "args": [
+                                            {
+                                                "name": "var_3",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 4,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 4,
+                                        "tokentype": "Operation"
+                                    }
+                                ],
+                                "line": 4
+                            }
+                        ],
+                        "valueList": [
+                            "$cond",
+                            {
+                                "name": "And",
+                                "args": [
+                                    {
+                                        "name": "NotEq",
+                                        "args": [
+                                            {
+                                                "name": "var_2",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 4,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 4,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "NotEq",
+                                        "args": [
+                                            {
+                                                "name": "var_3",
+                                                "primed": false,
+                                                "line": 4,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "value": "0",
+                                                "line": 4,
+                                                "tokentype": "Constant"
+                                            }
+                                        ],
+                                        "line": 4,
+                                        "tokentype": "Operation"
+                                    }
+                                ],
+                                "line": 4
+                            }
+                        ]
+                    }
+                ],
+                "3": [
+                    {
+                        "val0": "$ret",
+                        "val1": {
+                            "name": "count",
+                            "primed": false,
+                            "line": 10,
+                            "tokentype": "Variable"
+                        },
+                        "valueArray": [
+                            "$ret",
+                            {
+                                "name": "count",
+                                "primed": false,
+                                "line": 10
+                            }
+                        ],
+                        "valueList": [
+                            "$ret",
+                            {
+                                "name": "count",
+                                "primed": false,
+                                "line": 10
+                            }
+                        ]
+                    }
+                ],
+                "4": [
+                    {
+                        "val0": "var_2",
+                        "val1": {
+                            "name": "ite",
+                            "args": [
+                                {
+                                    "name": "GtE",
+                                    "args": [
+                                        {
+                                            "name": "var_2",
+                                            "primed": false,
+                                            "line": 5,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "name": "var_3",
+                                            "primed": false,
+                                            "line": 5,
+                                            "tokentype": "Variable"
+                                        }
+                                    ],
+                                    "line": 5,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "Sub",
+                                    "args": [
+                                        {
+                                            "name": "var_2",
+                                            "primed": false,
+                                            "line": 6,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "name": "var_3",
+                                            "primed": false,
+                                            "line": 6,
+                                            "tokentype": "Variable"
+                                        }
+                                    ],
+                                    "line": 6,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "var_2",
+                                    "primed": false,
+                                    "line": 0,
+                                    "tokentype": "Variable"
+                                }
+                            ],
+                            "line": 5,
+                            "tokentype": "Operation"
+                        },
+                        "valueArray": [
+                            "var_2",
+                            {
+                                "name": "ite",
+                                "args": [
+                                    {
+                                        "name": "GtE",
+                                        "args": [
+                                            {
+                                                "name": "var_2",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "var_3",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 5,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "Sub",
+                                        "args": [
+                                            {
+                                                "name": "var_2",
+                                                "primed": false,
+                                                "line": 6,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "var_3",
+                                                "primed": false,
+                                                "line": 6,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 6,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "var_2",
+                                        "primed": false,
+                                        "line": 0,
+                                        "tokentype": "Variable"
+                                    }
+                                ],
+                                "line": 5
+                            }
+                        ],
+                        "valueList": [
+                            "var_2",
+                            {
+                                "name": "ite",
+                                "args": [
+                                    {
+                                        "name": "GtE",
+                                        "args": [
+                                            {
+                                                "name": "var_2",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "var_3",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 5,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "Sub",
+                                        "args": [
+                                            {
+                                                "name": "var_2",
+                                                "primed": false,
+                                                "line": 6,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "var_3",
+                                                "primed": false,
+                                                "line": 6,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 6,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "var_2",
+                                        "primed": false,
+                                        "line": 0,
+                                        "tokentype": "Variable"
+                                    }
+                                ],
+                                "line": 5
+                            }
+                        ]
+                    },
+                    {
+                        "val0": "var_3",
+                        "val1": {
+                            "name": "ite",
+                            "args": [
+                                {
+                                    "name": "GtE",
+                                    "args": [
+                                        {
+                                            "name": "var_2",
+                                            "primed": false,
+                                            "line": 5,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "name": "var_3",
+                                            "primed": false,
+                                            "line": 5,
+                                            "tokentype": "Variable"
+                                        }
+                                    ],
+                                    "line": 5,
+                                    "tokentype": "Operation"
+                                },
+                                {
+                                    "name": "var_3",
+                                    "primed": false,
+                                    "line": 0,
+                                    "tokentype": "Variable"
+                                },
+                                {
+                                    "name": "Sub",
+                                    "args": [
+                                        {
+                                            "name": "var_3",
+                                            "primed": false,
+                                            "line": 8,
+                                            "tokentype": "Variable"
+                                        },
+                                        {
+                                            "name": "var_2",
+                                            "primed": false,
+                                            "line": 8,
+                                            "tokentype": "Variable"
+                                        }
+                                    ],
+                                    "line": 8,
+                                    "tokentype": "Operation"
+                                }
+                            ],
+                            "line": 5,
+                            "tokentype": "Operation"
+                        },
+                        "valueArray": [
+                            "var_3",
+                            {
+                                "name": "ite",
+                                "args": [
+                                    {
+                                        "name": "GtE",
+                                        "args": [
+                                            {
+                                                "name": "var_2",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "var_3",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 5,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "var_3",
+                                        "primed": false,
+                                        "line": 0,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "name": "Sub",
+                                        "args": [
+                                            {
+                                                "name": "var_3",
+                                                "primed": false,
+                                                "line": 8,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "var_2",
+                                                "primed": false,
+                                                "line": 8,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 8,
+                                        "tokentype": "Operation"
+                                    }
+                                ],
+                                "line": 5
+                            }
+                        ],
+                        "valueList": [
+                            "var_3",
+                            {
+                                "name": "ite",
+                                "args": [
+                                    {
+                                        "name": "GtE",
+                                        "args": [
+                                            {
+                                                "name": "var_2",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "var_3",
+                                                "primed": false,
+                                                "line": 5,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 5,
+                                        "tokentype": "Operation"
+                                    },
+                                    {
+                                        "name": "var_3",
+                                        "primed": false,
+                                        "line": 0,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "name": "Sub",
+                                        "args": [
+                                            {
+                                                "name": "var_3",
+                                                "primed": false,
+                                                "line": 8,
+                                                "tokentype": "Variable"
+                                            },
+                                            {
+                                                "name": "var_2",
+                                                "primed": false,
+                                                "line": 8,
+                                                "tokentype": "Variable"
+                                            }
+                                        ],
+                                        "line": 8,
+                                        "tokentype": "Operation"
+                                    }
+                                ],
+                                "line": 5
+                            }
+                        ]
+                    },
+                    {
+                        "val0": "count",
+                        "val1": {
+                            "name": "AssAdd",
+                            "args": [
+                                {
+                                    "name": "count",
+                                    "primed": false,
+                                    "line": 9,
+                                    "tokentype": "Variable"
+                                },
+                                {
+                                    "value": "1",
+                                    "line": 9,
+                                    "tokentype": "Constant"
+                                }
+                            ],
+                            "line": 9,
+                            "tokentype": "Operation"
+                        },
+                        "valueArray": [
+                            "count",
+                            {
+                                "name": "AssAdd",
+                                "args": [
+                                    {
+                                        "name": "count",
+                                        "primed": false,
+                                        "line": 9,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "value": "1",
+                                        "line": 9,
+                                        "tokentype": "Constant"
+                                    }
+                                ],
+                                "line": 9
+                            }
+                        ],
+                        "valueList": [
+                            "count",
+                            {
+                                "name": "AssAdd",
+                                "args": [
+                                    {
+                                        "name": "count",
+                                        "primed": false,
+                                        "line": 9,
+                                        "tokentype": "Variable"
+                                    },
+                                    {
+                                        "value": "1",
+                                        "line": 9,
+                                        "tokentype": "Constant"
+                                    }
+                                ],
+                                "line": 9
+                            }
+                        ]
+                    }
+                ]
+            },
+            "loctrans": {
+                "1": {
+                    "true": 2
+                },
+                "2": {
+                    "false": 3,
+                    "true": 4
+                },
+                "3": {},
+                "4": {
+                    "true": 2
+                }
+            },
+            "locdescs": {
+                "1": "around the beginning of function 'operations'",
+                "2": "the condition of the 'while' loop at line 4",
+                "3": "*after* the 'while' loop starting at line 4",
+                "4": "inside the body of the 'while' loop beginning at line 5"
+            },
+            "types": {
+                "var_2": "*",
+                "var_3": "*",
+                "count": "*"
+            }
+        }
+    }
+}
+```
+
+</details>
+

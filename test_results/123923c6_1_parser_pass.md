@@ -1,6 +1,6 @@
 # Test Report
 
-Time: 2024-03-30 07:24:20.735800
+Time: 2024-04-17 10:16 PM
 
 ### Base Program
 
@@ -599,12 +599,13 @@ Actual Output:
 ### Modified Program
 
 ```py
-def broken_calc(var_0: int, var_1: int) -> int:
+# Mutated by: VariableRenamerModifier
+def broken_calc(var_4: int, var_5: int) -> int:
     operations = 0
-    while var_1 > var_0:
-        var_1 = var_1 // 2 if var_1 % 2 == 0 else var_1 + 1
+    while var_5 > var_4:
+        var_5 = var_5 // 2 if var_5 % 2 == 0 else var_5 + 1
         operations += 1
-    return operations + var_0 - var_1
+    return operations + var_4 - var_5
 ```
 
 <details>
@@ -614,7 +615,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def broken_calc(var_0: int, var_1: int) -> int:\n    operations = 0\n    while var_1 > var_0:\n        var_1 = var_1 // 2 if var_1 % 2 == 0 else var_1 + 1\n        operations += 1\n    return operations + var_0 - var_1"
+    "source_code": "# Mutated by: VariableRenamerModifier\ndef broken_calc(var_4: int, var_5: int) -> int:\n    operations = 0\n    while var_5 > var_4:\n        var_5 = var_5 // 2 if var_5 % 2 == 0 else var_5 + 1\n        operations += 1\n    return operations + var_4 - var_5"
 }
 ```
 
@@ -635,26 +636,26 @@ Actual Output:
             "endloc": 0,
             "params": [
                 {
-                    "val0": "var_0",
+                    "val0": "var_4",
                     "val1": "*",
                     "valueArray": [
-                        "var_0",
+                        "var_4",
                         "*"
                     ],
                     "valueList": [
-                        "var_0",
+                        "var_4",
                         "*"
                     ]
                 },
                 {
-                    "val0": "var_1",
+                    "val0": "var_5",
                     "val1": "*",
                     "valueArray": [
-                        "var_1",
+                        "var_5",
                         "*"
                     ],
                     "valueList": [
-                        "var_1",
+                        "var_5",
                         "*"
                     ]
                 }
@@ -665,21 +666,21 @@ Actual Output:
                         "val0": "operations",
                         "val1": {
                             "value": "0",
-                            "line": 2,
+                            "line": 3,
                             "tokentype": "Constant"
                         },
                         "valueArray": [
                             "operations",
                             {
                                 "value": "0",
-                                "line": 2
+                                "line": 3
                             }
                         ],
                         "valueList": [
                             "operations",
                             {
                                 "value": "0",
-                                "line": 2
+                                "line": 3
                             }
                         ]
                     }
@@ -691,19 +692,19 @@ Actual Output:
                             "name": "Gt",
                             "args": [
                                 {
-                                    "name": "var_1",
+                                    "name": "var_5",
                                     "primed": false,
-                                    "line": 3,
+                                    "line": 4,
                                     "tokentype": "Variable"
                                 },
                                 {
-                                    "name": "var_0",
+                                    "name": "var_4",
                                     "primed": false,
-                                    "line": 3,
+                                    "line": 4,
                                     "tokentype": "Variable"
                                 }
                             ],
-                            "line": 3,
+                            "line": 4,
                             "tokentype": "Operation"
                         },
                         "valueArray": [
@@ -712,19 +713,19 @@ Actual Output:
                                 "name": "Gt",
                                 "args": [
                                     {
-                                        "name": "var_1",
+                                        "name": "var_5",
                                         "primed": false,
-                                        "line": 3,
+                                        "line": 4,
                                         "tokentype": "Variable"
                                     },
                                     {
-                                        "name": "var_0",
+                                        "name": "var_4",
                                         "primed": false,
-                                        "line": 3,
+                                        "line": 4,
                                         "tokentype": "Variable"
                                     }
                                 ],
-                                "line": 3
+                                "line": 4
                             }
                         ],
                         "valueList": [
@@ -733,19 +734,19 @@ Actual Output:
                                 "name": "Gt",
                                 "args": [
                                     {
-                                        "name": "var_1",
+                                        "name": "var_5",
                                         "primed": false,
-                                        "line": 3,
+                                        "line": 4,
                                         "tokentype": "Variable"
                                     },
                                     {
-                                        "name": "var_0",
+                                        "name": "var_4",
                                         "primed": false,
-                                        "line": 3,
+                                        "line": 4,
                                         "tokentype": "Variable"
                                     }
                                 ],
-                                "line": 3
+                                "line": 4
                             }
                         ]
                     }
@@ -762,27 +763,27 @@ Actual Output:
                                         {
                                             "name": "operations",
                                             "primed": false,
-                                            "line": 6,
+                                            "line": 7,
                                             "tokentype": "Variable"
                                         },
                                         {
-                                            "name": "var_0",
+                                            "name": "var_4",
                                             "primed": false,
-                                            "line": 6,
+                                            "line": 7,
                                             "tokentype": "Variable"
                                         }
                                     ],
-                                    "line": 6,
+                                    "line": 7,
                                     "tokentype": "Operation"
                                 },
                                 {
-                                    "name": "var_1",
+                                    "name": "var_5",
                                     "primed": false,
-                                    "line": 6,
+                                    "line": 7,
                                     "tokentype": "Variable"
                                 }
                             ],
-                            "line": 6,
+                            "line": 7,
                             "tokentype": "Operation"
                         },
                         "valueArray": [
@@ -796,27 +797,27 @@ Actual Output:
                                             {
                                                 "name": "operations",
                                                 "primed": false,
-                                                "line": 6,
+                                                "line": 7,
                                                 "tokentype": "Variable"
                                             },
                                             {
-                                                "name": "var_0",
+                                                "name": "var_4",
                                                 "primed": false,
-                                                "line": 6,
+                                                "line": 7,
                                                 "tokentype": "Variable"
                                             }
                                         ],
-                                        "line": 6,
+                                        "line": 7,
                                         "tokentype": "Operation"
                                     },
                                     {
-                                        "name": "var_1",
+                                        "name": "var_5",
                                         "primed": false,
-                                        "line": 6,
+                                        "line": 7,
                                         "tokentype": "Variable"
                                     }
                                 ],
-                                "line": 6
+                                "line": 7
                             }
                         ],
                         "valueList": [
@@ -830,34 +831,34 @@ Actual Output:
                                             {
                                                 "name": "operations",
                                                 "primed": false,
-                                                "line": 6,
+                                                "line": 7,
                                                 "tokentype": "Variable"
                                             },
                                             {
-                                                "name": "var_0",
+                                                "name": "var_4",
                                                 "primed": false,
-                                                "line": 6,
+                                                "line": 7,
                                                 "tokentype": "Variable"
                                             }
                                         ],
-                                        "line": 6,
+                                        "line": 7,
                                         "tokentype": "Operation"
                                     },
                                     {
-                                        "name": "var_1",
+                                        "name": "var_5",
                                         "primed": false,
-                                        "line": 6,
+                                        "line": 7,
                                         "tokentype": "Variable"
                                     }
                                 ],
-                                "line": 6
+                                "line": 7
                             }
                         ]
                     }
                 ],
                 "4": [
                     {
-                        "val0": "var_1",
+                        "val0": "var_5",
                         "val1": {
                             "name": "ite",
                             "args": [
@@ -868,71 +869,71 @@ Actual Output:
                                             "name": "Mod",
                                             "args": [
                                                 {
-                                                    "name": "var_1",
+                                                    "name": "var_5",
                                                     "primed": false,
-                                                    "line": 4,
+                                                    "line": 5,
                                                     "tokentype": "Variable"
                                                 },
                                                 {
                                                     "value": "2",
-                                                    "line": 4,
+                                                    "line": 5,
                                                     "tokentype": "Constant"
                                                 }
                                             ],
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Operation"
                                         },
                                         {
                                             "value": "0",
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Constant"
                                         }
                                     ],
-                                    "line": 4,
+                                    "line": 5,
                                     "tokentype": "Operation"
                                 },
                                 {
                                     "name": "FloorDiv",
                                     "args": [
                                         {
-                                            "name": "var_1",
+                                            "name": "var_5",
                                             "primed": false,
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Variable"
                                         },
                                         {
                                             "value": "2",
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Constant"
                                         }
                                     ],
-                                    "line": 4,
+                                    "line": 5,
                                     "tokentype": "Operation"
                                 },
                                 {
                                     "name": "Add",
                                     "args": [
                                         {
-                                            "name": "var_1",
+                                            "name": "var_5",
                                             "primed": false,
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Variable"
                                         },
                                         {
                                             "value": "1",
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Constant"
                                         }
                                     ],
-                                    "line": 4,
+                                    "line": 5,
                                     "tokentype": "Operation"
                                 }
                             ],
-                            "line": 4,
+                            "line": 5,
                             "tokentype": "Operation"
                         },
                         "valueArray": [
-                            "var_1",
+                            "var_5",
                             {
                                 "name": "ite",
                                 "args": [
@@ -943,71 +944,71 @@ Actual Output:
                                                 "name": "Mod",
                                                 "args": [
                                                     {
-                                                        "name": "var_1",
+                                                        "name": "var_5",
                                                         "primed": false,
-                                                        "line": 4,
+                                                        "line": 5,
                                                         "tokentype": "Variable"
                                                     },
                                                     {
                                                         "value": "2",
-                                                        "line": 4,
+                                                        "line": 5,
                                                         "tokentype": "Constant"
                                                     }
                                                 ],
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Operation"
                                             },
                                             {
                                                 "value": "0",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     },
                                     {
                                         "name": "FloorDiv",
                                         "args": [
                                             {
-                                                "name": "var_1",
+                                                "name": "var_5",
                                                 "primed": false,
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Variable"
                                             },
                                             {
                                                 "value": "2",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     },
                                     {
                                         "name": "Add",
                                         "args": [
                                             {
-                                                "name": "var_1",
+                                                "name": "var_5",
                                                 "primed": false,
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Variable"
                                             },
                                             {
                                                 "value": "1",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     }
                                 ],
-                                "line": 4
+                                "line": 5
                             }
                         ],
                         "valueList": [
-                            "var_1",
+                            "var_5",
                             {
                                 "name": "ite",
                                 "args": [
@@ -1018,67 +1019,67 @@ Actual Output:
                                                 "name": "Mod",
                                                 "args": [
                                                     {
-                                                        "name": "var_1",
+                                                        "name": "var_5",
                                                         "primed": false,
-                                                        "line": 4,
+                                                        "line": 5,
                                                         "tokentype": "Variable"
                                                     },
                                                     {
                                                         "value": "2",
-                                                        "line": 4,
+                                                        "line": 5,
                                                         "tokentype": "Constant"
                                                     }
                                                 ],
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Operation"
                                             },
                                             {
                                                 "value": "0",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     },
                                     {
                                         "name": "FloorDiv",
                                         "args": [
                                             {
-                                                "name": "var_1",
+                                                "name": "var_5",
                                                 "primed": false,
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Variable"
                                             },
                                             {
                                                 "value": "2",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     },
                                     {
                                         "name": "Add",
                                         "args": [
                                             {
-                                                "name": "var_1",
+                                                "name": "var_5",
                                                 "primed": false,
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Variable"
                                             },
                                             {
                                                 "value": "1",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     }
                                 ],
-                                "line": 4
+                                "line": 5
                             }
                         ]
                     },
@@ -1090,16 +1091,16 @@ Actual Output:
                                 {
                                     "name": "operations",
                                     "primed": false,
-                                    "line": 5,
+                                    "line": 6,
                                     "tokentype": "Variable"
                                 },
                                 {
                                     "value": "1",
-                                    "line": 5,
+                                    "line": 6,
                                     "tokentype": "Constant"
                                 }
                             ],
-                            "line": 5,
+                            "line": 6,
                             "tokentype": "Operation"
                         },
                         "valueArray": [
@@ -1110,16 +1111,16 @@ Actual Output:
                                     {
                                         "name": "operations",
                                         "primed": false,
-                                        "line": 5,
+                                        "line": 6,
                                         "tokentype": "Variable"
                                     },
                                     {
                                         "value": "1",
-                                        "line": 5,
+                                        "line": 6,
                                         "tokentype": "Constant"
                                     }
                                 ],
-                                "line": 5
+                                "line": 6
                             }
                         ],
                         "valueList": [
@@ -1130,16 +1131,16 @@ Actual Output:
                                     {
                                         "name": "operations",
                                         "primed": false,
-                                        "line": 5,
+                                        "line": 6,
                                         "tokentype": "Variable"
                                     },
                                     {
                                         "value": "1",
-                                        "line": 5,
+                                        "line": 6,
                                         "tokentype": "Constant"
                                     }
                                 ],
-                                "line": 5
+                                "line": 6
                             }
                         ]
                     }
@@ -1160,13 +1161,13 @@ Actual Output:
             },
             "locdescs": {
                 "1": "around the beginning of function 'broken_calc'",
-                "2": "the condition of the 'while' loop at line 3",
-                "3": "*after* the 'while' loop starting at line 3",
-                "4": "inside the body of the 'while' loop beginning at line 4"
+                "2": "the condition of the 'while' loop at line 4",
+                "3": "*after* the 'while' loop starting at line 4",
+                "4": "inside the body of the 'while' loop beginning at line 5"
             },
             "types": {
-                "operations": "*",
-                "var_1": "*"
+                "var_5": "*",
+                "operations": "*"
             }
         }
     }
@@ -1180,6 +1181,7 @@ Actual Output:
 ### Modified Program
 
 ```py
+# Mutated by: BinOpModifier
 def broken_calc(startValue: int, target: int) -> int:
     operations = 0
     while target > startValue:
@@ -1195,7 +1197,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def broken_calc(startValue: int, target: int) -> int:\n    operations = 0\n    while target > startValue:\n        target = target // 2 if target % 2 == 0 else 1 + target\n        operations += 1\n    return startValue + operations + -target"
+    "source_code": "# Mutated by: BinOpModifier\ndef broken_calc(startValue: int, target: int) -> int:\n    operations = 0\n    while target > startValue:\n        target = target // 2 if target % 2 == 0 else 1 + target\n        operations += 1\n    return startValue + operations + -target"
 }
 ```
 
@@ -1246,21 +1248,21 @@ Actual Output:
                         "val0": "operations",
                         "val1": {
                             "value": "0",
-                            "line": 2,
+                            "line": 3,
                             "tokentype": "Constant"
                         },
                         "valueArray": [
                             "operations",
                             {
                                 "value": "0",
-                                "line": 2
+                                "line": 3
                             }
                         ],
                         "valueList": [
                             "operations",
                             {
                                 "value": "0",
-                                "line": 2
+                                "line": 3
                             }
                         ]
                     }
@@ -1274,17 +1276,17 @@ Actual Output:
                                 {
                                     "name": "target",
                                     "primed": false,
-                                    "line": 3,
+                                    "line": 4,
                                     "tokentype": "Variable"
                                 },
                                 {
                                     "name": "startValue",
                                     "primed": false,
-                                    "line": 3,
+                                    "line": 4,
                                     "tokentype": "Variable"
                                 }
                             ],
-                            "line": 3,
+                            "line": 4,
                             "tokentype": "Operation"
                         },
                         "valueArray": [
@@ -1295,17 +1297,17 @@ Actual Output:
                                     {
                                         "name": "target",
                                         "primed": false,
-                                        "line": 3,
+                                        "line": 4,
                                         "tokentype": "Variable"
                                     },
                                     {
                                         "name": "startValue",
                                         "primed": false,
-                                        "line": 3,
+                                        "line": 4,
                                         "tokentype": "Variable"
                                     }
                                 ],
-                                "line": 3
+                                "line": 4
                             }
                         ],
                         "valueList": [
@@ -1316,17 +1318,17 @@ Actual Output:
                                     {
                                         "name": "target",
                                         "primed": false,
-                                        "line": 3,
+                                        "line": 4,
                                         "tokentype": "Variable"
                                     },
                                     {
                                         "name": "startValue",
                                         "primed": false,
-                                        "line": 3,
+                                        "line": 4,
                                         "tokentype": "Variable"
                                     }
                                 ],
-                                "line": 3
+                                "line": 4
                             }
                         ]
                     }
@@ -1343,17 +1345,17 @@ Actual Output:
                                         {
                                             "name": "startValue",
                                             "primed": false,
-                                            "line": 6,
+                                            "line": 7,
                                             "tokentype": "Variable"
                                         },
                                         {
                                             "name": "operations",
                                             "primed": false,
-                                            "line": 6,
+                                            "line": 7,
                                             "tokentype": "Variable"
                                         }
                                     ],
-                                    "line": 6,
+                                    "line": 7,
                                     "tokentype": "Operation"
                                 },
                                 {
@@ -1362,15 +1364,15 @@ Actual Output:
                                         {
                                             "name": "target",
                                             "primed": false,
-                                            "line": 6,
+                                            "line": 7,
                                             "tokentype": "Variable"
                                         }
                                     ],
-                                    "line": 6,
+                                    "line": 7,
                                     "tokentype": "Operation"
                                 }
                             ],
-                            "line": 6,
+                            "line": 7,
                             "tokentype": "Operation"
                         },
                         "valueArray": [
@@ -1384,17 +1386,17 @@ Actual Output:
                                             {
                                                 "name": "startValue",
                                                 "primed": false,
-                                                "line": 6,
+                                                "line": 7,
                                                 "tokentype": "Variable"
                                             },
                                             {
                                                 "name": "operations",
                                                 "primed": false,
-                                                "line": 6,
+                                                "line": 7,
                                                 "tokentype": "Variable"
                                             }
                                         ],
-                                        "line": 6,
+                                        "line": 7,
                                         "tokentype": "Operation"
                                     },
                                     {
@@ -1403,15 +1405,15 @@ Actual Output:
                                             {
                                                 "name": "target",
                                                 "primed": false,
-                                                "line": 6,
+                                                "line": 7,
                                                 "tokentype": "Variable"
                                             }
                                         ],
-                                        "line": 6,
+                                        "line": 7,
                                         "tokentype": "Operation"
                                     }
                                 ],
-                                "line": 6
+                                "line": 7
                             }
                         ],
                         "valueList": [
@@ -1425,17 +1427,17 @@ Actual Output:
                                             {
                                                 "name": "startValue",
                                                 "primed": false,
-                                                "line": 6,
+                                                "line": 7,
                                                 "tokentype": "Variable"
                                             },
                                             {
                                                 "name": "operations",
                                                 "primed": false,
-                                                "line": 6,
+                                                "line": 7,
                                                 "tokentype": "Variable"
                                             }
                                         ],
-                                        "line": 6,
+                                        "line": 7,
                                         "tokentype": "Operation"
                                     },
                                     {
@@ -1444,15 +1446,15 @@ Actual Output:
                                             {
                                                 "name": "target",
                                                 "primed": false,
-                                                "line": 6,
+                                                "line": 7,
                                                 "tokentype": "Variable"
                                             }
                                         ],
-                                        "line": 6,
+                                        "line": 7,
                                         "tokentype": "Operation"
                                     }
                                 ],
-                                "line": 6
+                                "line": 7
                             }
                         ]
                     }
@@ -1472,25 +1474,25 @@ Actual Output:
                                                 {
                                                     "name": "target",
                                                     "primed": false,
-                                                    "line": 4,
+                                                    "line": 5,
                                                     "tokentype": "Variable"
                                                 },
                                                 {
                                                     "value": "2",
-                                                    "line": 4,
+                                                    "line": 5,
                                                     "tokentype": "Constant"
                                                 }
                                             ],
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Operation"
                                         },
                                         {
                                             "value": "0",
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Constant"
                                         }
                                     ],
-                                    "line": 4,
+                                    "line": 5,
                                     "tokentype": "Operation"
                                 },
                                 {
@@ -1499,16 +1501,16 @@ Actual Output:
                                         {
                                             "name": "target",
                                             "primed": false,
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Variable"
                                         },
                                         {
                                             "value": "2",
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Constant"
                                         }
                                     ],
-                                    "line": 4,
+                                    "line": 5,
                                     "tokentype": "Operation"
                                 },
                                 {
@@ -1516,21 +1518,21 @@ Actual Output:
                                     "args": [
                                         {
                                             "value": "1",
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Constant"
                                         },
                                         {
                                             "name": "target",
                                             "primed": false,
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Variable"
                                         }
                                     ],
-                                    "line": 4,
+                                    "line": 5,
                                     "tokentype": "Operation"
                                 }
                             ],
-                            "line": 4,
+                            "line": 5,
                             "tokentype": "Operation"
                         },
                         "valueArray": [
@@ -1547,25 +1549,25 @@ Actual Output:
                                                     {
                                                         "name": "target",
                                                         "primed": false,
-                                                        "line": 4,
+                                                        "line": 5,
                                                         "tokentype": "Variable"
                                                     },
                                                     {
                                                         "value": "2",
-                                                        "line": 4,
+                                                        "line": 5,
                                                         "tokentype": "Constant"
                                                     }
                                                 ],
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Operation"
                                             },
                                             {
                                                 "value": "0",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     },
                                     {
@@ -1574,16 +1576,16 @@ Actual Output:
                                             {
                                                 "name": "target",
                                                 "primed": false,
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Variable"
                                             },
                                             {
                                                 "value": "2",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     },
                                     {
@@ -1591,21 +1593,21 @@ Actual Output:
                                         "args": [
                                             {
                                                 "value": "1",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             },
                                             {
                                                 "name": "target",
                                                 "primed": false,
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Variable"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     }
                                 ],
-                                "line": 4
+                                "line": 5
                             }
                         ],
                         "valueList": [
@@ -1622,25 +1624,25 @@ Actual Output:
                                                     {
                                                         "name": "target",
                                                         "primed": false,
-                                                        "line": 4,
+                                                        "line": 5,
                                                         "tokentype": "Variable"
                                                     },
                                                     {
                                                         "value": "2",
-                                                        "line": 4,
+                                                        "line": 5,
                                                         "tokentype": "Constant"
                                                     }
                                                 ],
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Operation"
                                             },
                                             {
                                                 "value": "0",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     },
                                     {
@@ -1649,16 +1651,16 @@ Actual Output:
                                             {
                                                 "name": "target",
                                                 "primed": false,
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Variable"
                                             },
                                             {
                                                 "value": "2",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     },
                                     {
@@ -1666,21 +1668,21 @@ Actual Output:
                                         "args": [
                                             {
                                                 "value": "1",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             },
                                             {
                                                 "name": "target",
                                                 "primed": false,
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Variable"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     }
                                 ],
-                                "line": 4
+                                "line": 5
                             }
                         ]
                     },
@@ -1692,16 +1694,16 @@ Actual Output:
                                 {
                                     "name": "operations",
                                     "primed": false,
-                                    "line": 5,
+                                    "line": 6,
                                     "tokentype": "Variable"
                                 },
                                 {
                                     "value": "1",
-                                    "line": 5,
+                                    "line": 6,
                                     "tokentype": "Constant"
                                 }
                             ],
-                            "line": 5,
+                            "line": 6,
                             "tokentype": "Operation"
                         },
                         "valueArray": [
@@ -1712,16 +1714,16 @@ Actual Output:
                                     {
                                         "name": "operations",
                                         "primed": false,
-                                        "line": 5,
+                                        "line": 6,
                                         "tokentype": "Variable"
                                     },
                                     {
                                         "value": "1",
-                                        "line": 5,
+                                        "line": 6,
                                         "tokentype": "Constant"
                                     }
                                 ],
-                                "line": 5
+                                "line": 6
                             }
                         ],
                         "valueList": [
@@ -1732,16 +1734,16 @@ Actual Output:
                                     {
                                         "name": "operations",
                                         "primed": false,
-                                        "line": 5,
+                                        "line": 6,
                                         "tokentype": "Variable"
                                     },
                                     {
                                         "value": "1",
-                                        "line": 5,
+                                        "line": 6,
                                         "tokentype": "Constant"
                                     }
                                 ],
-                                "line": 5
+                                "line": 6
                             }
                         ]
                     }
@@ -1762,9 +1764,9 @@ Actual Output:
             },
             "locdescs": {
                 "1": "around the beginning of function 'broken_calc'",
-                "2": "the condition of the 'while' loop at line 3",
-                "3": "*after* the 'while' loop starting at line 3",
-                "4": "inside the body of the 'while' loop beginning at line 4"
+                "2": "the condition of the 'while' loop at line 4",
+                "3": "*after* the 'while' loop starting at line 4",
+                "4": "inside the body of the 'while' loop beginning at line 5"
             },
             "types": {
                 "operations": "*",
@@ -1782,12 +1784,13 @@ Actual Output:
 ### Modified Program
 
 ```py
-def broken_calc(var_2: int, var_3: int) -> int:
+# Mutated by: VariableRenamerModifier, BinOpModifier
+def broken_calc(var_6: int, var_7: int) -> int:
     operations = 0
-    while var_3 > var_2:
-        var_3 = var_3 // 2 if var_3 % 2 == 0 else 1 + var_3
+    while var_7 > var_6:
+        var_7 = var_7 // 2 if var_7 % 2 == 0 else 1 + var_7
         operations += 1
-    return var_2 + operations + -var_3
+    return var_6 + operations + -var_7
 ```
 
 <details>
@@ -1797,7 +1800,7 @@ Request Body:
 ```json
 {
     "language": "py",
-    "source_code": "def broken_calc(var_2: int, var_3: int) -> int:\n    operations = 0\n    while var_3 > var_2:\n        var_3 = var_3 // 2 if var_3 % 2 == 0 else 1 + var_3\n        operations += 1\n    return var_2 + operations + -var_3"
+    "source_code": "# Mutated by: VariableRenamerModifier, BinOpModifier\ndef broken_calc(var_6: int, var_7: int) -> int:\n    operations = 0\n    while var_7 > var_6:\n        var_7 = var_7 // 2 if var_7 % 2 == 0 else 1 + var_7\n        operations += 1\n    return var_6 + operations + -var_7"
 }
 ```
 
@@ -1818,26 +1821,26 @@ Actual Output:
             "endloc": 0,
             "params": [
                 {
-                    "val0": "var_2",
+                    "val0": "var_6",
                     "val1": "*",
                     "valueArray": [
-                        "var_2",
+                        "var_6",
                         "*"
                     ],
                     "valueList": [
-                        "var_2",
+                        "var_6",
                         "*"
                     ]
                 },
                 {
-                    "val0": "var_3",
+                    "val0": "var_7",
                     "val1": "*",
                     "valueArray": [
-                        "var_3",
+                        "var_7",
                         "*"
                     ],
                     "valueList": [
-                        "var_3",
+                        "var_7",
                         "*"
                     ]
                 }
@@ -1848,21 +1851,21 @@ Actual Output:
                         "val0": "operations",
                         "val1": {
                             "value": "0",
-                            "line": 2,
+                            "line": 3,
                             "tokentype": "Constant"
                         },
                         "valueArray": [
                             "operations",
                             {
                                 "value": "0",
-                                "line": 2
+                                "line": 3
                             }
                         ],
                         "valueList": [
                             "operations",
                             {
                                 "value": "0",
-                                "line": 2
+                                "line": 3
                             }
                         ]
                     }
@@ -1874,19 +1877,19 @@ Actual Output:
                             "name": "Gt",
                             "args": [
                                 {
-                                    "name": "var_3",
+                                    "name": "var_7",
                                     "primed": false,
-                                    "line": 3,
+                                    "line": 4,
                                     "tokentype": "Variable"
                                 },
                                 {
-                                    "name": "var_2",
+                                    "name": "var_6",
                                     "primed": false,
-                                    "line": 3,
+                                    "line": 4,
                                     "tokentype": "Variable"
                                 }
                             ],
-                            "line": 3,
+                            "line": 4,
                             "tokentype": "Operation"
                         },
                         "valueArray": [
@@ -1895,19 +1898,19 @@ Actual Output:
                                 "name": "Gt",
                                 "args": [
                                     {
-                                        "name": "var_3",
+                                        "name": "var_7",
                                         "primed": false,
-                                        "line": 3,
+                                        "line": 4,
                                         "tokentype": "Variable"
                                     },
                                     {
-                                        "name": "var_2",
+                                        "name": "var_6",
                                         "primed": false,
-                                        "line": 3,
+                                        "line": 4,
                                         "tokentype": "Variable"
                                     }
                                 ],
-                                "line": 3
+                                "line": 4
                             }
                         ],
                         "valueList": [
@@ -1916,19 +1919,19 @@ Actual Output:
                                 "name": "Gt",
                                 "args": [
                                     {
-                                        "name": "var_3",
+                                        "name": "var_7",
                                         "primed": false,
-                                        "line": 3,
+                                        "line": 4,
                                         "tokentype": "Variable"
                                     },
                                     {
-                                        "name": "var_2",
+                                        "name": "var_6",
                                         "primed": false,
-                                        "line": 3,
+                                        "line": 4,
                                         "tokentype": "Variable"
                                     }
                                 ],
-                                "line": 3
+                                "line": 4
                             }
                         ]
                     }
@@ -1943,36 +1946,36 @@ Actual Output:
                                     "name": "Add",
                                     "args": [
                                         {
-                                            "name": "var_2",
+                                            "name": "var_6",
                                             "primed": false,
-                                            "line": 6,
+                                            "line": 7,
                                             "tokentype": "Variable"
                                         },
                                         {
                                             "name": "operations",
                                             "primed": false,
-                                            "line": 6,
+                                            "line": 7,
                                             "tokentype": "Variable"
                                         }
                                     ],
-                                    "line": 6,
+                                    "line": 7,
                                     "tokentype": "Operation"
                                 },
                                 {
                                     "name": "USub",
                                     "args": [
                                         {
-                                            "name": "var_3",
+                                            "name": "var_7",
                                             "primed": false,
-                                            "line": 6,
+                                            "line": 7,
                                             "tokentype": "Variable"
                                         }
                                     ],
-                                    "line": 6,
+                                    "line": 7,
                                     "tokentype": "Operation"
                                 }
                             ],
-                            "line": 6,
+                            "line": 7,
                             "tokentype": "Operation"
                         },
                         "valueArray": [
@@ -1984,36 +1987,36 @@ Actual Output:
                                         "name": "Add",
                                         "args": [
                                             {
-                                                "name": "var_2",
+                                                "name": "var_6",
                                                 "primed": false,
-                                                "line": 6,
+                                                "line": 7,
                                                 "tokentype": "Variable"
                                             },
                                             {
                                                 "name": "operations",
                                                 "primed": false,
-                                                "line": 6,
+                                                "line": 7,
                                                 "tokentype": "Variable"
                                             }
                                         ],
-                                        "line": 6,
+                                        "line": 7,
                                         "tokentype": "Operation"
                                     },
                                     {
                                         "name": "USub",
                                         "args": [
                                             {
-                                                "name": "var_3",
+                                                "name": "var_7",
                                                 "primed": false,
-                                                "line": 6,
+                                                "line": 7,
                                                 "tokentype": "Variable"
                                             }
                                         ],
-                                        "line": 6,
+                                        "line": 7,
                                         "tokentype": "Operation"
                                     }
                                 ],
-                                "line": 6
+                                "line": 7
                             }
                         ],
                         "valueList": [
@@ -2025,43 +2028,43 @@ Actual Output:
                                         "name": "Add",
                                         "args": [
                                             {
-                                                "name": "var_2",
+                                                "name": "var_6",
                                                 "primed": false,
-                                                "line": 6,
+                                                "line": 7,
                                                 "tokentype": "Variable"
                                             },
                                             {
                                                 "name": "operations",
                                                 "primed": false,
-                                                "line": 6,
+                                                "line": 7,
                                                 "tokentype": "Variable"
                                             }
                                         ],
-                                        "line": 6,
+                                        "line": 7,
                                         "tokentype": "Operation"
                                     },
                                     {
                                         "name": "USub",
                                         "args": [
                                             {
-                                                "name": "var_3",
+                                                "name": "var_7",
                                                 "primed": false,
-                                                "line": 6,
+                                                "line": 7,
                                                 "tokentype": "Variable"
                                             }
                                         ],
-                                        "line": 6,
+                                        "line": 7,
                                         "tokentype": "Operation"
                                     }
                                 ],
-                                "line": 6
+                                "line": 7
                             }
                         ]
                     }
                 ],
                 "4": [
                     {
-                        "val0": "var_3",
+                        "val0": "var_7",
                         "val1": {
                             "name": "ite",
                             "args": [
@@ -2072,45 +2075,45 @@ Actual Output:
                                             "name": "Mod",
                                             "args": [
                                                 {
-                                                    "name": "var_3",
+                                                    "name": "var_7",
                                                     "primed": false,
-                                                    "line": 4,
+                                                    "line": 5,
                                                     "tokentype": "Variable"
                                                 },
                                                 {
                                                     "value": "2",
-                                                    "line": 4,
+                                                    "line": 5,
                                                     "tokentype": "Constant"
                                                 }
                                             ],
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Operation"
                                         },
                                         {
                                             "value": "0",
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Constant"
                                         }
                                     ],
-                                    "line": 4,
+                                    "line": 5,
                                     "tokentype": "Operation"
                                 },
                                 {
                                     "name": "FloorDiv",
                                     "args": [
                                         {
-                                            "name": "var_3",
+                                            "name": "var_7",
                                             "primed": false,
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Variable"
                                         },
                                         {
                                             "value": "2",
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Constant"
                                         }
                                     ],
-                                    "line": 4,
+                                    "line": 5,
                                     "tokentype": "Operation"
                                 },
                                 {
@@ -2118,25 +2121,25 @@ Actual Output:
                                     "args": [
                                         {
                                             "value": "1",
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Constant"
                                         },
                                         {
-                                            "name": "var_3",
+                                            "name": "var_7",
                                             "primed": false,
-                                            "line": 4,
+                                            "line": 5,
                                             "tokentype": "Variable"
                                         }
                                     ],
-                                    "line": 4,
+                                    "line": 5,
                                     "tokentype": "Operation"
                                 }
                             ],
-                            "line": 4,
+                            "line": 5,
                             "tokentype": "Operation"
                         },
                         "valueArray": [
-                            "var_3",
+                            "var_7",
                             {
                                 "name": "ite",
                                 "args": [
@@ -2147,45 +2150,45 @@ Actual Output:
                                                 "name": "Mod",
                                                 "args": [
                                                     {
-                                                        "name": "var_3",
+                                                        "name": "var_7",
                                                         "primed": false,
-                                                        "line": 4,
+                                                        "line": 5,
                                                         "tokentype": "Variable"
                                                     },
                                                     {
                                                         "value": "2",
-                                                        "line": 4,
+                                                        "line": 5,
                                                         "tokentype": "Constant"
                                                     }
                                                 ],
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Operation"
                                             },
                                             {
                                                 "value": "0",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     },
                                     {
                                         "name": "FloorDiv",
                                         "args": [
                                             {
-                                                "name": "var_3",
+                                                "name": "var_7",
                                                 "primed": false,
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Variable"
                                             },
                                             {
                                                 "value": "2",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     },
                                     {
@@ -2193,25 +2196,25 @@ Actual Output:
                                         "args": [
                                             {
                                                 "value": "1",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             },
                                             {
-                                                "name": "var_3",
+                                                "name": "var_7",
                                                 "primed": false,
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Variable"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     }
                                 ],
-                                "line": 4
+                                "line": 5
                             }
                         ],
                         "valueList": [
-                            "var_3",
+                            "var_7",
                             {
                                 "name": "ite",
                                 "args": [
@@ -2222,45 +2225,45 @@ Actual Output:
                                                 "name": "Mod",
                                                 "args": [
                                                     {
-                                                        "name": "var_3",
+                                                        "name": "var_7",
                                                         "primed": false,
-                                                        "line": 4,
+                                                        "line": 5,
                                                         "tokentype": "Variable"
                                                     },
                                                     {
                                                         "value": "2",
-                                                        "line": 4,
+                                                        "line": 5,
                                                         "tokentype": "Constant"
                                                     }
                                                 ],
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Operation"
                                             },
                                             {
                                                 "value": "0",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     },
                                     {
                                         "name": "FloorDiv",
                                         "args": [
                                             {
-                                                "name": "var_3",
+                                                "name": "var_7",
                                                 "primed": false,
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Variable"
                                             },
                                             {
                                                 "value": "2",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     },
                                     {
@@ -2268,21 +2271,21 @@ Actual Output:
                                         "args": [
                                             {
                                                 "value": "1",
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Constant"
                                             },
                                             {
-                                                "name": "var_3",
+                                                "name": "var_7",
                                                 "primed": false,
-                                                "line": 4,
+                                                "line": 5,
                                                 "tokentype": "Variable"
                                             }
                                         ],
-                                        "line": 4,
+                                        "line": 5,
                                         "tokentype": "Operation"
                                     }
                                 ],
-                                "line": 4
+                                "line": 5
                             }
                         ]
                     },
@@ -2294,16 +2297,16 @@ Actual Output:
                                 {
                                     "name": "operations",
                                     "primed": false,
-                                    "line": 5,
+                                    "line": 6,
                                     "tokentype": "Variable"
                                 },
                                 {
                                     "value": "1",
-                                    "line": 5,
+                                    "line": 6,
                                     "tokentype": "Constant"
                                 }
                             ],
-                            "line": 5,
+                            "line": 6,
                             "tokentype": "Operation"
                         },
                         "valueArray": [
@@ -2314,16 +2317,16 @@ Actual Output:
                                     {
                                         "name": "operations",
                                         "primed": false,
-                                        "line": 5,
+                                        "line": 6,
                                         "tokentype": "Variable"
                                     },
                                     {
                                         "value": "1",
-                                        "line": 5,
+                                        "line": 6,
                                         "tokentype": "Constant"
                                     }
                                 ],
-                                "line": 5
+                                "line": 6
                             }
                         ],
                         "valueList": [
@@ -2334,16 +2337,16 @@ Actual Output:
                                     {
                                         "name": "operations",
                                         "primed": false,
-                                        "line": 5,
+                                        "line": 6,
                                         "tokentype": "Variable"
                                     },
                                     {
                                         "value": "1",
-                                        "line": 5,
+                                        "line": 6,
                                         "tokentype": "Constant"
                                     }
                                 ],
-                                "line": 5
+                                "line": 6
                             }
                         ]
                     }
@@ -2364,13 +2367,13 @@ Actual Output:
             },
             "locdescs": {
                 "1": "around the beginning of function 'broken_calc'",
-                "2": "the condition of the 'while' loop at line 3",
-                "3": "*after* the 'while' loop starting at line 3",
-                "4": "inside the body of the 'while' loop beginning at line 4"
+                "2": "the condition of the 'while' loop at line 4",
+                "3": "*after* the 'while' loop starting at line 4",
+                "4": "inside the body of the 'while' loop beginning at line 5"
             },
             "types": {
                 "operations": "*",
-                "var_3": "*"
+                "var_7": "*"
             }
         }
     }
