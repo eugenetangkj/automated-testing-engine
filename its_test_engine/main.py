@@ -55,7 +55,7 @@ def run_leetcode_programs(number_of_test_cases: int):
         tester.run_tests()
 
 
-def run_open_ai_programs(number_of_test_cases):
+def run_open_ai_programs(number_of_test_cases: int):
     """
         Generate and run test cases using OpenAiProgramGenerator
         to generate base Python programs.
