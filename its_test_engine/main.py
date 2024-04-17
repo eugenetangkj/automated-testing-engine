@@ -73,7 +73,7 @@ def run_open_ai_programs(number_of_test_cases):
     argument_generator = RandomArgumentGenerator()
 
     # Put in modifiers that you want to use
-    transformers = [VariableRenamerModifier(), BinOpModifier()]
+    transformers = [ExtraArgumentReassignmentModifier(), WrapInIfTrueModifier()]
 
     tester = Tester(
         Language.PYTHON, program_generator, transformers, argument_generator, writer
@@ -85,5 +85,5 @@ def run_open_ai_programs(number_of_test_cases):
 
 
 if __name__ == "__main__":
-    run_leetcode_programs(10)
-    run_open_ai_programs(10)
+    run_leetcode_programs(2)
+    run_open_ai_programs(2)
